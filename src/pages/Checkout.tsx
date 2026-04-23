@@ -7,7 +7,7 @@ import { Lock, ShieldCheck, Check } from "lucide-react";
 import { toast } from "sonner";
 
 const Checkout = () => {
-  const { withProducts, subtotal, discountCode, discountAmount, total, applyDiscount, clear, format: _f } = useCart();
+  const { withProducts, subtotal, discountCode, discountAmount, total, applyDiscount, clear } = useCart();
   const { format } = useCurrency();
   const navigate = useNavigate();
   const [step, setStep] = useState<"info" | "shipping" | "payment">("info");
