@@ -132,6 +132,8 @@ const Index = () => {
         </div>
       </section>
 
+      <FounderNote />
+
       <CountdownBanner />
 
       {/* BUNDLES */}
@@ -178,6 +180,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <GuaranteeStrip />
+
+      <TestimonialSlider />
 
       <ReviewsSection />
 
