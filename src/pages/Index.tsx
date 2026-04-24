@@ -4,6 +4,10 @@ import { ProductCard } from "@/components/ProductCard";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { TrustBar } from "@/components/TrustBar";
 import { CountdownBanner } from "@/components/CountdownBanner";
+import { PressStrip } from "@/components/PressStrip";
+import { TestimonialSlider } from "@/components/TestimonialSlider";
+import { FounderNote } from "@/components/FounderNote";
+import { GuaranteeStrip } from "@/components/GuaranteeStrip";
 import { products, bundles, getProduct } from "@/data/products";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useCart } from "@/context/CartContext";
@@ -69,17 +73,7 @@ const Index = () => {
 
       <TrustBar />
 
-      {/* AS SEEN IN */}
-      <section className="py-10 border-b border-border">
-        <div className="container">
-          <p className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6">As featured in</p>
-          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-4 opacity-60">
-            {["VOGUE", "FORBES", "GQ", "GOOP", "HEALTHLINE", "MEN'S HEALTH"].map((b) => (
-              <span key={b} className="font-serif text-xl tracking-[0.25em]">{b}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PressStrip />
 
       {/* BESTSELLERS */}
       <section className="py-20 md:py-28">
