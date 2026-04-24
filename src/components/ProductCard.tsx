@@ -10,9 +10,9 @@ export function ProductCard({ product }: { product: Product }) {
       to={`/product/${product.slug}`}
       className="group block animate-fade-up"
     >
-      <div className="relative bg-secondary aspect-square overflow-hidden mb-4">
+      <div className="relative bg-secondary aspect-square overflow-hidden mb-5">
         {product.badge && (
-          <span className="absolute top-4 left-4 z-10 bg-foreground text-background text-[10px] uppercase tracking-[0.2em] px-2.5 py-1">
+          <span className="absolute top-4 left-4 z-10 bg-foreground text-background text-[10px] uppercase tracking-[0.25em] px-2.5 py-1.5">
             {product.badge}
           </span>
         )}
@@ -22,11 +22,14 @@ export function ProductCard({ product }: { product: Product }) {
           loading="lazy"
           width={1024}
           height={1024}
-          className="w-full h-full object-cover transition-elegant group-hover:scale-105"
+          className="w-full h-full object-cover transition-elegant duration-700 group-hover:scale-[1.04]"
         />
+        <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-elegant bg-foreground text-background text-center py-3 text-[10px] uppercase tracking-[0.25em]">
+          Quick view →
+        </div>
       </div>
-      <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{product.category}</p>
-      <h3 className="font-serif text-2xl mt-1 mb-1.5 leading-tight">{product.name}</h3>
+      <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{product.category}</p>
+      <h3 className="font-serif text-2xl mt-1.5 mb-1.5 leading-tight">{product.name}</h3>
       <p className="text-sm text-muted-foreground mb-3 line-clamp-2 leading-relaxed">{product.tagline}</p>
       <div className="flex items-center gap-2">
         <span className="text-base font-medium">{format(product.price)}</span>

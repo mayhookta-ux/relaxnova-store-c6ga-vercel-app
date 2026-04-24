@@ -4,6 +4,10 @@ import { ProductCard } from "@/components/ProductCard";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { TrustBar } from "@/components/TrustBar";
 import { CountdownBanner } from "@/components/CountdownBanner";
+import { PressStrip } from "@/components/PressStrip";
+import { TestimonialSlider } from "@/components/TestimonialSlider";
+import { FounderNote } from "@/components/FounderNote";
+import { GuaranteeStrip } from "@/components/GuaranteeStrip";
 import { products, bundles, getProduct } from "@/data/products";
 import { useCurrency } from "@/context/CurrencyContext";
 import { useCart } from "@/context/CartContext";
@@ -19,10 +23,10 @@ const Index = () => {
     <>
       {/* HERO */}
       <section className="relative bg-gradient-warm overflow-hidden">
-        <div className="container grid lg:grid-cols-2 gap-10 lg:gap-16 items-center py-16 md:py-24 lg:py-32">
-          <div className="space-y-7 animate-fade-up">
-            <p className="text-xs uppercase tracking-[0.3em] text-gold">Smart Wellness · Quietly Engineered</p>
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.02] text-balance">
+        <div className="container grid lg:grid-cols-12 gap-10 lg:gap-16 items-center py-20 md:py-28 lg:py-36">
+          <div className="lg:col-span-6 space-y-8 animate-fade-up">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-gold">Smart Wellness · Quietly Engineered</p>
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-[5.5rem] leading-[0.98] text-balance">
               Stand taller.<br />
               <span className="italic text-gold-shimmer">Feel lighter.</span><br />
               Live better.
@@ -30,26 +34,26 @@ const Index = () => {
             <p className="text-base md:text-lg text-muted-foreground max-w-md leading-relaxed">
               Discreet, intelligent devices that retrain your posture, soothe your muscles and restore your skin — designed in California, loved by 80,000+ Americans.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-none h-13 px-8 text-sm tracking-wider uppercase">
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Button asChild size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-none h-13 px-9 text-xs tracking-[0.2em] uppercase">
                 <Link to="/product/smart-posture-corrector">
                   Shop Bestseller <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-none h-13 px-8 text-sm tracking-wider uppercase border-foreground">
+              <Button asChild variant="outline" size="lg" className="rounded-none h-13 px-8 text-xs tracking-[0.2em] uppercase border-foreground bg-transparent">
                 <Link to="/shop">Explore Collection</Link>
               </Button>
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-2 pt-4 text-xs text-muted-foreground">
+            <div className="flex flex-wrap gap-x-6 gap-y-2 pt-6 text-xs text-muted-foreground border-t border-border/60 mt-2">
               {["60-day risk-free trial", "Free US shipping over $75", "FSA / HSA eligible"].map((p) => (
-                <span key={p} className="inline-flex items-center gap-1.5">
+                <span key={p} className="inline-flex items-center gap-1.5 pt-4">
                   <Check className="h-3 w-3 text-gold" /> {p}
                 </span>
               ))}
             </div>
           </div>
 
-          <div className="relative">
+          <div className="lg:col-span-6 relative">
             <img
               src={heroImg}
               alt="Aurelis Aura Posture worn"
@@ -57,11 +61,15 @@ const Index = () => {
               height={1280}
               className="w-full h-auto shadow-lift animate-fade-in"
             />
-            <div className="absolute -bottom-6 -left-6 md:-left-12 bg-background p-5 shadow-lift max-w-[200px] hidden md:block">
-              <p className="font-serif text-3xl text-gold">+38%</p>
-              <p className="text-xs text-muted-foreground leading-relaxed mt-1">
+            <div className="absolute -bottom-6 -left-6 md:-left-12 bg-background p-6 shadow-lift max-w-[220px] hidden md:block animate-fade-up">
+              <p className="font-serif text-4xl text-gold leading-none">+38%</p>
+              <p className="text-[11px] text-muted-foreground leading-relaxed mt-2">
                 Average posture improvement in clinical 2-week trial.
               </p>
+            </div>
+            <div className="absolute -top-4 right-4 md:-right-6 bg-foreground text-background px-4 py-3 shadow-lift hidden md:block">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-gold">★ 4.9 / 5</p>
+              <p className="text-[10px] mt-0.5 text-background/80">7,000+ verified reviews</p>
             </div>
           </div>
         </div>
@@ -69,17 +77,7 @@ const Index = () => {
 
       <TrustBar />
 
-      {/* AS SEEN IN */}
-      <section className="py-10 border-b border-border">
-        <div className="container">
-          <p className="text-center text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-6">As featured in</p>
-          <div className="flex flex-wrap justify-center items-center gap-x-10 gap-y-4 opacity-60">
-            {["VOGUE", "FORBES", "GQ", "GOOP", "HEALTHLINE", "MEN'S HEALTH"].map((b) => (
-              <span key={b} className="font-serif text-xl tracking-[0.25em]">{b}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PressStrip />
 
       {/* BESTSELLERS */}
       <section className="py-20 md:py-28">
@@ -138,6 +136,8 @@ const Index = () => {
         </div>
       </section>
 
+      <FounderNote />
+
       <CountdownBanner />
 
       {/* BUNDLES */}
@@ -184,6 +184,10 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      <GuaranteeStrip />
+
+      <TestimonialSlider />
 
       <ReviewsSection />
 
