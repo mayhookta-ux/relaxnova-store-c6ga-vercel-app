@@ -59,46 +59,46 @@ const reviews = [
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="py-20 md:py-28 bg-secondary/40">
+    <section id="reviews" className="py-24 md:py-32 bg-secondary/40">
       <div className="container">
-        <div className="text-center mb-14">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold mb-3">7,000+ Five-Star Reviews</p>
-          <h2 className="font-serif text-4xl md:text-5xl mb-4">Loved by 80,000+ wellness obsessives.</h2>
-          <div className="inline-flex items-center gap-2">
+        <div className="text-center mb-16">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">7,000+ Five-Star Reviews</p>
+          <h2 className="font-serif text-4xl md:text-5xl mb-5 text-balance">Loved by 80,000+ wellness obsessives.</h2>
+          <div className="inline-flex items-center gap-2.5 px-5 py-2 bg-background border border-border">
             <div className="flex">
               {[1, 2, 3, 4, 5].map((s) => (
                 <Star key={s} className="h-4 w-4 fill-gold text-gold" />
               ))}
             </div>
-            <span className="text-sm">4.9 / 5 average · Verified Buyers</span>
+            <span className="text-xs tracking-wide">4.9 / 5 · Verified Buyers</span>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
           {reviews.map((r, i) => (
             <article
               key={i}
-              className="bg-background p-7 border border-border/50 shadow-soft animate-fade-up"
+              className="bg-background p-8 border border-border/40 shadow-soft hover:shadow-lift transition-elegant animate-fade-up"
               style={{ animationDelay: `${i * 60}ms` }}
             >
-              <div className="flex mb-3">
-                {[...Array(r.rating)].map((_, s) => (
-                  <Star key={s} className="h-3.5 w-3.5 fill-gold text-gold" />
-                ))}
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex">
+                  {[...Array(r.rating)].map((_, s) => (
+                    <Star key={s} className="h-3.5 w-3.5 fill-gold text-gold" />
+                  ))}
+                </div>
+                {r.verified && (
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-gold">✓ Verified</p>
+                )}
               </div>
-              <h4 className="font-serif text-xl mb-2 leading-tight">{r.title}</h4>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">{r.body}</p>
-              <div className="flex justify-between items-end pt-4 border-t border-border">
+              <h4 className="font-serif text-xl mb-3 leading-tight">{r.title}</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">{r.body}</p>
+              <div className="flex justify-between items-end pt-5 border-t border-border">
                 <div>
                   <p className="text-sm font-medium">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">{r.location}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{r.location}</p>
                 </div>
-                <div className="text-right">
-                  {r.verified && (
-                    <p className="text-[10px] uppercase tracking-wider text-gold">✓ Verified</p>
-                  )}
-                  <p className="text-xs text-muted-foreground mt-0.5">{r.product}</p>
-                </div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{r.product}</p>
               </div>
             </article>
           ))}

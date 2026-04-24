@@ -45,7 +45,7 @@ export function Footer() {
             { to: "/about", label: "Our Story" },
             { to: "/privacy", label: "Privacy Policy" },
             { to: "/terms", label: "Terms of Service" },
-            { to: "/admin", label: "Admin" },
+            { to: "/shipping", label: "Shipping" },
           ]}
         />
       </div>
