@@ -17,7 +17,6 @@ import FAQ from "./pages/FAQ.tsx";
 import Contact from "./pages/Contact.tsx";
 import About from "./pages/About.tsx";
 import { Privacy, Terms, Refund, Shipping } from "./pages/Policies.tsx";
-import Admin from "./pages/Admin.tsx";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +43,6 @@ const App = () => (
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/refund" element={<Refund />} />
                 <Route path="/shipping" element={<Shipping />} />
-                <Route path="/admin" element={<Admin />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Layout>
