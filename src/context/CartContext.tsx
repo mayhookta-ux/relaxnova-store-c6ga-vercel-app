@@ -26,11 +26,9 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-const DISCOUNTS: Record<string, number> = {
-  WELCOME10: 0.1,
-  AURELIS15: 0.15,
-  VIP20: 0.2,
-};
+// Discount codes are validated server-side. The client never holds the list of
+// valid codes or their values to prevent users from extracting them from the bundle.
+// Until a server-side validator is wired up via Lovable Cloud, all codes are rejected.
 
 const STORAGE_KEY = "aurelis-cart-v1";
 
@@ -99,15 +97,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
   const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
 
-  const discountAmount = discountCode ? subtotal * (DISCOUNTS[discountCode] || 0) : 0;
+  const discountAmount = 0;
   const total = Math.max(0, subtotal - discountAmount);
 
-  const applyDiscount = (code: string) => {
-    const upper = code.trim().toUpperCase();
-    if (DISCOUNTS[upper]) {
-      setDiscountCode(upper);
-      return true;
-    }
+  const applyDiscount = (_code: string) => {
+    // Server-side validation not yet configured. Reject all codes safely.
     return false;
   };
   const removeDiscount = () => setDiscountCode(null);
