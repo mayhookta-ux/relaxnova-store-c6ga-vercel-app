@@ -22,7 +22,7 @@ export function EmailPopup() {
       toast.error("Please enter a valid email");
       return;
     }
-    toast.success("Welcome! Check your inbox for code WELCOME10.");
+    toast.success("Welcome! Check your inbox for your exclusive offer.");
     setOpen(false);
   };
 
