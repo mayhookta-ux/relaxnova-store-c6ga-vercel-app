@@ -19,8 +19,9 @@
   --ivory: 42 36% 91%;
   --shadow: 0 24px 70px hsl(220 18% 13% / 0.12);
   --soft-shadow: 0 12px 35px hsl(220 18% 13% / 0.08);
-  --product-shadow: 0 28px 76px hsl(220 18% 13% / 0.16), 0 10px 24px hsl(38 43% 58% / 0.12);
-  --product-surface: 38 35% 94%;
+  --product-shadow: 0 34px 88px hsl(220 18% 13% / 0.2), 0 14px 34px hsl(38 43% 58% / 0.16), inset 0 1px 0 hsl(var(--card) / 0.86);
+  --product-surface: 38 26% 91%;
+  --product-contrast: 220 18% 13%;
 }
 
 * { box-sizing: border-box; }
@@ -55,11 +56,11 @@ h3 { font-size: clamp(24px, 3vw, 36px); }
 .hero-visual, .product-stage { position: relative; display: grid; place-items: center; min-height: 560px; }
 .device { position: relative; width: 210px; height: 290px; display: grid; place-items: center; }
 .device-large { width: min(390px, 80vw); height: min(540px, 96vw); }
-.device-glow { position: absolute; width: 98%; aspect-ratio: 1; border-radius: 50%; background: hsl(var(--accent) / 0.62); filter: blur(38px); opacity: 0.95; }
+.device-glow { position: absolute; width: 106%; aspect-ratio: 1; border-radius: 50%; background: hsl(var(--accent) / 0.7); filter: blur(36px); opacity: 1; }
 .device-shell { position: relative; width: 62%; height: 82%; border-radius: 46% 46% 36% 36%; background: linear-gradient(145deg, hsl(var(--card)), hsl(var(--product-surface))); border: 1px solid hsl(var(--border)); box-shadow: var(--product-shadow); display: grid; place-items: center; overflow: hidden; }
-.device-lens { width: 54%; height: 64%; border-radius: 999px; background: radial-gradient(circle, hsl(var(--accent) / 0.95), hsl(var(--gold) / 0.48) 42%, hsl(var(--primary) / 0.18)); border: 1px solid hsl(var(--card)); box-shadow: inset 0 0 26px hsl(var(--primary) / 0.08); }
-.device-mark { position: absolute; bottom: 11%; font-family: Marcellus, serif; color: hsl(var(--gold)); }
-.device-shadow { position: absolute; bottom: 0; width: 78%; height: 30px; background: hsl(var(--primary) / 0.2); filter: blur(16px); border-radius: 50%; }
+.device-lens { width: 54%; height: 64%; border-radius: 999px; background: radial-gradient(circle, hsl(var(--accent) / 1), hsl(var(--gold) / 0.58) 42%, hsl(var(--primary) / 0.24)); border: 1px solid hsl(var(--card)); box-shadow: inset 0 0 26px hsl(var(--primary) / 0.1), 0 12px 28px hsl(var(--product-contrast) / 0.14); }
+.device-mark { position: absolute; bottom: 11%; font-family: Marcellus, serif; color: hsl(var(--primary) / 0.7); }
+.device-shadow { position: absolute; bottom: 0; width: 84%; height: 34px; background: hsl(var(--primary) / 0.26); filter: blur(17px); border-radius: 50%; }
 .device-rose .device-glow { background: hsl(var(--rose)); }
 .device-jade .device-glow { background: hsl(var(--jade)); }
 .device-ivory .device-glow { background: hsl(var(--ivory)); }
