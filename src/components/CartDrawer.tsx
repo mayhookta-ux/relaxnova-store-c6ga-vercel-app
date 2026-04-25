@@ -1,10 +1,11 @@
-import { X, Minus, Plus, ShieldCheck } from "lucide-react";
+import { X, Minus, Plus, ShieldCheck, CreditCard } from "lucide-react";
 import type { Product } from "../data/products";
 
 type CartLine = { product: Product; quantity: number };
 
-export function CartDrawer({ open, lines, onClose, onAdd, onRemove }: { open: boolean; lines: CartLine[]; onClose: () => void; onAdd: (id: string) => void; onRemove: (id: string) => void }) {
+export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }: { open: boolean; lines: CartLine[]; onClose: () => void; onAdd: (id: string) => void; onRemove: (id: string) => void; onCheckout: () => void }) {
   const subtotal = lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
+  const shipping = subtotal >= 250 || subtotal === 0 ? 0 : 12;
   return (
     <aside className={`cart-panel ${open ? "cart-open" : ""}`} aria-hidden={!open}>
       <div className="cart-head">
@@ -36,9 +37,10 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove }: { open: bo
         </div>
       )}
       <div className="cart-footer">
-        <div className="trust-note"><ShieldCheck size={18} /> Encrypted checkout placeholder ready for payment integration.</div>
+        <div className="trust-note"><ShieldCheck size={18} /> Encrypted checkout structure prepared for Stripe and PayPal.</div>
         <div className="total-row"><span>Subtotal</span><strong>${subtotal}</strong></div>
-        <button className="primary-action">Continue to secure checkout</button>
+        <div className="total-row muted-total"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div>
+        <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><CreditCard size={18} /> Continue to secure checkout</button>
       </div>
     </aside>
   );
