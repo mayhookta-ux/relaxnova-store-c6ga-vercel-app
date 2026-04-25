@@ -149,10 +149,10 @@ summary { cursor: pointer; font-weight: 800; }
 .primary-action svg { vertical-align: middle; margin-right: 8px; }
 .gallery-section { background: hsl(var(--card)); }
 .gallery-grid { display: grid; grid-template-columns: 1.1fr 0.9fr 0.9fr; gap: 20px; }
-.gallery-card { min-height: 360px; padding: 28px; border: 1px solid hsl(var(--border)); border-radius: 28px; background: linear-gradient(180deg, hsl(40 30% 96%), hsl(var(--product-surface))); box-shadow: var(--soft-shadow); overflow: hidden; }
+.gallery-card { min-height: 360px; padding: 28px; border: 1px solid hsl(var(--border)); border-radius: 28px; background: linear-gradient(180deg, hsl(var(--card)), hsl(var(--product-surface))); box-shadow: var(--soft-shadow); overflow: visible; }
 .gallery-card:first-child { grid-row: span 2; }
-.gallery-card .device { width: 100%; height: 230px; margin-bottom: 18px; }
-.gallery-card:first-child .device { height: 430px; }
+.gallery-card .device { width: 100%; height: 190px; margin: 0 auto 24px; }
+.gallery-card:first-child .device { height: 360px; }
 .gallery-card p, .checkout-section p, .confirmation-section p, .order-summary p, .footer span, .footer small { color: hsl(var(--muted-foreground)); line-height: 1.7; }
 .checkout-section { background: hsl(var(--muted) / 0.45); }
 .checkout-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 430px); gap: 28px; align-items: start; }
@@ -184,6 +184,8 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .nav-open { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .gallery-grid, .checkout-grid { grid-template-columns: 1fr; }
   .gallery-card:first-child { grid-row: auto; }
+  .gallery-card:first-child .device { height: 230px; }
+  .product-card { min-height: 0; }
   .order-summary { position: static; }
   .confirmation-section { flex-direction: column; align-items: flex-start; }
   .footer { grid-template-columns: 1fr 1fr; }
@@ -196,19 +198,19 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .cart-line b { grid-column: 2; }
   fieldset { padding: 18px; }
   section:not(.hero-section):not(.strip-section) { padding-inline: 18px; }
-  .product-stage { min-height: 340px; padding: 20px; }
-  .device-large { width: min(260px, 74vw); height: min(360px, 96vw); }
+  .product-stage { min-height: 300px; padding: 20px; }
+  .device-large { width: min(224px, 64vw); height: min(312px, 78vw); }
   .product-card, .gallery-card { display: flex; flex-direction: column; align-items: stretch; min-height: 0; height: auto; padding: 28px 22px 26px; overflow: visible; }
-  .product-card .device, .gallery-card:first-child .device, .gallery-card .device { flex: 0 0 132px; order: 0; width: 100%; height: 132px; min-height: 132px; max-height: 132px; margin: 8px auto 32px; overflow: visible; }
-  .product-card .device-shell, .gallery-card .device-shell { width: min(46%, 96px); height: 74%; }
+  .product-card .device, .gallery-card:first-child .device, .gallery-card .device { flex: 0 0 112px; order: 0; width: 100%; height: 112px; min-height: 112px; max-height: 112px; margin: 8px auto 28px; overflow: visible; }
+  .product-card .device-shell, .gallery-card .device-shell { width: min(38%, 82px); height: 70%; }
   .product-card .device-shadow, .gallery-card .device-shadow { height: 22px; width: 58%; filter: blur(13px); }
   .product-card .eyebrow { margin: 0 0 12px; }
   .product-card h3, .gallery-card h3 { display: block; flex: 0 0 auto; min-height: 0; margin: 0; font-size: 28px; line-height: 1.18; overflow: visible; overflow-wrap: anywhere; word-break: normal; }
   .product-card p, .gallery-card p { display: block; flex: 0 0 auto; min-height: 0; margin: 15px 0 0; line-height: 1.72; overflow: visible; overflow-wrap: anywhere; }
   .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
   .gallery-card, .gallery-card:first-child { display: flex; flex-direction: column; align-items: stretch; min-height: 0; height: auto; padding: 24px 22px 28px; overflow: visible; }
-  .gallery-card .device, .gallery-card:first-child .device { display: grid; place-items: center; flex: 0 0 118px; order: 0; width: 100%; height: 118px; min-height: 118px; max-height: 118px; margin: 12px auto 28px; overflow: visible; }
-  .gallery-card .device-shell, .gallery-card:first-child .device-shell { width: min(40%, 88px); height: 70%; }
+  .gallery-card .device, .gallery-card:first-child .device { display: grid; place-items: center; flex: 0 0 104px; order: 0; width: 100%; height: 104px; min-height: 104px; max-height: 104px; margin: 12px auto 26px; overflow: visible; }
+  .gallery-card .device-shell, .gallery-card:first-child .device-shell { width: min(35%, 76px); height: 68%; }
   .gallery-card .device-shadow, .gallery-card:first-child .device-shadow { bottom: 3px; width: 54%; height: 18px; filter: blur(11px); }
   .gallery-card h3 { order: 1; margin: 0; padding: 0; }
   .gallery-card p { order: 2; margin: 14px 0 0; padding: 0; }
