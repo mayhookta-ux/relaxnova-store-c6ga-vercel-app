@@ -206,11 +206,12 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .product-card h3, .gallery-card h3 { display: block; flex: 0 0 auto; min-height: 0; margin: 0; font-size: 28px; line-height: 1.18; overflow: visible; overflow-wrap: anywhere; word-break: normal; }
   .product-card p, .gallery-card p { display: block; flex: 0 0 auto; min-height: 0; margin: 15px 0 0; line-height: 1.72; overflow: visible; overflow-wrap: anywhere; }
   .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
-  .gallery-card { display: block; min-height: 0; height: auto; padding: 24px 22px 26px; overflow: visible; }
-  .gallery-card .device, .gallery-card:first-child .device { display: grid; place-items: center; width: 100%; height: 140px; min-height: 140px; max-height: 140px; margin: 10px auto 30px; }
-  .gallery-card .device-shell { width: min(44%, 98px); height: 72%; }
-  .gallery-card h3 { margin-top: 0; }
-  .gallery-card p { margin-top: 14px; }
+  .gallery-card, .gallery-card:first-child { display: flex; flex-direction: column; align-items: stretch; min-height: 0; height: auto; padding: 24px 22px 28px; overflow: visible; }
+  .gallery-card .device, .gallery-card:first-child .device { display: grid; place-items: center; flex: 0 0 118px; order: 0; width: 100%; height: 118px; min-height: 118px; max-height: 118px; margin: 12px auto 28px; overflow: visible; }
+  .gallery-card .device-shell, .gallery-card:first-child .device-shell { width: min(40%, 88px); height: 70%; }
+  .gallery-card .device-shadow, .gallery-card:first-child .device-shadow { bottom: 3px; width: 54%; height: 18px; filter: blur(11px); }
+  .gallery-card h3 { order: 1; margin: 0; padding: 0; }
+  .gallery-card p { order: 2; margin: 14px 0 0; padding: 0; }
   .card-bottom { align-items: flex-start; gap: 12px; margin-top: 22px; }
   .card-bottom strong { font-size: 24px; line-height: 1.1; }
   .card-bottom button { padding: 10px 16px; }
