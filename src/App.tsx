@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Check, ChevronRight, Clock, CreditCard, Lock, PackageCheck, ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
+import { FormEvent, useMemo, useState } from "react";
+import { Check, ChevronRight, Clock, CreditCard, Lock, Mail, MapPin, PackageCheck, ShieldCheck, Sparkles, Star, Truck, WalletCards } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
@@ -14,6 +14,13 @@ const benefits = [
   "Pairs with serum, cleansing and sculpting tools"
 ];
 
+const gallery = [
+  ["Pearl profile", "A sculpted handheld silhouette with a calm pearl finish for a premium vanity presence."],
+  ["Light ritual", "Four clearly labeled light modes presented as an elegant evening care sequence."],
+  ["Travel cradle", "A compact charging cradle concept designed for tidy counters and weekend cases."],
+  ["Full routine", "Cleanse, illuminate, hydrate and sculpt in one elevated Elyra Maison set."]
+];
+
 const beforeAfter = [
   ["Before ritual", "Skin can look tired, uneven and unprepared after long days, travel or screen-heavy work."],
   ["After steady use", "A polished routine helps skin appear smoother, calmer and more luminous in daily close-up moments."],
@@ -23,21 +30,33 @@ const beforeAfter = [
 const reviews = [
   ["Mara V.", "The device feels expensive, the routine is simple, and my evening skincare finally feels intentional."],
   ["Celeste R.", "The serum and roller bundle made the whole set feel like a private facial cabinet at home."],
-  ["Nadia K.", "Beautiful packaging, fast shipping, and the checkout trust details made ordering feel safe." ]
+  ["Nadia K.", "Beautiful packaging, fast shipping, and the checkout trust details made ordering feel safe."],
+  ["Iris L.", "I chose the full ritual set because every product felt considered instead of random."],
+  ["Sofia N.", "The guarantee and clear delivery notes gave me confidence before checkout."],
+  ["Elena P.", "The cleansing brush and serum made the device feel like a complete nightly practice."]
 ];
 
 const faqs = [
-  ["Is Elyra Maison a real existing brand?", "No. Elyra Maison, Oréva Beam, Veloura Serum, Lysa Roller and Mira Cleanse are newly invented names for this original storefront and can be personalized before launch."],
-  ["Does the checkout process take real payments?", "This front-end package includes a polished checkout experience and trust messaging. Connect your payment provider before accepting live orders."],
-  ["How should the LED device be used?", "The store copy presents a general beauty ritual concept. Add your final safety directions, compliance statements and product manual before selling."],
-  ["Can I change prices, policies and contact details?", "Yes. All copy is written as original placeholder business content so you can replace company details, domain, address and legal information." ]
+  ["How long does shipping usually take?", "Standard tracked delivery is written for a 5–9 business day estimate after processing. Update this timing to match your final warehouse, carrier and destination regions."],
+  ["Can customers return the ritual set?", "The storefront includes a 60-day satisfaction promise framework. Final hygiene exclusions, inspection rules and refund timing should be confirmed before launch."],
+  ["Is payment information secure?", "The checkout interface is structured for encrypted card processing through Stripe and a PayPal option placeholder. Live payment credentials must be connected before accepting real orders."],
+  ["Is there a warranty?", "The Oréva Beam copy includes a one-year limited device-care warranty concept for manufacturing concerns. Replace with your final warranty provider and legal terms."],
+  ["How should the LED device be used?", "Begin with clean, dry skin, choose the intended light mode, glide gently for the guided session time, then finish with serum or moisturizer. Add your final safety manual before launch."],
+  ["Is Elyra Maison a real existing brand?", "No. Elyra Maison, Oréva Beam, Veloura Serum, Lysa Roller and Mira Cleanse are newly invented names for this original storefront and can be personalized before launch."]
 ];
 
 export default function App() {
   const [cart, setCart] = useState<Cart>({ "oreva-beam": 1 });
   const [cartOpen, setCartOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
+  const subtotal = cartLines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
+  const shipping = subtotal >= 250 || subtotal === 0 ? 0 : 12;
+  const total = subtotal + shipping;
   const addToCart = (id: string) => {
     setCart((current) => ({ ...current, [id]: (current[id] || 0) + 1 }));
     setCartOpen(true);
@@ -47,11 +66,22 @@ export default function App() {
     if (!next[id]) delete next[id];
     return next;
   });
+  const openCheckout = () => {
+    setCartOpen(false);
+    setCheckoutOpen(true);
+    setOrderPlaced(false);
+    window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 40);
+  };
+  const placeOrder = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setOrderPlaced(true);
+    window.setTimeout(() => document.getElementById("confirmation")?.scrollIntoView({ behavior: "smooth" }), 40);
+  };
 
   return (
     <div id="home">
-      <Header cartCount={cartCount} onCart={() => setCartOpen(true)} />
-      <CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} />
+      <Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} />
+      <CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} />
 
       <main>
         <section className="hero-section">
@@ -109,6 +139,11 @@ export default function App() {
           {beforeAfter.map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}
         </section>
 
+        <section id="gallery" className="gallery-section">
+          <div className="section-intro"><p className="eyebrow">Product gallery</p><h2>Premium angles for a complete ritual presentation.</h2><p>Additional showcase blocks help customers understand the device, accessories and full routine before checkout.</p></div>
+          <div className="gallery-grid">{gallery.map(([title, body], index) => <article key={title} className="gallery-card"><ProductVisual product={index === 0 ? mainProduct : products[index]} large={index === 0} /><h3>{title}</h3><p>{body}</p></article>)}</div>
+        </section>
+
         <section className="upsell-section">
           <div className="section-intro"><p className="eyebrow">Complete the ritual</p><h2>High-margin complementary products.</h2><p>Each add-on supports the main device purchase while increasing basket value.</p></div>
           <div className="cards-grid">{addOns.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add</button></div></article>)}</div>
@@ -116,12 +151,16 @@ export default function App() {
 
         <section className="guarantee-section">
           <div><p className="eyebrow">Premium guarantee</p><h2>Confidence promise for first-time buyers.</h2><p>Customers can try the Elyra ritual for 60 days. If it is not the right fit, your support team can guide an easy return according to the refund policy below.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Tracked delivery</span><span><ShieldCheck /> Secure payment messaging</span><span><Clock /> Limited launch savings block</span></div>
+          <div className="guarantee-list"><span><PackageCheck /> Tracked delivery assurance</span><span><ShieldCheck /> Secure payment badges</span><span><Clock /> 60-day satisfaction promise</span><span><WalletCards /> Refund guarantee framework</span></div>
         </section>
 
         <section className="urgency-section">
           <p className="eyebrow">Launch window</p><h2>Reserve the Oréva Beam set while introductory pricing is active.</h2><button className="primary-action" onClick={() => addToCart(mainProduct.id)}>Claim launch offer</button>
         </section>
+
+        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure checkout</p><h2>Complete your Elyra Maison order.</h2><p>Structured for Stripe card processing and PayPal as a secondary option. Connect live payment credentials before accepting real transactions.</p></div><div className="checkout-grid"><form className="checkout-form" onSubmit={placeOrder}><fieldset><legend>Shipping details</legend><input required placeholder="Full name" /><input required type="email" placeholder="Email address" /><input required placeholder="Street address" /><div className="form-row"><input required placeholder="City" /><input required placeholder="Postal code" /></div><input required placeholder="Country or region" /></fieldset><fieldset><legend>Billing and payment</legend><label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "card"} onChange={() => setPaymentMethod("card")} /> <span><CreditCard size={18} /> Card payment via Stripe structure</span></label>{paymentMethod === "card" && <div className="card-fields"><input required placeholder="Card number" inputMode="numeric" /><div className="form-row"><input required placeholder="MM / YY" /><input required placeholder="CVC" /></div><input required placeholder="Name on card" /></div>}<label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "paypal"} onChange={() => setPaymentMethod("paypal")} /> <span><WalletCards size={18} /> PayPal option placeholder</span></label></fieldset><div className="checkout-trust"><span><Lock size={17} /> SSL-ready checkout</span><span><ShieldCheck size={17} /> Fraud-screening placeholder</span><span><CreditCard size={17} /> Stripe and PayPal structure</span></div><button className="primary-action full" disabled={!cartLines.length}>Place secure order</button></form><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${line.product.price * line.quantity}</strong></div>)}<div className="summary-line"><span>Shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total}</strong></div><p>Payment fields are presentation-ready and prepared for secure provider connection.</p></aside></div></section>}
+
+        {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your Elyra ritual reservation is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this production checkout flow. A live store should send confirmation email, fulfillment status and tracking once payment provider keys are connected.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ChevronRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
           <div className="section-intro"><p className="eyebrow">Customer language</p><h2>Original reviews for a premium beauty audience.</h2></div>
@@ -134,14 +173,15 @@ export default function App() {
         </section>
 
         <section id="policies" className="policy-section">
-          <Policy title="Shipping Policy" body="Orders are prepared within a stated handling window and shipped with tracking when available. Delivery estimates, carrier availability, taxes and duties should be updated to match your final business location and fulfillment provider." />
-          <Policy title="Refund Policy" body="Customers may request a return within the published trial period if products are complete, safely packaged and meet your hygiene and resale conditions. Final eligibility, exclusions and refund timing should be customized before launch." />
-          <Policy title="Privacy Policy" body="Customer information is used to process orders, provide support, improve store performance and send requested communications. Replace this placeholder with your final data practices, processor list and regional compliance language." />
-          <Policy title="Terms of Service" body="Use of this store means visitors agree to accurate account details, lawful purchases and the final product instructions you provide. Pricing, availability and promotions may change according to your published store terms." />
+          <Policy title="Shipping Policy" body="Elyra Maison prepares orders during published business handling days, then releases parcels to tracked carriers where service is available. Delivery estimates are presented in good faith and may change because of destination rules, customs review, weather interruptions or carrier volume. Customers receive dispatch communication once the order is ready to travel." />
+          <Policy title="Refund Policy" body="Customers may request a return during the stated satisfaction window when items are complete, safely packaged and eligible under hygiene standards. Returned devices and accessories are reviewed before refund approval. Original shipping charges, promotional gifts and visibly used personal-care items may require separate handling according to your final business policy." />
+          <Policy title="Privacy Policy" body="Customer information is collected to process orders, protect transactions, provide support, deliver updates and improve the store experience. Data is shared only with service providers needed for checkout, fulfillment, analytics or legal compliance. Replace this wording with your final regional disclosures, processor list and contact details before launch." />
+          <Policy title="Terms of Service" body="Visitors agree to provide accurate order information, use products according to the published instructions and avoid unlawful resale or misuse of the website. Product availability, pricing, promotions and content may change without notice. Final purchase rights, dispute rules and company details should be customized for your operating location." />
+          <Policy title="Contact Us" body="For order help, returns or product questions, contact support@yourdomain.example with the customer name, order number and a short description of the request. Replace this placeholder email, business address and response window with your official support information before publishing." />
         </section>
       </main>
 
-      <footer className="footer"><strong>Elyra Maison</strong><span>Original tagline: Beauty technology, softly illuminated.</span><span>Replace with your business address, support email and domain before launch.</span></footer>
+      <footer id="contact" className="footer"><div><strong>Elyra Maison</strong><span>Beauty technology, softly illuminated.</span><span>support@yourdomain.example · Replace with your studio address</span></div><nav><a href="#policies">Privacy</a><a href="#policies">Terms</a><a href="#policies">Refunds</a><a href="#policies">Shipping</a></nav><div className="social-row"><a href="#home">Instagram</a><a href="#home">TikTok</a><a href="#home">Pinterest</a></div><small>© 2026 Elyra Maison. Original storefront copy and visuals prepared for personalization.</small></footer>
     </div>
   );
 }
