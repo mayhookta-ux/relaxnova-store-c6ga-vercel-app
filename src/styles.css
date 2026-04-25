@@ -134,3 +134,58 @@ summary { cursor: pointer; font-weight: 800; }
   .primary-action { width: 100%; }
   .floating-card { position: static; margin: 8px; }
 }
+
+.header-actions { display: inline-flex; align-items: center; gap: 10px; }
+.menu-button { display: none; }
+.primary-action:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.primary-action svg { vertical-align: middle; margin-right: 8px; }
+.gallery-section { background: hsl(var(--card)); }
+.gallery-grid { display: grid; grid-template-columns: 1.1fr 0.9fr 0.9fr; gap: 20px; }
+.gallery-card { min-height: 360px; padding: 28px; border: 1px solid hsl(var(--border)); border-radius: 28px; background: hsl(var(--background)); box-shadow: var(--soft-shadow); overflow: hidden; }
+.gallery-card:first-child { grid-row: span 2; }
+.gallery-card .device { width: 100%; height: 230px; margin-bottom: 18px; }
+.gallery-card:first-child .device { height: 430px; }
+.gallery-card p, .checkout-section p, .confirmation-section p, .order-summary p, .footer span, .footer small { color: hsl(var(--muted-foreground)); line-height: 1.7; }
+.checkout-section { background: hsl(var(--muted) / 0.45); }
+.checkout-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 430px); gap: 28px; align-items: start; }
+.checkout-form, .order-summary, .confirmation-section { border: 1px solid hsl(var(--border)); border-radius: 28px; background: hsl(var(--card)); box-shadow: var(--soft-shadow); padding: clamp(24px, 4vw, 42px); }
+.checkout-form { display: grid; gap: 24px; }
+fieldset { border: 1px solid hsl(var(--border)); border-radius: 22px; padding: 22px; display: grid; gap: 14px; }
+legend { padding: 0 8px; font-family: Marcellus, serif; font-size: 25px; }
+input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px; min-height: 50px; padding: 0 16px; background: hsl(var(--background)); color: hsl(var(--foreground)); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.payment-option { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid hsl(var(--border)); border-radius: 18px; cursor: pointer; }
+.payment-option input { width: 18px; min-height: 18px; }
+.payment-option span, .checkout-trust { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.card-fields { display: grid; gap: 12px; }
+.checkout-trust { color: hsl(var(--muted-foreground)); font-size: 13px; }
+.order-summary { position: sticky; top: 98px; display: grid; gap: 16px; }
+.summary-line, .summary-total { display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid hsl(var(--border)); padding-bottom: 13px; }
+.summary-total { border-bottom: 0; font-size: 23px; }
+.confirmation-section { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin: 0 clamp(20px, 5vw, 80px) clamp(60px, 7vw, 90px); }
+.muted-total { font-size: 15px; color: hsl(var(--muted-foreground)); }
+.footer { display: grid; grid-template-columns: 1.3fr 1fr 1fr auto; align-items: start; }
+.footer div, .footer nav, .social-row { display: grid; gap: 8px; }
+.footer nav, .social-row { grid-auto-flow: row; }
+.footer a:hover { color: hsl(var(--foreground)); }
+
+@media (max-width: 980px) {
+  .menu-button { display: inline-flex; }
+  .site-header { flex-wrap: wrap; min-height: 70px; }
+  .nav { order: 3; display: none; width: 100%; padding: 14px 0 18px; border-top: 1px solid hsl(var(--border)); }
+  .nav-open { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .gallery-grid, .checkout-grid { grid-template-columns: 1fr; }
+  .gallery-card:first-child { grid-row: auto; }
+  .order-summary { position: static; }
+  .confirmation-section { flex-direction: column; align-items: flex-start; }
+  .footer { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .nav-open, .form-row, .footer { grid-template-columns: 1fr; }
+  .cart-head, .cart-footer { padding: 18px; }
+  .cart-lines { padding: 14px 18px; }
+  .cart-line { grid-template-columns: 50px 1fr; }
+  .cart-line b { grid-column: 2; }
+  fieldset { padding: 18px; }
+  .gallery-card:first-child .device, .gallery-card .device { height: 260px; }
+}
