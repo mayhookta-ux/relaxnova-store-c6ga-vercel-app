@@ -195,5 +195,15 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .cart-line { grid-template-columns: 50px 1fr; }
   .cart-line b { grid-column: 2; }
   fieldset { padding: 18px; }
-  .product-card .device, .gallery-card:first-child .device, .gallery-card .device { height: 260px; }
+  section:not(.hero-section):not(.strip-section) { padding-inline: 18px; }
+  .product-stage { min-height: 340px; padding: 20px; }
+  .device-large { width: min(260px, 74vw); height: min(360px, 96vw); }
+  .product-card, .gallery-card { padding: 22px; }
+  .product-card .device, .gallery-card:first-child .device, .gallery-card .device { height: 190px; margin-bottom: 22px; }
+  .product-card .device-shell, .gallery-card .device-shell { width: min(54%, 118px); height: 76%; }
+  .product-card h3, .gallery-card h3 { font-size: 29px; line-height: 1.12; overflow-wrap: anywhere; }
+  .product-card p, .gallery-card p { margin-top: 12px; line-height: 1.7; overflow: visible; }
+  .card-bottom { align-items: flex-start; gap: 12px; margin-top: 18px; }
+  .card-bottom strong { font-size: 24px; line-height: 1.1; }
+  .card-bottom button { padding: 10px 16px; }
 }
