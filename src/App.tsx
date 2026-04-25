@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from "react";
-import { Check, ChevronRight, Clock, CreditCard, Lock, Mail, MapPin, PackageCheck, ShieldCheck, Sparkles, Star, Truck, WalletCards } from "lucide-react";
+import { ArrowRight, BadgeCheck, BadgeDollarSign, CircleCheckBig, Gem, KeyRound, Landmark, Package, PackageCheck, Timer } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
@@ -91,18 +91,18 @@ export default function App() {
             <p className="hero-text">Meet Oréva Beam, a premium LED facial beauty device created for customers who want a polished at-home routine that looks elegant, feels trustworthy and is simple to keep using.</p>
             <div className="hero-actions">
               <button className="primary-action" onClick={() => addToCart(mainProduct.id)}>Add Oréva Beam — ${mainProduct.price}</button>
-              <a className="secondary-action" href="#product">View ritual <ChevronRight size={17} /></a>
+              <a className="secondary-action" href="#product">View ritual <ArrowRight size={17} /></a>
             </div>
             <div className="proof-row">
-              <span><Star size={16} fill="currentColor" /> 4.9 ritual rating</span>
-              <span><Truck size={16} /> Free tracked shipping threshold</span>
-              <span><ShieldCheck size={16} /> 60-day confidence promise</span>
+              <span><Gem size={16} /> 4.9 ritual rating</span>
+              <span><PackageCheck size={16} /> Free tracked shipping threshold</span>
+              <span><BadgeCheck size={16} /> 60-day confidence promise</span>
             </div>
           </div>
           <div className="hero-visual">
             <ProductVisual product={mainProduct} large />
-            <div className="floating-card top-card"><Sparkles size={18} /> Four beauty light modes</div>
-            <div className="floating-card bottom-card"><Lock size={18} /> Secure checkout ready</div>
+            <div className="floating-card top-card"><Gem size={18} /> Four beauty light modes</div>
+            <div className="floating-card bottom-card"><KeyRound size={18} /> Secure checkout ready</div>
           </div>
         </section>
 
@@ -123,9 +123,9 @@ export default function App() {
               <h3>Premium LED facial beauty device</h3>
               <p>{mainProduct.description}</p>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
-              <ul>{mainProduct.bullets.map((b) => <li key={b}><Check size={17} /> {b}</li>)}</ul>
+               <ul>{mainProduct.bullets.map((b) => <li key={b}><CircleCheckBig size={17} /> {b}</li>)}</ul>
               <button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add device to bag</button>
-              <div className="pay-row"><CreditCard size={18} /> Payment provider ready · SSL checkout · No surprise fees copy</div>
+              <div className="pay-row"><Landmark size={18} /> Payment provider ready · SSL checkout · No surprise fees copy</div>
             </div>
           </div>
         </section>
@@ -151,16 +151,16 @@ export default function App() {
 
         <section className="guarantee-section">
           <div><p className="eyebrow">Premium guarantee</p><h2>Confidence promise for first-time buyers.</h2><p>Customers can try the Elyra ritual for 60 days. If it is not the right fit, your support team can guide an easy return according to the refund policy below.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Tracked delivery assurance</span><span><ShieldCheck /> Secure payment badges</span><span><Clock /> 60-day satisfaction promise</span><span><WalletCards /> Refund guarantee framework</span></div>
+           <div className="guarantee-list"><span><Package /> Tracked delivery assurance</span><span><BadgeCheck /> Secure payment badges</span><span><Timer /> 60-day satisfaction promise</span><span><BadgeDollarSign /> Refund guarantee framework</span></div>
         </section>
 
         <section className="urgency-section">
           <p className="eyebrow">Launch window</p><h2>Reserve the Oréva Beam set while introductory pricing is active.</h2><button className="primary-action" onClick={() => addToCart(mainProduct.id)}>Claim launch offer</button>
         </section>
 
-        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure checkout</p><h2>Complete your Elyra Maison order.</h2><p>Structured for Stripe card processing and PayPal as a secondary option. Connect live payment credentials before accepting real transactions.</p></div><div className="checkout-grid"><form className="checkout-form" onSubmit={placeOrder}><fieldset><legend>Shipping details</legend><input required placeholder="Full name" /><input required type="email" placeholder="Email address" /><input required placeholder="Street address" /><div className="form-row"><input required placeholder="City" /><input required placeholder="Postal code" /></div><input required placeholder="Country or region" /></fieldset><fieldset><legend>Billing and payment</legend><label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "card"} onChange={() => setPaymentMethod("card")} /> <span><CreditCard size={18} /> Card payment via Stripe structure</span></label>{paymentMethod === "card" && <div className="card-fields"><input required placeholder="Card number" inputMode="numeric" /><div className="form-row"><input required placeholder="MM / YY" /><input required placeholder="CVC" /></div><input required placeholder="Name on card" /></div>}<label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "paypal"} onChange={() => setPaymentMethod("paypal")} /> <span><WalletCards size={18} /> PayPal option placeholder</span></label></fieldset><div className="checkout-trust"><span><Lock size={17} /> SSL-ready checkout</span><span><ShieldCheck size={17} /> Fraud-screening placeholder</span><span><CreditCard size={17} /> Stripe and PayPal structure</span></div><button className="primary-action full" disabled={!cartLines.length}>Place secure order</button></form><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${line.product.price * line.quantity}</strong></div>)}<div className="summary-line"><span>Shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total}</strong></div><p>Payment fields are presentation-ready and prepared for secure provider connection.</p></aside></div></section>}
+        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure checkout</p><h2>Complete your Elyra Maison order.</h2><p>Structured for Stripe card processing and PayPal as a secondary option. Connect live payment credentials before accepting real transactions.</p></div><div className="checkout-grid"><form className="checkout-form" onSubmit={placeOrder}><fieldset><legend>Shipping details</legend><input required placeholder="Full name" /><input required type="email" placeholder="Email address" /><input required placeholder="Street address" /><div className="form-row"><input required placeholder="City" /><input required placeholder="Postal code" /></div><input required placeholder="Country or region" /></fieldset><fieldset><legend>Billing and payment</legend><label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "card"} onChange={() => setPaymentMethod("card")} /> <span><Landmark size={18} /> Card payment via Stripe structure</span></label>{paymentMethod === "card" && <div className="card-fields"><input required placeholder="Card number" inputMode="numeric" /><div className="form-row"><input required placeholder="MM / YY" /><input required placeholder="CVC" /></div><input required placeholder="Name on card" /></div>}<label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "paypal"} onChange={() => setPaymentMethod("paypal")} /> <span><BadgeDollarSign size={18} /> PayPal option placeholder</span></label></fieldset><div className="checkout-trust"><span><KeyRound size={17} /> SSL-ready checkout</span><span><BadgeCheck size={17} /> Fraud-screening placeholder</span><span><Landmark size={17} /> Stripe and PayPal structure</span></div><button className="primary-action full" disabled={!cartLines.length}>Place secure order</button></form><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${line.product.price * line.quantity}</strong></div>)}<div className="summary-line"><span>Shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total}</strong></div><p>Payment fields are presentation-ready and prepared for secure provider connection.</p></aside></div></section>}
 
-        {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your Elyra ritual reservation is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this production checkout flow. A live store should send confirmation email, fulfillment status and tracking once payment provider keys are connected.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ChevronRight size={17} /></button></section>}
+        {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your Elyra ritual reservation is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this production checkout flow. A live store should send confirmation email, fulfillment status and tracking once payment provider keys are connected.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
           <div className="section-intro"><p className="eyebrow">Customer language</p><h2>Original reviews for a premium beauty audience.</h2></div>
