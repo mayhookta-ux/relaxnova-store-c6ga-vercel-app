@@ -1,4 +1,4 @@
-import { X, Minus, Plus, ShieldCheck, CreditCard } from "lucide-react";
+import { X, Minus, Plus, BadgeCheck, Landmark } from "lucide-react";
 import type { Product } from "../data/products";
 
 type CartLine = { product: Product; quantity: number };
@@ -37,10 +37,10 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
         </div>
       )}
       <div className="cart-footer">
-        <div className="trust-note"><ShieldCheck size={18} /> Encrypted checkout structure prepared for Stripe and PayPal.</div>
+        <div className="trust-note"><BadgeCheck size={18} /> Encrypted checkout structure prepared for Stripe and PayPal.</div>
         <div className="total-row"><span>Subtotal</span><strong>${subtotal}</strong></div>
         <div className="total-row muted-total"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div>
-        <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><CreditCard size={18} /> Continue to secure checkout</button>
+        <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><Landmark size={18} /> Continue to secure checkout</button>
       </div>
     </aside>
   );
