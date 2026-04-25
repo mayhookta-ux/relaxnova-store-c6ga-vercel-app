@@ -198,12 +198,13 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   section:not(.hero-section):not(.strip-section) { padding-inline: 18px; }
   .product-stage { min-height: 340px; padding: 20px; }
   .device-large { width: min(260px, 74vw); height: min(360px, 96vw); }
-  .product-card, .gallery-card { padding: 22px; }
-  .product-card .device, .gallery-card:first-child .device, .gallery-card .device { height: 190px; margin-bottom: 22px; }
+  .product-card, .gallery-card { display: flex; flex-direction: column; align-items: stretch; min-height: auto; height: auto; padding: 24px 22px 26px; overflow: visible; }
+  .product-card .device, .gallery-card:first-child .device, .gallery-card .device { flex: 0 0 auto; order: 0; height: 172px; min-height: 172px; margin: 0 0 26px; }
   .product-card .device-shell, .gallery-card .device-shell { width: min(54%, 118px); height: 76%; }
-  .product-card h3, .gallery-card h3 { font-size: 29px; line-height: 1.12; overflow-wrap: anywhere; }
-  .product-card p, .gallery-card p { margin-top: 12px; line-height: 1.7; overflow: visible; }
-  .card-bottom { align-items: flex-start; gap: 12px; margin-top: 18px; }
+  .product-card .eyebrow { margin: 0 0 10px; }
+  .product-card h3, .gallery-card h3 { display: block; min-height: 0; margin: 0; font-size: 28px; line-height: 1.16; overflow: visible; overflow-wrap: anywhere; word-break: normal; }
+  .product-card p, .gallery-card p { display: block; min-height: 0; margin: 14px 0 0; line-height: 1.72; overflow: visible; overflow-wrap: anywhere; }
+  .card-bottom { align-items: flex-start; gap: 12px; margin-top: 22px; }
   .card-bottom strong { font-size: 24px; line-height: 1.1; }
   .card-bottom button { padding: 10px 16px; }
 }
