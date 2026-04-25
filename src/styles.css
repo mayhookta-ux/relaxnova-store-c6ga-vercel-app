@@ -147,7 +147,7 @@ summary { cursor: pointer; font-weight: 800; }
 .primary-action svg { vertical-align: middle; margin-right: 8px; }
 .gallery-section { background: hsl(var(--card)); }
 .gallery-grid { display: grid; grid-template-columns: 1.1fr 0.9fr 0.9fr; gap: 20px; }
-.gallery-card { min-height: 360px; padding: 28px; border: 1px solid hsl(var(--border)); border-radius: 28px; background: hsl(var(--background)); box-shadow: var(--soft-shadow); overflow: hidden; }
+.gallery-card { min-height: 360px; padding: 28px; border: 1px solid hsl(var(--border)); border-radius: 28px; background: linear-gradient(180deg, hsl(var(--background)), hsl(var(--product-surface))); box-shadow: var(--soft-shadow); overflow: hidden; }
 .gallery-card:first-child { grid-row: span 2; }
 .gallery-card .device { width: 100%; height: 230px; margin-bottom: 18px; }
 .gallery-card:first-child .device { height: 430px; }
@@ -193,5 +193,5 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .cart-line { grid-template-columns: 50px 1fr; }
   .cart-line b { grid-column: 2; }
   fieldset { padding: 18px; }
-  .gallery-card:first-child .device, .gallery-card .device { height: 260px; }
+  .product-card .device, .gallery-card:first-child .device, .gallery-card .device { height: 260px; }
 }
