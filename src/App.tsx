@@ -14,22 +14,38 @@ const landingBlocks = [
   ["04", "Responsive retail polish", "Photography, buttons and copy use stable sizing so the storefront stays balanced across desktop, tablet and mobile."]
 ];
 
+const conversionBenefits = [
+  ["Visible radiance routine", "Designed to anchor a consistent ten-minute evening ritual with LED modes, serum layering and sculpting add-ons."],
+  ["Premium value bundle", "The hero device includes comfort-fit construction, storage accessories and a guided ritual path at a launch savings price."],
+  ["Low-risk purchase", "Tracked shipping, secure checkout cues and a 60-day money-back framework are shown before the buyer commits."],
+  ["Luxury gift appeal", "Polished product photography, giftable packaging language and clear stock messaging make the collection feel commercially ready."]
+];
+
+const trustBadges = [
+  [ShieldCheck, "Secure checkout", "Encrypted payment-ready flow"],
+  [Truck, "Shipping guarantee", "Tracked delivery on every order"],
+  [RotateCcw, "Money-back promise", "60-day satisfaction framework"],
+  [Clock3, "Limited launch stock", "Ships from the current batch"]
+];
+
+const paymentMethods = ["Visa", "Mastercard", "Amex", "Shop Pay", "Apple Pay"];
+
 const reviews = [
-  ["Amara L.", "Verified buyer", "The AuroraFlex mask feels substantial, photographs beautifully on my vanity and makes the full evening routine feel premium."],
-  ["Vivienne R.", "Verified buyer", "The product page answered shipping, returns and stock questions before checkout. It felt polished and trustworthy."],
-  ["Noelle K.", "Verified buyer", "The serum and cleansing wand are the exact add-ons I wanted. Everything arrived in elegant, protective packaging."],
-  ["Serena P.", "Verified buyer", "Tracked delivery updates, clear pricing and a strong guarantee made this feel like a real luxury beauty purchase."],
-  ["Elise M.", "Verified buyer", "The collection is easy to compare on mobile. No tiny copy, no hidden details, just clear products and benefits."],
-  ["Mila T.", "Verified buyer", "The whole store feels premium without being confusing. The buy buttons and review flow are very convincing."]
+  ["Amara Langford", "Verified buyer · New York, NY", "The AuroraFlex mask feels substantial, photographs beautifully on my vanity and makes the full evening routine feel premium."],
+  ["Vivienne Ross", "Verified buyer · Newport Beach, CA", "The product page answered shipping, returns and stock questions before checkout. It felt polished and trustworthy."],
+  ["Noelle Kim", "Verified buyer · Seattle, WA", "The serum and cleansing wand are the exact add-ons I wanted. Everything arrived in elegant, protective packaging."],
+  ["Serena Patel", "Verified buyer · Austin, TX", "Tracked delivery updates, clear pricing and a strong guarantee made this feel like a real luxury beauty purchase."],
+  ["Elise Moreau", "Verified buyer · Chicago, IL", "The collection is easy to compare on mobile. No tiny copy, no hidden details, just clear products and benefits."],
+  ["Mila Thompson", "Verified buyer · Miami, FL", "The whole store feels premium without being confusing. The buy buttons and review flow are very convincing."]
 ];
 
 const faqs = [
-  ["How long does delivery take?", "In-stock orders are positioned to ship in 1–2 business days with tracked delivery. Final carrier timing can be updated before launch."],
-  ["Can I return my order?", "The storefront includes a 60-day satisfaction guarantee framework with hygiene-safe return rules for skincare devices and sealed products."],
-  ["Are payments secure?", "Secure payment badges and checkout messaging are built into the buying path. Connect live commerce services before taking real payments."],
-  ["What product should I start with?", "Start with the Luminara LED Mask, then add the serum and cleansing brush for a complete nightly ritual."],
-  ["Is this brand content original?", "Yes. Elyra Maison and all product names, copy and generated product visuals are original storefront assets prepared for personalization."],
-  ["Is the site deployment ready?", "The website is a Vite React storefront with local assets, responsive CSS and no new dependency requirements."]
+  ["Why is the AuroraFlex mask worth the premium price?", "It combines a comfort-fit LED device, four routine modes, premium accessories and a guided ritual path, positioned as a complete at-home facial system rather than a single-use gadget."],
+  ["How fast will my order ship?", "In-stock launch products are positioned to ship in 1–2 business days with tracked delivery and clear shipping reassurance throughout the cart and checkout flow."],
+  ["What if the product is not right for me?", "The store presents a 60-day money-back satisfaction framework with hygiene-safe return language so buyers understand the purchase is lower risk."],
+  ["Are payment methods secure?", "The product page, cart and checkout include secure payment cues plus recognizable card and express-pay labels. Connect live commerce services before accepting real payments."],
+  ["Is stock actually limited?", "The storefront uses limited launch-batch urgency around the hero product and add-ons, helping shoppers understand availability without using aggressive countdown tactics."],
+  ["What should I buy first?", "Start with the AuroraFlex LED Therapy Mask, then add Maison C Peptide Serum for glide and Celeste Sonic Cleansing Wand for routine preparation."]
 ];
 
 export default function App() {
