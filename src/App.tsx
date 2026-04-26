@@ -1,5 +1,6 @@
 import { FormEvent, useMemo, useState } from "react";
 import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, Gem, HeartHandshake, Leaf, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Sparkles, Star, Truck, WandSparkles } from "lucide-react";
+import { z } from "zod";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
@@ -7,45 +8,58 @@ import { addOns, mainProduct, products } from "./data/products";
 
 type Cart = Record<string, number>;
 
+const checkoutSchema = z.object({
+  fullName: z.string().trim().min(2).max(100),
+  email: z.string().trim().email().max(255),
+  street: z.string().trim().min(5).max(160),
+  city: z.string().trim().min(2).max(80),
+  postalCode: z.string().trim().min(3).max(20),
+  country: z.string().trim().min(2).max(80),
+  cardNumber: z.string().trim().regex(/^[0-9 ]{12,23}$/),
+  expiry: z.string().trim().regex(/^[0-9]{2}\s?\/\s?[0-9]{2}$/),
+  cvc: z.string().trim().regex(/^[0-9]{3,4}$/),
+  cardName: z.string().trim().min(2).max(100)
+});
+
 const landingBlocks = [
-  ["01", "Real product merchandising", "Commercial product names, credible pricing, stock messages and benefit-led descriptions support confident purchase decisions."],
-  ["02", "Luxury routine bundling", "Each add-on has a clear role in the skincare ritual, making the full basket feel intentional rather than decorative."],
-  ["03", "Trust before checkout", "Guarantees, secure payment cues, shipping clarity and verified reviews reduce hesitation before the buyer reaches the cart."],
-  ["04", "Responsive retail polish", "Photography, buttons and copy use stable sizing so the storefront stays balanced across desktop, tablet and mobile."]
+  ["01", "Benefit-led shopping", "Every product explains the daily purpose, expected use and reason to buy before a shopper reaches the button."],
+  ["02", "Routine-based value", "The collection is arranged as a complete care sequence so add-ons feel useful, not random."],
+  ["03", "Decision support", "Shipping, returns, payment safety and quality signals stay visible where purchase hesitation usually appears."],
+  ["04", "Responsive retail polish", "Image sizing, button hierarchy and copy blocks stay balanced across desktop, tablet and mobile."]
 ];
 
 const conversionBenefits = [
-  ["Visible radiance routine", "Designed to anchor a consistent ten-minute evening ritual with LED modes, serum layering and sculpting add-ons."],
-  ["Premium value bundle", "The hero device includes comfort-fit construction, storage accessories and a guided ritual path at a launch savings price."],
-  ["Low-risk purchase", "Tracked shipping, secure checkout cues and a 60-day money-back framework are shown before the buyer commits."],
-  ["Luxury gift appeal", "Polished product photography, giftable packaging language and clear stock messaging make the collection feel commercially ready."]
+  ["Made for steady routines", "The hero device supports a short evening care moment for shoppers who want a polished routine without a spa appointment."],
+  ["Clear premium value", "Comfort materials, included accessories and guided use details make the price easier to understand at a glance."],
+  ["Reduced purchase risk", "Guarantee, delivery and payment messages appear beside the product so buyers do not need to search for reassurance."],
+  ["Gift-ready presentation", "Soft product photography, concise benefits and elegant spacing create a storefront suitable for premium self-care gifting."]
 ];
 
 const trustBadges = [
-  { icon: ShieldCheck, title: "Secure checkout", body: "Encrypted payment-ready flow" },
-  { icon: Truck, title: "Shipping guarantee", body: "Tracked delivery on every order" },
-  { icon: RotateCcw, title: "Money-back promise", body: "60-day satisfaction framework" },
-  { icon: Clock3, title: "Limited launch stock", body: "Ships from the current batch" }
+  { icon: ShieldCheck, title: "Secure Checkout", body: "Protected payment path" },
+  { icon: RotateCcw, title: "Money Back Guarantee", body: "60-day confidence window" },
+  { icon: Truck, title: "Fast Shipping", body: "Tracked dispatch on eligible orders" },
+  { icon: BadgeCheck, title: "Verified Quality", body: "Checked before packing" }
 ];
 
-const paymentMethods = ["Visa", "Mastercard", "Amex", "Shop Pay", "Apple Pay"];
+const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];
 
 const reviews = [
-  ["Amara Langford", "Verified buyer · New York, NY", "The AuroraFlex mask feels substantial, photographs beautifully on my vanity and makes the full evening routine feel premium."],
-  ["Vivienne Ross", "Verified buyer · Newport Beach, CA", "The product page answered shipping, returns and stock questions before checkout. It felt polished and trustworthy."],
-  ["Noelle Kim", "Verified buyer · Seattle, WA", "The serum and cleansing wand are the exact add-ons I wanted. Everything arrived in elegant, protective packaging."],
-  ["Serena Patel", "Verified buyer · Austin, TX", "Tracked delivery updates, clear pricing and a strong guarantee made this feel like a real luxury beauty purchase."],
-  ["Elise Moreau", "Verified buyer · Chicago, IL", "The collection is easy to compare on mobile. No tiny copy, no hidden details, just clear products and benefits."],
-  ["Mila Thompson", "Verified buyer · Miami, FL", "The whole store feels premium without being confusing. The buy buttons and review flow are very convincing."]
+  ["A. Vale", "Verified buyer · city residence", "The main device felt easy to understand because the page explained what it does, when to use it and what comes in the box."],
+  ["R. Soren", "Verified buyer · coastal home", "The delivery promise and return wording were visible before checkout, which made the order feel calm and considered."],
+  ["L. Maren", "Verified buyer · private studio", "The serum and cleansing tool made sense as a routine rather than a forced bundle. The product cards were clear on mobile."],
+  ["C. Arden", "Verified buyer · weekend house", "The stock notice, secure payment labels and guarantee gave the store a more polished retail feel without looking loud."],
+  ["N. Wren", "Verified buyer · loft apartment", "I could compare the products quickly. The photos stayed balanced and the text never disappeared inside the cards."],
+  ["S. Iven", "Verified buyer · townhouse", "The checkout section felt structured, readable and premium. The buying buttons were easy to spot without breaking the design."]
 ];
 
 const faqs = [
-  ["Why is the AuroraFlex mask worth the premium price?", "It combines a comfort-fit LED device, four routine modes, premium accessories and a guided ritual path, positioned as a complete at-home facial system rather than a single-use gadget."],
-  ["How fast will my order ship?", "In-stock launch products are positioned to ship in 1–2 business days with tracked delivery and clear shipping reassurance throughout the cart and checkout flow."],
-  ["What if the product is not right for me?", "The store presents a 60-day money-back satisfaction framework with hygiene-safe return language so buyers understand the purchase is lower risk."],
-  ["Are payment methods secure?", "The product page, cart and checkout include secure payment cues plus recognizable card and express-pay labels. Connect live commerce services before accepting real payments."],
-  ["Is stock actually limited?", "The storefront uses limited launch-batch urgency around the hero product and add-ons, helping shoppers understand availability without using aggressive countdown tactics."],
-  ["What should I buy first?", "Start with the AuroraFlex LED Therapy Mask, then add Maison C Peptide Serum for glide and Celeste Sonic Cleansing Wand for routine preparation."]
+  ["Who is the main device for?", "It is positioned for shoppers who want a refined at-home facial ritual, clear routine guidance and a premium device that looks appropriate on a vanity."],
+  ["How quickly can an order leave the studio?", "Eligible in-stock orders can be prepared for same-day dispatch when placed before the displayed cut-off window, with tracking shown after packing."],
+  ["What is the return window?", "The store presents a 60-day money-back guarantee framework with hygiene-aware conditions for opened devices and sealed skincare items."],
+  ["Is there warranty coverage?", "The product page is structured to support a one-year limited device coverage statement for eligible manufacturing faults after launch terms are finalized."],
+  ["Are payments handled safely?", "The checkout uses a validated form structure, recognizable payment labels and no unsafe HTML injection patterns. Live payment processing should be connected before real sales."],
+  ["How are delivery details shared?", "The order flow is written for tracked delivery updates, including dispatch status, carrier movement and destination arrival notices where available."]
 ];
 
 export default function App() {
