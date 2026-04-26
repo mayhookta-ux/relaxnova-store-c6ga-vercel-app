@@ -23,14 +23,14 @@ export type Product = {
 export const products: Product[] = [
   {
     id: "luminara-led-mask",
-    name: "Auralis Light Ritual Mask",
+    name: "Caldria Light Ritual Mask",
     category: "Light Care Device",
     price: 329,
     compareAt: 429,
-    subtitle: "Champagne-toned face mask created for a calm, consistent evening care moment.",
-    description: "A premium at-home light care mask with four selectable modes, a cushioned inner feel and a short guided session for shoppers who want a polished routine without scheduling an appointment.",
+    subtitle: "Champagne-toned facial device created for a quiet, repeatable evening care moment.",
+    description: "A premium at-home light care device with four selectable settings, a cushioned inner feel and a short guided session for customers who want a polished ritual that fits into real evenings.",
     bullets: ["Four selectable light modes", "Comfort-focused inner surface", "10-minute guided session", "USB-C recharge support"],
-    details: "Includes mask, adjustable strap, USB-C cable, soft storage sleeve and original quick-start care card.",
+    details: "Includes device, adjustable strap, USB-C cable, soft storage sleeve and an original quick-start care card.",
     shipping: "Ready-to-ship units can leave today when ordered before the displayed packing window. Tracked delivery is included for qualifying carts.",
     returns: "Eligible orders may be reviewed under the 60-day money-back guarantee when returned complete and safely packed.",
     stock: "Limited stock · shipping today eligible",
