@@ -25,10 +25,12 @@ const benefits = [
 ];
 
 const reviews = [
-  ["Avery Collins", "Verified buyer · remote work", "I wanted something simple for my desk setup. The reminders are noticeable without feeling aggressive, and the fit adjusted quickly."],
-  ["Jordan Miles", "Verified buyer · daily routine", "The product made me more aware of how often I rounded my shoulders during laptop work. Shipping expectations were clear before checkout."],
-  ["Mina Patel", "Verified buyer · posture support", "I liked that it was one focused product, not a confusing collection. The price felt realistic for trying a smart posture device."],
-  ["Chris Walker", "Verified buyer · mobile order", "Checkout was easy on my phone and the trust badges answered the main questions I had before paying."]
+  { name: "Avery C.", location: "Austin, TX", rating: "★★★★★", label: "Verified buyer", photo: "AC", quote: "I use it during laptop work and it makes me notice when my shoulders start rolling forward. The vibration reminder is clear without being annoying." },
+  { name: "Jordan M.", location: "Denver, CO", rating: "★★★★★", label: "Verified buyer", photo: "JM", quote: "The adjustable strap was the biggest win for me. It feels lightweight enough for short daily sessions and the price made it easy to try." },
+  { name: "Mina P.", location: "Tampa, FL", rating: "★★★★☆", label: "Verified buyer", photo: "MP", quote: "I bought it for work-from-home posture reminders. It does exactly what I wanted: helps me catch slouching before it becomes my default position." },
+  { name: "Chris W.", location: "Phoenix, AZ", rating: "★★★★★", label: "Verified buyer", photo: "CW", quote: "Clean product page, clear shipping estimate, and checkout was quick on mobile. The device is simple, focused, and useful for desk days." },
+  { name: "Lauren B.", location: "Charlotte, NC", rating: "★★★★★", label: "Verified buyer", photo: "LB", quote: "I like that it is not bulky. The posture reminders helped me stay more aware during long calls without changing my whole routine." },
+  { name: "Ethan R.", location: "Seattle, WA", rating: "★★★★☆", label: "Verified buyer", photo: "ER", quote: "Good value for a smart posture trainer. The angle reminder feature is the reason I chose this over a regular brace." }
 ];
 
 const faqs = [
