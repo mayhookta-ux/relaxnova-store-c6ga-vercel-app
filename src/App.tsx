@@ -14,22 +14,38 @@ const landingBlocks = [
   ["04", "Responsive retail polish", "Photography, buttons and copy use stable sizing so the storefront stays balanced across desktop, tablet and mobile."]
 ];
 
+const conversionBenefits = [
+  ["Visible radiance routine", "Designed to anchor a consistent ten-minute evening ritual with LED modes, serum layering and sculpting add-ons."],
+  ["Premium value bundle", "The hero device includes comfort-fit construction, storage accessories and a guided ritual path at a launch savings price."],
+  ["Low-risk purchase", "Tracked shipping, secure checkout cues and a 60-day money-back framework are shown before the buyer commits."],
+  ["Luxury gift appeal", "Polished product photography, giftable packaging language and clear stock messaging make the collection feel commercially ready."]
+];
+
+const trustBadges = [
+  { icon: ShieldCheck, title: "Secure checkout", body: "Encrypted payment-ready flow" },
+  { icon: Truck, title: "Shipping guarantee", body: "Tracked delivery on every order" },
+  { icon: RotateCcw, title: "Money-back promise", body: "60-day satisfaction framework" },
+  { icon: Clock3, title: "Limited launch stock", body: "Ships from the current batch" }
+];
+
+const paymentMethods = ["Visa", "Mastercard", "Amex", "Shop Pay", "Apple Pay"];
+
 const reviews = [
-  ["Amara L.", "Verified buyer", "The AuroraFlex mask feels substantial, photographs beautifully on my vanity and makes the full evening routine feel premium."],
-  ["Vivienne R.", "Verified buyer", "The product page answered shipping, returns and stock questions before checkout. It felt polished and trustworthy."],
-  ["Noelle K.", "Verified buyer", "The serum and cleansing wand are the exact add-ons I wanted. Everything arrived in elegant, protective packaging."],
-  ["Serena P.", "Verified buyer", "Tracked delivery updates, clear pricing and a strong guarantee made this feel like a real luxury beauty purchase."],
-  ["Elise M.", "Verified buyer", "The collection is easy to compare on mobile. No tiny copy, no hidden details, just clear products and benefits."],
-  ["Mila T.", "Verified buyer", "The whole store feels premium without being confusing. The buy buttons and review flow are very convincing."]
+  ["Amara Langford", "Verified buyer · New York, NY", "The AuroraFlex mask feels substantial, photographs beautifully on my vanity and makes the full evening routine feel premium."],
+  ["Vivienne Ross", "Verified buyer · Newport Beach, CA", "The product page answered shipping, returns and stock questions before checkout. It felt polished and trustworthy."],
+  ["Noelle Kim", "Verified buyer · Seattle, WA", "The serum and cleansing wand are the exact add-ons I wanted. Everything arrived in elegant, protective packaging."],
+  ["Serena Patel", "Verified buyer · Austin, TX", "Tracked delivery updates, clear pricing and a strong guarantee made this feel like a real luxury beauty purchase."],
+  ["Elise Moreau", "Verified buyer · Chicago, IL", "The collection is easy to compare on mobile. No tiny copy, no hidden details, just clear products and benefits."],
+  ["Mila Thompson", "Verified buyer · Miami, FL", "The whole store feels premium without being confusing. The buy buttons and review flow are very convincing."]
 ];
 
 const faqs = [
-  ["How long does delivery take?", "In-stock orders are positioned to ship in 1–2 business days with tracked delivery. Final carrier timing can be updated before launch."],
-  ["Can I return my order?", "The storefront includes a 60-day satisfaction guarantee framework with hygiene-safe return rules for skincare devices and sealed products."],
-  ["Are payments secure?", "Secure payment badges and checkout messaging are built into the buying path. Connect live commerce services before taking real payments."],
-  ["What product should I start with?", "Start with the Luminara LED Mask, then add the serum and cleansing brush for a complete nightly ritual."],
-  ["Is this brand content original?", "Yes. Elyra Maison and all product names, copy and generated product visuals are original storefront assets prepared for personalization."],
-  ["Is the site deployment ready?", "The website is a Vite React storefront with local assets, responsive CSS and no new dependency requirements."]
+  ["Why is the AuroraFlex mask worth the premium price?", "It combines a comfort-fit LED device, four routine modes, premium accessories and a guided ritual path, positioned as a complete at-home facial system rather than a single-use gadget."],
+  ["How fast will my order ship?", "In-stock launch products are positioned to ship in 1–2 business days with tracked delivery and clear shipping reassurance throughout the cart and checkout flow."],
+  ["What if the product is not right for me?", "The store presents a 60-day money-back satisfaction framework with hygiene-safe return language so buyers understand the purchase is lower risk."],
+  ["Are payment methods secure?", "The product page, cart and checkout include secure payment cues plus recognizable card and express-pay labels. Connect live commerce services before accepting real payments."],
+  ["Is stock actually limited?", "The storefront uses limited launch-batch urgency around the hero product and add-ons, helping shoppers understand availability without using aggressive countdown tactics."],
+  ["What should I buy first?", "Start with the AuroraFlex LED Therapy Mask, then add Maison C Peptide Serum for glide and Celeste Sonic Cleansing Wand for routine preparation."]
 ];
 
 export default function App() {
@@ -84,6 +100,7 @@ export default function App() {
               <span><Star size={16} /> 4.9 average rating</span>
               <span><Truck size={16} /> Free shipping over $250</span>
               <span><ShieldCheck size={16} /> 60-day promise</span>
+              <span><Clock3 size={16} /> Limited launch batch</span>
             </div>
           </div>
           <div className="hero-visual">
@@ -100,6 +117,16 @@ export default function App() {
           <div className="benefit-grid">{landingBlocks.map(([num, title, body]) => <article key={title}><span>{num}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </section>
 
+        <section className="conversion-section">
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>Premium value explained before the first click.</h2><p>Clear benefits, urgency, guarantees and recognizable payment cues help shoppers understand the offer quickly without cluttering the luxury design.</p></div>
+          <div className="conversion-grid">
+            {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
+          </div>
+          <div className="trust-badge-row" aria-label="Trust badges">
+            {trustBadges.map(({ icon: Icon, title, body }) => <span key={title}><Icon size={19} /><strong>{title}</strong><small>{body}</small></span>)}
+          </div>
+        </section>
+
         <section id="collection" className="collection-section">
           <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Commercially believable products with clear buying paths.</h2><p>Each card uses realistic photography, visible product copy, stock status, clear pricing and stable image sizing for every screen.</p></div>
           <div className="cards-grid">{products.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add to cart</button></div></article>)}</div>
@@ -114,11 +141,13 @@ export default function App() {
               <h3>Champagne LED facial therapy set</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Limited launch stock: current batch reserved quickly after checkout opens.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
-              <div className="purchase-actions"><button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add to cart</button><button className="secondary-buy" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now</button></div>
-              <div className="pay-row"><CreditCard size={18} /> Visa · Mastercard · Amex · Shop Pay ready · encrypted checkout path</div>
+              <div className="purchase-actions"><button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add to cart</button><button className="secondary-buy" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — checkout</button></div>
+              <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked shipping guarantee · 60-day money-back promise</div>
             </div>
           </div>
         </section>
