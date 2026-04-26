@@ -1,7 +1,7 @@
-import ledMask from "../assets/product-luminara-led-mask.jpg";
-import serum from "../assets/product-silk-serum.jpg";
-import cleansingBrush from "../assets/product-onyx-brush.jpg";
-import roller from "../assets/product-marble-roller.jpg";
+import ledMask from "../assets/product-led-mask-pro.jpg";
+import serum from "../assets/product-vitamin-c-serum.jpg";
+import cleansingBrush from "../assets/product-sonic-cleanse-brush.jpg";
+import roller from "../assets/product-pink-stone-roller.jpg";
 
 export type Product = {
   id: string;
@@ -12,6 +12,10 @@ export type Product = {
   subtitle: string;
   description: string;
   bullets: string[];
+  details: string;
+  shipping: string;
+  returns: string;
+  stock: string;
   color: string;
   image: string;
 };
@@ -19,47 +23,63 @@ export type Product = {
 export const products: Product[] = [
   {
     id: "luminara-led-mask",
-    name: "Luminara LED Mask",
-    category: "LED Facial Therapy",
-    price: 289,
-    compareAt: 369,
-    subtitle: "A sculptural champagne LED mask for a calm, spa-level evening ritual.",
-    description: "A premium light-therapy facial device with a soft-touch interior, balanced fit and guided ten-minute routine for luminous, rested-looking skin at home.",
-    bullets: ["Four targeted LED modes", "Soft-touch contoured interior", "10-minute guided sessions", "USB-C magnetic charging"],
+    name: "AuroraFlex LED Therapy Mask",
+    category: "LED Facial Therapy Device",
+    price: 329,
+    compareAt: 429,
+    subtitle: "Champagne-gold flexible LED mask for a calm, visibly radiant evening ritual.",
+    description: "A premium at-home light therapy mask with red, blue, amber and near-infrared modes, a cushioned interior and a ten-minute guided routine designed for consistent luxury skincare use.",
+    bullets: ["4 targeted LED wavelengths", "Flexible comfort-fit silicone", "10-minute auto routine", "USB-C charging case compatible"],
+    details: "Includes AuroraFlex mask, adjustable head strap, USB-C charging cable, satin storage pouch and quick-start ritual guide.",
+    shipping: "In stock and ready to ship. Complimentary tracked shipping on orders over $250.",
+    returns: "Eligible for the 60-day satisfaction guarantee when returned complete and hygienically handled.",
+    stock: "In stock · ships in 1–2 business days",
     color: "champagne",
     image: ledMask
   },
   {
     id: "aurelia-repair-serum",
-    name: "Aurelia Repair Serum",
-    category: "Barrier Support Serum",
-    price: 78,
-    subtitle: "A frosted-glass hydration serum made to finish a high-end facial ritual.",
-    description: "A silky, fragrance-free serum with a refined slip, designed for layering after light care and before moisturizer without stickiness or shine.",
-    bullets: ["Fragrance-free finish", "Glass bottle with gold pump", "Layers under cream", "Daily glow support"],
+    name: "Maison C Peptide Serum",
+    category: "Vitamin C + Peptide Serum",
+    price: 92,
+    subtitle: "Frosted-glass brightening serum with a refined, cushiony finish.",
+    description: "A daily vitamin C and peptide serum created to pair with device-led routines, leaving skin feeling hydrated, smooth and ready for moisturizer without tackiness.",
+    bullets: ["Vitamin C glow complex", "Peptide comfort support", "Frosted glass bottle", "Layers cleanly under cream"],
+    details: "30 ml pump bottle. Apply one to two pumps after cleansing and before moisturizer, morning or evening.",
+    shipping: "Ships with protective carton packaging and tracking on every order.",
+    returns: "Unopened bottles qualify for returns inside the published confidence window.",
+    stock: "In stock · limited launch batch",
     color: "ivory",
     image: serum
   },
   {
     id: "celeste-sonic-brush",
-    name: "Celeste Sonic Brush",
-    category: "Sonic Cleansing Device",
-    price: 118,
-    compareAt: 148,
-    subtitle: "An ivory sonic cleansing brush that prepares skin for serum and device care.",
-    description: "A premium silicone cleansing tool with gentle pulse settings, a weighted ergonomic handle and a polished vanity-ready silhouette.",
-    bullets: ["Three soft pulse levels", "Hygienic silicone bristles", "Water-resistant body", "Travel lock mode"],
+    name: "Celeste Sonic Cleansing Wand",
+    category: "Sonic Cleansing Tool",
+    price: 128,
+    compareAt: 168,
+    subtitle: "Ivory cleansing wand with soft sonic polish and gold detailing.",
+    description: "A water-resistant sonic cleansing wand with three gentle pulse modes, a balanced ergonomic handle and a vanity-ready silhouette for daily facial preparation.",
+    bullets: ["3 sonic pulse modes", "Soft hygienic touch surface", "Water-resistant body", "Travel lock function"],
+    details: "Includes cleansing wand, charging cable and protective travel sleeve. Use with non-abrasive cleanser.",
+    shipping: "Packed in a rigid gift box and shipped with tracking.",
+    returns: "Eligible when returned with all accessories and original packaging according to hygiene policy.",
+    stock: "In stock · ships this week",
     color: "pearl",
     image: cleansingBrush
   },
   {
     id: "roselle-sculpt-roller",
-    name: "Roselle Sculpt Roller",
+    name: "Roselle Quartz Sculpt Roller",
     category: "Facial Sculpting Tool",
-    price: 64,
-    subtitle: "A rose quartz-inspired roller for cool-touch contouring and serum glide.",
-    description: "A dual-ended sculpting roller with warm gold hardware, balanced hand-feel and giftable presentation for elevated morning routines.",
-    bullets: ["Dual contour heads", "Cool-touch stone feel", "Gold-tone hardware", "Gift-ready storage pouch"],
+    price: 68,
+    subtitle: "Pink stone-inspired sculpting roller with warm brushed-gold hardware.",
+    description: "A dual-ended facial roller designed for cool-touch contouring, serum glide and refined morning depuffing rituals with a balanced, giftable hand-feel.",
+    bullets: ["Dual contour heads", "Cool-touch stone finish", "Brushed-gold hardware", "Satin storage pouch"],
+    details: "Use after serum across cheeks, jawline and brow area with light outward strokes. Store cool for a refreshed ritual.",
+    shipping: "Ships in a padded gift carton with tracked delivery.",
+    returns: "Return eligible when unused and complete with pouch and original packaging.",
+    stock: "In stock · ready to gift",
     color: "rose",
     image: roller
   }
