@@ -17,17 +17,17 @@ const isCheckoutValid = (data: FormData, paymentMethod: string) => {
 };
 
 const landingBlocks = [
-  ["01", "Benefit-led shopping", "Every product explains the daily purpose, expected use and reason to buy before a shopper reaches the button."],
-  ["02", "Routine-based value", "The collection is arranged as a complete care sequence so add-ons feel useful, not random."],
-  ["03", "Decision support", "Shipping, returns, payment safety and quality signals stay visible where purchase hesitation usually appears."],
-  ["04", "Responsive retail polish", "Image sizing, button hierarchy and copy blocks stay balanced across desktop, tablet and mobile."]
+  ["01", "Purpose before price", "Each item states its routine role, daily benefit and reason to own it before shoppers reach checkout."],
+  ["02", "Premium routine logic", "The collection moves from cleansing prep to treatment support and finishing care, so every add-on has a clear purpose."],
+  ["03", "Confidence beside action", "Shipping, returns, payment safety and guarantee cues stay close to the product decision points."],
+  ["04", "Retail-grade responsiveness", "Contained photos, readable copy and balanced buttons remain stable across desktop, tablet and mobile layouts."]
 ];
 
 const conversionBenefits = [
-  ["Made for steady routines", "The hero device supports a short evening care moment for shoppers who want a polished routine without a spa appointment."],
-  ["Clear premium value", "Comfort materials, included accessories and guided use details make the price easier to understand at a glance."],
-  ["Reduced purchase risk", "Guarantee, delivery and payment messages appear beside the product so buyers do not need to search for reassurance."],
-  ["Gift-ready presentation", "Soft product photography, concise benefits and elegant spacing create a storefront suitable for premium self-care gifting."]
+  ["Built for repeat use", "The signature device gives structure to a short evening ritual for customers who want a composed care habit at home."],
+  ["Value made visible", "Materials, accessories, guided use and care outcomes are explained clearly so the premium price feels understandable."],
+  ["Risk reduced early", "Guarantee, delivery and payment reassurance appear before checkout so buyers do not need to hunt for answers."],
+  ["Luxury that feels practical", "The products support a calmer vanity routine while still looking polished enough for gifting or daily display."]
 ];
 
 const trustBadges = [
@@ -40,21 +40,21 @@ const trustBadges = [
 const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];
 
 const reviews = [
-  ["A. Vale", "Verified buyer · city residence", "The main device felt easy to understand because the page explained what it does, when to use it and what comes in the box."],
-  ["R. Soren", "Verified buyer · coastal home", "The delivery promise and return wording were visible before checkout, which made the order feel calm and considered."],
-  ["L. Maren", "Verified buyer · private studio", "The serum and cleansing tool made sense as a routine rather than a forced bundle. The product cards were clear on mobile."],
-  ["C. Arden", "Verified buyer · weekend house", "The stock notice, secure payment labels and guarantee gave the store a more polished retail feel without looking loud."],
-  ["N. Wren", "Verified buyer · loft apartment", "I could compare the products quickly. The photos stayed balanced and the text never disappeared inside the cards."],
-  ["S. Iven", "Verified buyer · townhouse", "The checkout section felt structured, readable and premium. The buying buttons were easy to spot without breaking the design."]
+  ["M. Elaris", "Verified buyer · refined apartment routine", "The mask page explained the purpose, timing and included pieces clearly. I felt I understood the value before adding it to my cart."],
+  ["R. Veylen", "Verified buyer · weekday self-care buyer", "The delivery and guarantee details were easy to see, which made the purchase feel calm instead of rushed."],
+  ["L. Arven", "Verified buyer · gift order", "The serum and prep wand felt like a complete ritual, not random extras. The cards were readable and polished on my phone."],
+  ["C. Merrow", "Verified buyer · evening routine user", "The limited-stock notice, payment labels and quality promise gave the store a credible premium feel without becoming noisy."],
+  ["N. Sorelle", "Verified buyer · compact vanity setup", "The photos stayed balanced and the descriptions made comparison simple. Nothing felt hidden or overdesigned."],
+  ["T. Avelor", "Verified buyer · first device purchase", "The buy button stood out immediately, and the return explanation helped me feel comfortable choosing the full set."]
 ];
 
 const faqs = [
-  ["Who is the main device for?", "It is positioned for shoppers who want a refined at-home facial ritual, clear routine guidance and a premium device that looks appropriate on a vanity."],
-  ["How quickly can an order leave the studio?", "Eligible in-stock orders can be prepared for same-day dispatch when placed before the displayed cut-off window, with tracking shown after packing."],
-  ["What is the return window?", "The store presents a 60-day money-back guarantee framework with hygiene-aware conditions for opened devices and sealed skincare items."],
-  ["Is there warranty coverage?", "The product page is structured to support a one-year limited device coverage statement for eligible manufacturing faults after launch terms are finalized."],
-  ["Are payments handled safely?", "The checkout uses a validated form structure, recognizable payment labels and no unsafe HTML injection patterns. Live payment processing should be connected before real sales."],
-  ["How are delivery details shared?", "The order flow is written for tracked delivery updates, including dispatch status, carrier movement and destination arrival notices where available."]
+  ["Is payment information handled safely?", "The storefront uses a clean validated checkout interface, recognizable payment labels and no unsafe HTML injection patterns. A live payment provider should be connected before accepting real orders."],
+  ["When can an in-stock order ship?", "Products marked ready to ship can be prepared during the current packing window, with tracking intended to appear after carrier handoff."],
+  ["What if the product is not the right fit?", "Eligible orders are presented with a 60-day money-back framework, subject to hygiene-aware review and complete return packaging."],
+  ["Is there a quality guarantee?", "Every visible product is positioned with a pre-packing quality review and a limited coverage statement for eligible device faults once final selling terms are activated."],
+  ["How do I know which product to choose?", "The page explains who each item is for, how it fits into a daily ritual and why it supports a more composed premium care routine."],
+  ["How will delivery details be shared?", "The store structure supports tracked delivery updates for packing, carrier movement and destination arrival where service is available."]
 ];
 
 export default function App() {
