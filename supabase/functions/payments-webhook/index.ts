@@ -70,6 +70,23 @@ Deno.serve(async (req) => {
         const { data: order } = await db.from("orders").update(update).eq("stripe_checkout_session_id", object.id).select("id").maybeSingle();
         orderId = order?.id || null;
       }
+
+      if (orderId) {
+        await db.from("store_notifications").insert({
+          type: "paid_order",
+          title: "New paid order received",
+          message: `Smart Posture Corrector order ${object.metadata?.orderNumber || orderId} is paid and ready for CJ fulfillment review.`,
+          order_id: orderId,
+          metadata: {
+            environment: env,
+            checkoutSessionId: object.id,
+            orderNumber: object.metadata?.orderNumber || null,
+            totalAmount: object.amount_total || 0,
+            currency: object.currency || "usd",
+            fulfillmentPartner: "cj_dropshipping",
+          },
+        });
+      }
     }
 
     if (event.type === "checkout.session.async_payment_failed" || event.type === "transaction.payment_failed") {
