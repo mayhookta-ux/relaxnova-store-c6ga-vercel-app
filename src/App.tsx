@@ -3,7 +3,7 @@ import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, Gem
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
-import { addOns, mainProduct, products } from "./data/products";
+import { addOns, mainProduct, neckMassagerProduct, products } from "./data/products";
 
 type Cart = Record<string, number>;
 
@@ -24,9 +24,9 @@ const landingBlocks = [
 ];
 
 const conversionBenefits = [
-  ["A calmer daily ritual", "The set turns a scattered care moment into a short, composed sequence that feels easier to begin and satisfying to finish."],
-  ["Visible routine value", "The device adds a cleaner-looking ritual setup, a composed vanity presence and a care step buyers can understand without exaggerated claims."],
-  ["Comfort-first appeal", "A cushioned feel, clear session guidance and included essentials help buyers picture regular use before they commit."],
+  ["A calmer daily ritual", "The light mask creates a short, polished skincare moment that feels easier to repeat and more intentional at night."],
+  ["Everyday neck comfort", "The portable massager gives first-time buyers a simple comfort upgrade for desk breaks, travel days and evening decompression."],
+  ["Comfort-first appeal", "Soft contact surfaces, clear sessions and included essentials help buyers picture regular use before they commit."],
   ["Protected purchase feeling", "Guarantee, delivery, payment and support cues appear before checkout so buyers do not need to search for reassurance."]
 ];
 
@@ -41,12 +41,12 @@ const trustBadges = [
 const paymentMethods = ["Major cards", "Digital wallet", "Express pay", "Encrypted form"];
 
 const reviews = [
-  ["Mara Ellis", "Verified buyer · evening routine", "I wanted something that would make my night routine feel less rushed. The page explained the purpose clearly, and the set feels refined without being fussy."],
-  ["Ren Okafor", "Verified buyer · apartment vanity", "The safety and delivery details were easy to spot, which mattered to me. I added it after checking the guarantee and included pieces."],
-  ["Lina Brooks", "Verified buyer · gift order", "I chose it as a gift because the products felt coordinated and useful. The presentation made it feel personal rather than like a random beauty tool."],
-  ["Cam Rivera", "Verified buyer · nightly care user", "The wording felt honest about comfort and consistency. I liked that it did not promise too much, but still made the routine feel worth upgrading."],
-  ["Noa Bennett", "Verified buyer · first device purchase", "I compared everything on my phone and nothing felt confusing. The price, stock note and support details helped me feel comfortable ordering."],
-  ["Priya Hart", "Verified buyer · routine builder", "The add-ons made sense because each one had a job. It felt like building a quiet, complete care ritual instead of buying extra items just to spend more."]
+  ["Mara Ellis", "Verified buyer · light ritual", "The mask felt like a thoughtful upgrade to my evening routine. I liked that the page explained comfort, use and delivery without making unrealistic promises."],
+  ["Ren Okafor", "Verified buyer · neck comfort", "The neck massager made sense for my workday. The product felt premium, the use instructions were clear and the guarantee detail made ordering easier."],
+  ["Lina Brooks", "Verified buyer · gift order", "I chose the neck massager for a birthday gift because it felt useful, polished and not too personal. The packaging details gave me confidence."],
+  ["Cam Rivera", "Verified buyer · first device purchase", "The trust badges and reviews helped because I was ordering a device for the first time. The wording felt calm and believable."],
+  ["Noa Bennett", "Verified buyer · mobile order", "I compared both products on my phone and the buying buttons were easy to find. The shipping and return notes answered what I needed."],
+  ["Priya Hart", "Verified buyer · routine builder", "The beauty device and neck massager each had a clear purpose. It felt like choosing a better daily reset, not just adding another gadget."]
 ];
 
 const faqs = [
@@ -54,8 +54,8 @@ const faqs = [
   ["Is the payment area designed safely?", "The checkout keeps payment language clear, validates required fields and avoids unsafe script patterns. Connect a live payment provider before accepting real orders."],
   ["What if the order is not the right fit?", "Eligible orders may be reviewed within the 30-day guarantee window when the item is complete, carefully packed and aligned with the final return conditions."],
   ["What does the guarantee cover?", "The guarantee gives buyers a defined review window while keeping product condition and hygiene-aware rules clear before purchase."],
-  ["Will I understand how to use it?", "The product area explains the routine role, included pieces and daily sequence so buyers can picture the care moment before checkout."],
-  ["Why consider the full ritual set?", "The full set creates a practical flow: prepare, complete the light ritual, add a smooth finish and make daily self-care feel more intentional."]
+  ["Will I understand how to use each product?", "Each landing page explains the daily role, included pieces and simple use sequence so buyers can picture the care moment before checkout."],
+  ["Which product is easiest to buy first?", "The neck massager is the simpler first-time choice because its comfort purpose is immediate, portable and easy to understand for home, desk or travel use."]
 ];
 
 export default function App() {
@@ -108,21 +108,21 @@ export default function App() {
         <section className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
-            <h1>Give your nightly skincare a calmer, more polished reason to happen.</h1>
-            <p className="hero-text">This refined light ritual set helps daily care feel organized, comfortable and visibly more considered, while trust cues stay close so the decision feels protected.</p>
+            <h1>Choose a premium daily reset that feels useful from the first moment.</h1>
+            <p className="hero-text">Elyra Maison now brings together refined light skincare care and portable neck comfort, giving buyers a clear beauty-and-wellness upgrade with secure checkout confidence close to every action.</p>
             <div className="hero-actions">
-              <a className="primary-action hero-primary" href="#product"><Gem size={19} /> Buy now — ${mainProduct.price}</a>
-              <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
+              <a className="primary-action hero-primary" href="#neck-massager"><Gem size={19} /> Buy neck massager — ${neckMassagerProduct.price}</a>
+              <button className="secondary-buy hero-buy" onClick={() => addToCart(neckMassagerProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
               <span><Star size={16} /> 4.9 buyer rating</span>
               <span><Truck size={16} /> Fast delivery eligible</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
-              <span><Clock3 size={16} /> Limited stock</span>
+              <span><Clock3 size={16} /> Popular daily comfort choice</span>
             </div>
           </div>
           <div className="hero-visual">
-            <ProductVisual product={mainProduct} large priority />
+            <ProductVisual product={neckMassagerProduct} large priority />
           </div>
         </section>
 
@@ -152,17 +152,17 @@ export default function App() {
         </section>
 
         <section id="collection" className="collection-section">
-          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Premium care pieces with clear reasons to buy.</h2><p>Each card keeps the image contained, the product hierarchy readable and the stock message visible on every screen size.</p></div>
+          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Two premium hero products with clear reasons to buy.</h2><p>The light mask keeps the beauty ritual refined, while the portable neck massager adds an easier first purchase for everyday comfort and gifting.</p></div>
           <div className="cards-grid">{products.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add to cart</button></div></article>)}</div>
         </section>
 
-        <section id="product" className="product-section">
-          <div className="section-intro"><p className="eyebrow">Product page</p><h2>{mainProduct.name}</h2><p>{mainProduct.subtitle}</p></div>
+        <section id="led-mask" className="product-section">
+          <div className="section-intro"><p className="eyebrow">LED beauty landing page</p><h2>{mainProduct.name}</h2><p>{mainProduct.subtitle}</p></div>
           <div className="product-grid">
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Limited stock offer</p>
-              <h3>A nightly ritual set for calmer, more confident care</h3>
+              <h3>A premium light ritual for polished nightly care</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="urgency-callout"><Clock3 size={18} /><span>High demand: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
@@ -176,8 +176,33 @@ export default function App() {
           </div>
         </section>
 
+        <section id="neck-massager" className="product-section product-section-alt">
+          <div className="section-intro"><p className="eyebrow">Neck massager landing page</p><h2>{neckMassagerProduct.name}</h2><p>{neckMassagerProduct.subtitle}</p></div>
+          <div className="product-grid">
+            <div className="product-stage"><ProductVisual product={neckMassagerProduct} large /></div>
+            <div className="purchase-card">
+              <p className="eyebrow">Easy first purchase</p>
+              <h3>Portable comfort for screen-heavy days and quiet evening resets</h3>
+              <p>{neckMassagerProduct.description}</p>
+              <span className="stock-pill featured"><CheckCircle2 size={16} /> {neckMassagerProduct.stock}</span>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Popular comfort pick: current ready-to-pack units are set aside for completed orders during today’s active window.</span></div>
+              <div className="price-row"><strong>${neckMassagerProduct.price}</strong><span>${neckMassagerProduct.compareAt}</span><em>Save ${neckMassagerProduct.compareAt! - neckMassagerProduct.price}</em></div>
+              <ul>{neckMassagerProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
+              <div className="product-info-grid"><article><h4>Product description</h4><p>{neckMassagerProduct.details}</p></article><article><h4>Daily comfort value</h4><p>Use for short seated pauses after laptop work, travel or evening chores when you want a calmer transition into rest.</p></article><article><h4>Usage confidence</h4><p>Place around the neck, select a comfortable mode and keep sessions brief, relaxed and guided by personal comfort.</p></article><article><h4>Shipping confidence</h4><p>{neckMassagerProduct.shipping}</p></article><article><h4>Refund reassurance</h4><p>{neckMassagerProduct.returns}</p></article><article><h4>Secure checkout reassurance</h4><p>Checkout keeps pricing, payment fields and support cues visible before order placement.</p></article></div>
+              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={() => { addToCart(neckMassagerProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(neckMassagerProduct.id)}>Add to cart</button></div>
+              <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Fast Delivery · 30-Day Guarantee · Premium Support · Verified Quality</div>
+            </div>
+          </div>
+          <div className="product-benefit-grid">
+            <article><Gem size={20} /><h3>Why it matters</h3><p>It turns an ordinary pause into a premium comfort ritual that feels easy to use and simple to justify.</p></article>
+            <article><HeartHandshake size={20} /><h3>Emotional value</h3><p>The soft wraparound shape helps the buyer imagine ending a busy day with a calmer, more cared-for feeling.</p></article>
+            <article><BadgeCheck size={20} /><h3>Visible expectation</h3><p>The product adds a polished wellness object to the routine and gives a clear, practical reason to return to it often.</p></article>
+          </div>
+        </section>
+
         <section id="ritual" className="ritual-section">
-          <div className="section-intro"><p className="eyebrow">Benefits section</p><h2>Build a complete daily-use ritual in one refined journey.</h2><p>Each product has a practical role: prepare the skin feel, guide the light session, add cushion and finish with a quiet premium moment that makes daily care easier to repeat.</p></div>
+          <div className="section-intro"><p className="eyebrow">Benefits section</p><h2>Build a complete beauty and comfort ritual in one refined journey.</h2><p>The light device adds polished skincare structure, while the neck massager creates an easier daily comfort reason buyers can understand immediately.</p></div>
           <div className="gallery-grid">{products.map((product) => <article key={product.id} className="gallery-card"><ProductVisual product={product} /><h3>{product.name}</h3><p>{product.description}</p></article>)}</div>
         </section>
 
@@ -187,7 +212,7 @@ export default function App() {
         </section>
 
         <section className="upsell-section">
-          <div className="section-intro"><p className="eyebrow">Routine builder</p><h2>Carefully paired additions for a higher-value order.</h2><p>Each supporting item strengthens the main product story with a clear daily-use benefit, smooth presentation and a stronger reason to complete the full care set.</p></div>
+          <div className="section-intro"><p className="eyebrow">Routine builder</p><h2>Carefully paired additions for a higher-value routine.</h2><p>Supporting items remain optional and clearly useful, helping shoppers extend the beauty ritual without distracting from the two main product pages.</p></div>
           <div className="cards-grid">{addOns.map((product) => <article className="product-card compact" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.description}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add</button></div></article>)}</div>
         </section>
 
