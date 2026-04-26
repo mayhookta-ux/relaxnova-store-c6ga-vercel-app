@@ -8,13 +8,16 @@ import { addOns, mainProduct, products } from "./data/products";
 
 type Cart = Record<string, number>;
 
-const checkoutSchema = z.object({
+const shippingSchema = z.object({
   fullName: z.string().trim().min(2).max(100),
   email: z.string().trim().email().max(255),
   street: z.string().trim().min(5).max(160),
   city: z.string().trim().min(2).max(80),
   postalCode: z.string().trim().min(3).max(20),
-  country: z.string().trim().min(2).max(80),
+  country: z.string().trim().min(2).max(80)
+});
+
+const cardSchema = shippingSchema.extend({
   cardNumber: z.string().trim().regex(/^[0-9 ]{12,23}$/),
   expiry: z.string().trim().regex(/^[0-9]{2}\s?\/\s?[0-9]{2}$/),
   cvc: z.string().trim().regex(/^[0-9]{3,4}$/),
@@ -94,7 +97,7 @@ export default function App() {
     event.preventDefault();
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form));
-    const result = checkoutSchema.safeParse(data);
+    const result = (paymentMethod === "card" ? cardSchema : shippingSchema).safeParse(data);
     if (!result.success) {
       setCheckoutError("Please review the highlighted checkout fields before continuing.");
       return;
