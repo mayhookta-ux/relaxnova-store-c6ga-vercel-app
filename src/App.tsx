@@ -189,7 +189,7 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your care ritual order is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this secure preview flow.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Natural premium reviews with visible ratings and buyer context.</h2><p>Each review uses original wording, fictional customer identities and practical purchase details for a credible premium presentation.</p></div>
+          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Natural premium reviews with visible ratings and buyer context.</h2><p>Fresh customer-style feedback highlights daily use, delivery confidence, mobile clarity and practical buying reassurance.</p></div>
           <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
         </section>
 
@@ -211,7 +211,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a><a href="#contact">Contact</a></nav><div className="social-row"><span>Secure Checkout</span><span>30-Day Guarantee</span><span>Fast Delivery</span><span>Premium Support</span></div><small>© 2026 Elyra Maison. Fresh original store copy, fictional reviews and original product naming prepared for transferable ownership.</small></footer>
+      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a><a href="#contact">Contact</a></nav><div className="social-row"><span>Secure Checkout</span><span>30-Day Guarantee</span><span>Fast Delivery</span><span>Premium Support</span></div><small>© 2026 Elyra Maison. Original store wording and fictional customer reviews prepared for transferable ownership.</small></footer>
     </div>
   );
 }
