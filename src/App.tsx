@@ -68,6 +68,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [checkoutError, setCheckoutError] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
@@ -91,6 +92,14 @@ export default function App() {
   };
   const placeOrder = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    const result = checkoutSchema.safeParse(data);
+    if (!result.success) {
+      setCheckoutError("Please review the highlighted checkout fields before continuing.");
+      return;
+    }
+    setCheckoutError("");
     setOrderPlaced(true);
     window.setTimeout(() => document.getElementById("confirmation")?.scrollIntoView({ behavior: "smooth" }), 40);
   };
@@ -103,18 +112,18 @@ export default function App() {
       <main>
         <section className="hero-section">
           <div className="hero-copy">
-            <p className="eyebrow">Elyra Maison · Sale-ready beauty technology</p>
-            <h1>Luxury facial devices curated for a radiant at-home ritual.</h1>
-            <p className="hero-text">Shop premium beauty technology with realistic product photography, clear benefits, transparent pricing, verified social proof and a conversion-focused purchase flow.</p>
+            <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
+            <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
+            <p className="hero-text">A fully original luxury storefront with clear benefits, balanced product photography, visible guarantees, limited-stock cues and a secure checkout-ready flow.</p>
             <div className="hero-actions">
-              <button className="primary-action" onClick={() => addToCart(mainProduct.id)}><Gem size={18} /> Shop {mainProduct.name} — ${mainProduct.price}</button>
-              <a className="secondary-action" href="#product">Buy now <ArrowRight size={17} /></a>
+              <a className="primary-action" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
+              <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
-              <span><Star size={16} /> 4.9 average rating</span>
-              <span><Truck size={16} /> Free shipping over $250</span>
-              <span><ShieldCheck size={16} /> 60-day promise</span>
-              <span><Clock3 size={16} /> Limited launch batch</span>
+              <span><Star size={16} /> 4.9 buyer rating</span>
+              <span><Truck size={16} /> Shipping today eligible</span>
+              <span><ShieldCheck size={16} /> Secure Checkout</span>
+              <span><Clock3 size={16} /> Limited stock</span>
             </div>
           </div>
           <div className="hero-visual">
@@ -123,11 +132,11 @@ export default function App() {
         </section>
 
         <section className="strip-section" aria-label="Store assurances">
-          {["Free tracked shipping over $250", "60-day satisfaction guarantee", "Secure payment-ready checkout", "US luxury retail spacing"].map((item) => <span key={item}>{item}</span>)}
+          {["Secure Checkout", "Money Back Guarantee", "Fast Shipping", "Verified Quality"].map((item) => <span key={item}>{item}</span>)}
         </section>
 
         <section className="landing-section">
-          <div className="section-intro narrow"><p className="eyebrow">Premium ecommerce flow</p><h2>A complete luxury storefront designed to convert.</h2></div>
+          <div className="section-intro narrow"><p className="eyebrow">Premium ecommerce flow</p><h2>A luxury buying path with original, ownership-safe content.</h2></div>
           <div className="benefit-grid">{landingBlocks.map(([num, title, body]) => <article key={title}><span>{num}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </section>
 
@@ -142,7 +151,7 @@ export default function App() {
         </section>
 
         <section id="collection" className="collection-section">
-          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Commercially believable products with clear buying paths.</h2><p>Each card uses realistic photography, visible product copy, stock status, clear pricing and stable image sizing for every screen.</p></div>
+          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Original products with clear buying paths.</h2><p>Each card keeps the image contained, the product hierarchy readable and the stock message visible on every screen size.</p></div>
           <div className="cards-grid">{products.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add to cart</button></div></article>)}</div>
         </section>
 
