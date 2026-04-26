@@ -11,17 +11,17 @@ type Cart = Record<string, number>;
 
 const trustBadges = [
   { icon: ShieldCheck, title: "Secure Checkout", body: "Encrypted embedded payment" },
-  { icon: Truck, title: "US Delivery", body: "Estimated 7–12 business days" },
+  { icon: Truck, title: "US Delivery", body: "Estimated 8–23 days" },
   { icon: PackageCheck, title: "CJ Fulfillment", body: "Dropshipping-ready order records" },
   { icon: RotateCcw, title: "30-Day Guarantee", body: "Clear review window" },
   { icon: BadgeCheck, title: "Verified Product", body: "Single-item catalog" }
 ];
 
 const benefits = [
-  ["Smart posture reminders", "Gentle vibration cues help customers notice slouching while working, scrolling or studying."],
-  ["Daily wearable fit", "Adjustable straps keep the posture corrector practical for short focused sessions over a thin shirt."],
-  ["Better desk routine", "A simple device-led reminder makes upright posture easier to practice without changing the entire workday."],
-  ["Ready for fulfillment", "Checkout creates one clean CJ-ready item record instead of mixing unavailable demo products."]
+  ["Angle and tension sensing", "Accurately captures the wearer’s posture changes through angle and tension sensing."],
+  ["Vibration reminder", "When the hunchback angle exceeds the set angle, the posture corrector automatically vibrates to remind you."],
+  ["Adjustable shoulder strap", "High elasticity adjustable shoulder strap, without fear of age and height."],
+  ["LED counting", "LED counting shows accumulative reminder error posture count."]
 ];
 
 const reviews = [
@@ -32,10 +32,10 @@ const reviews = [
 ];
 
 const faqs = [
-  ["How long is delivery to the United States?", "The current delivery estimate is 7–12 business days after processing, with tracked fulfillment where carrier service is available."],
-  ["How does the posture corrector work?", "Wear it over a thin shirt, calibrate your upright position, and the device gives gentle vibration reminders when your shoulders drift forward."],
+  ["How long is delivery to the United States?", "The supplier shipping time shown for United States is 8–23 days."],
+  ["How does the posture corrector work?", "It captures posture changes through angle and tension sensing, then vibrates when the hunchback angle exceeds the set angle."],
   ["Is checkout connected only to this product?", "Yes. The cart and checkout now submit only the Smart Posture Corrector at $34.99."],
-  ["What is included?", "The order includes the smart posture corrector, USB charging cable and setup guide."],
+  ["What is included?", "Package content: 1*Posture Corrector."],
   ["Is this medical treatment?", "No. It is a posture-awareness training device for daily habit support and is not a medical device or treatment."],
   ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day guarantee window when the item is complete, clean and safely packed."]
 ];
@@ -97,14 +97,14 @@ export default function App() {
           <div className="hero-copy">
             <p className="eyebrow">CJ Dropshipping verified · single winning product</p>
             <h1>Smart Posture Corrector</h1>
-            <p className="hero-text">A focused posture-awareness device for desk work, long screen sessions and daily upright habit training — now priced at ${mainProduct.price} with secure checkout and CJ-ready fulfillment records.</p>
+            <p className="hero-text">{mainProduct.description} Now priced at ${mainProduct.price} with secure checkout and CJ-ready fulfillment records.</p>
             <div className="hero-actions">
               <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Buy now — ${mainProduct.price}</button>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
               <span><Star size={16} /> 4.8 buyer rating</span>
-              <span><Truck size={16} /> 7–12 business day US estimate</span>
+              <span><Truck size={16} /> 8–23 day US shipping</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
               <span><BadgeCheck size={16} /> Verified single-product offer</span>
             </div>
@@ -118,7 +118,7 @@ export default function App() {
 
         <section className="reassurance-section" aria-label="Delivery and product reassurance">
           <article><PackageCheck size={21} /><h3>CJ-ready fulfillment</h3><p>Only one checkout product remains, so order records are clean, focused and ready for CJ Dropshipping review.</p></article>
-          <article><Truck size={21} /><h3>Delivery estimate shown early</h3><p>United States delivery is presented as a realistic 7–12 business day estimate after processing.</p></article>
+          <article><Truck size={21} /><h3>Delivery estimate shown early</h3><p>United States delivery is presented with the supplier shipping time: 8–23 days.</p></article>
           <article><LockKeyhole size={21} /><h3>Secure payment path</h3><p>Embedded checkout supports major cards and eligible wallet payments without custom card handling.</p></article>
         </section>
 
@@ -128,9 +128,9 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Today’s smart posture offer</p>
-              <h3>Train posture awareness for screen-heavy days</h3>
+              <h3>{mainProduct.subtitle}</h3>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Delivery estimate: 7–12 business days to the United States after processing.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Shipping time: 8–23 days to the United States.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${(mainProduct.compareAt! - mainProduct.price).toFixed(2)}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector SKU at $34.99.</p></article></div>
@@ -142,9 +142,9 @@ export default function App() {
         </section>
 
         <section id="results" className="before-after-section">
-          <div className="section-intro"><p className="eyebrow">Before / after posture awareness</p><h2>From unnoticed slouching to daily posture reminders.</h2></div>
-          <article><span>Before</span><h3>Rounded shoulders during laptop sessions</h3><p>Long screen time can make forward shoulder posture feel normal, especially when there is no real-time reminder to reset.</p></article>
-          <article><span>After</span><h3>Upright cues built into the workday</h3><p>The smart corrector gives gentle reminders when posture drifts, helping customers practice awareness in short repeatable sessions.</p></article>
+          <div className="section-intro"><p className="eyebrow">Posture reminder flow</p><h2>Angle sensing, vibration reminder and adjustable support.</h2></div>
+          <article><span>Posture change</span><h3>Angle and tension sensing</h3><p>Accurately capture the wearer's posture changes through angle and tension sensing.</p></article>
+          <article><span>Reminder</span><h3>Automatic vibration</h3><p>When the angle of the hunchback exceeds the set angle, the posture corrector will automatically vibrate to remind you.</p></article>
         </section>
 
         <section className="conversion-section">
@@ -154,11 +154,11 @@ export default function App() {
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust and delivery</p><h2>Everything important is visible before checkout.</h2><p>Price, delivery estimate, secure payment support, guarantee language and fulfillment readiness stay close to the buying decision.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> CJ Dropshipping-ready product</span><span><Truck /> 7–12 business day US delivery estimate</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><Banknote /> $34.99 product price</span></div>
+          <div><p className="eyebrow">Trust and delivery</p><h2>Everything important is visible before checkout.</h2><p>Price, supplier shipping time, secure payment support, guarantee language and fulfillment readiness stay close to the buying decision.</p></div>
+          <div className="guarantee-list"><span><PackageCheck /> CJ Dropshipping SKU CJJT100662701AZ</span><span><Truck /> 8–23 day United States shipping time</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><Banknote /> $34.99 product price</span></div>
         </section>
 
-        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>Protected embedded checkout supports major cards and eligible Apple Pay or Google Pay wallet payments when available on the buyer device.</p></div><div className="checkout-grid"><div className="checkout-form"><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Sparkles size={17} /> Apple Pay and Google Pay when eligible</span><span><Truck size={17} /> US delivery estimate</span></div>{cartLines.length ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-line"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><p>After payment, the order is saved securely with a CJ Dropshipping-ready fulfillment structure.</p></aside></div></section>}
+        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>Protected embedded checkout supports major cards and eligible Apple Pay or Google Pay wallet payments when available on the buyer device.</p></div><div className="checkout-grid"><div className="checkout-form"><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Sparkles size={17} /> Apple Pay and Google Pay when eligible</span><span><Truck size={17} /> 8–23 day US shipping</span></div>{cartLines.length ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-line"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><p>After payment, the order is saved securely with a CJ Dropshipping-ready fulfillment structure.</p></aside></div></section>}
 
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely and the order record is ready for CJ Dropshipping fulfillment review.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 

@@ -37,7 +37,7 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
         </div>
       )}
       <div className="cart-footer">
-        <div className="trust-note"><ShieldCheck size={18} /> Secure checkout · CJ fulfillment · 7–12 business day US delivery estimate.</div>
+        <div className="trust-note"><ShieldCheck size={18} /> Secure checkout · CJ fulfillment · 8–23 day United States shipping time.</div>
         <div className="total-row"><span>Subtotal</span><strong>${subtotal.toFixed(2)}</strong></div>
         <div className="total-row muted-total"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</strong></div>
         <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><CreditCard size={18} /> Continue to checkout</button>
