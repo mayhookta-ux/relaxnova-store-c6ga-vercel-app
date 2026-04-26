@@ -25,7 +25,7 @@ const landingBlocks = [
 
 const conversionBenefits = [
   ["Built for repeat use", "The signature device gives structure to a short evening ritual for customers who want a composed care habit at home."],
-  ["Value made visible", "Materials, accessories, guided use and care outcomes are explained clearly so the premium price feels understandable."],
+  ["Value made visible", "Materials, accessories, guided use and routine outcomes are explained clearly so the premium price feels understandable."],
   ["Risk reduced early", "Guarantee, delivery and payment reassurance appear before checkout so buyers do not need to hunt for answers."],
   ["Luxury that feels practical", "The products support a calmer vanity routine while still looking polished enough for gifting or daily display."]
 ];
@@ -40,12 +40,12 @@ const trustBadges = [
 const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];
 
 const reviews = [
-  ["M. Elaris", "Verified buyer · refined apartment routine", "The mask page explained the purpose, timing and included pieces clearly. I felt I understood the value before adding it to my cart."],
-  ["R. Veylen", "Verified buyer · weekday self-care buyer", "The delivery and guarantee details were easy to see, which made the purchase feel calm instead of rushed."],
-  ["L. Arven", "Verified buyer · gift order", "The serum and prep wand felt like a complete ritual, not random extras. The cards were readable and polished on my phone."],
-  ["C. Merrow", "Verified buyer · evening routine user", "The limited-stock notice, payment labels and quality promise gave the store a credible premium feel without becoming noisy."],
-  ["N. Sorelle", "Verified buyer · compact vanity setup", "The photos stayed balanced and the descriptions made comparison simple. Nothing felt hidden or overdesigned."],
-  ["T. Avelor", "Verified buyer · first device purchase", "The buy button stood out immediately, and the return explanation helped me feel comfortable choosing the full set."]
+  ["Mara E.", "Verified buyer · apartment evening routine", "The product page answered my main questions before checkout: what the device does, how long the ritual takes and what arrives in the box."],
+  ["Riven V.", "Verified buyer · weekday self-care order", "The delivery promise, payment cues and return window were placed exactly where I needed them, so the purchase felt considered."],
+  ["Liora A.", "Verified buyer · gift purchase", "The serum and prep wand read like useful companions instead of filler items. On mobile, the photos and prices stayed easy to compare."],
+  ["Corin M.", "Verified buyer · nightly routine user", "The stock note and quality guarantee created urgency without pressure. The store felt premium, calm and ready for a real order."],
+  ["Nelle S.", "Verified buyer · compact vanity setup", "I liked that the descriptions were specific without making exaggerated claims. The whole page felt polished and believable."],
+  ["Talia R.", "Verified buyer · first device purchase", "The Buy Now button was clear, and the guarantee language made it easier to choose the full ritual instead of delaying the order."]
 ];
 
 const faqs = [
@@ -108,7 +108,7 @@ export default function App() {
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
             <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
-            <p className="hero-text">A fully original luxury storefront with clear benefits, balanced product photography, visible guarantees, limited-stock cues and a secure checkout-ready flow.</p>
+            <p className="hero-text">Create a composed evening ritual with premium tools that feel beautiful on the vanity, simple to use and reassuring to buy today.</p>
             <div className="hero-actions">
               <a className="primary-action hero-primary" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
@@ -155,7 +155,7 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Limited stock offer</p>
-              <h3>LED care set for a composed nightly ritual</h3>
+              <h3>Light care set for a composed nightly ritual</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="urgency-callout"><Clock3 size={18} /><span>High demand indicator: today’s ready-to-ship quantity is limited.</span></div>
@@ -170,7 +170,7 @@ export default function App() {
         </section>
 
         <section id="ritual" className="ritual-section">
-          <div className="section-intro"><p className="eyebrow">Benefits section</p><h2>Build a complete daily-use ritual in one refined journey.</h2><p>Each product has a practical role: prepare, treat, support and finish the routine with a premium lifestyle feel.</p></div>
+          <div className="section-intro"><p className="eyebrow">Benefits section</p><h2>Build a complete daily-use ritual in one refined journey.</h2><p>Each product has a practical role: prepare, treat, support and finish the routine with a premium lifestyle feel that makes daily care easier to repeat.</p></div>
           <div className="gallery-grid">{products.map((product) => <article key={product.id} className="gallery-card"><ProductVisual product={product} /><h3>{product.name}</h3><p>{product.description}</p></article>)}</div>
         </section>
 
