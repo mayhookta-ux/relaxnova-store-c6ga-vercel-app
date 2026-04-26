@@ -160,15 +160,15 @@ export default function App() {
           <div className="product-grid">
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
-              <p className="eyebrow">Hero launch offer</p>
-              <h3>Champagne LED facial therapy set</h3>
+              <p className="eyebrow">Limited stock offer</p>
+              <h3>LED care set for a composed nightly ritual</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Limited launch stock: current batch reserved quickly after checkout opens.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>High demand indicator: today’s ready-to-ship quantity is limited.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
-              <div className="purchase-actions"><button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add to cart</button><button className="secondary-buy" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — checkout</button></div>
+              <div className="purchase-actions"><button className="primary-action full" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
               <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked shipping guarantee · 60-day money-back promise</div>
             </div>
@@ -176,17 +176,17 @@ export default function App() {
         </section>
 
         <section id="ritual" className="ritual-section">
-          <div className="section-intro"><p className="eyebrow">Landing page sections</p><h2>Build the full routine in one premium journey.</h2><p>Dedicated sections guide shoppers from discovery to bundle selection, trust validation and checkout without visual clutter.</p></div>
+          <div className="section-intro"><p className="eyebrow">Benefits section</p><h2>Build a complete daily-use ritual in one refined journey.</h2><p>Each product has a practical role: prepare, treat, support and finish the routine with a premium lifestyle feel.</p></div>
           <div className="gallery-grid">{products.map((product) => <article key={product.id} className="gallery-card"><ProductVisual product={product} /><h3>{product.name}</h3><p>{product.description}</p></article>)}</div>
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Luxury ecommerce needs clarity. This section highlights shipping, returns, secure payment, support and satisfaction guarantees in highly visible language.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Tracked shipping guarantee</span><span><LockKeyhole /> Secure payment icons and messaging</span><span><RotateCcw /> 60-day satisfaction guarantee</span><span><HeartHandshake /> Concierge support promise</span><span><Banknote /> Transparent pricing and no surprise fees</span></div>
+          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Shipping assurance, payment safety, money-back support and quality checks stay visible so the purchase feels considered and low-friction.</p></div>
+          <div className="guarantee-list"><span><PackageCheck /> Fast tracked shipping</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> Money Back Guarantee</span><span><BadgeCheck /> Verified Quality review</span><span><Banknote /> Clear pricing before payment</span></div>
         </section>
 
         <section className="upsell-section">
-          <div className="section-intro"><p className="eyebrow">Routine builder</p><h2>Curated add-ons to increase basket value.</h2><p>Complementary products support the hero purchase with practical, premium reasons to complete the set.</p></div>
+          <div className="section-intro"><p className="eyebrow">Routine builder</p><h2>Carefully paired additions for a higher-value order.</h2><p>Each supporting item strengthens the main product story with a clear daily-use benefit and premium presentation.</p></div>
           <div className="cards-grid">{addOns.map((product) => <article className="product-card compact" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.description}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add</button></div></article>)}</div>
         </section>
 
