@@ -97,14 +97,14 @@ export default function App() {
           <div className="hero-copy">
             <p className="eyebrow">CJ Dropshipping verified · single winning product</p>
             <h1>Smart Posture Corrector</h1>
-            <p className="hero-text">A focused posture-awareness device for desk work, long screen sessions and daily upright habit training — now priced at ${mainProduct.price} with secure checkout and CJ-ready fulfillment records.</p>
+            <p className="hero-text">{mainProduct.description} Now priced at ${mainProduct.price} with secure checkout and CJ-ready fulfillment records.</p>
             <div className="hero-actions">
               <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Buy now — ${mainProduct.price}</button>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
               <span><Star size={16} /> 4.8 buyer rating</span>
-              <span><Truck size={16} /> 7–12 business day US estimate</span>
+              <span><Truck size={16} /> 8–23 day US shipping</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
               <span><BadgeCheck size={16} /> Verified single-product offer</span>
             </div>
@@ -118,7 +118,7 @@ export default function App() {
 
         <section className="reassurance-section" aria-label="Delivery and product reassurance">
           <article><PackageCheck size={21} /><h3>CJ-ready fulfillment</h3><p>Only one checkout product remains, so order records are clean, focused and ready for CJ Dropshipping review.</p></article>
-          <article><Truck size={21} /><h3>Delivery estimate shown early</h3><p>United States delivery is presented as a realistic 7–12 business day estimate after processing.</p></article>
+          <article><Truck size={21} /><h3>Delivery estimate shown early</h3><p>United States delivery is presented with the supplier shipping time: 8–23 days.</p></article>
           <article><LockKeyhole size={21} /><h3>Secure payment path</h3><p>Embedded checkout supports major cards and eligible wallet payments without custom card handling.</p></article>
         </section>
 
@@ -128,9 +128,9 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Today’s smart posture offer</p>
-              <h3>Train posture awareness for screen-heavy days</h3>
+              <h3>{mainProduct.subtitle}</h3>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Delivery estimate: 7–12 business days to the United States after processing.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Shipping time: 8–23 days to the United States.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${(mainProduct.compareAt! - mainProduct.price).toFixed(2)}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector SKU at $34.99.</p></article></div>
