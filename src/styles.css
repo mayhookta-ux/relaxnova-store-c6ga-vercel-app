@@ -166,8 +166,9 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .nav { order: 3; display: none; width: 100%; padding: 14px 0 18px; border-top: 1px solid hsl(var(--border)); }
   .nav-open { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .hero-section, .product-grid, .guarantee-section, .checkout-grid, .contact-section { grid-template-columns: 1fr; }
-  .hero-visual, .product-stage { min-height: 380px; }
+  .hero-visual, .product-stage { min-height: 340px; }
   .strip-section, .policy-section { grid-template-columns: 1fr 1fr; }
+  .product-photo-large { width: min(100%, 390px); }
   .order-summary { position: static; }
   .confirmation-section { flex-direction: column; align-items: flex-start; }
   .footer { grid-template-columns: 1fr 1fr; }
@@ -178,16 +179,20 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .hero-section { padding: 38px 18px 58px; min-height: auto; }
   h1 { font-size: 48px; }
   h2 { font-size: 38px; }
+  h3 { font-size: 29px; }
   .hero-actions { align-items: stretch; }
   .primary-action { width: 100%; }
   .nav-open, .strip-section, .benefit-grid, .cards-grid, .policy-section, .gallery-grid, .form-row, .footer { grid-template-columns: 1fr; }
   .hero-visual, .product-stage { min-height: auto; padding: 18px; }
-  .product-photo-large { width: min(100%, 330px); }
+  .product-photo-large { width: min(100%, 300px); }
   .product-card, .gallery-card { padding: 22px; height: auto; min-height: 0; }
-  .product-card .product-photo, .gallery-card .product-photo { height: 170px; margin-bottom: 22px; }
+  .product-card .product-photo, .gallery-card .product-photo { height: 156px; margin-bottom: 22px; }
   .product-card h3, .gallery-card h3 { font-size: 29px; line-height: 1.08; overflow-wrap: anywhere; }
   .product-card p, .gallery-card p { margin: 12px 0 0; line-height: 1.68; }
-  .card-bottom { align-items: flex-start; gap: 12px; }
+  .purchase-actions { grid-template-columns: 1fr; }
+  .secondary-buy { width: 100%; }
+  .card-bottom { align-items: stretch; gap: 12px; flex-direction: column; }
+  .card-bottom button { width: 100%; min-height: 48px; }
   .cart-head, .cart-footer { padding: 18px; }
   .cart-lines { padding: 14px 18px; }
   .cart-line { grid-template-columns: 56px 1fr; }
