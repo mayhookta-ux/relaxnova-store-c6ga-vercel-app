@@ -83,6 +83,7 @@ li { display: flex; gap: 10px; align-items: center; font-weight: 700; }
 .product-info-grid p { margin: 0; font-size: 14px; line-height: 1.65; }
 .purchase-actions { display: grid; grid-template-columns: 1fr 0.72fr; gap: 12px; }
 .secondary-buy { border: 1px solid hsl(var(--primary)); background: hsl(var(--background)); color: hsl(var(--primary)); border-radius: 999px; min-height: 56px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 24px hsl(var(--primary) / 0.08); }
+.hero-buy { padding-inline: 26px; }
 
 .benefit-grid, .cards-grid, .policy-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .cards-grid, .policy-section { grid-template-columns: repeat(3, 1fr); }
@@ -159,6 +160,7 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
 .payment-option span, .checkout-trust { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .card-fields { display: grid; gap: 12px; }
 .checkout-trust { color: hsl(var(--muted-foreground)); font-size: 13px; }
+.form-error { margin: 0; border: 1px solid hsl(var(--rose)); border-radius: 14px; background: hsl(var(--rose) / 0.38); color: hsl(var(--primary)); padding: 12px 14px; font-weight: 800; }
 .order-summary { position: sticky; top: 98px; display: grid; gap: 16px; }
 .summary-line, .summary-total { display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid hsl(var(--border)); padding-bottom: 13px; }
 .summary-total { border-bottom: 0; font-size: 23px; }
