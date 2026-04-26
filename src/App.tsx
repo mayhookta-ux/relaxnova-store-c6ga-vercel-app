@@ -145,9 +145,9 @@ export default function App() {
         </section>
 
         <section id="results" className="before-after-section">
-          <div className="section-intro"><p className="eyebrow">Posture reminder flow</p><h2>Angle sensing, vibration reminder and adjustable support.</h2></div>
-          <article><span>Posture change</span><h3>Angle and tension sensing</h3><p>Accurately capture the wearer's posture changes through angle and tension sensing.</p></article>
-          <article><span>Reminder</span><h3>Automatic vibration</h3><p>When the angle of the hunchback exceeds the set angle, the posture corrector will automatically vibrate to remind you.</p></article>
+          <div className="section-intro"><p className="eyebrow">Before / after posture benefits</p><h2>From passive slouching to active posture awareness.</h2></div>
+          <article><span>Before</span><h3>Posture changes go unnoticed</h3><p>During laptop work, studying or scrolling, shoulder position can drift forward without a clear cue to reset.</p></article>
+          <article><span>After</span><h3>Automatic reminders help you reset</h3><p>Angle and tension sensing tracks posture changes, then vibration reminders help bring attention back to an upright position.</p></article>
         </section>
 
         <section className="conversion-section">
