@@ -88,9 +88,8 @@ export default function App() {
   const placeOrder = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form));
-    const result = (paymentMethod === "card" ? cardSchema : shippingSchema).safeParse(data);
-    if (!result.success) {
+    const data = new FormData(form);
+    if (!isCheckoutValid(data, paymentMethod)) {
       setCheckoutError("Please review the highlighted checkout fields before continuing.");
       return;
     }
