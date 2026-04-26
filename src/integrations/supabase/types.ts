@@ -14,7 +14,172 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      checkout_events: {
+        Row: {
+          event_type: string
+          id: string
+          order_id: string | null
+          payload: Json
+          processed_at: string
+          stripe_event_id: string
+        }
+        Insert: {
+          event_type: string
+          id?: string
+          order_id?: string | null
+          payload?: Json
+          processed_at?: string
+          stripe_event_id: string
+        }
+        Update: {
+          event_type?: string
+          id?: string
+          order_id?: string | null
+          payload?: Json
+          processed_at?: string
+          stripe_event_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "checkout_events_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      order_items: {
+        Row: {
+          cj_product_id: string | null
+          cj_variant_id: string | null
+          created_at: string
+          fulfillment_provider: string
+          id: string
+          metadata: Json
+          order_id: string
+          product_id: string
+          product_name: string
+          quantity: number
+          sku: string | null
+          total_amount: number
+          unit_amount: number
+        }
+        Insert: {
+          cj_product_id?: string | null
+          cj_variant_id?: string | null
+          created_at?: string
+          fulfillment_provider?: string
+          id?: string
+          metadata?: Json
+          order_id: string
+          product_id: string
+          product_name: string
+          quantity: number
+          sku?: string | null
+          total_amount: number
+          unit_amount: number
+        }
+        Update: {
+          cj_product_id?: string | null
+          cj_variant_id?: string | null
+          created_at?: string
+          fulfillment_provider?: string
+          id?: string
+          metadata?: Json
+          order_id?: string
+          product_id?: string
+          product_name?: string
+          quantity?: number
+          sku?: string | null
+          total_amount?: number
+          unit_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          billing_address: Json | null
+          cj_status: string | null
+          confirmed_at: string | null
+          created_at: string
+          currency: string
+          customer_email: string
+          customer_name: string | null
+          fulfillment_status: string
+          id: string
+          metadata: Json
+          order_number: string
+          payment_status: string
+          phone: string | null
+          shipping_address: Json | null
+          shipping_amount: number
+          status: string
+          stripe_checkout_session_id: string | null
+          stripe_payment_intent_id: string | null
+          subtotal_amount: number
+          tax_amount: number
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          billing_address?: Json | null
+          cj_status?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          currency?: string
+          customer_email: string
+          customer_name?: string | null
+          fulfillment_status?: string
+          id?: string
+          metadata?: Json
+          order_number: string
+          payment_status?: string
+          phone?: string | null
+          shipping_address?: Json | null
+          shipping_amount?: number
+          status?: string
+          stripe_checkout_session_id?: string | null
+          stripe_payment_intent_id?: string | null
+          subtotal_amount?: number
+          tax_amount?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          billing_address?: Json | null
+          cj_status?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          currency?: string
+          customer_email?: string
+          customer_name?: string | null
+          fulfillment_status?: string
+          id?: string
+          metadata?: Json
+          order_number?: string
+          payment_status?: string
+          phone?: string | null
+          shipping_address?: Json | null
+          shipping_amount?: number
+          status?: string
+          stripe_checkout_session_id?: string | null
+          stripe_payment_intent_id?: string | null
+          subtotal_amount?: number
+          tax_amount?: number
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
