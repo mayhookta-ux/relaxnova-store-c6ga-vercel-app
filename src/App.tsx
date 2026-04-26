@@ -109,7 +109,7 @@ export default function App() {
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
             <h1>Choose a premium daily reset that feels useful from the first moment.</h1>
-            <p className="hero-text">Elyra Maison now brings together refined light skincare care and portable neck comfort, giving buyers a clear beauty-and-wellness upgrade with secure checkout confidence close to every action.</p>
+            <p className="hero-text">Elyra Maison now brings together refined light skincare and portable neck comfort, giving buyers a clear beauty-and-wellness upgrade with secure checkout confidence close to every action.</p>
             <div className="hero-actions">
               <a className="primary-action hero-primary" href="#neck-massager"><Gem size={19} /> Buy neck massager — ${neckMassagerProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(neckMassagerProduct.id)}>Add to cart</button>
@@ -168,11 +168,16 @@ export default function App() {
               <div className="urgency-callout"><Clock3 size={18} /><span>High demand: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
-              <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
+              <div className="product-info-grid"><article><h4>Product description</h4><p>{mainProduct.details}</p></article><article><h4>Daily beauty value</h4><p>Use during a short evening pause when you want skincare to feel more organized, comfortable and visually polished.</p></article><article><h4>Usage confidence</h4><p>Secure the fit, choose a comfortable light setting and follow the brief guided session without extending the routine.</p></article><article><h4>Shipping confidence</h4><p>{mainProduct.shipping}</p></article><article><h4>Refund reassurance</h4><p>{mainProduct.returns}</p></article><article><h4>Secure checkout reassurance</h4><p>Checkout keeps pricing, payment fields and support cues visible before order placement.</p></article></div>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
               <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Fast Shipping · 30-Day Guarantee · Premium Support · Verified Quality</div>
             </div>
+          </div>
+          <div className="product-benefit-grid">
+            <article><Gem size={20} /><h3>Why it matters</h3><p>It gives nightly skincare a clear focal point, making the routine feel intentional instead of scattered.</p></article>
+            <article><HeartHandshake size={20} /><h3>Emotional value</h3><p>The cushioned fit and refined finish create a quieter care moment that feels premium without feeling complicated.</p></article>
+            <article><BadgeCheck size={20} /><h3>Visible expectation</h3><p>The device adds a polished vanity presence and a repeatable ritual buyers can understand from the first visit.</p></article>
           </div>
         </section>
 
