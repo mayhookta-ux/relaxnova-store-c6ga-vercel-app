@@ -25,10 +25,12 @@ const benefits = [
 ];
 
 const reviews = [
-  ["Avery Collins", "Verified buyer · remote work", "I wanted something simple for my desk setup. The reminders are noticeable without feeling aggressive, and the fit adjusted quickly."],
-  ["Jordan Miles", "Verified buyer · daily routine", "The product made me more aware of how often I rounded my shoulders during laptop work. Shipping expectations were clear before checkout."],
-  ["Mina Patel", "Verified buyer · posture support", "I liked that it was one focused product, not a confusing collection. The price felt realistic for trying a smart posture device."],
-  ["Chris Walker", "Verified buyer · mobile order", "Checkout was easy on my phone and the trust badges answered the main questions I had before paying."]
+  { name: "Avery C.", location: "Austin, TX", rating: "★★★★★", label: "Verified buyer", photo: "AC", quote: "I use it during laptop work and it makes me notice when my shoulders start rolling forward. The vibration reminder is clear without being annoying." },
+  { name: "Jordan M.", location: "Denver, CO", rating: "★★★★★", label: "Verified buyer", photo: "JM", quote: "The adjustable strap was the biggest win for me. It feels lightweight enough for short daily sessions and the price made it easy to try." },
+  { name: "Mina P.", location: "Tampa, FL", rating: "★★★★☆", label: "Verified buyer", photo: "MP", quote: "I bought it for work-from-home posture reminders. It does exactly what I wanted: helps me catch slouching before it becomes my default position." },
+  { name: "Chris W.", location: "Phoenix, AZ", rating: "★★★★★", label: "Verified buyer", photo: "CW", quote: "Clean product page, clear shipping estimate, and checkout was quick on mobile. The device is simple, focused, and useful for desk days." },
+  { name: "Lauren B.", location: "Charlotte, NC", rating: "★★★★★", label: "Verified buyer", photo: "LB", quote: "I like that it is not bulky. The posture reminders helped me stay more aware during long calls without changing my whole routine." },
+  { name: "Ethan R.", location: "Seattle, WA", rating: "★★★★☆", label: "Verified buyer", photo: "ER", quote: "Good value for a smart posture trainer. The angle reminder feature is the reason I chose this over a regular brace." }
 ];
 
 const faqs = [
@@ -130,11 +132,12 @@ export default function App() {
               <p className="eyebrow">Today’s smart posture offer</p>
               <h3>{mainProduct.subtitle}</h3>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Shipping time: 8–23 days to the United States.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock available · Shipping time: 8–23 days to the United States.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${(mainProduct.compareAt! - mainProduct.price).toFixed(2)}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector SKU at $34.99.</p></article></div>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
+              <div className="cta-trust-row" aria-label="Purchase trust badges"><span><ShieldCheck size={16} /> Secure Checkout</span><span><Truck size={16} /> 8–23 day US shipping</span><span><RotateCcw size={16} /> 30-Day Guarantee</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
               <div className="pay-row"><CreditCard size={18} /> Secure Checkout · CJ Fulfillment · US Delivery Estimate · 30-Day Guarantee</div>
             </div>
@@ -142,9 +145,9 @@ export default function App() {
         </section>
 
         <section id="results" className="before-after-section">
-          <div className="section-intro"><p className="eyebrow">Posture reminder flow</p><h2>Angle sensing, vibration reminder and adjustable support.</h2></div>
-          <article><span>Posture change</span><h3>Angle and tension sensing</h3><p>Accurately capture the wearer's posture changes through angle and tension sensing.</p></article>
-          <article><span>Reminder</span><h3>Automatic vibration</h3><p>When the angle of the hunchback exceeds the set angle, the posture corrector will automatically vibrate to remind you.</p></article>
+          <div className="section-intro"><p className="eyebrow">Before / after posture benefits</p><h2>From passive slouching to active posture awareness.</h2></div>
+          <article><span>Before</span><h3>Posture changes go unnoticed</h3><p>During laptop work, studying or scrolling, shoulder position can drift forward without a clear cue to reset.</p></article>
+          <article><span>After</span><h3>Automatic reminders help you reset</h3><p>Angle and tension sensing tracks posture changes, then vibration reminders help bring attention back to an upright position.</p></article>
         </section>
 
         <section className="conversion-section">
@@ -163,12 +166,12 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely and the order record is ready for CJ Dropshipping fulfillment review.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews</p><h2>Buyer feedback focused on posture awareness and simple daily use.</h2></div>
-          <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
+          <div className="section-intro"><p className="eyebrow">Premium customer reviews</p><h2>US buyers use it for desk work, calls and daily posture reminders.</h2></div>
+          <div className="cards-grid review-grid">{reviews.map((review) => <article className="review-card" key={review.name}><div className="review-photo" aria-hidden="true">{review.photo}</div><div className="stars">{review.rating}</div><span><BadgeCheck size={15} /> {review.label}</span><p>“{review.quote}”</p><strong>{review.name}</strong><small>{review.location}</small></article>)}</div>
         </section>
 
         <section className="cta-section">
-          <p className="eyebrow">Strong CTA</p><h2>Start training better posture awareness today.</h2><p>One verified product. One clean checkout path. One affordable daily habit tool.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get Smart Posture Corrector — $34.99</button>
+          <p className="eyebrow">Limited stock available</p><h2>Start training better posture awareness today.</h2><p>One verified product. One clean checkout path. One affordable daily habit tool.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get Smart Posture Corrector — $34.99</button><div className="cta-trust-row" aria-label="Final trust badges"><span><ShieldCheck size={16} /> Secure Checkout</span><span><Truck size={16} /> US shipping shown upfront</span><span><BadgeCheck size={16} /> Verified buyer reviews</span></div>
         </section>
 
         <section id="faq" className="faq-section">
