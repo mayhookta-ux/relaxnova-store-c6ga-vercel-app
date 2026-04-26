@@ -100,6 +100,7 @@ export default function App() {
               <span><Star size={16} /> 4.9 average rating</span>
               <span><Truck size={16} /> Free shipping over $250</span>
               <span><ShieldCheck size={16} /> 60-day promise</span>
+              <span><Clock3 size={16} /> Limited launch batch</span>
             </div>
           </div>
           <div className="hero-visual">
@@ -116,6 +117,16 @@ export default function App() {
           <div className="benefit-grid">{landingBlocks.map(([num, title, body]) => <article key={title}><span>{num}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </section>
 
+        <section className="conversion-section">
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>Premium value explained before the first click.</h2><p>Clear benefits, urgency, guarantees and recognizable payment cues help shoppers understand the offer quickly without cluttering the luxury design.</p></div>
+          <div className="conversion-grid">
+            {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
+          </div>
+          <div className="trust-badge-row" aria-label="Trust badges">
+            {trustBadges.map(([Icon, title, body]) => <span key={title}><Icon size={19} /><strong>{title}</strong><small>{body}</small></span>)}
+          </div>
+        </section>
+
         <section id="collection" className="collection-section">
           <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Commercially believable products with clear buying paths.</h2><p>Each card uses realistic photography, visible product copy, stock status, clear pricing and stable image sizing for every screen.</p></div>
           <div className="cards-grid">{products.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add to cart</button></div></article>)}</div>
@@ -130,11 +141,13 @@ export default function App() {
               <h3>Champagne LED facial therapy set</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Limited launch stock: current batch reserved quickly after checkout opens.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
-              <div className="purchase-actions"><button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add to cart</button><button className="secondary-buy" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now</button></div>
-              <div className="pay-row"><CreditCard size={18} /> Visa · Mastercard · Amex · Shop Pay ready · encrypted checkout path</div>
+              <div className="purchase-actions"><button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add to cart</button><button className="secondary-buy" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — checkout</button></div>
+              <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked shipping guarantee · 60-day money-back promise</div>
             </div>
           </div>
         </section>
