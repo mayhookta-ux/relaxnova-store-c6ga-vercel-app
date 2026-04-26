@@ -19,42 +19,42 @@ const isCheckoutValid = (data: FormData, paymentMethod: string) => {
 const landingBlocks = [
   ["01", "Purpose before price", "Each item states its routine role, daily benefit and reason to own it before shoppers reach checkout."],
   ["02", "Premium routine logic", "The collection moves from cleansing prep to treatment support and finishing care, so every add-on has a clear purpose."],
-  ["03", "Confidence beside action", "Shipping, returns, payment safety and guarantee cues stay close to the product decision points."],
+  ["03", "Confidence beside action", "Delivery, returns, payment safety and support cues stay close to the product decision points."],
   ["04", "Retail-grade responsiveness", "Contained photos, readable copy and balanced buttons remain stable across desktop, tablet and mobile layouts."]
 ];
 
 const conversionBenefits = [
   ["Built for repeat use", "The signature device gives structure to a short evening ritual for customers who want a composed care habit at home."],
-  ["Value made visible", "Materials, accessories, guided use and routine outcomes are explained clearly so the premium price feels understandable."],
-  ["Risk reduced early", "Guarantee, delivery and payment reassurance appear before checkout so buyers do not need to hunt for answers."],
+  ["Visible routine motivation", "Consistent use helps the ritual feel more intentional, giving customers a clear reason to return to it night after night."],
+  ["Confidence before checkout", "Guarantee, delivery, payment and support cues appear before checkout so buyers do not need to hunt for reassurance."],
   ["Luxury that feels practical", "The products support a calmer vanity routine while still looking polished enough for gifting or daily display."]
 ];
 
 const trustBadges = [
   { icon: ShieldCheck, title: "Secure Checkout", body: "Protected payment path" },
-  { icon: RotateCcw, title: "Money Back Guarantee", body: "60-day confidence window" },
-  { icon: Truck, title: "Fast Shipping", body: "Tracked dispatch on eligible orders" },
-  { icon: BadgeCheck, title: "Verified Quality", body: "Checked before packing" }
+  { icon: RotateCcw, title: "30-Day Guarantee", body: "Clear confidence window" },
+  { icon: Truck, title: "Fast Delivery", body: "Tracked release on eligible orders" },
+  { icon: HeartHandshake, title: "Premium Support", body: "Order help from first click" }
 ];
 
-const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];
+const paymentMethods = ["Major cards", "Digital wallet", "Express pay", "Encrypted form"];
 
 const reviews = [
-  ["Mara E.", "Verified buyer · apartment evening routine", "The product page answered my main questions before checkout: what the device does, how long the ritual takes and what arrives in the box."],
-  ["Riven V.", "Verified buyer · weekday self-care order", "The delivery promise, payment cues and return window were placed exactly where I needed them, so the purchase felt considered."],
-  ["Liora A.", "Verified buyer · gift purchase", "The serum and prep wand read like useful companions instead of filler items. On mobile, the photos and prices stayed easy to compare."],
-  ["Corin M.", "Verified buyer · nightly routine user", "The stock note and quality guarantee created urgency without pressure. The store felt premium, calm and ready for a real order."],
-  ["Nelle S.", "Verified buyer · compact vanity setup", "I liked that the descriptions were specific without making exaggerated claims. The whole page felt polished and believable."],
-  ["Talia R.", "Verified buyer · first device purchase", "The Buy Now button was clear, and the guarantee language made it easier to choose the full ritual instead of delaying the order."]
+  ["Mara Ellis", "Verified buyer · evening routine", "I wanted something that felt easy to keep using. The page explained the timing, the parts included and the reason for the price without overselling it."],
+  ["Ren Vale", "Verified buyer · city apartment", "The trust badges were right under the first section, so I did not have to search for delivery or checkout reassurance before deciding."],
+  ["Lina Corren", "Verified buyer · gift purchase", "The serum and prep tool made sense as additions. The cards were clear on my phone, and the prices were easy to compare."],
+  ["Cam Arden", "Verified buyer · nightly care user", "The stock note felt useful rather than pushy. I liked that the copy stayed specific and calm instead of making huge promises."],
+  ["Noa Merren", "Verified buyer · small vanity setup", "The product photos looked balanced and the details answered practical questions. It felt like a polished shop, not a template."],
+  ["Tessa Rowan", "Verified buyer · first device order", "The Buy Now button was easy to spot, and the guarantee wording gave me enough confidence to move forward with the set."]
 ];
 
 const faqs = [
-  ["Is payment information handled safely?", "The storefront uses a clean validated checkout interface, recognizable payment labels and no unsafe HTML injection patterns. A live payment provider should be connected before accepting real orders."],
-  ["When can an in-stock order ship?", "Products marked ready to ship can be prepared during the current packing window, with tracking intended to appear after carrier handoff."],
-  ["What if the product is not the right fit?", "Eligible orders are presented with a 60-day money-back framework, subject to hygiene-aware review and complete return packaging."],
-  ["Is there a quality guarantee?", "Every visible product is positioned with a pre-packing quality review and a limited coverage statement for eligible device faults once final selling terms are activated."],
-  ["How do I know which product to choose?", "The page explains who each item is for, how it fits into a daily ritual and why it supports a more composed premium care routine."],
-  ["How will delivery details be shared?", "The store structure supports tracked delivery updates for packing, carrier movement and destination arrival where service is available."]
+  ["How long does delivery usually take?", "Items marked ready for the current packing window are prepared for tracked release as soon as order details are complete and carrier service is available."],
+  ["Is the checkout structure safe?", "The checkout uses validated fields, limited input lengths and clean React-rendered text without unsafe script injection patterns. Connect a live payment provider before accepting real orders."],
+  ["Can I return an eligible order?", "Eligible orders can be reviewed within a 30-day guarantee window when the item is complete, safely packed and aligned with the final published return conditions."],
+  ["What does the guarantee cover?", "The guarantee is written to support careful buying confidence, covering eligible order concerns under clear hygiene-aware and product-condition guidelines."],
+  ["Will I feel confident using the product?", "The product section explains the daily role, included parts and routine sequence so customers understand how it fits into a composed self-care moment."],
+  ["Why choose the full ritual?", "The full set creates a practical care flow: prepare, use the hero device, support the skin feel and finish with a calm premium routine."]
 ];
 
 export default function App() {
@@ -108,14 +108,14 @@ export default function App() {
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
             <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
-            <p className="hero-text">Create a composed evening ritual with premium tools that feel beautiful on the vanity, simple to use and reassuring to buy today.</p>
+            <p className="hero-text">Turn an ordinary evening into a steady care ritual with a refined light device, clear routine guidance and visible buying reassurance from the first screen.</p>
             <div className="hero-actions">
               <a className="primary-action hero-primary" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
               <span><Star size={16} /> 4.9 buyer rating</span>
-              <span><Truck size={16} /> Shipping today eligible</span>
+              <span><Truck size={16} /> Fast delivery eligible</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
               <span><Clock3 size={16} /> Limited stock</span>
             </div>
@@ -135,7 +135,7 @@ export default function App() {
         </section>
 
         <section className="conversion-section">
-          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The store explains what the hero product does, why daily use matters and how each supporting item creates a calmer premium care routine.</p></div>
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces make the routine feel complete, tactile and easier to repeat.</p></div>
           <div className="conversion-grid">
             {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
           </div>
@@ -158,13 +158,13 @@ export default function App() {
               <h3>Light care set for a composed nightly ritual</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>High demand indicator: today’s ready-to-ship quantity is limited.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
-              <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked shipping guarantee · 60-day money-back promise</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked delivery support · 30-day guarantee</div>
             </div>
           </div>
         </section>
@@ -175,8 +175,8 @@ export default function App() {
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Shipping assurance, payment safety, money-back support and quality checks stay visible so the purchase feels considered and low-friction.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Fast tracked shipping</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> Money Back Guarantee</span><span><BadgeCheck /> Verified Quality review</span><span><Banknote /> Clear pricing before payment</span></div>
+          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Delivery assurance, payment safety, guarantee support and premium assistance stay visible so the purchase feels considered and low-friction.</p></div>
+          <div className="guarantee-list"><span><PackageCheck /> Fast tracked delivery</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><HeartHandshake /> Premium Support</span><span><Banknote /> Clear pricing before payment</span></div>
         </section>
 
         <section className="upsell-section">
@@ -184,12 +184,12 @@ export default function App() {
           <div className="cards-grid">{addOns.map((product) => <article className="product-card compact" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.description}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add</button></div></article>)}</div>
         </section>
 
-        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Checkout page</p><h2>Complete your Elyra Maison order.</h2><p>Validated checkout structure with clear payment reassurance, premium form spacing and a responsive order summary.</p></div><div className="checkout-grid"><form className="checkout-form" onSubmit={placeOrder}><fieldset><legend>Shipping details</legend><input required name="fullName" autoComplete="name" maxLength={100} placeholder="Full name" /><input required name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email address" /><input required name="street" autoComplete="street-address" maxLength={160} placeholder="Street address" /><div className="form-row"><input required name="city" autoComplete="address-level2" maxLength={80} placeholder="City" /><input required name="postalCode" autoComplete="postal-code" maxLength={20} placeholder="Postal code" /></div><input required name="country" autoComplete="country-name" maxLength={80} placeholder="Country or region" /></fieldset><fieldset><legend>Payment</legend><label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "card"} onChange={() => setPaymentMethod("card")} /> <span><CreditCard size={18} /> Secure card payment</span></label>{paymentMethod === "card" && <div className="card-fields"><input required name="cardNumber" placeholder="Card number" inputMode="numeric" maxLength={23} /><div className="form-row"><input required name="expiry" placeholder="MM / YY" maxLength={7} /><input required name="cvc" placeholder="CVC" inputMode="numeric" maxLength={4} /></div><input required name="cardName" autoComplete="cc-name" maxLength={100} placeholder="Name on card" /></div>}<label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "paypal"} onChange={() => setPaymentMethod("paypal")} /> <span><Sparkles size={18} /> PayPal express option</span></label></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><BadgeCheck size={17} /> Verified Quality</span><span><Truck size={17} /> Fast Shipping</span><span><RotateCcw size={17} /> Money Back Guarantee</span></div>{checkoutError && <p className="form-error" role="alert">{checkoutError}</p>}<button className="primary-action full" disabled={!cartLines.length}>Place secure order</button></form><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${line.product.price * line.quantity}</strong></div>)}<div className="summary-line"><span>Shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total}</strong></div><p>Connect live payment processing before accepting real orders.</p></aside></div></section>}
+        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Checkout page</p><h2>Complete your Elyra Maison order.</h2><p>Validated checkout structure with clear payment reassurance, premium form spacing and a responsive order summary.</p></div><div className="checkout-grid"><form className="checkout-form" onSubmit={placeOrder}><fieldset><legend>Shipping details</legend><input required name="fullName" autoComplete="name" maxLength={100} placeholder="Full name" /><input required name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email address" /><input required name="street" autoComplete="street-address" maxLength={160} placeholder="Street address" /><div className="form-row"><input required name="city" autoComplete="address-level2" maxLength={80} placeholder="City" /><input required name="postalCode" autoComplete="postal-code" maxLength={20} placeholder="Postal code" /></div><input required name="country" autoComplete="country-name" maxLength={80} placeholder="Country or region" /></fieldset><fieldset><legend>Payment</legend><label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "card"} onChange={() => setPaymentMethod("card")} /> <span><CreditCard size={18} /> Secure card payment</span></label>{paymentMethod === "card" && <div className="card-fields"><input required name="cardNumber" placeholder="Card number" inputMode="numeric" maxLength={23} /><div className="form-row"><input required name="expiry" placeholder="MM / YY" maxLength={7} /><input required name="cvc" placeholder="CVC" inputMode="numeric" maxLength={4} /></div><input required name="cardName" autoComplete="cc-name" maxLength={100} placeholder="Name on card" /></div>}<label className="payment-option"><input type="radio" name="payment" checked={paymentMethod === "express"} onChange={() => setPaymentMethod("express")} /> <span><Sparkles size={18} /> Express checkout option</span></label></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><HeartHandshake size={17} /> Premium Support</span><span><Truck size={17} /> Fast Delivery</span><span><RotateCcw size={17} /> 30-Day Guarantee</span></div>{checkoutError && <p className="form-error" role="alert">{checkoutError}</p>}<button className="primary-action full" disabled={!cartLines.length}>Place secure order</button></form><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${line.product.price * line.quantity}</strong></div>)}<div className="summary-line"><span>Shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total}</strong></div><p>Connect live payment processing before accepting real orders.</p></aside></div></section>}
 
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your care ritual order is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this secure preview flow.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Original customer feedback with visible ratings and buyer context.</h2><p>Each review uses fresh wording, fictional customer identities and practical purchase details for a credible premium presentation.</p></div>
+          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Natural premium reviews with visible ratings and buyer context.</h2><p>Each review uses original wording, fictional customer identities and practical purchase details for a credible premium presentation.</p></div>
           <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
         </section>
 
@@ -199,8 +199,8 @@ export default function App() {
         </section>
 
         <section id="policies" className="policy-section">
-          <Policy title="Shipping Policy" body="Eligible orders are packed with protective materials and prepared for tracked release when carrier service is available. Same-day messaging applies only to items marked ready for the current packing window." />
-          <Policy title="Refund Policy" body="Eligible orders may be reviewed within a 60-day money-back framework. Hygiene-sensitive items must return complete, safely packed and approved under the final published return conditions." />
+          <Policy title="Shipping Policy" body="Eligible orders are packed with protective materials and prepared for tracked release when carrier service is available. Fast delivery language applies only to items marked ready for the current packing window." />
+          <Policy title="Refund Policy" body="Eligible orders may be reviewed within a 30-day guarantee framework. Hygiene-sensitive items must return complete, safely packed and approved under the final published return conditions." />
           <Policy title="Privacy Policy" body="Customer details are intended only for order handling, transaction protection, support replies, delivery notices and store experience improvement. Final regional disclosures should be added before live selling." />
           <Policy title="Terms of Service" body="Customers agree to provide accurate order details, review product guidance and confirm all purchase terms before ordering. Availability, pricing and offers may change as inventory changes." />
         </section>
@@ -211,7 +211,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a></nav><div className="social-row"><span>Secure Checkout</span><span>Money Back Guarantee</span><span>Fast Shipping</span><span>Premium Quality Guarantee</span></div><small>© 2026 Elyra Maison. Fresh original store copy, fictional reviews and original product naming prepared for transferable ownership.</small></footer>
+      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a><a href="#contact">Contact</a></nav><div className="social-row"><span>Secure Checkout</span><span>30-Day Guarantee</span><span>Fast Delivery</span><span>Premium Support</span></div><small>© 2026 Elyra Maison. Fresh original store copy, fictional reviews and original product naming prepared for transferable ownership.</small></footer>
     </div>
   );
 }

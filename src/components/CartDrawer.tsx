@@ -37,7 +37,7 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
         </div>
       )}
       <div className="cart-footer">
-        <div className="trust-note"><ShieldCheck size={18} /> Secure payment-ready checkout · tracked shipping · 60-day guarantee.</div>
+        <div className="trust-note"><ShieldCheck size={18} /> Secure payment-ready checkout · tracked delivery · 30-day guarantee.</div>
         <div className="total-row"><span>Subtotal</span><strong>${subtotal}</strong></div>
         <div className="total-row muted-total"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div>
         <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><CreditCard size={18} /> Continue to checkout</button>
