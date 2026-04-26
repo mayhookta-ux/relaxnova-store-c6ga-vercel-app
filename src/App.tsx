@@ -73,12 +73,12 @@ export default function App() {
       <main>
         <section className="hero-section">
           <div className="hero-copy">
-            <p className="eyebrow">Elyra Maison · Premium beauty technology</p>
-            <h1>Luxury facial technology for a luminous at-home ritual.</h1>
-            <p className="hero-text">Discover a refined beauty-tech storefront built around realistic product photography, clear pricing, high-converting trust cues and a complete premium shopping structure.</p>
+            <p className="eyebrow">Elyra Maison · Sale-ready beauty technology</p>
+            <h1>Luxury facial devices curated for a radiant at-home ritual.</h1>
+            <p className="hero-text">Shop premium beauty technology with realistic product photography, clear benefits, transparent pricing, verified social proof and a conversion-focused purchase flow.</p>
             <div className="hero-actions">
-              <button className="primary-action" onClick={() => addToCart(mainProduct.id)}>Shop {mainProduct.name} — ${mainProduct.price}</button>
-              <a className="secondary-action" href="#collection">Explore collection <ArrowRight size={17} /></a>
+              <button className="primary-action" onClick={() => addToCart(mainProduct.id)}><Gem size={18} /> Shop {mainProduct.name} — ${mainProduct.price}</button>
+              <a className="secondary-action" href="#product">Buy now <ArrowRight size={17} /></a>
             </div>
             <div className="proof-row">
               <span><Star size={16} /> 4.9 average rating</span>
@@ -92,17 +92,17 @@ export default function App() {
         </section>
 
         <section className="strip-section" aria-label="Store assurances">
-          {["Premium product photography", "Responsive ecommerce structure", "Clear prices and descriptions", "Ready for Vercel deployment"].map((item) => <span key={item}>{item}</span>)}
+          {["Free tracked shipping over $250", "60-day satisfaction guarantee", "Secure payment-ready checkout", "US luxury retail spacing"].map((item) => <span key={item}>{item}</span>)}
         </section>
 
         <section className="landing-section">
-          <div className="section-intro narrow"><p className="eyebrow">New premium template</p><h2>A complete storefront designed for beauty conversion.</h2></div>
+          <div className="section-intro narrow"><p className="eyebrow">Premium ecommerce flow</p><h2>A complete luxury storefront designed to convert.</h2></div>
           <div className="benefit-grid">{landingBlocks.map(([num, title, body]) => <article key={title}><span>{num}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </section>
 
         <section id="collection" className="collection-section">
-          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Real premium products with clear buying paths.</h2><p>Each card uses realistic photography, visible copy, stable image sizing and clean spacing for desktop, tablet and mobile.</p></div>
-          <div className="cards-grid">{products.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add to bag</button></div></article>)}</div>
+          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Commercially believable products with clear buying paths.</h2><p>Each card uses realistic photography, visible product copy, stock status, clear pricing and stable image sizing for every screen.</p></div>
+          <div className="cards-grid">{products.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add to cart</button></div></article>)}</div>
         </section>
 
         <section id="product" className="product-section">
@@ -111,24 +111,26 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Hero launch offer</p>
-              <h3>Champagne LED facial mask</h3>
+              <h3>Champagne LED facial therapy set</h3>
               <p>{mainProduct.description}</p>
+              <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
-              <button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add mask to bag</button>
-              <div className="pay-row"><CreditCard size={18} /> Secure checkout structure · tracked delivery · transparent pricing</div>
+              <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
+              <div className="purchase-actions"><button className="primary-action full" onClick={() => addToCart(mainProduct.id)}>Add to cart</button><button className="secondary-buy" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now</button></div>
+              <div className="pay-row"><CreditCard size={18} /> Visa · Mastercard · Amex · Shop Pay ready · encrypted checkout path</div>
             </div>
           </div>
         </section>
 
         <section id="ritual" className="ritual-section">
-          <div className="section-intro"><p className="eyebrow">Landing page sections</p><h2>Build the full routine in one premium journey.</h2><p>Dedicated sections guide shoppers from discovery to bundle selection, trust validation and checkout.</p></div>
+          <div className="section-intro"><p className="eyebrow">Landing page sections</p><h2>Build the full routine in one premium journey.</h2><p>Dedicated sections guide shoppers from discovery to bundle selection, trust validation and checkout without visual clutter.</p></div>
           <div className="gallery-grid">{products.map((product) => <article key={product.id} className="gallery-card"><ProductVisual product={product} /><h3>{product.name}</h3><p>{product.description}</p></article>)}</div>
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Luxury ecommerce needs clarity. This section highlights shipping, returns, secure checkout and support without hiding key details in small print.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Tracked delivery</span><span><ShieldCheck /> Secure payment-ready checkout</span><span><Clock3 /> 60-day confidence promise</span><span><HeartHandshake /> Responsive support framework</span></div>
+          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Luxury ecommerce needs clarity. This section highlights shipping, returns, secure payment, support and satisfaction guarantees in highly visible language.</p></div>
+          <div className="guarantee-list"><span><PackageCheck /> Tracked shipping guarantee</span><span><LockKeyhole /> Secure payment icons and messaging</span><span><RotateCcw /> 60-day satisfaction guarantee</span><span><HeartHandshake /> Concierge support promise</span><span><Banknote /> Transparent pricing and no surprise fees</span></div>
         </section>
 
         <section className="upsell-section">
