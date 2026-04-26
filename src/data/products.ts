@@ -1,3 +1,8 @@
+import ledMask from "../assets/product-luminara-led-mask.jpg";
+import serum from "../assets/product-silk-serum.jpg";
+import cleansingBrush from "../assets/product-onyx-brush.jpg";
+import roller from "../assets/product-marble-roller.jpg";
+
 export type Product = {
   id: string;
   name: string;
@@ -8,50 +13,55 @@ export type Product = {
   description: string;
   bullets: string[];
   color: string;
+  image: string;
 };
 
 export const products: Product[] = [
   {
-    id: "oreva-beam",
-    name: "Oréva Beam",
-    category: "LED Facial Device",
-    price: 249,
-    compareAt: 329,
-    subtitle: "A salon-inspired LED facial ritual for luminous, rested-looking skin.",
-    description: "A refined handheld light-care device designed for calm evenings, quick morning refreshes and consistent visible radiance routines at home.",
-    bullets: ["Four targeted light modes", "Featherweight curved contact surface", "10-minute guided ritual", "Rechargeable travel cradle"],
-    color: "pearl"
+    id: "luminara-led-mask",
+    name: "Luminara LED Mask",
+    category: "LED Facial Therapy",
+    price: 289,
+    compareAt: 369,
+    subtitle: "A sculptural champagne LED mask for a calm, spa-level evening ritual.",
+    description: "A premium light-therapy facial device with a soft-touch interior, balanced fit and guided ten-minute routine for luminous, rested-looking skin at home.",
+    bullets: ["Four targeted LED modes", "Soft-touch contoured interior", "10-minute guided sessions", "USB-C magnetic charging"],
+    color: "champagne",
+    image: ledMask
   },
   {
-    id: "veloura-serum",
-    name: "Veloura Serum",
-    category: "Facial Serum",
-    price: 68,
-    subtitle: "A silky hydration concentrate created to pair with light-led beauty rituals.",
-    description: "A weightless finishing serum with botanical humectants and a smooth, non-sticky feel for a polished glow before or after device care.",
-    bullets: ["Fragrance-free finish", "Layerable under moisturizer", "Glass-skin texture", "Made for daily rituals"],
-    color: "rose"
+    id: "aurelia-repair-serum",
+    name: "Aurelia Repair Serum",
+    category: "Barrier Support Serum",
+    price: 78,
+    subtitle: "A frosted-glass hydration serum made to finish a high-end facial ritual.",
+    description: "A silky, fragrance-free serum with a refined slip, designed for layering after light care and before moisturizer without stickiness or shine.",
+    bullets: ["Fragrance-free finish", "Glass bottle with gold pump", "Layers under cream", "Daily glow support"],
+    color: "ivory",
+    image: serum
   },
   {
-    id: "lysa-roller",
-    name: "Lysa Roller",
-    category: "Facial Roller",
-    price: 54,
-    subtitle: "A cool-touch sculpting tool for relaxed contours and a lifted ritual feel.",
-    description: "A balanced dual-end facial roller with a luminous mineral-look finish, built for serum glide and gentle morning de-puffing routines.",
-    bullets: ["Dual contour heads", "Naturally cool touch", "Quiet weighted handle", "Gift-ready storage sleeve"],
-    color: "jade"
+    id: "celeste-sonic-brush",
+    name: "Celeste Sonic Brush",
+    category: "Sonic Cleansing Device",
+    price: 118,
+    compareAt: 148,
+    subtitle: "An ivory sonic cleansing brush that prepares skin for serum and device care.",
+    description: "A premium silicone cleansing tool with gentle pulse settings, a weighted ergonomic handle and a polished vanity-ready silhouette.",
+    bullets: ["Three soft pulse levels", "Hygienic silicone bristles", "Water-resistant body", "Travel lock mode"],
+    color: "pearl",
+    image: cleansingBrush
   },
   {
-    id: "mira-cleanse",
-    name: "Mira Cleanse",
-    category: "Cleansing Brush",
-    price: 89,
-    compareAt: 118,
-    subtitle: "A soft sonic cleansing brush that prepares skin for your full facial ritual.",
-    description: "A premium cleansing brush with fine silicone touchpoints and gentle pulse settings for polished-feeling skin without harsh scrubbing.",
-    bullets: ["Three pulse intensities", "Hygienic silicone surface", "Water-resistant design", "USB-C charging"],
-    color: "ivory"
+    id: "roselle-sculpt-roller",
+    name: "Roselle Sculpt Roller",
+    category: "Facial Sculpting Tool",
+    price: 64,
+    subtitle: "A rose quartz-inspired roller for cool-touch contouring and serum glide.",
+    description: "A dual-ended sculpting roller with warm gold hardware, balanced hand-feel and giftable presentation for elevated morning routines.",
+    bullets: ["Dual contour heads", "Cool-touch stone feel", "Gold-tone hardware", "Gift-ready storage pouch"],
+    color: "rose",
+    image: roller
   }
 ];
 
