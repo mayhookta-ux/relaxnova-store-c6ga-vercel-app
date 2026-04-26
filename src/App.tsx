@@ -142,7 +142,7 @@ export default function App() {
         </section>
 
         <section className="conversion-section">
-          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces add slip, preparation and finishing comfort for a routine customers can return to daily.</p></div>
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces add preparation, glide and finishing comfort for a routine customers can return to daily.</p></div>
           <div className="conversion-grid">
             {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
           </div>
@@ -162,10 +162,10 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Limited stock offer</p>
-              <h3>A nightly ritual set for visible routine discipline</h3>
+              <h3>A nightly ritual set for calmer, more consistent care</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>High demand: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
@@ -182,8 +182,8 @@ export default function App() {
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Delivery assurance, payment safety, guarantee support and premium assistance stay visible so the purchase feels considered and low-friction.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Fast tracked delivery</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><HeartHandshake /> Premium Support</span><span><Banknote /> Clear pricing before payment</span></div>
+          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Delivery assurance, payment safety, guarantee support and premium assistance stay visible so the purchase feels considered, protected and easy to complete.</p></div>
+          <div className="guarantee-list"><span><PackageCheck /> Fast tracked delivery</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><HeartHandshake /> Premium Support</span><span><BadgeCheck /> Verified Quality</span><span><Banknote /> Clear pricing before payment</span></div>
         </section>
 
         <section className="upsell-section">
