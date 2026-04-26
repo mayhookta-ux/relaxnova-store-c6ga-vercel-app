@@ -108,8 +108,8 @@ export default function App() {
         <section className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
-            <h1>Make nightly skincare feel calmer, clearer and worth repeating.</h1>
-            <p className="hero-text">Choose a refined light ritual set that brings structure, comfort and vanity-level beauty to daily care, with checkout safety and support visible before you decide.</p>
+            <h1>Give your nightly skincare a calmer, more polished reason to happen.</h1>
+            <p className="hero-text">This refined light ritual set helps daily care feel organized, comfortable and visibly more considered, while trust cues stay close so the decision feels protected.</p>
             <div className="hero-actions">
               <a className="primary-action hero-primary" href="#product"><Gem size={19} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
@@ -131,9 +131,9 @@ export default function App() {
         </section>
 
         <section className="reassurance-section" aria-label="Buyer reassurance">
-          <article><ShieldCheck size={21} /><h3>Protected from the first click</h3><p>Security, delivery and guarantee cues stay visible so the buying path feels steady, transparent and easy to trust.</p></article>
-          <article><Gem size={21} /><h3>Premium value beyond display</h3><p>The main device is positioned as a repeatable self-care anchor, not a one-time novelty or decorative purchase.</p></article>
-          <article><Clock3 size={21} /><h3>Measured demand signal</h3><p>Limited stock language stays calm and specific, helping buyers understand availability without aggressive pressure.</p></article>
+          <article><ShieldCheck size={21} /><h3>Protected from the first click</h3><p>Payment safety, delivery clarity and guarantee support stay visible so the buying path feels steady and easy to trust.</p></article>
+          <article><Gem size={21} /><h3>Premium value beyond display</h3><p>The main device is framed as a repeatable self-care anchor that makes daily care feel more composed, not a one-time novelty.</p></article>
+          <article><Clock3 size={21} /><h3>Measured popularity signal</h3><p>Availability cues stay calm and specific, giving first-time buyers confidence without loud pressure or forced urgency.</p></article>
         </section>
 
         <section className="landing-section">
@@ -162,7 +162,7 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Limited stock offer</p>
-              <h3>A nightly ritual set for calmer, more consistent care</h3>
+              <h3>A nightly ritual set for calmer, more confident care</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="urgency-callout"><Clock3 size={18} /><span>High demand: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
@@ -171,7 +171,7 @@ export default function App() {
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
-              <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked delivery support · 30-day guarantee</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Fast Shipping · 30-Day Guarantee · Premium Support · Verified Quality</div>
             </div>
           </div>
         </section>
