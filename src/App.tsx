@@ -22,10 +22,10 @@ const conversionBenefits = [
 ];
 
 const trustBadges = [
-  [ShieldCheck, "Secure checkout", "Encrypted payment-ready flow"],
-  [Truck, "Shipping guarantee", "Tracked delivery on every order"],
-  [RotateCcw, "Money-back promise", "60-day satisfaction framework"],
-  [Clock3, "Limited launch stock", "Ships from the current batch"]
+  { icon: ShieldCheck, title: "Secure checkout", body: "Encrypted payment-ready flow" },
+  { icon: Truck, title: "Shipping guarantee", body: "Tracked delivery on every order" },
+  { icon: RotateCcw, title: "Money-back promise", body: "60-day satisfaction framework" },
+  { icon: Clock3, title: "Limited launch stock", body: "Ships from the current batch" }
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Amex", "Shop Pay", "Apple Pay"];
@@ -123,7 +123,7 @@ export default function App() {
             {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
           </div>
           <div className="trust-badge-row" aria-label="Trust badges">
-            {trustBadges.map(([Icon, title, body]) => <span key={title}><Icon size={19} /><strong>{title}</strong><small>{body}</small></span>)}
+            {trustBadges.map(({ icon: Icon, title, body }) => <span key={title}><Icon size={19} /><strong>{title}</strong><small>{body}</small></span>)}
           </div>
         </section>
 
