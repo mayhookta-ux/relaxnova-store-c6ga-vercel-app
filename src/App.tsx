@@ -108,14 +108,14 @@ export default function App() {
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
             <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
-            <p className="hero-text">Create a composed evening ritual with premium tools that feel beautiful on the vanity, simple to use and reassuring to buy today.</p>
+            <p className="hero-text">Turn an ordinary evening into a steady care ritual with a refined light device, clear routine guidance and visible buying reassurance from the first screen.</p>
             <div className="hero-actions">
               <a className="primary-action hero-primary" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
               <span><Star size={16} /> 4.9 buyer rating</span>
-              <span><Truck size={16} /> Shipping today eligible</span>
+              <span><Truck size={16} /> Fast delivery eligible</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
               <span><Clock3 size={16} /> Limited stock</span>
             </div>
@@ -135,7 +135,7 @@ export default function App() {
         </section>
 
         <section className="conversion-section">
-          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The store explains what the hero product does, why daily use matters and how each supporting item creates a calmer premium care routine.</p></div>
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces make the routine feel complete, tactile and easier to repeat.</p></div>
           <div className="conversion-grid">
             {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
           </div>
@@ -158,13 +158,13 @@ export default function App() {
               <h3>Light care set for a composed nightly ritual</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>High demand indicator: today’s ready-to-ship quantity is limited.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
-              <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked shipping guarantee · 60-day money-back promise</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked delivery support · 30-day guarantee</div>
             </div>
           </div>
         </section>
@@ -175,8 +175,8 @@ export default function App() {
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Shipping assurance, payment safety, money-back support and quality checks stay visible so the purchase feels considered and low-friction.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Fast tracked shipping</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> Money Back Guarantee</span><span><BadgeCheck /> Verified Quality review</span><span><Banknote /> Clear pricing before payment</span></div>
+          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Delivery assurance, payment safety, guarantee support and premium assistance stay visible so the purchase feels considered and low-friction.</p></div>
+          <div className="guarantee-list"><span><PackageCheck /> Fast tracked delivery</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><HeartHandshake /> Premium Support</span><span><Banknote /> Clear pricing before payment</span></div>
         </section>
 
         <section className="upsell-section">
