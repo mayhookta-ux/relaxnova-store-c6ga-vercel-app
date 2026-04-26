@@ -189,7 +189,7 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your care ritual order is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this secure preview flow.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Detailed customer feedback with visible ratings and original reviewer identities.</h2></div>
+          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Original customer feedback with visible ratings and refined trust cues.</h2></div>
           <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
         </section>
 
@@ -199,19 +199,19 @@ export default function App() {
         </section>
 
         <section id="policies" className="policy-section">
-          <Policy title="Shipping Policy" body="Eligible orders are packed with protective materials and released with tracking when carrier service is available. Same-day dispatch messaging applies only to products marked ready to ship." />
-          <Policy title="Refund Policy" body="Eligible orders may be reviewed under a 60-day money-back guarantee. Hygiene-sensitive returns must include all parts, safe packaging and final approval under published conditions." />
-          <Policy title="Privacy Policy" body="Customer details are used only for order handling, transaction protection, support replies, delivery notices and store experience improvement. Final regional notices should be added before live selling." />
-          <Policy title="Terms of Service" body="Customers agree to provide accurate order details, follow product instructions and review all terms before purchase. Availability, pricing and offers may change as inventory changes." />
+          <Policy title="Shipping Policy" body="Eligible orders are packed with protective materials and prepared for tracked release when carrier service is available. Same-day messaging applies only to items marked ready for the current packing window." />
+          <Policy title="Refund Policy" body="Eligible orders may be reviewed within a 60-day money-back framework. Hygiene-sensitive items must return complete, safely packed and approved under the final published return conditions." />
+          <Policy title="Privacy Policy" body="Customer details are intended only for order handling, transaction protection, support replies, delivery notices and store experience improvement. Final regional disclosures should be added before live selling." />
+          <Policy title="Terms of Service" body="Customers agree to provide accurate order details, review product guidance and confirm all purchase terms before ordering. Availability, pricing and offers may change as inventory changes." />
         </section>
 
         <section id="contact" className="contact-section">
-          <div><p className="eyebrow">Contact page</p><h2>Private support for product, delivery and order questions.</h2><p>support@elyramaison.example · Add the final support address, registered business details and response window before live selling.</p></div>
+          <div><p className="eyebrow">Contact page</p><h2>Private support for product, delivery and order questions.</h2><p>support@elyramaison.example · Replace with your final support inbox, registered business details and response window before live selling.</p></div>
           <div className="contact-card"><WandSparkles size={28} /><h3>Elyra Maison</h3><p>Original care tools with a quiet luxury presence.</p><p><Leaf size={16} /> Care routine support</p></div>
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span></div><nav><a href="#policies">Privacy</a><a href="#policies">Terms</a><a href="#policies">Refunds</a><a href="#policies">Shipping</a></nav><div className="social-row"><a href="#home">Instagram</a><a href="#home">TikTok</a><a href="#home">Pinterest</a></div><small>© 2026 Elyra Maison. Original storefront content prepared for transferable ownership.</small></footer>
+      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a></nav><div className="social-row"><span>Secure Checkout</span><span>Money Back Guarantee</span><span>Fast Shipping</span><span>Premium Quality Guarantee</span></div><small>© 2026 Elyra Maison. Original storefront content prepared for transferable ownership.</small></footer>
     </div>
   );
 }
