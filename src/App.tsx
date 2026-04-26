@@ -132,11 +132,12 @@ export default function App() {
               <p className="eyebrow">Today’s smart posture offer</p>
               <h3>{mainProduct.subtitle}</h3>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Shipping time: 8–23 days to the United States.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock available · Shipping time: 8–23 days to the United States.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${(mainProduct.compareAt! - mainProduct.price).toFixed(2)}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector SKU at $34.99.</p></article></div>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
+              <div className="cta-trust-row" aria-label="Purchase trust badges"><span><ShieldCheck size={16} /> Secure Checkout</span><span><Truck size={16} /> 8–23 day US shipping</span><span><RotateCcw size={16} /> 30-Day Guarantee</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
               <div className="pay-row"><CreditCard size={18} /> Secure Checkout · CJ Fulfillment · US Delivery Estimate · 30-Day Guarantee</div>
             </div>
