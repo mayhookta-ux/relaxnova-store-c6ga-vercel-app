@@ -1,6 +1,5 @@
 import { FormEvent, useMemo, useState } from "react";
 import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, Gem, HeartHandshake, Leaf, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Sparkles, Star, Truck, WandSparkles } from "lucide-react";
-import { z } from "zod";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
@@ -8,21 +7,14 @@ import { addOns, mainProduct, products } from "./data/products";
 
 type Cart = Record<string, number>;
 
-const shippingSchema = z.object({
-  fullName: z.string().trim().min(2).max(100),
-  email: z.string().trim().email().max(255),
-  street: z.string().trim().min(5).max(160),
-  city: z.string().trim().min(2).max(80),
-  postalCode: z.string().trim().min(3).max(20),
-  country: z.string().trim().min(2).max(80)
-});
+const textInRange = (value: FormDataEntryValue | null, min: number, max: number) => typeof value === "string" && value.trim().length >= min && value.trim().length <= max;
+const matchesPattern = (value: FormDataEntryValue | null, pattern: RegExp) => typeof value === "string" && pattern.test(value.trim());
 
-const cardSchema = shippingSchema.extend({
-  cardNumber: z.string().trim().regex(/^[0-9 ]{12,23}$/),
-  expiry: z.string().trim().regex(/^[0-9]{2}\s?\/\s?[0-9]{2}$/),
-  cvc: z.string().trim().regex(/^[0-9]{3,4}$/),
-  cardName: z.string().trim().min(2).max(100)
-});
+const isCheckoutValid = (data: FormData, paymentMethod: string) => {
+  const shippingValid = textInRange(data.get("fullName"), 2, 100) && matchesPattern(data.get("email"), /^[^\s@]+@[^\s@]+\.[^\s@]+$/) && textInRange(data.get("street"), 5, 160) && textInRange(data.get("city"), 2, 80) && textInRange(data.get("postalCode"), 3, 20) && textInRange(data.get("country"), 2, 80);
+  if (!shippingValid || paymentMethod !== "card") return shippingValid;
+  return matchesPattern(data.get("cardNumber"), /^[0-9 ]{12,23}$/) && matchesPattern(data.get("expiry"), /^[0-9]{2}\s?\/\s?[0-9]{2}$/) && matchesPattern(data.get("cvc"), /^[0-9]{3,4}$/) && textInRange(data.get("cardName"), 2, 100);
+};
 
 const landingBlocks = [
   ["01", "Benefit-led shopping", "Every product explains the daily purpose, expected use and reason to buy before a shopper reaches the button."],
