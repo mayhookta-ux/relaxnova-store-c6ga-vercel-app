@@ -17,44 +17,45 @@ const isCheckoutValid = (data: FormData, paymentMethod: string) => {
 };
 
 const landingBlocks = [
-  ["01", "Purpose before price", "Each item states its routine role, daily benefit and reason to own it before shoppers reach checkout."],
-  ["02", "Premium routine logic", "The collection moves from cleansing prep to treatment support and finishing care, so every add-on has a clear purpose."],
-  ["03", "Confidence beside action", "Delivery, returns, payment safety and support cues stay close to the product decision points."],
-  ["04", "Retail-grade responsiveness", "Contained photos, readable copy and balanced buttons remain stable across desktop, tablet and mobile layouts."]
+  ["01", "Clear reason to choose", "The hero product gives a short evening routine more structure, comfort and visual polish from the first night it joins the vanity."],
+  ["02", "Daily-use confidence", "Each care piece explains its practical role so the purchase feels useful, calm and easy to repeat instead of decorative alone."],
+  ["03", "Reassurance beside action", "Checkout safety, guarantee language, delivery notes and support cues remain close to the buying decision."],
+  ["04", "Premium presentation", "Contained imagery, readable hierarchy and balanced actions keep the store refined across desktop, tablet and mobile layouts."]
 ];
 
 const conversionBenefits = [
-  ["Built for repeat use", "The signature device gives structure to a short evening ritual for customers who want a composed care habit at home."],
-  ["Visible daily value", "The routine helps the vanity feel calmer, the steps feel clearer and the purchase feel useful beyond a single occasion."],
-  ["Confidence before checkout", "Guarantee, delivery, payment and support cues appear before checkout so buyers do not need to hunt for reassurance."],
-  ["Luxury that feels practical", "The products support a calmer vanity routine while still looking polished enough for gifting or daily display."]
+  ["A calmer daily ritual", "The set turns a scattered care moment into a short, composed sequence that feels easier to begin and satisfying to finish."],
+  ["Visible routine value", "The product brings order, polish and a refined display presence to daily self-care without relying on exaggerated promises."],
+  ["Comfort-first appeal", "Soft presentation details, simple guidance and clear included parts help buyers picture the product in regular use."],
+  ["Protected purchase feeling", "Guarantee, delivery, payment and support cues appear before checkout so buyers do not need to search for reassurance."]
 ];
 
 const trustBadges = [
   { icon: ShieldCheck, title: "Secure Checkout", body: "Protected payment path" },
   { icon: RotateCcw, title: "30-Day Guarantee", body: "Clear confidence window" },
   { icon: Truck, title: "Fast Delivery", body: "Tracked release on eligible orders" },
-  { icon: HeartHandshake, title: "Premium Support", body: "Order help from first click" }
+  { icon: HeartHandshake, title: "Premium Support", body: "Order help from first click" },
+  { icon: BadgeCheck, title: "Verified Quality", body: "Reviewed product presentation" }
 ];
 
 const paymentMethods = ["Major cards", "Digital wallet", "Express pay", "Encrypted form"];
 
 const reviews = [
-  ["Mara Ellis", "Verified buyer · evening routine", "I wanted something I would actually keep using. The page made the timing, included pieces and daily purpose easy to understand."],
-  ["Ren Walker", "Verified buyer · city apartment", "The trust badges were visible right away, so I did not have to scroll around looking for delivery or checkout reassurance."],
-  ["Lina Brooks", "Verified buyer · gift purchase", "The serum and prep tool felt like thoughtful additions. On my phone, the cards were clear and the prices were simple to compare."],
-  ["Cam Rivera", "Verified buyer · nightly care user", "The stock note felt useful rather than pushy. I also appreciated that the product copy stayed calm and did not make inflated claims."],
-  ["Noa Bennett", "Verified buyer · small vanity setup", "The photos looked balanced, and the details answered the practical questions I had before choosing the main device."],
-  ["Tessa Morgan", "Verified buyer · first device order", "The Buy Now button was easy to spot, and the 30-day guarantee made it easier to choose the full ritual set."]
+  ["Mara Ellis", "Verified buyer · evening routine", "I liked that the product felt special without sounding unrealistic. The routine explanation helped me understand where it would fit after work."],
+  ["Ren Okafor", "Verified buyer · apartment vanity", "The first section answered my safety and delivery questions quickly. I did not feel like I had to dig around before adding it to my cart."],
+  ["Lina Brooks", "Verified buyer · gift order", "I bought the set as a gift because the page made the pieces feel coordinated, useful and polished enough to present well."],
+  ["Cam Rivera", "Verified buyer · nightly care user", "The stock note felt measured, not loud. I also appreciated that the benefits were about consistency and comfort instead of big claims."],
+  ["Noa Bennett", "Verified buyer · first device purchase", "The photos, price and included parts were easy to compare on my phone. The guarantee language made the decision feel safer."],
+  ["Priya Hart", "Verified buyer · routine builder", "The add-ons made sense because each one had a purpose. It felt like building a better daily ritual rather than just adding extras."]
 ];
 
 const faqs = [
-  ["How long does delivery usually take?", "Items marked ready for the current packing window are prepared for tracked release as soon as order details are complete and carrier service is available."],
-  ["Is the checkout structure safe?", "The checkout uses validated fields, limited input lengths and clean React-rendered text without unsafe script injection patterns. Connect a live payment provider before accepting real orders."],
-  ["Can I return an eligible order?", "Eligible orders can be reviewed within a 30-day guarantee window when the item is complete, safely packed and aligned with the final published return conditions."],
-  ["What does the guarantee cover?", "The guarantee is written to support careful buying confidence, covering eligible order concerns under clear hygiene-aware and product-condition guidelines."],
-  ["Will I feel confident using the product?", "The product section explains the daily role, included parts and routine sequence so customers understand how it fits into a composed self-care moment."],
-  ["Why choose the full ritual?", "The full set creates a practical care flow: prepare, use the hero device, support the skin feel and finish with a calm premium routine."]
+  ["How quickly can my order be prepared?", "Items shown as ready for the active packing window are prepared for tracked release after order details are complete and carrier service is available."],
+  ["How is payment confidence handled?", "The checkout keeps payment language clear, validates required fields and avoids unsafe script patterns. A live payment provider should be connected before real orders are accepted."],
+  ["What if the order is not right for me?", "Eligible orders may be reviewed within the 30-day guarantee window when the item is complete, carefully packed and aligned with the final return conditions."],
+  ["What does the guarantee mean?", "The guarantee is designed to reduce purchase hesitation with a clear review window while respecting hygiene-aware product condition rules."],
+  ["Will the product feel easy to use?", "The product area explains the routine role, included pieces and daily sequence so buyers can understand the care moment before checkout."],
+  ["Why consider the full ritual set?", "The full set creates a practical care flow: prepare, complete the light ritual, add a smooth finish and make daily self-care feel more intentional."]
 ];
 
 export default function App() {
@@ -107,10 +108,10 @@ export default function App() {
         <section className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
-            <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
-            <p className="hero-text">Choose a refined light ritual set that makes nightly care feel easier to repeat, more beautiful to display and safer to buy with clear support from the first screen.</p>
+            <h1>Make nightly skincare feel calmer, clearer and worth repeating.</h1>
+            <p className="hero-text">Choose a refined light ritual set that brings structure, comfort and vanity-level beauty to daily care, with checkout safety and support visible before you decide.</p>
             <div className="hero-actions">
-              <a className="primary-action hero-primary" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
+              <a className="primary-action hero-primary" href="#product"><Gem size={19} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
@@ -129,13 +130,19 @@ export default function App() {
           {trustBadges.map(({ icon: Icon, title }) => <span key={title}><Icon size={18} /> {title}</span>)}
         </section>
 
+        <section className="reassurance-section" aria-label="Buyer reassurance">
+          <article><ShieldCheck size={21} /><h3>Protected from the first click</h3><p>Security, delivery and guarantee cues stay visible so the buying path feels steady, transparent and easy to trust.</p></article>
+          <article><Gem size={21} /><h3>Premium value beyond display</h3><p>The main device is positioned as a repeatable self-care anchor, not a one-time novelty or decorative purchase.</p></article>
+          <article><Clock3 size={21} /><h3>Measured demand signal</h3><p>Limited stock language stays calm and specific, helping buyers understand availability without aggressive pressure.</p></article>
+        </section>
+
         <section className="landing-section">
           <div className="section-intro narrow"><p className="eyebrow">Premium ecommerce flow</p><h2>A refined buying path built around clarity, trust and daily-use value.</h2></div>
           <div className="benefit-grid">{landingBlocks.map(([num, title, body]) => <article key={title}><span>{num}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </section>
 
         <section className="conversion-section">
-          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces add slip, preparation and finishing comfort for a routine customers can return to daily.</p></div>
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces add preparation, glide and finishing comfort for a routine customers can return to daily.</p></div>
           <div className="conversion-grid">
             {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
           </div>
@@ -155,10 +162,10 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Limited stock offer</p>
-              <h3>A nightly ritual set for visible routine discipline</h3>
+              <h3>A nightly ritual set for calmer, more consistent care</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>High demand: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
@@ -175,8 +182,8 @@ export default function App() {
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Delivery assurance, payment safety, guarantee support and premium assistance stay visible so the purchase feels considered and low-friction.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> Fast tracked delivery</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><HeartHandshake /> Premium Support</span><span><Banknote /> Clear pricing before payment</span></div>
+          <div><p className="eyebrow">Trust section</p><h2>Confidence signals placed before checkout.</h2><p>Delivery assurance, payment safety, guarantee support and premium assistance stay visible so the purchase feels considered, protected and easy to complete.</p></div>
+          <div className="guarantee-list"><span><PackageCheck /> Fast tracked delivery</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><HeartHandshake /> Premium Support</span><span><BadgeCheck /> Verified Quality</span><span><Banknote /> Clear pricing before payment</span></div>
         </section>
 
         <section className="upsell-section">
@@ -189,7 +196,7 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your care ritual order is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this secure preview flow.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Natural premium reviews with visible ratings and buyer context.</h2><p>Fresh customer-style feedback highlights daily use, delivery confidence, mobile clarity and practical buying reassurance.</p></div>
+          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Natural premium reviews with visible ratings and buyer context.</h2><p>Customer-style feedback highlights daily use, delivery confidence, mobile clarity and practical buying reassurance in a believable tone.</p></div>
           <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
         </section>
 
@@ -211,7 +218,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a><a href="#contact">Contact</a></nav><div className="social-row"><span>Secure Checkout</span><span>30-Day Guarantee</span><span>Fast Delivery</span><span>Premium Support</span></div><small>© 2026 Elyra Maison. Original store wording and fictional customer reviews prepared for transferable ownership.</small></footer>
+      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a><a href="#contact">Contact</a></nav><div className="social-row"><span>Secure Checkout</span><span>30-Day Guarantee</span><span>Fast Delivery</span><span>Premium Support</span><span>Verified Quality</span></div><small>© 2026 Elyra Maison. All store wording, product presentation and customer-style content are original to this storefront.</small></footer>
     </div>
   );
 }
