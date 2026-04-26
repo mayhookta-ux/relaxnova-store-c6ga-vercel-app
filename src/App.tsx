@@ -171,7 +171,7 @@ export default function App() {
         </section>
 
         <section className="cta-section">
-          <p className="eyebrow">Strong CTA</p><h2>Start training better posture awareness today.</h2><p>One verified product. One clean checkout path. One affordable daily habit tool.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get Smart Posture Corrector — $34.99</button>
+          <p className="eyebrow">Limited stock available</p><h2>Start training better posture awareness today.</h2><p>One verified product. One clean checkout path. One affordable daily habit tool.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get Smart Posture Corrector — $34.99</button><div className="cta-trust-row" aria-label="Final trust badges"><span><ShieldCheck size={16} /> Secure Checkout</span><span><Truck size={16} /> US shipping shown upfront</span><span><BadgeCheck size={16} /> Verified buyer reviews</span></div>
         </section>
 
         <section id="faq" className="faq-section">
