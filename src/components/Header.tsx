@@ -10,10 +10,11 @@ export function Header({ cartCount, menuOpen, onCart, onMenu }: { cartCount: num
       <nav className={`nav ${menuOpen ? "nav-open" : ""}`} aria-label="Primary navigation">
         <a href="#collection">Collection</a>
         <a href="#product">Product</a>
-        <a href="#ritual">Ritual</a>
+        <a href="#ritual">Routine</a>
         <a href="#trust">Trust</a>
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
+        <a href="#policies">Policies</a>
         <a href="#contact">Contact</a>
       </nav>
       <div className="header-actions">
