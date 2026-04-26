@@ -108,10 +108,10 @@ export default function App() {
         <section className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
-            <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
-            <p className="hero-text">Choose a refined light ritual set that makes nightly care feel easier to repeat, more beautiful to display and safer to buy with clear support from the first screen.</p>
+            <h1>Make nightly skincare feel calmer, clearer and worth repeating.</h1>
+            <p className="hero-text">Choose a refined light ritual set that brings structure, comfort and vanity-level beauty to daily care, with checkout safety and support visible before you decide.</p>
             <div className="hero-actions">
-              <a className="primary-action hero-primary" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
+              <a className="primary-action hero-primary" href="#product"><Gem size={19} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
@@ -128,6 +128,12 @@ export default function App() {
 
         <section className="strip-section" aria-label="Store assurances">
           {trustBadges.map(({ icon: Icon, title }) => <span key={title}><Icon size={18} /> {title}</span>)}
+        </section>
+
+        <section className="reassurance-section" aria-label="Buyer reassurance">
+          <article><ShieldCheck size={21} /><h3>Protected from the first click</h3><p>Security, delivery and guarantee cues stay visible so the buying path feels steady, transparent and easy to trust.</p></article>
+          <article><Gem size={21} /><h3>Premium value beyond display</h3><p>The main device is positioned as a repeatable self-care anchor, not a one-time novelty or decorative purchase.</p></article>
+          <article><Clock3 size={21} /><h3>Measured demand signal</h3><p>Limited stock language stays calm and specific, helping buyers understand availability without aggressive pressure.</p></article>
         </section>
 
         <section className="landing-section">
