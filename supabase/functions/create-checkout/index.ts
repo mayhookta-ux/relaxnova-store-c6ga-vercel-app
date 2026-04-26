@@ -3,7 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { type StripeEnv, createStripeClient } from "../_shared/stripe.ts";
 
 const products = {
-  "cj-smart-posture-corrector": { name: "Smart Posture Corrector", amount: 3499, sku: "CJ-SMART-POSTURE-CORRECTOR", cjProductId: null, cjVariantId: null },
+  "cj-smart-posture-corrector": { name: "Smart Posture Corrector", amount: 3499, sku: "CJJT100662701AZ", cjProductId: "1357500854936145920", cjVariantId: null },
 } as const;
 
 type ProductId = keyof typeof products;
