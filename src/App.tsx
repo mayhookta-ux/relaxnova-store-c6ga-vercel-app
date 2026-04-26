@@ -17,16 +17,16 @@ const isCheckoutValid = (data: FormData, paymentMethod: string) => {
 };
 
 const landingBlocks = [
-  ["01", "Clear reason to choose", "The hero product gives a short evening routine more structure, comfort and visual polish from the first night it joins the vanity."],
-  ["02", "Daily-use confidence", "Each care piece explains its practical role so the purchase feels useful, calm and easy to repeat instead of decorative alone."],
+  ["01", "Instant ritual clarity", "The main device is presented as a practical nightly anchor that adds calm structure, comfort and a more polished care moment from the first use."],
+  ["02", "Daily-use confidence", "Every piece has a clear role, so the order feels useful, repeatable and worth keeping on the vanity instead of decorative alone."],
   ["03", "Reassurance beside action", "Checkout safety, guarantee language, delivery notes and support cues remain close to the buying decision."],
   ["04", "Premium presentation", "Contained imagery, readable hierarchy and balanced actions keep the store refined across desktop, tablet and mobile layouts."]
 ];
 
 const conversionBenefits = [
   ["A calmer daily ritual", "The set turns a scattered care moment into a short, composed sequence that feels easier to begin and satisfying to finish."],
-  ["Visible routine value", "The product brings order, polish and a refined display presence to daily self-care without relying on exaggerated promises."],
-  ["Comfort-first appeal", "Soft presentation details, simple guidance and clear included parts help buyers picture the product in regular use."],
+  ["Visible routine value", "The device adds a cleaner-looking ritual setup, a composed vanity presence and a care step buyers can understand without exaggerated claims."],
+  ["Comfort-first appeal", "A cushioned feel, clear session guidance and included essentials help buyers picture regular use before they commit."],
   ["Protected purchase feeling", "Guarantee, delivery, payment and support cues appear before checkout so buyers do not need to search for reassurance."]
 ];
 
@@ -41,21 +41,21 @@ const trustBadges = [
 const paymentMethods = ["Major cards", "Digital wallet", "Express pay", "Encrypted form"];
 
 const reviews = [
-  ["Mara Ellis", "Verified buyer · evening routine", "I liked that the product felt special without sounding unrealistic. The routine explanation helped me understand where it would fit after work."],
-  ["Ren Okafor", "Verified buyer · apartment vanity", "The first section answered my safety and delivery questions quickly. I did not feel like I had to dig around before adding it to my cart."],
-  ["Lina Brooks", "Verified buyer · gift order", "I bought the set as a gift because the page made the pieces feel coordinated, useful and polished enough to present well."],
-  ["Cam Rivera", "Verified buyer · nightly care user", "The stock note felt measured, not loud. I also appreciated that the benefits were about consistency and comfort instead of big claims."],
-  ["Noa Bennett", "Verified buyer · first device purchase", "The photos, price and included parts were easy to compare on my phone. The guarantee language made the decision feel safer."],
-  ["Priya Hart", "Verified buyer · routine builder", "The add-ons made sense because each one had a purpose. It felt like building a better daily ritual rather than just adding extras."]
+  ["Mara Ellis", "Verified buyer · evening routine", "I wanted something that would make my night routine feel less rushed. The page explained the purpose clearly, and the set feels refined without being fussy."],
+  ["Ren Okafor", "Verified buyer · apartment vanity", "The safety and delivery details were easy to spot, which mattered to me. I added it after checking the guarantee and included pieces."],
+  ["Lina Brooks", "Verified buyer · gift order", "I chose it as a gift because the products felt coordinated and useful. The presentation made it feel personal rather than like a random beauty tool."],
+  ["Cam Rivera", "Verified buyer · nightly care user", "The wording felt honest about comfort and consistency. I liked that it did not promise too much, but still made the routine feel worth upgrading."],
+  ["Noa Bennett", "Verified buyer · first device purchase", "I compared everything on my phone and nothing felt confusing. The price, stock note and support details helped me feel comfortable ordering."],
+  ["Priya Hart", "Verified buyer · routine builder", "The add-ons made sense because each one had a job. It felt like building a quiet, complete care ritual instead of buying extra items just to spend more."]
 ];
 
 const faqs = [
-  ["How quickly can my order be prepared?", "Items shown as ready for the active packing window are prepared for tracked release after order details are complete and carrier service is available."],
-  ["How is payment confidence handled?", "The checkout keeps payment language clear, validates required fields and avoids unsafe script patterns. A live payment provider should be connected before real orders are accepted."],
-  ["What if the order is not right for me?", "Eligible orders may be reviewed within the 30-day guarantee window when the item is complete, carefully packed and aligned with the final return conditions."],
-  ["What does the guarantee mean?", "The guarantee is designed to reduce purchase hesitation with a clear review window while respecting hygiene-aware product condition rules."],
-  ["Will the product feel easy to use?", "The product area explains the routine role, included pieces and daily sequence so buyers can understand the care moment before checkout."],
-  ["Why consider the full ritual set?", "The full set creates a practical care flow: prepare, complete the light ritual, add a smooth finish and make daily self-care feel more intentional."]
+  ["When will my order move toward delivery?", "Items marked ready for the active packing window are prepared for tracked release after order details are complete and carrier service is available."],
+  ["Is the payment area designed safely?", "The checkout keeps payment language clear, validates required fields and avoids unsafe script patterns. Connect a live payment provider before accepting real orders."],
+  ["What if the order is not the right fit?", "Eligible orders may be reviewed within the 30-day guarantee window when the item is complete, carefully packed and aligned with the final return conditions."],
+  ["What does the guarantee cover?", "The guarantee gives buyers a defined review window while keeping product condition and hygiene-aware rules clear before purchase."],
+  ["Will I understand how to use it?", "The product area explains the routine role, included pieces and daily sequence so buyers can picture the care moment before checkout."],
+  ["Why consider the full ritual set?", "The full set creates a practical flow: prepare, complete the light ritual, add a smooth finish and make daily self-care feel more intentional."]
 ];
 
 export default function App() {
