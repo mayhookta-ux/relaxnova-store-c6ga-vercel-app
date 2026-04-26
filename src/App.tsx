@@ -25,7 +25,7 @@ const landingBlocks = [
 
 const conversionBenefits = [
   ["Built for repeat use", "The signature device gives structure to a short evening ritual for customers who want a composed care habit at home."],
-  ["Visible routine motivation", "Consistent use helps the ritual feel more intentional, giving customers a clear reason to return to it night after night."],
+  ["Visible daily value", "The routine helps the vanity feel calmer, the steps feel clearer and the purchase feel useful beyond a single occasion."],
   ["Confidence before checkout", "Guarantee, delivery, payment and support cues appear before checkout so buyers do not need to hunt for reassurance."],
   ["Luxury that feels practical", "The products support a calmer vanity routine while still looking polished enough for gifting or daily display."]
 ];
@@ -40,12 +40,12 @@ const trustBadges = [
 const paymentMethods = ["Major cards", "Digital wallet", "Express pay", "Encrypted form"];
 
 const reviews = [
-  ["Mara Ellis", "Verified buyer · evening routine", "I wanted something that felt easy to keep using. The page explained the timing, the parts included and the reason for the price without overselling it."],
-  ["Ren Vale", "Verified buyer · city apartment", "The trust badges were right under the first section, so I did not have to search for delivery or checkout reassurance before deciding."],
-  ["Lina Corren", "Verified buyer · gift purchase", "The serum and prep tool made sense as additions. The cards were clear on my phone, and the prices were easy to compare."],
-  ["Cam Arden", "Verified buyer · nightly care user", "The stock note felt useful rather than pushy. I liked that the copy stayed specific and calm instead of making huge promises."],
-  ["Noa Merren", "Verified buyer · small vanity setup", "The product photos looked balanced and the details answered practical questions. It felt like a polished shop, not a template."],
-  ["Tessa Rowan", "Verified buyer · first device order", "The Buy Now button was easy to spot, and the guarantee wording gave me enough confidence to move forward with the set."]
+  ["Mara Ellis", "Verified buyer · evening routine", "I wanted something I would actually keep using. The page made the timing, included pieces and daily purpose easy to understand."],
+  ["Ren Walker", "Verified buyer · city apartment", "The trust badges were visible right away, so I did not have to scroll around looking for delivery or checkout reassurance."],
+  ["Lina Brooks", "Verified buyer · gift purchase", "The serum and prep tool felt like thoughtful additions. On my phone, the cards were clear and the prices were simple to compare."],
+  ["Cam Rivera", "Verified buyer · nightly care user", "The stock note felt useful rather than pushy. I also appreciated that the product copy stayed calm and did not make inflated claims."],
+  ["Noa Bennett", "Verified buyer · small vanity setup", "The photos looked balanced, and the details answered the practical questions I had before choosing the main device."],
+  ["Tessa Morgan", "Verified buyer · first device order", "The Buy Now button was easy to spot, and the 30-day guarantee made it easier to choose the full ritual set."]
 ];
 
 const faqs = [
@@ -108,7 +108,7 @@ export default function App() {
           <div className="hero-copy">
             <p className="eyebrow">Elyra Maison · Original luxury care tools</p>
             <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
-            <p className="hero-text">Turn an ordinary evening into a steady care ritual with a refined light device, clear routine guidance and visible buying reassurance from the first screen.</p>
+            <p className="hero-text">Choose a refined light ritual set that makes nightly care feel easier to repeat, more beautiful to display and safer to buy with clear support from the first screen.</p>
             <div className="hero-actions">
               <a className="primary-action hero-primary" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
@@ -130,12 +130,12 @@ export default function App() {
         </section>
 
         <section className="landing-section">
-          <div className="section-intro narrow"><p className="eyebrow">Premium ecommerce flow</p><h2>A luxury buying path with original, ownership-safe content.</h2></div>
+          <div className="section-intro narrow"><p className="eyebrow">Premium ecommerce flow</p><h2>A refined buying path built around clarity, trust and daily-use value.</h2></div>
           <div className="benefit-grid">{landingBlocks.map(([num, title, body]) => <article key={title}><span>{num}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </section>
 
         <section className="conversion-section">
-          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces make the routine feel complete, tactile and easier to repeat.</p></div>
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The hero product gives structure to a short care moment, while the supporting pieces add slip, preparation and finishing comfort for a routine customers can return to daily.</p></div>
           <div className="conversion-grid">
             {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
           </div>
@@ -145,7 +145,7 @@ export default function App() {
         </section>
 
         <section id="collection" className="collection-section">
-          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Original products with clear buying paths.</h2><p>Each card keeps the image contained, the product hierarchy readable and the stock message visible on every screen size.</p></div>
+          <div className="section-intro"><p className="eyebrow">Collection page</p><h2>Premium care pieces with clear reasons to buy.</h2><p>Each card keeps the image contained, the product hierarchy readable and the stock message visible on every screen size.</p></div>
           <div className="cards-grid">{products.map((product) => <article className="product-card" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.subtitle}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add to cart</button></div></article>)}</div>
         </section>
 
@@ -155,7 +155,7 @@ export default function App() {
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
               <p className="eyebrow">Limited stock offer</p>
-              <h3>Light care set for a composed nightly ritual</h3>
+              <h3>A nightly ritual set for visible routine discipline</h3>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock: today’s ready-to-pack quantity is reserved for orders completed during the active window.</span></div>
@@ -170,7 +170,7 @@ export default function App() {
         </section>
 
         <section id="ritual" className="ritual-section">
-          <div className="section-intro"><p className="eyebrow">Benefits section</p><h2>Build a complete daily-use ritual in one refined journey.</h2><p>Each product has a practical role: prepare, treat, support and finish the routine with a premium lifestyle feel that makes daily care easier to repeat.</p></div>
+          <div className="section-intro"><p className="eyebrow">Benefits section</p><h2>Build a complete daily-use ritual in one refined journey.</h2><p>Each product has a practical role: prepare the skin feel, guide the light session, add cushion and finish with a quiet premium moment that makes daily care easier to repeat.</p></div>
           <div className="gallery-grid">{products.map((product) => <article key={product.id} className="gallery-card"><ProductVisual product={product} /><h3>{product.name}</h3><p>{product.description}</p></article>)}</div>
         </section>
 
@@ -180,7 +180,7 @@ export default function App() {
         </section>
 
         <section className="upsell-section">
-          <div className="section-intro"><p className="eyebrow">Routine builder</p><h2>Carefully paired additions for a higher-value order.</h2><p>Each supporting item strengthens the main product story with a clear daily-use benefit and premium presentation.</p></div>
+          <div className="section-intro"><p className="eyebrow">Routine builder</p><h2>Carefully paired additions for a higher-value order.</h2><p>Each supporting item strengthens the main product story with a clear daily-use benefit, smooth presentation and a stronger reason to complete the full care set.</p></div>
           <div className="cards-grid">{addOns.map((product) => <article className="product-card compact" key={product.id}><ProductVisual product={product} /><p className="eyebrow">{product.category}</p><h3>{product.name}</h3><p>{product.description}</p><span className="stock-pill"><CheckCircle2 size={15} /> {product.stock}</span><div className="card-bottom"><strong>${product.price}</strong><button onClick={() => addToCart(product.id)}>Add</button></div></article>)}</div>
         </section>
 
@@ -189,7 +189,7 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your care ritual order is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this secure preview flow.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Natural premium reviews with visible ratings and buyer context.</h2><p>Each review uses original wording, fictional customer identities and practical purchase details for a credible premium presentation.</p></div>
+          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Natural premium reviews with visible ratings and buyer context.</h2><p>Fresh customer-style feedback highlights daily use, delivery confidence, mobile clarity and practical buying reassurance.</p></div>
           <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
         </section>
 
@@ -211,7 +211,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a><a href="#contact">Contact</a></nav><div className="social-row"><span>Secure Checkout</span><span>30-Day Guarantee</span><span>Fast Delivery</span><span>Premium Support</span></div><small>© 2026 Elyra Maison. Fresh original store copy, fictional reviews and original product naming prepared for transferable ownership.</small></footer>
+      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a><a href="#contact">Contact</a></nav><div className="social-row"><span>Secure Checkout</span><span>30-Day Guarantee</span><span>Fast Delivery</span><span>Premium Support</span></div><small>© 2026 Elyra Maison. Original store wording and fictional customer reviews prepared for transferable ownership.</small></footer>
     </div>
   );
 }
