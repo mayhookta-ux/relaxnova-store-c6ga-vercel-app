@@ -10,13 +10,13 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
     <aside className={`cart-panel ${open ? "cart-open" : ""}`} aria-hidden={!open}>
       <div className="cart-head">
         <div>
-          <p className="eyebrow">Private bag</p>
-          <h2>Your ritual</h2>
+          <p className="eyebrow">Luxury cart</p>
+          <h2>Your order</h2>
         </div>
         <button className="icon-button" onClick={onClose} aria-label="Close cart"><X size={20} /></button>
       </div>
       {lines.length === 0 ? (
-        <div className="empty-cart">Your bag is ready for a new ritual.</div>
+        <div className="empty-cart">Your cart is ready for a premium skincare ritual.</div>
       ) : (
         <div className="cart-lines">
           {lines.map((line) => (
@@ -37,7 +37,7 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
         </div>
       )}
       <div className="cart-footer">
-        <div className="trust-note"><ShieldCheck size={18} /> Secure checkout structure prepared for deployment.</div>
+        <div className="trust-note"><ShieldCheck size={18} /> Secure payment-ready checkout · tracked shipping · 60-day guarantee.</div>
         <div className="total-row"><span>Subtotal</span><strong>${subtotal}</strong></div>
         <div className="total-row muted-total"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping}`}</strong></div>
         <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><CreditCard size={18} /> Continue to checkout</button>
