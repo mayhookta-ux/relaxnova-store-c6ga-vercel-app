@@ -1,4 +1,4 @@
-import postureCorrector from "../assets/product-smart-posture-corrector.jpg";
+import postureCorrector from "../assets/cj-smart-posture-corrector.jpg";
 
 export type Product = {
   id: string;
@@ -24,13 +24,13 @@ export const products: Product[] = [
     category: "CJ Dropshipping Verified Posture Device",
     price: 34.99,
     compareAt: 59.99,
-    subtitle: "A wearable smart posture trainer for desk work, long commutes and daily alignment reminders without bulky equipment.",
-    description: "This CJ Dropshipping verified smart posture corrector uses an adjustable upper-back brace with gentle vibration reminders to help customers notice slouching and build a more upright sitting habit during everyday routines.",
-    bullets: ["Smart vibration posture reminders", "Adjustable shoulder and back fit", "Lightweight wearable design", "USB rechargeable daily-use device"],
-    details: "Includes smart posture corrector, USB charging cable and setup guide. Wear over a thin shirt, adjust the straps, calibrate upright posture and use in short daily sessions.",
-    shipping: "CJ Dropshipping fulfillment support with tracked United States delivery estimate of 7–12 business days after processing.",
+    subtitle: "Adjustable Anglel Smart Posture Corrector For Adults Children Correct Hunchback Clavicle Support Trainer Upper Back Brace Black.",
+    description: "Accurately capture the wearer's posture changes through angle and tension sensing, and vibrate promptly. High elasticity adjustable shoulder strap, without fear of age and height. Sitting posture correction, full of confidence anytime, anywhere.",
+    bullets: ["Angle and tension sensing", "Automatic vibration reminder", "High elasticity adjustable shoulder strap", "LED counting for accumulative reminder error posture"],
+    details: "Material: Plastic. Applicable people: unisex. Scope of application: general. Style: induction vibration. Type: Orthotics. Color: black belt (English display). Package content: 1*Posture Corrector.",
+    shipping: "CJ Dropshipping supplier shipping time shown for United States: 8–23 days.",
     returns: "Eligible orders may be reviewed under the 30-day guarantee when returned complete, clean and safely packed.",
-    stock: "CJ verified · United States delivery available",
+    stock: "CJ verified · SKU CJJT100662701AZ",
     color: "onyx",
     image: postureCorrector
   }
