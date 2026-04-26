@@ -189,7 +189,7 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your care ritual order is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this secure preview flow.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Original customer feedback with visible ratings and refined trust cues.</h2></div>
+          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Original customer feedback with visible ratings and buyer context.</h2><p>Each review uses fresh wording, fictional customer identities and practical purchase details for a credible premium presentation.</p></div>
           <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
         </section>
 
@@ -207,11 +207,11 @@ export default function App() {
 
         <section id="contact" className="contact-section">
           <div><p className="eyebrow">Contact page</p><h2>Private support for product, delivery and order questions.</h2><p>support@elyramaison.example · Replace with your final support inbox, registered business details and response window before live selling.</p></div>
-          <div className="contact-card"><WandSparkles size={28} /><h3>Elyra Maison</h3><p>Original care tools with a quiet luxury presence.</p><p><Leaf size={16} /> Care routine support</p></div>
+          <div className="contact-card"><WandSparkles size={28} /><h3>Elyra Maison</h3><p>Original care tools with a quiet luxury presence.</p><p><Leaf size={16} /> Care routine support</p><p><ShieldCheck size={16} /> Secure order assistance</p></div>
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a></nav><div className="social-row"><span>Secure Checkout</span><span>Money Back Guarantee</span><span>Fast Shipping</span><span>Premium Quality Guarantee</span></div><small>© 2026 Elyra Maison. Original storefront content prepared for transferable ownership.</small></footer>
+      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a></nav><div className="social-row"><span>Secure Checkout</span><span>Money Back Guarantee</span><span>Fast Shipping</span><span>Premium Quality Guarantee</span></div><small>© 2026 Elyra Maison. Fresh original store copy, fictional reviews and original product naming prepared for transferable ownership.</small></footer>
     </div>
   );
 }
