@@ -3,11 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { type StripeEnv, createStripeClient } from "../_shared/stripe.ts";
 
 const products = {
-  "luminara-led-mask": { name: "Caldria Light Ritual Mask", amount: 32900, sku: "ELY-CALDRIA-MASK", cjProductId: null, cjVariantId: null },
-  "seren-neck-massager": { name: "Seren Portable Neck Massager", amount: 11900, sku: "ELY-SEREN-NECK", cjProductId: null, cjVariantId: null },
-  "aurelia-repair-serum": { name: "Liora Cushion Serum", amount: 9200, sku: "ELY-LIORA-SERUM", cjProductId: null, cjVariantId: null },
-  "celeste-sonic-brush": { name: "Veyra Sonic Prep Wand", amount: 12800, sku: "ELY-VEYRA-WAND", cjProductId: null, cjVariantId: null },
-  "roselle-sculpt-roller": { name: "Nerelle Cooling Sculpt Roller", amount: 6800, sku: "ELY-NERELLE-ROLLER", cjProductId: null, cjVariantId: null },
+  "cj-smart-posture-corrector": { name: "Smart Posture Corrector", amount: 3499, sku: "CJ-SMART-POSTURE-CORRECTOR", cjProductId: null, cjVariantId: null },
 } as const;
 
 type ProductId = keyof typeof products;
