@@ -11,17 +11,17 @@ type Cart = Record<string, number>;
 
 const trustBadges = [
   { icon: ShieldCheck, title: "Secure Checkout", body: "Encrypted embedded payment" },
-  { icon: Truck, title: "US Delivery", body: "Estimated 7–12 business days" },
+  { icon: Truck, title: "US Delivery", body: "Estimated 8–23 days" },
   { icon: PackageCheck, title: "CJ Fulfillment", body: "Dropshipping-ready order records" },
   { icon: RotateCcw, title: "30-Day Guarantee", body: "Clear review window" },
   { icon: BadgeCheck, title: "Verified Product", body: "Single-item catalog" }
 ];
 
 const benefits = [
-  ["Smart posture reminders", "Gentle vibration cues help customers notice slouching while working, scrolling or studying."],
-  ["Daily wearable fit", "Adjustable straps keep the posture corrector practical for short focused sessions over a thin shirt."],
-  ["Better desk routine", "A simple device-led reminder makes upright posture easier to practice without changing the entire workday."],
-  ["Ready for fulfillment", "Checkout creates one clean CJ-ready item record instead of mixing unavailable demo products."]
+  ["Angle and tension sensing", "Accurately captures the wearer’s posture changes through angle and tension sensing."],
+  ["Vibration reminder", "When the hunchback angle exceeds the set angle, the posture corrector automatically vibrates to remind you."],
+  ["Adjustable shoulder strap", "High elasticity adjustable shoulder strap, without fear of age and height."],
+  ["LED counting", "LED counting shows accumulative reminder error posture count."]
 ];
 
 const reviews = [
@@ -32,10 +32,10 @@ const reviews = [
 ];
 
 const faqs = [
-  ["How long is delivery to the United States?", "The current delivery estimate is 7–12 business days after processing, with tracked fulfillment where carrier service is available."],
-  ["How does the posture corrector work?", "Wear it over a thin shirt, calibrate your upright position, and the device gives gentle vibration reminders when your shoulders drift forward."],
+  ["How long is delivery to the United States?", "The supplier shipping time shown for United States is 8–23 days."],
+  ["How does the posture corrector work?", "It captures posture changes through angle and tension sensing, then vibrates when the hunchback angle exceeds the set angle."],
   ["Is checkout connected only to this product?", "Yes. The cart and checkout now submit only the Smart Posture Corrector at $34.99."],
-  ["What is included?", "The order includes the smart posture corrector, USB charging cable and setup guide."],
+  ["What is included?", "Package content: 1*Posture Corrector."],
   ["Is this medical treatment?", "No. It is a posture-awareness training device for daily habit support and is not a medical device or treatment."],
   ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day guarantee window when the item is complete, clean and safely packed."]
 ];
