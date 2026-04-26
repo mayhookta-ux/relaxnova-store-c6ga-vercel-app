@@ -1,4 +1,5 @@
 import ledMask from "../assets/product-led-mask-pro.jpg";
+import neckMassager from "../assets/product-portable-neck-massager.jpg";
 import serum from "../assets/product-vitamin-c-serum.jpg";
 import cleansingBrush from "../assets/product-sonic-cleanse-brush.jpg";
 import roller from "../assets/product-pink-stone-roller.jpg";
@@ -36,6 +37,22 @@ export const products: Product[] = [
     stock: "Limited stock · shipping today eligible",
     color: "champagne",
     image: ledMask
+  },
+  {
+    id: "seren-neck-massager",
+    name: "Seren Portable Neck Massager",
+    category: "Portable Comfort Device",
+    price: 119,
+    compareAt: 158,
+    subtitle: "A compact ivory neck comfort device made for desk breaks, travel recovery and calm evening reset moments.",
+    description: "A premium portable neck massager designed to help first-time buyers feel immediate daily value: softer shoulder pauses, easier decompression after screen time and a more composed self-care ritual without complicated setup.",
+    bullets: ["Portable wraparound comfort", "Gentle selectable massage modes", "Soft-touch cushion contact", "Rechargeable travel-friendly design"],
+    details: "Includes neck massager, USB-C charging cable, soft travel pouch and a concise original use guide for short comfort sessions.",
+    shipping: "Ready-to-pack units are prepared with protective packaging and tracked delivery where service is available.",
+    returns: "Eligible orders may be reviewed within the 30-day guarantee when returned complete, clean and safely packed.",
+    stock: "Popular choice · ready-to-pack today",
+    color: "ivory",
+    image: neckMassager
   },
   {
     id: "aurelia-repair-serum",
@@ -86,4 +103,5 @@ export const products: Product[] = [
 ];
 
 export const mainProduct = products[0];
-export const addOns = products.slice(1);
+export const neckMassagerProduct = products[1];
+export const addOns = products.slice(2);
