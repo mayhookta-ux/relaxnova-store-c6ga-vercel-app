@@ -48,9 +48,10 @@ h1 { font-size: clamp(54px, 8vw, 112px); max-width: 980px; }
 h2 { font-size: clamp(38px, 5vw, 72px); }
 h3 { font-size: clamp(24px, 2.8vw, 35px); }
 .hero-text, .section-intro p, .purchase-card p, .product-card p, .review-card p, .policy-section p, .faq-list p, .guarantee-section p, .gallery-card p, .contact-section p { color: hsl(var(--muted-foreground)); line-height: 1.78; font-weight: 600; }
-.hero-text { max-width: 680px; font-size: 19px; color: hsl(var(--primary)); }
+.hero-text { max-width: 700px; font-size: 20px; color: hsl(var(--primary)); }
 .hero-actions, .proof-row, .card-bottom, .price-row, .pay-row, .guarantee-list { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-.primary-action { border: 0; border-radius: 999px; padding: 19px 32px; min-height: 60px; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-weight: 900; cursor: pointer; box-shadow: 0 18px 40px hsl(var(--primary) / 0.2); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.hero-actions { margin-top: 28px; gap: 16px; }
+.primary-action { border: 0; border-radius: 999px; padding: 20px 34px; min-height: 64px; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-weight: 900; cursor: pointer; box-shadow: 0 18px 40px hsl(var(--primary) / 0.2); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 .primary-action:hover { transform: translateY(-1px); }
 .primary-action:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 .hero-primary, .buy-now-strong { background: linear-gradient(135deg, hsl(var(--primary)), hsl(218 34% 20%)); box-shadow: 0 24px 54px hsl(var(--primary) / 0.34), inset 0 0 0 1px hsl(var(--primary-foreground) / 0.14); }
@@ -84,7 +85,7 @@ li { display: flex; gap: 10px; align-items: center; font-weight: 700; }
 .product-info-grid h4 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: hsl(var(--primary)); }
 .product-info-grid p { margin: 0; font-size: 14px; line-height: 1.65; }
 .purchase-actions { display: grid; grid-template-columns: 1fr 0.72fr; gap: 12px; }
-.secondary-buy { border: 1.5px solid hsl(var(--primary)); background: hsl(var(--background)); color: hsl(var(--primary)); border-radius: 999px; min-height: 60px; font-weight: 900; cursor: pointer; box-shadow: 0 12px 26px hsl(var(--primary) / 0.1); }
+.secondary-buy { border: 1.5px solid hsl(var(--primary)); background: hsl(var(--background)); color: hsl(var(--primary)); border-radius: 999px; min-height: 64px; font-weight: 900; cursor: pointer; box-shadow: 0 12px 26px hsl(var(--primary) / 0.1); }
 .hero-buy { padding-inline: 26px; }
 
 .benefit-grid, .cards-grid, .policy-section { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
