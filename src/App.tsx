@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Clock3, CreditCard, HeartHandshake, Leaf, PackageCheck, ShieldCheck, Sparkles, Star, Truck, WandSparkles } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, Gem, HeartHandshake, Leaf, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Sparkles, Star, Truck, WandSparkles } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
@@ -8,25 +8,25 @@ import { addOns, mainProduct, products } from "./data/products";
 type Cart = Record<string, number>;
 
 const landingBlocks = [
-  ["01", "Clinic-grade calm", "A premium device-led routine presented with clear benefits, refined pacing and an immediate purchase path."],
-  ["02", "Giftable product system", "Every accessory feels intentional, from barrier serum to sonic cleanse and rose sculpting tools."],
-  ["03", "Trust-first conversion", "Shipping, guarantees, reviews and policy sections appear before checkout to reduce hesitation."],
-  ["04", "Responsive luxury", "Product photography, pricing and copy stay crisp across desktop, tablet and mobile screens."]
+  ["01", "Real product merchandising", "Commercial product names, credible pricing, stock messages and benefit-led descriptions support confident purchase decisions."],
+  ["02", "Luxury routine bundling", "Each add-on has a clear role in the skincare ritual, making the full basket feel intentional rather than decorative."],
+  ["03", "Trust before checkout", "Guarantees, secure payment cues, shipping clarity and verified reviews reduce hesitation before the buyer reaches the cart."],
+  ["04", "Responsive retail polish", "Photography, buttons and copy use stable sizing so the storefront stays balanced across desktop, tablet and mobile."]
 ];
 
 const reviews = [
-  ["Amara L.", "The mask looks stunning on my vanity and the full set made the routine feel genuinely luxurious."],
-  ["Vivienne R.", "Clear product details, beautiful photos and the guarantee made the purchase feel effortless."],
-  ["Noelle K.", "The serum and cleansing brush are the perfect add-ons. Everything feels cohesive and premium."],
-  ["Serena P.", "Fast tracked delivery, elegant packaging and a calm checkout experience from start to finish."],
-  ["Elise M.", "The collection page made it easy to compare products without any confusing claims or clutter."],
-  ["Mila T.", "A polished beauty-tech store that feels ready for a real luxury launch."]
+  ["Amara L.", "Verified buyer", "The AuroraFlex mask feels substantial, photographs beautifully on my vanity and makes the full evening routine feel premium."],
+  ["Vivienne R.", "Verified buyer", "The product page answered shipping, returns and stock questions before checkout. It felt polished and trustworthy."],
+  ["Noelle K.", "Verified buyer", "The serum and cleansing wand are the exact add-ons I wanted. Everything arrived in elegant, protective packaging."],
+  ["Serena P.", "Verified buyer", "Tracked delivery updates, clear pricing and a strong guarantee made this feel like a real luxury beauty purchase."],
+  ["Elise M.", "Verified buyer", "The collection is easy to compare on mobile. No tiny copy, no hidden details, just clear products and benefits."],
+  ["Mila T.", "Verified buyer", "The whole store feels premium without being confusing. The buy buttons and review flow are very convincing."]
 ];
 
 const faqs = [
-  ["How long does delivery take?", "Orders are presented with tracked delivery and a 5–9 business day estimate after processing. Replace this with final carrier timing before launch."],
-  ["Can I return my order?", "The storefront includes a 60-day confidence promise framework. Final hygiene exclusions and refund timing should be customized for your operating region."],
-  ["Are payments secure?", "The checkout layout is ready for encrypted provider integration and clearly communicates secure handling before purchase."],
+  ["How long does delivery take?", "In-stock orders are positioned to ship in 1–2 business days with tracked delivery. Final carrier timing can be updated before launch."],
+  ["Can I return my order?", "The storefront includes a 60-day satisfaction guarantee framework with hygiene-safe return rules for skincare devices and sealed products."],
+  ["Are payments secure?", "Secure payment badges and checkout messaging are built into the buying path. Connect live commerce services before taking real payments."],
   ["What product should I start with?", "Start with the Luminara LED Mask, then add the serum and cleansing brush for a complete nightly ritual."],
   ["Is this brand content original?", "Yes. Elyra Maison and all product names, copy and generated product visuals are original storefront assets prepared for personalization."],
   ["Is the site deployment ready?", "The website is a Vite React storefront with local assets, responsive CSS and no new dependency requirements."]
