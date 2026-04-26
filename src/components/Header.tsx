@@ -1,22 +1,18 @@
-import { Menu, ShoppingBag, Sparkles, X } from "lucide-react";
+import { Activity, Menu, ShoppingBag, X } from "lucide-react";
 
 export function Header({ cartCount, menuOpen, onCart, onMenu }: { cartCount: number; menuOpen: boolean; onCart: () => void; onMenu: () => void }) {
   return (
     <header className="site-header">
-      <a className="brand" href="#home" aria-label="Elyra Maison home">
-        <span className="brand-mark"><Sparkles size={18} /></span>
-        <span>Elyra Maison</span>
+      <a className="brand" href="#home" aria-label="Smart Posture Corrector home">
+        <span className="brand-mark"><Activity size={18} /></span>
+        <span>Posture Corrector</span>
       </a>
       <nav className={`nav ${menuOpen ? "nav-open" : ""}`} aria-label="Primary navigation">
-        <a href="#collection">Collection</a>
-        <a href="#led-mask">LED Mask</a>
-        <a href="#neck-massager">Neck Massager</a>
-        <a href="#ritual">Routine</a>
+        <a href="#product">Product</a>
+        <a href="#results">Before/After</a>
         <a href="#trust">Trust</a>
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
-        <a href="#policies">Policies</a>
-        <a href="#contact">Contact</a>
       </nav>
       <div className="header-actions">
         <button className="icon-button menu-button" onClick={onMenu} aria-label="Toggle menu">

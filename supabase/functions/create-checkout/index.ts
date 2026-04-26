@@ -3,11 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { type StripeEnv, createStripeClient } from "../_shared/stripe.ts";
 
 const products = {
-  "luminara-led-mask": { name: "Caldria Light Ritual Mask", amount: 32900, sku: "ELY-CALDRIA-MASK", cjProductId: null, cjVariantId: null },
-  "seren-neck-massager": { name: "Seren Portable Neck Massager", amount: 11900, sku: "ELY-SEREN-NECK", cjProductId: null, cjVariantId: null },
-  "aurelia-repair-serum": { name: "Liora Cushion Serum", amount: 9200, sku: "ELY-LIORA-SERUM", cjProductId: null, cjVariantId: null },
-  "celeste-sonic-brush": { name: "Veyra Sonic Prep Wand", amount: 12800, sku: "ELY-VEYRA-WAND", cjProductId: null, cjVariantId: null },
-  "roselle-sculpt-roller": { name: "Nerelle Cooling Sculpt Roller", amount: 6800, sku: "ELY-NERELLE-ROLLER", cjProductId: null, cjVariantId: null },
+  "cj-smart-posture-corrector": { name: "Smart Posture Corrector", amount: 3499, sku: "CJ-SMART-POSTURE-CORRECTOR", cjProductId: null, cjVariantId: null },
 } as const;
 
 type ProductId = keyof typeof products;
@@ -73,6 +69,18 @@ Deno.serve(async (req) => {
     const { error: itemsError } = await db.from("order_items").insert(orderItems);
     if (itemsError) throw new Error("Could not prepare order items");
 
+    const lineItems: Array<{ quantity: number; price_data: { currency: string; unit_amount: number; product_data: { name: string; metadata: { productId: string; sku: string } } } }> = items.map((item) => ({
+      quantity: item.quantity,
+      price_data: {
+        currency: "usd",
+        unit_amount: products[item.productId].amount,
+        product_data: { name: products[item.productId].name, metadata: { productId: item.productId, sku: products[item.productId].sku } },
+      },
+    }));
+    if (shipping > 0) {
+      lineItems.push({ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Tracked delivery", metadata: { productId: "shipping", sku: "CJ-SHIP-US" } } } });
+    }
+
     const stripe = createStripeClient(env);
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -83,14 +91,7 @@ Deno.serve(async (req) => {
       phone_number_collection: { enabled: true },
       billing_address_collection: "auto",
       payment_method_types: ["card"],
-      line_items: items.map((item) => ({
-        quantity: item.quantity,
-        price_data: {
-          currency: "usd",
-          unit_amount: products[item.productId].amount,
-          product_data: { name: products[item.productId].name, metadata: { productId: item.productId, sku: products[item.productId].sku } },
-        },
-      })).concat(shipping > 0 ? [{ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Tracked delivery", metadata: { productId: "shipping", sku: "ELY-SHIP" } } } }] : []),
+      line_items: lineItems,
       metadata: { orderId: order.id, orderNumber, fulfillmentPartner: "cj_dropshipping" },
       payment_intent_data: { metadata: { orderId: order.id, orderNumber, fulfillmentPartner: "cj_dropshipping" } },
     });

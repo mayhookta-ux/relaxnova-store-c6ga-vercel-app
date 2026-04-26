@@ -1,8 +1,4 @@
-import ledMask from "../assets/product-led-mask-pro.jpg";
-import neckMassager from "../assets/product-portable-neck-massager.jpg";
-import serum from "../assets/product-vitamin-c-serum.jpg";
-import cleansingBrush from "../assets/product-sonic-cleanse-brush.jpg";
-import roller from "../assets/product-pink-stone-roller.jpg";
+import postureCorrector from "../assets/product-smart-posture-corrector.jpg";
 
 export type Product = {
   id: string;
@@ -23,85 +19,23 @@ export type Product = {
 
 export const products: Product[] = [
   {
-    id: "luminara-led-mask",
-    name: "Caldria Light Ritual Mask",
-    category: "Light Care Device",
-    price: 329,
-    compareAt: 429,
-    subtitle: "Champagne-toned facial device made to give nightly care a calmer rhythm, a clearer purpose and a more polished finish.",
-    description: "A premium at-home light care device with four selectable settings, a cushioned inner feel and a short guided session for customers who want daily self-care to feel organized, comfortable and visually refined.",
-    bullets: ["Four selectable light settings", "Comfort-focused inner surface", "10-minute guided session", "Vanity-ready premium finish"],
-    details: "Includes device, adjustable strap, USB-C cable, soft storage sleeve and an original quick-start care card.",
-    shipping: "Ready-to-pack units can leave during the active fulfillment window. Tracked delivery is included for qualifying carts.",
-    returns: "Eligible orders may be reviewed under the 30-day guarantee when returned complete and safely packed.",
-    stock: "Limited stock · shipping today eligible",
-    color: "champagne",
-    image: ledMask
-  },
-  {
-    id: "seren-neck-massager",
-    name: "Seren Portable Neck Massager",
-    category: "Portable Comfort Device",
-    price: 119,
-    compareAt: 158,
-    subtitle: "A compact ivory neck comfort device made for desk breaks, travel recovery and calm evening reset moments.",
-    description: "A premium portable neck massager designed to help first-time buyers feel immediate daily value: softer shoulder pauses, easier decompression after screen time and a more composed self-care ritual without complicated setup.",
-    bullets: ["Portable wraparound comfort", "Gentle selectable massage modes", "Soft-touch cushion contact", "Rechargeable travel-friendly design"],
-    details: "Includes neck massager, USB-C charging cable, soft travel pouch and a concise original use guide for short comfort sessions.",
-    shipping: "Ready-to-pack units are prepared with protective packaging and tracked delivery where service is available.",
-    returns: "Eligible orders may be reviewed within the 30-day guarantee when returned complete, clean and safely packed.",
-    stock: "Popular choice · ready-to-pack today",
-    color: "ivory",
-    image: neckMassager
-  },
-  {
-    id: "aurelia-repair-serum",
-    name: "Liora Cushion Serum",
-    category: "Daily Finish Serum",
-    price: 92,
-    subtitle: "Frosted-glass serum with a smooth, cushion-like finish that makes daily layering feel softer and more complete.",
-    description: "A lightweight finishing serum created to follow cleansing or device care, adding glide, comfort and a composed skin feel before moisturizer.",
-    bullets: ["Smooth daily texture", "Peptide-inspired care story", "Frosted glass presentation", "Layers neatly under cream"],
-    details: "30 ml pump bottle. Apply one to two pumps after cleansing and before cream during morning or evening care.",
-    shipping: "Packed in a protective carton with tracked delivery on eligible orders.",
-    returns: "Unopened bottles may qualify for return review within the published guarantee window.",
-    stock: "Limited stock · high demand indicator",
-    color: "ivory",
-    image: serum
-  },
-  {
-    id: "celeste-sonic-brush",
-    name: "Veyra Sonic Prep Wand",
-    category: "Cleansing Prep Tool",
-    price: 128,
-    compareAt: 168,
-    subtitle: "Ivory prep wand with gentle pulse settings for a cleaner-feeling start and a more intentional care sequence.",
-    description: "A water-resistant cleansing prep tool with three pulse levels, a balanced handle and a clean silhouette for shoppers who want their routine to feel orderly, comfortable and elevated.",
-    bullets: ["Three gentle pulse levels", "Soft-touch contact surface", "Water-resistant outer body", "Travel lock setting"],
-    details: "Includes prep wand, charging cable and protective sleeve. Pair with a mild cleanser and rinse after use.",
-    shipping: "Packed in a structured gift carton and released with tracking where service is available.",
-    returns: "Return review is available when accessories and original packaging are included under hygiene-aware conditions.",
-    stock: "Limited stock · fast shipping eligible",
-    color: "pearl",
-    image: cleansingBrush
-  },
-  {
-    id: "roselle-sculpt-roller",
-    name: "Nerelle Cooling Sculpt Roller",
-    category: "Cooling Sculpt Tool",
-    price: 68,
-    subtitle: "Pink cooling roller with warm metal hardware for a soothing finishing step that makes the routine feel complete.",
-    description: "A dual-ended sculpting roller designed for serum glide, gentle facial massage and a quiet morning or evening finish with a refined self-care feel.",
-    bullets: ["Two rolling ends", "Cooling stone-like finish", "Warm metal hardware", "Soft storage pouch"],
-    details: "Use with light outward strokes across cheeks, jawline and brow area after serum. Store cool for a refreshing feel.",
-    shipping: "Ships in a padded presentation carton with tracking on eligible orders.",
-    returns: "Unused rollers may qualify for return review when complete with pouch and original packaging.",
-    stock: "Limited stock · ready to gift",
-    color: "rose",
-    image: roller
+    id: "cj-smart-posture-corrector",
+    name: "Smart Posture Corrector",
+    category: "CJ Dropshipping Verified Posture Device",
+    price: 34.99,
+    compareAt: 59.99,
+    subtitle: "A wearable smart posture trainer for desk work, long commutes and daily alignment reminders without bulky equipment.",
+    description: "This CJ Dropshipping verified smart posture corrector uses an adjustable upper-back brace with gentle vibration reminders to help customers notice slouching and build a more upright sitting habit during everyday routines.",
+    bullets: ["Smart vibration posture reminders", "Adjustable shoulder and back fit", "Lightweight wearable design", "USB rechargeable daily-use device"],
+    details: "Includes smart posture corrector, USB charging cable and setup guide. Wear over a thin shirt, adjust the straps, calibrate upright posture and use in short daily sessions.",
+    shipping: "CJ Dropshipping fulfillment support with tracked United States delivery estimate of 7–12 business days after processing.",
+    returns: "Eligible orders may be reviewed under the 30-day guarantee when returned complete, clean and safely packed.",
+    stock: "CJ verified · United States delivery available",
+    color: "onyx",
+    image: postureCorrector
   }
 ];
 
 export const mainProduct = products[0];
-export const neckMassagerProduct = products[1];
-export const addOns = products.slice(2);
+export const neckMassagerProduct = products[0];
+export const addOns: Product[] = [];
