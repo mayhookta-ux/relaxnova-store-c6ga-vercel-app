@@ -69,7 +69,7 @@ Deno.serve(async (req) => {
     const { error: itemsError } = await db.from("order_items").insert(orderItems);
     if (itemsError) throw new Error("Could not prepare order items");
 
-    const lineItems = items.map((item) => ({
+    const lineItems: Array<{ quantity: number; price_data: { currency: string; unit_amount: number; product_data: { name: string; metadata: { productId: string; sku: string } } } }> = items.map((item) => ({
       quantity: item.quantity,
       price_data: {
         currency: "usd",
@@ -78,7 +78,7 @@ Deno.serve(async (req) => {
       },
     }));
     if (shipping > 0) {
-      lineItems.push({ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Tracked delivery", metadata: { productId: "shipping" as ProductId, sku: "ELY-SHIP" } } } });
+      lineItems.push({ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Tracked delivery", metadata: { productId: "shipping", sku: "CJ-SHIP-US" } } } });
     }
 
     const stripe = createStripeClient(env);
