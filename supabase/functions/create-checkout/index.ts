@@ -69,6 +69,18 @@ Deno.serve(async (req) => {
     const { error: itemsError } = await db.from("order_items").insert(orderItems);
     if (itemsError) throw new Error("Could not prepare order items");
 
+    const lineItems = items.map((item) => ({
+      quantity: item.quantity,
+      price_data: {
+        currency: "usd",
+        unit_amount: products[item.productId].amount,
+        product_data: { name: products[item.productId].name, metadata: { productId: item.productId, sku: products[item.productId].sku } },
+      },
+    }));
+    if (shipping > 0) {
+      lineItems.push({ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Tracked delivery", metadata: { productId: "shipping" as ProductId, sku: "ELY-SHIP" } } } });
+    }
+
     const stripe = createStripeClient(env);
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -79,14 +91,7 @@ Deno.serve(async (req) => {
       phone_number_collection: { enabled: true },
       billing_address_collection: "auto",
       payment_method_types: ["card"],
-      line_items: items.map((item) => ({
-        quantity: item.quantity,
-        price_data: {
-          currency: "usd",
-          unit_amount: products[item.productId].amount,
-          product_data: { name: products[item.productId].name, metadata: { productId: item.productId, sku: products[item.productId].sku } },
-        },
-      })).concat(shipping > 0 ? [{ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Tracked delivery", metadata: { productId: "shipping", sku: "ELY-SHIP" } } } }] : []),
+      line_items: lineItems,
       metadata: { orderId: order.id, orderNumber, fulfillmentPartner: "cj_dropshipping" },
       payment_intent_data: { metadata: { orderId: order.id, orderNumber, fulfillmentPartner: "cj_dropshipping" } },
     });
