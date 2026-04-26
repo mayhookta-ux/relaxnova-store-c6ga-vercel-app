@@ -17,17 +17,17 @@ const isCheckoutValid = (data: FormData, paymentMethod: string) => {
 };
 
 const landingBlocks = [
-  ["01", "Benefit-led shopping", "Every product explains the daily purpose, expected use and reason to buy before a shopper reaches the button."],
-  ["02", "Routine-based value", "The collection is arranged as a complete care sequence so add-ons feel useful, not random."],
-  ["03", "Decision support", "Shipping, returns, payment safety and quality signals stay visible where purchase hesitation usually appears."],
-  ["04", "Responsive retail polish", "Image sizing, button hierarchy and copy blocks stay balanced across desktop, tablet and mobile."]
+  ["01", "Purpose before price", "Each item states its routine role, daily benefit and reason to own it before shoppers reach checkout."],
+  ["02", "Premium routine logic", "The collection moves from cleansing prep to treatment support and finishing care, so every add-on has a clear purpose."],
+  ["03", "Confidence beside action", "Shipping, returns, payment safety and guarantee cues stay close to the product decision points."],
+  ["04", "Retail-grade responsiveness", "Contained photos, readable copy and balanced buttons remain stable across desktop, tablet and mobile layouts."]
 ];
 
 const conversionBenefits = [
-  ["Made for steady routines", "The hero device supports a short evening care moment for shoppers who want a polished routine without a spa appointment."],
-  ["Clear premium value", "Comfort materials, included accessories and guided use details make the price easier to understand at a glance."],
-  ["Reduced purchase risk", "Guarantee, delivery and payment messages appear beside the product so buyers do not need to search for reassurance."],
-  ["Gift-ready presentation", "Soft product photography, concise benefits and elegant spacing create a storefront suitable for premium self-care gifting."]
+  ["Built for repeat use", "The signature device gives structure to a short evening ritual for customers who want a composed care habit at home."],
+  ["Value made visible", "Materials, accessories, guided use and care outcomes are explained clearly so the premium price feels understandable."],
+  ["Risk reduced early", "Guarantee, delivery and payment reassurance appear before checkout so buyers do not need to hunt for answers."],
+  ["Luxury that feels practical", "The products support a calmer vanity routine while still looking polished enough for gifting or daily display."]
 ];
 
 const trustBadges = [
@@ -40,21 +40,21 @@ const trustBadges = [
 const paymentMethods = ["Visa", "Mastercard", "PayPal", "Apple Pay"];
 
 const reviews = [
-  ["A. Vale", "Verified buyer · city residence", "The main device felt easy to understand because the page explained what it does, when to use it and what comes in the box."],
-  ["R. Soren", "Verified buyer · coastal home", "The delivery promise and return wording were visible before checkout, which made the order feel calm and considered."],
-  ["L. Maren", "Verified buyer · private studio", "The serum and cleansing tool made sense as a routine rather than a forced bundle. The product cards were clear on mobile."],
-  ["C. Arden", "Verified buyer · weekend house", "The stock notice, secure payment labels and guarantee gave the store a more polished retail feel without looking loud."],
-  ["N. Wren", "Verified buyer · loft apartment", "I could compare the products quickly. The photos stayed balanced and the text never disappeared inside the cards."],
-  ["S. Iven", "Verified buyer · townhouse", "The checkout section felt structured, readable and premium. The buying buttons were easy to spot without breaking the design."]
+  ["M. Elaris", "Verified buyer · refined apartment routine", "The mask page explained the purpose, timing and included pieces clearly. I felt I understood the value before adding it to my cart."],
+  ["R. Veylen", "Verified buyer · weekday self-care buyer", "The delivery and guarantee details were easy to see, which made the purchase feel calm instead of rushed."],
+  ["L. Arven", "Verified buyer · gift order", "The serum and prep wand felt like a complete ritual, not random extras. The cards were readable and polished on my phone."],
+  ["C. Merrow", "Verified buyer · evening routine user", "The limited-stock notice, payment labels and quality promise gave the store a credible premium feel without becoming noisy."],
+  ["N. Sorelle", "Verified buyer · compact vanity setup", "The photos stayed balanced and the descriptions made comparison simple. Nothing felt hidden or overdesigned."],
+  ["T. Avelor", "Verified buyer · first device purchase", "The buy button stood out immediately, and the return explanation helped me feel comfortable choosing the full set."]
 ];
 
 const faqs = [
-  ["Who is the main device for?", "It is positioned for shoppers who want a refined at-home facial ritual, clear routine guidance and a premium device that looks appropriate on a vanity."],
-  ["How quickly can an order leave the studio?", "Eligible in-stock orders can be prepared for same-day dispatch when placed before the displayed cut-off window, with tracking shown after packing."],
-  ["What is the return window?", "The store presents a 60-day money-back guarantee framework with hygiene-aware conditions for opened devices and sealed skincare items."],
-  ["Is there warranty coverage?", "The product page is structured to support a one-year limited device coverage statement for eligible manufacturing faults after launch terms are finalized."],
-  ["Are payments handled safely?", "The checkout uses a validated form structure, recognizable payment labels and no unsafe HTML injection patterns. Live payment processing should be connected before real sales."],
-  ["How are delivery details shared?", "The order flow is written for tracked delivery updates, including dispatch status, carrier movement and destination arrival notices where available."]
+  ["Is payment information handled safely?", "The storefront uses a clean validated checkout interface, recognizable payment labels and no unsafe HTML injection patterns. A live payment provider should be connected before accepting real orders."],
+  ["When can an in-stock order ship?", "Products marked ready to ship can be prepared during the current packing window, with tracking intended to appear after carrier handoff."],
+  ["What if the product is not the right fit?", "Eligible orders are presented with a 60-day money-back framework, subject to hygiene-aware review and complete return packaging."],
+  ["Is there a quality guarantee?", "Every visible product is positioned with a pre-packing quality review and a limited coverage statement for eligible device faults once final selling terms are activated."],
+  ["How do I know which product to choose?", "The page explains who each item is for, how it fits into a daily ritual and why it supports a more composed premium care routine."],
+  ["How will delivery details be shared?", "The store structure supports tracked delivery updates for packing, carrier movement and destination arrival where service is available."]
 ];
 
 export default function App() {
@@ -110,7 +110,7 @@ export default function App() {
             <h1>Premium facial ritual tools for calm, consistent self-care.</h1>
             <p className="hero-text">A fully original luxury storefront with clear benefits, balanced product photography, visible guarantees, limited-stock cues and a secure checkout-ready flow.</p>
             <div className="hero-actions">
-              <a className="primary-action" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
+              <a className="primary-action hero-primary" href="#product"><Gem size={18} /> Buy now — ${mainProduct.price}</a>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
@@ -126,7 +126,7 @@ export default function App() {
         </section>
 
         <section className="strip-section" aria-label="Store assurances">
-          {["Secure Checkout", "Money Back Guarantee", "Fast Shipping", "Verified Quality"].map((item) => <span key={item}>{item}</span>)}
+          {trustBadges.map(({ icon: Icon, title }) => <span key={title}><Icon size={18} /> {title}</span>)}
         </section>
 
         <section className="landing-section">
@@ -135,7 +135,7 @@ export default function App() {
         </section>
 
         <section className="conversion-section">
-          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>Premium value explained before the first click.</h2><p>Clear benefits, urgency, guarantees and recognizable payment cues help shoppers understand the offer quickly without cluttering the luxury design.</p></div>
+          <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A polished ritual that feels personal, useful and gift-worthy.</h2><p>The store explains what the hero product does, why daily use matters and how each supporting item creates a calmer premium care routine.</p></div>
           <div className="conversion-grid">
             {conversionBenefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}
           </div>
@@ -162,7 +162,7 @@ export default function App() {
               <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${mainProduct.compareAt! - mainProduct.price}</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>Product details</h4><p>{mainProduct.details}</p></article><article><h4>Shipping information</h4><p>{mainProduct.shipping}</p></article><article><h4>Return policy</h4><p>{mainProduct.returns}</p></article></div>
-              <div className="purchase-actions"><button className="primary-action full" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
+              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={() => { addToCart(mainProduct.id); openCheckout(); }}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
               <div className="pay-row"><CreditCard size={18} /> Secure checkout · tracked shipping guarantee · 60-day money-back promise</div>
             </div>
@@ -189,7 +189,7 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your care ritual order is confirmed.</h2><p>Order EM-{Date.now().toString().slice(-6)} has been recorded in this secure preview flow.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Detailed customer feedback with visible ratings and original reviewer identities.</h2></div>
+          <div className="section-intro"><p className="eyebrow">Reviews section</p><h2>Original customer feedback with visible ratings and refined trust cues.</h2></div>
           <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
         </section>
 
@@ -199,19 +199,19 @@ export default function App() {
         </section>
 
         <section id="policies" className="policy-section">
-          <Policy title="Shipping Policy" body="Eligible orders are packed with protective materials and released with tracking when carrier service is available. Same-day dispatch messaging applies only to products marked ready to ship." />
-          <Policy title="Refund Policy" body="Eligible orders may be reviewed under a 60-day money-back guarantee. Hygiene-sensitive returns must include all parts, safe packaging and final approval under published conditions." />
-          <Policy title="Privacy Policy" body="Customer details are used only for order handling, transaction protection, support replies, delivery notices and store experience improvement. Final regional notices should be added before live selling." />
-          <Policy title="Terms of Service" body="Customers agree to provide accurate order details, follow product instructions and review all terms before purchase. Availability, pricing and offers may change as inventory changes." />
+          <Policy title="Shipping Policy" body="Eligible orders are packed with protective materials and prepared for tracked release when carrier service is available. Same-day messaging applies only to items marked ready for the current packing window." />
+          <Policy title="Refund Policy" body="Eligible orders may be reviewed within a 60-day money-back framework. Hygiene-sensitive items must return complete, safely packed and approved under the final published return conditions." />
+          <Policy title="Privacy Policy" body="Customer details are intended only for order handling, transaction protection, support replies, delivery notices and store experience improvement. Final regional disclosures should be added before live selling." />
+          <Policy title="Terms of Service" body="Customers agree to provide accurate order details, review product guidance and confirm all purchase terms before ordering. Availability, pricing and offers may change as inventory changes." />
         </section>
 
         <section id="contact" className="contact-section">
-          <div><p className="eyebrow">Contact page</p><h2>Private support for product, delivery and order questions.</h2><p>support@elyramaison.example · Add the final support address, registered business details and response window before live selling.</p></div>
+          <div><p className="eyebrow">Contact page</p><h2>Private support for product, delivery and order questions.</h2><p>support@elyramaison.example · Replace with your final support inbox, registered business details and response window before live selling.</p></div>
           <div className="contact-card"><WandSparkles size={28} /><h3>Elyra Maison</h3><p>Original care tools with a quiet luxury presence.</p><p><Leaf size={16} /> Care routine support</p></div>
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span></div><nav><a href="#policies">Privacy</a><a href="#policies">Terms</a><a href="#policies">Refunds</a><a href="#policies">Shipping</a></nav><div className="social-row"><a href="#home">Instagram</a><a href="#home">TikTok</a><a href="#home">Pinterest</a></div><small>© 2026 Elyra Maison. Original storefront content prepared for transferable ownership.</small></footer>
+      <footer className="footer"><div><strong>Elyra Maison</strong><span>Original premium care storefront.</span><span>support@elyramaison.example</span></div><nav aria-label="Legal footer"><a href="#policies">Privacy Policy</a><a href="#policies">Refund Policy</a><a href="#policies">Shipping Policy</a><a href="#policies">Terms of Service</a></nav><div className="social-row"><span>Secure Checkout</span><span>Money Back Guarantee</span><span>Fast Shipping</span><span>Premium Quality Guarantee</span></div><small>© 2026 Elyra Maison. Original storefront content prepared for transferable ownership.</small></footer>
     </div>
   );
 }
