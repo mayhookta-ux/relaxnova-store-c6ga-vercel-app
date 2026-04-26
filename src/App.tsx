@@ -166,8 +166,8 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely and the order record is ready for CJ Dropshipping fulfillment review.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Reviews</p><h2>Buyer feedback focused on posture awareness and simple daily use.</h2></div>
-          <div className="cards-grid">{reviews.map(([name, status, quote]) => <article className="review-card" key={name}><div className="stars">★★★★★</div><span><BadgeCheck size={15} /> {status}</span><p>“{quote}”</p><strong>{name}</strong></article>)}</div>
+          <div className="section-intro"><p className="eyebrow">Premium customer reviews</p><h2>US buyers use it for desk work, calls and daily posture reminders.</h2></div>
+          <div className="cards-grid review-grid">{reviews.map((review) => <article className="review-card" key={review.name}><div className="review-photo" aria-hidden="true">{review.photo}</div><div className="stars">{review.rating}</div><span><BadgeCheck size={15} /> {review.label}</span><p>“{review.quote}”</p><strong>{review.name}</strong><small>{review.location}</small></article>)}</div>
         </section>
 
         <section className="cta-section">
