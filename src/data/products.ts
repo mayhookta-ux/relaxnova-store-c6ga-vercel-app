@@ -1,4 +1,4 @@
-import postureCorrector from "../assets/cj-smart-posture-corrector.jpg";
+import postureCorrector from "../assets/posture-gallery-product-front.jpg";
 
 export type Product = {
   id: string;

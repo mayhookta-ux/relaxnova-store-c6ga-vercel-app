@@ -5,6 +5,12 @@ import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
+import galleryBeforeAfter from "./assets/posture-gallery-before-after.jpg";
+import galleryDetail from "./assets/posture-gallery-material-closeup.jpg";
+import galleryHumanWorn from "./assets/posture-gallery-human-worn.jpg";
+import galleryLifestyle from "./assets/posture-gallery-lifestyle-desk.jpg";
+import galleryProductAngle from "./assets/posture-gallery-product-angle.jpg";
+import galleryProductFront from "./assets/posture-gallery-product-front.jpg";
 
 type Cart = Record<string, number>;
 const trustBadges = [
@@ -38,6 +44,15 @@ const faqs = [
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
+
+const galleryImages = [
+  { src: galleryProductFront, title: "Studio front angle", body: "Clean premium product view on a warm white ecommerce background.", className: "gallery-featured", width: 1280, height: 1280 },
+  { src: galleryHumanWorn, title: "Natural office wear", body: "Realistic daily desk use with the corrector worn over work clothing.", className: "gallery-tall", width: 1280, height: 1600 },
+  { src: galleryProductAngle, title: "Rear product angle", body: "Adjustable strap routing, compact sensor body, and secure fit details.", width: 1280, height: 1280 },
+  { src: galleryDetail, title: "Material close-up", body: "Woven elastic texture, smooth module finish, stitching, and buckle build quality.", width: 1280, height: 1280 },
+  { src: galleryBeforeAfter, title: "Posture comparison", body: "Elegant side-profile posture reference for credible visual education.", className: "gallery-wide", width: 1600, height: 1000 },
+  { src: galleryLifestyle, title: "Desk lifestyle setting", body: "Premium modern workspace lighting for high-trust ecommerce context.", className: "gallery-wide", width: 1600, height: 1100 }
+];
 
 export default function App() {
   const [cart, setCart] = useState<Cart>({ [mainProduct.id]: 1 });
@@ -139,6 +154,11 @@ export default function App() {
               <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Fast Delivery · Easy Returns</div>
             </div>
           </div>
+        </section>
+
+        <section className="premium-gallery-section" aria-label="Smart Posture Corrector product gallery">
+          <div className="section-intro"><p className="eyebrow">Premium product gallery</p><h2>Original visuals built for trust before checkout.</h2><p>Clean studio angles, natural usage, posture comparison, and material details keep the Smart Posture Corrector realistic, consistent, and conversion-focused.</p></div>
+          <div className="premium-gallery-grid">{galleryImages.map((image) => <article className={`premium-gallery-card ${image.className || ""}`} key={image.title}><img src={image.src} alt={`${mainProduct.name} ${image.title.toLowerCase()}`} width={image.width} height={image.height} loading="lazy" /><div><strong>{image.title}</strong><span>{image.body}</span></div></article>)}</div>
         </section>
 
         <section id="results" className="before-after-section">
