@@ -181,6 +181,11 @@ summary { cursor: pointer; font-weight: 800; }
 .checkout-form, .order-summary, .confirmation-section { border: 1px solid hsl(var(--border)); border-radius: var(--radius); background: hsl(var(--card)); box-shadow: var(--soft-shadow); padding: clamp(24px, 4vw, 42px); }
 .checkout-form { display: grid; gap: 24px; }
 .embedded-checkout-shell { overflow: hidden; border: 1px solid hsl(var(--border)); border-radius: 18px; background: hsl(var(--background)); min-height: 620px; padding: 8px; }
+.checkout-mode { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 3px; align-items: center; border: 1px solid hsl(var(--border)); border-radius: 18px; background: hsl(var(--background)); padding: 16px 18px; color: hsl(var(--primary)); }
+.checkout-mode svg { color: hsl(var(--gold)); grid-row: span 2; }
+.checkout-mode span { color: hsl(var(--muted-foreground)); font-size: 13px; font-weight: 800; }
+.checkout-mode.manual { border-color: hsl(var(--gold) / 0.38); background: hsl(var(--accent) / 0.16); }
+.checkout-mode.live { border-color: hsl(var(--jade)); background: hsl(var(--jade) / 0.18); }
 fieldset { border: 1px solid hsl(var(--border)); border-radius: 22px; padding: 22px; display: grid; gap: 14px; }
 legend { padding: 0 8px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 25px; font-weight: 700; }
 input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px; min-height: 50px; padding: 0 16px; background: hsl(var(--background)); color: hsl(var(--foreground)); }
