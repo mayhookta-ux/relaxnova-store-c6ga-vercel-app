@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Star, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, ShieldCheck, Star, Truck } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
@@ -55,6 +55,98 @@ const galleryImages = [
   { src: galleryWearGuide, title: "Adjustment and wear guide", body: "Visual support for fit, reminder angle, and daily usage expectations.", className: "gallery-wide", width: 1200, height: 1200 },
   { src: galleryLifestyle, title: "Usage presentation", body: "Supplier-provided lifestyle/product context kept consistent with fulfillment media.", className: "gallery-wide", width: 1200, height: 1200 }
 ];
+
+type LegalPageKey = "privacy-policy" | "refund-policy" | "terms-of-service" | "shipping-policy" | "contact-us";
+
+const businessInfo = {
+  storeName: "Posture Corrector Store",
+  legalName: "[Your Legal Business Name]",
+  email: "support@example.com",
+  phone: "[Your Business Phone]",
+  address: "[Your Business Address, City, State ZIP]",
+  updated: "April 27, 2026"
+};
+
+const legalPages: Record<LegalPageKey, { title: string; intro: string; sections: { heading: string; body: string[] }[] }> = {
+  "privacy-policy": {
+    title: "Privacy Policy",
+    intro: "This Privacy Policy explains how we collect, use, protect, and share customer information for a US ecommerce store selling the Smart Posture Corrector.",
+    sections: [
+      { heading: "Information we collect", body: ["We may collect your name, email address, shipping address, billing details, phone number, order history, support messages, device information, IP address, browser data, and checkout activity needed to operate the store.", "Payment card details are processed by Stripe. We do not intentionally store full card numbers, CVV codes, or complete payment credentials on our storefront systems."] },
+      { heading: "How we use information", body: ["We use customer information to process orders, collect payment, arrange fulfillment through CJ Dropshipping, provide tracking, respond to support requests, prevent fraud, improve the store, comply with legal obligations, and maintain accurate business records.", "We may use order and browsing data to measure site performance, understand conversion activity, and improve the customer experience."] },
+      { heading: "Cookies and analytics", body: ["Our store may use cookies, pixels, session storage, analytics tools, and similar technologies to keep the cart working, measure traffic, detect errors, prevent abuse, and understand how visitors interact with our pages.", "You can control cookies through your browser settings, but disabling them may affect checkout, cart behavior, fraud screening, or store functionality."] },
+      { heading: "Payment processing disclosure", body: ["Payments are securely processed by Stripe and eligible wallet/payment providers. Stripe may collect and process payment, device, fraud-prevention, and transaction information under its own legal and privacy terms.", "By completing checkout, you authorize Stripe and our store to process the payment amount shown at checkout, including any applicable taxes, shipping, or adjustments disclosed before purchase."] },
+      { heading: "Fulfillment and service providers", body: ["We share only the information reasonably necessary for fulfillment with CJ Dropshipping and related logistics providers, including customer name, delivery address, order item, quantity, and tracking details.", "We may also share information with email, analytics, fraud-prevention, hosting, customer support, legal, accounting, and compliance service providers who help us operate the business."] },
+      { heading: "Data protection and retention", body: ["We use reasonable administrative, technical, and organizational safeguards designed to protect customer information from unauthorized access, misuse, alteration, or disclosure.", "No online system can be guaranteed completely secure. We retain business records for as long as reasonably needed for order support, tax, accounting, fraud prevention, dispute handling, and legal compliance."] },
+      { heading: "Your privacy choices", body: ["You may contact us to request access, correction, deletion, or limitation of certain personal information where required by applicable law. We may need to verify your identity before fulfilling a privacy request.", "We do not sell sensitive personal information. If advertising or analytics tools are added later, this policy should be updated to reflect any required opt-out rights."] }
+    ]
+  },
+  "refund-policy": {
+    title: "Refund Policy",
+    intro: "This policy is designed to be fair to customers while protecting the store against return abuse, hygiene issues, carrier problems, and fulfillment costs.",
+    sections: [
+      { heading: "30-day return review window", body: ["Eligible orders may be submitted for return review within 30 days after delivery. To start a request, contact us with your order number, checkout email, delivery address, photos if relevant, and a clear explanation of the issue.", "A return request is not automatically approved. We review each request for eligibility, product condition, delivery status, and signs of misuse, damage, or policy abuse."] },
+      { heading: "Return condition requirements", body: ["Returned products must be complete, clean, undamaged, safely packed, and include all parts, straps, accessories, manuals, packaging components, and any included product materials.", "We may deny refunds for used, altered, damaged, unsanitary, incomplete, missing, refused, abandoned, or incorrectly returned items, or for returns shipped without approval."] },
+      { heading: "Non-refundable situations", body: ["Shipping delays caused by carriers, customs, weather, incorrect addresses, failed delivery attempts, customer refusal, missed pickup, or events outside our reasonable control do not automatically qualify for refund.", "We do not refund orders where tracking shows delivered unless the customer provides timely, credible evidence of a delivery issue and the carrier investigation supports the claim."] },
+      { heading: "Defective, damaged, or wrong items", body: ["If your item arrives defective, materially damaged, or not the product ordered, contact us within 7 days of delivery with clear photos or video of the item, packaging, label, and issue.", "When approved, we may offer replacement, partial refund, store credit, or refund depending on the circumstances and available fulfillment options."] },
+      { heading: "Refund timing", body: ["Approved refunds are issued to the original payment method through Stripe. Bank and card processing times vary and may take several business days after the refund is submitted.", "Original fulfillment, handling, payment processing, and return shipping costs may be non-refundable unless required by law or unless we determine the issue was caused by our error."] },
+      { heading: "Chargebacks and abuse prevention", body: ["Please contact us before opening a payment dispute so we can review the issue and offer an appropriate resolution. We reserve the right to provide order, tracking, communication, and policy evidence to Stripe, payment networks, carriers, and fraud-prevention partners.", "Repeated claims, suspicious activity, false statements, altered evidence, or abuse of return policies may result in denial of service, cancellation, or refusal of future orders."] }
+    ]
+  },
+  "terms-of-service": {
+    title: "Terms of Service",
+    intro: "These Terms govern use of our storefront, checkout, customer support, and purchase of the Smart Posture Corrector.",
+    sections: [
+      { heading: "Store terms and acceptance", body: ["By visiting this site, placing an order, contacting support, or using any store feature, you agree to these Terms, our Privacy Policy, Refund Policy, and Shipping Policy.", "We may update these Terms from time to time. The version posted on this page applies to purchases made after the updated date shown below."] },
+      { heading: "Product information and medical disclaimer", body: ["The Smart Posture Corrector is a consumer posture-awareness support product. It is not a medical device, medical treatment, diagnosis tool, substitute for professional care, or guaranteed cure for pain, injury, posture conditions, or health problems.", "Consult a licensed healthcare professional before use if you have pain, injury, implanted devices, skin sensitivity, circulation issues, pregnancy, recent surgery, or any medical concern. Stop use if discomfort, irritation, dizziness, pain, numbness, or adverse reaction occurs."] },
+      { heading: "Orders, pricing, and availability", body: ["Prices, offers, product availability, delivery estimates, and product descriptions may change without notice. We reserve the right to cancel or refuse any order for suspected fraud, pricing errors, stock issues, address concerns, compliance risk, or payment issues.", "Your order is accepted only after payment authorization and fulfillment review. Receiving an order confirmation does not guarantee shipment if a compliance, inventory, fraud, or address issue is discovered."] },
+      { heading: "Stripe payment processing", body: ["Checkout is processed securely through Stripe. By submitting payment information, you authorize the charge shown at checkout and agree that Stripe and related payment providers may process transaction and fraud-prevention data.", "We are not responsible for bank declines, issuer holds, wallet provider errors, charge timing, foreign transaction fees, or other actions taken by your payment provider."] },
+      { heading: "CJ Dropshipping fulfillment", body: ["Orders may be fulfilled by CJ Dropshipping and logistics partners. Product handling, processing, shipment routing, tracking updates, and delivery timing may depend on supplier inventory, carrier capacity, destination, customs, and operational conditions.", "Packaging, small visual presentation details, and tracking carriers may vary while remaining consistent with the product ordered."] },
+      { heading: "Limitation of liability", body: ["To the maximum extent allowed by law, our store, owners, operators, suppliers, fulfillment partners, payment processors, and service providers are not liable for indirect, incidental, consequential, special, punitive, or exemplary damages, including lost profits, health claims, business interruption, delivery delays, or third-party service failures.", "Our total liability for any claim related to an order will not exceed the amount paid for the specific product giving rise to the claim, unless applicable law requires otherwise."] },
+      { heading: "Disputes and governing law", body: ["These Terms are intended for a US ecommerce store and should be customized with your state, legal entity, and dispute-resolution terms before launch. Placeholder business details must be replaced with accurate information.", "If any term is found unenforceable, the remaining terms remain in effect. Failure to enforce a term does not waive our right to enforce it later."] }
+    ]
+  },
+  "shipping-policy": {
+    title: "Shipping Policy",
+    intro: "This Shipping Policy explains realistic fulfillment expectations for a US-focused dropshipping store using CJ Dropshipping fulfillment partners.",
+    sections: [
+      { heading: "US shipping estimate", body: ["Current US delivery estimate: 8–23 days after order processing, unless a different estimate is clearly shown at checkout or in order communication.", "Processing usually begins after payment approval and fulfillment review. Processing and carrier movement may take longer during holidays, high-volume periods, supplier delays, carrier disruptions, or address verification issues."] },
+      { heading: "Fulfillment source", body: ["Orders may be sourced and shipped through CJ Dropshipping, supplier warehouses, and logistics partners. This allows us to offer a focused product at a lower price, but shipping timelines may be longer than domestic warehouse delivery.", "Tracking information is provided when available from the fulfillment and carrier network. Tracking scans may take several days to update after a label or logistics record is created."] },
+      { heading: "Customer address responsibility", body: ["Customers are responsible for entering a complete and accurate shipping address, including apartment, unit, suite, building, ZIP code, and valid contact information.", "We are not responsible for failed delivery, non-delivery, returned packages, extra carrier fees, or replacement costs caused by incorrect, incomplete, inaccessible, or undeliverable addresses submitted by the customer."] },
+      { heading: "Carrier delay disclaimer", body: ["Delivery dates are estimates, not guarantees. Carriers, customs agencies, weather events, regional disruptions, security checks, holiday volume, and last-mile delivery issues may delay packages outside our control.", "A delayed package is not considered lost while tracking remains active or while the carrier indicates the shipment is still moving through the network."] },
+      { heading: "Lost, delivered, or returned packages", body: ["If tracking shows delivered but you cannot locate the package, check household members, neighbors, mailrooms, lockers, building management, and the local carrier before contacting support.", "If a package is returned, refused, abandoned, or undeliverable due to customer action or address problems, we may deduct fulfillment, reshipment, return, and handling costs from any approved resolution."] },
+      { heading: "International orders", body: ["This storefront is currently written for US ecommerce traffic. If international shipping is enabled later, duties, taxes, import fees, customs clearance, and delivery times should be reviewed and disclosed before accepting international orders."] }
+    ]
+  },
+  "contact-us": {
+    title: "Contact Us",
+    intro: "Contact customer support for order questions, shipping updates, return review requests, product concerns, privacy requests, or general store assistance.",
+    sections: [
+      { heading: "Customer support", body: [`Email: ${businessInfo.email}`, `Phone/contact: ${businessInfo.phone}`, `Business mailing address: ${businessInfo.address}`, "Recommended support hours placeholder: Monday–Friday, 9:00 AM–5:00 PM ET, excluding major US holidays."] },
+      { heading: "What to include", body: ["For the fastest support, include your order number, checkout email, full shipping name, delivery ZIP code, a clear description of the issue, and photos or video when reporting damage, defects, wrong items, or package concerns.", "For privacy requests, include the email address used at checkout and enough information for us to verify the request without exposing your account or order data to someone else."] },
+      { heading: "Response expectations", body: ["We aim to respond to customer support messages within 1–3 business days. Complex shipping investigations, supplier checks, carrier claims, payment disputes, and return reviews may take longer.", "Sending repeated messages may move your request down the queue if it creates duplicate tickets. Please reply in the same email thread whenever possible."] },
+      { heading: "Professional assistance", body: ["For medical questions, product suitability, pain, injury, or health concerns, contact a licensed healthcare professional. Our customer support team cannot provide medical advice.", "For legal, tax, privacy, or compliance customization, the store owner should consult qualified US counsel and replace all placeholder business details before relying on these pages long term."] }
+    ]
+  }
+};
+
+const legalLinks: { key: LegalPageKey; label: string }[] = [
+  { key: "privacy-policy", label: "Privacy Policy" },
+  { key: "refund-policy", label: "Refund Policy" },
+  { key: "terms-of-service", label: "Terms of Service" },
+  { key: "shipping-policy", label: "Shipping Policy" },
+  { key: "contact-us", label: "Contact Us" }
+];
+
+const pageFromHash = (hash: string): LegalPageKey | null => {
+  const key = hash.replace("#", "") as LegalPageKey;
+  return key in legalPages ? key : null;
+};
+
+function LegalPageView({ pageKey }: { pageKey: LegalPageKey }) {
+  const page = legalPages[pageKey];
+  return <section className="legal-page"><div className="legal-hero"><p className="eyebrow">Store policy</p><h1>{page.title}</h1><p>{page.intro}</p><div className="legal-meta"><span>Last updated: {businessInfo.updated}</span><span>{businessInfo.legalName}</span></div></div><div className="legal-layout"><aside className="legal-contact-card"><strong>Placeholder business details</strong><span><Mail size={16} /> {businessInfo.email}</span><span><MessageCircle size={16} /> {businessInfo.phone}</span><span><MapPin size={16} /> {businessInfo.address}</span><small>Replace these placeholders with your actual business contact information before relying on the pages publicly.</small></aside><div className="legal-content">{page.sections.map((section) => <article className="legal-card" key={section.heading}><h2>{section.heading}</h2>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</article>)}</div></div></section>;
+}
 
 export default function App() {
   const [cart, setCart] = useState<Cart>({ [mainProduct.id]: 1 });
