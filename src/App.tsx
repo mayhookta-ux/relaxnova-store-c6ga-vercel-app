@@ -10,6 +10,7 @@ import { supabase } from "./integrations/supabase/client";
 import { isLiveCheckoutAvailable } from "./lib/stripe";
 
 type Cart = Record<string, number>;
+type LiveTestStatus = { state: "idle" | "running" | "success" | "error"; message: string; details?: string };
 
 const trustBadges = [
   { icon: ShieldCheck, title: "Secure Checkout", body: "Encrypted embedded payment" },
@@ -65,6 +66,7 @@ export default function App() {
   const [manualOrder, setManualOrder] = useState({ name: "", addressLine1: "", city: "", state: "", postalCode: "" });
   const [manualStatus, setManualStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [manualMessage, setManualMessage] = useState("");
+  const [liveTest, setLiveTest] = useState<LiveTestStatus>({ state: "idle", message: "Live checkout test has not been run yet." });
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
@@ -106,6 +108,32 @@ export default function App() {
     setManualStatus("success");
     setManualMessage(`Manual order ${data.orderNumber} received. We will review payment and fulfillment next.`);
     setCart({});
+  };
+
+  const placeLiveTestOrder = async () => {
+    setLiveTest({ state: "running", message: "Attempting a live Stripe checkout session for Smart Posture Corrector..." });
+    const { data, error } = await supabase.functions.invoke("test-live-checkout", {
+      body: {
+        customerEmail,
+        quantity: cart[mainProduct.id] || 1,
+        returnUrl: `${window.location.origin}/?checkout=complete&session_id={CHECKOUT_SESSION_ID}`,
+      },
+    });
+
+    if (error || !data?.ok) {
+      setLiveTest({
+        state: "error",
+        message: "Live checkout test failed.",
+        details: data?.error || error?.message || "No response details were returned.",
+      });
+      return;
+    }
+
+    setLiveTest({
+      state: "success",
+      message: "Live checkout test passed.",
+      details: `Created live checkout session ${data.sessionId} using ${data.productName} at ${data.amount}.`,
+    });
   };
 
   useEffect(() => {
@@ -194,7 +222,7 @@ export default function App() {
         <section className="go-live-section" aria-label="Stripe go-live checklist">
           <div className="section-intro"><p className="eyebrow">Payment provider setup</p><h2>Stripe go-live checklist.</h2><p>Use this checklist to finish live checkout activation for the Smart Posture Corrector.</p></div>
           <div className="go-live-panel">
-            <div className={liveCheckoutReady ? "provider-status ready" : "provider-status pending"}><ShieldCheck size={20} /><strong>{liveCheckoutReady ? "Provider enabled for live checkout" : "Provider not enabled for live checkout yet"}</strong><span>{liveCheckoutReady ? "Checkout automatically routes to the live Stripe connection." : "Checkout safely routes to manual fallback until live Stripe credentials are available."}</span></div>
+            <div className={liveCheckoutReady ? "provider-status ready" : "provider-status pending"}><ShieldCheck size={20} /><strong>{liveCheckoutReady ? "Provider enabled for live checkout" : "Provider not enabled for live checkout yet"}</strong><span>{liveCheckoutReady ? "Checkout automatically routes to the live Stripe connection." : "Checkout safely routes to manual fallback until live Stripe credentials are available."}</span><button className="secondary-buy go-live-test" disabled={liveTest.state === "running"} onClick={placeLiveTestOrder}>{liveTest.state === "running" ? "Testing live checkout..." : "Place a test order"}</button><p className={`live-test-result ${liveTest.state}`}>{liveTest.message}{liveTest.details ? ` ${liveTest.details}` : ""}</p></div>
             <ol>{stripeGoLiveSteps.map((step, index) => <li key={step}><span>{liveCheckoutReady ? <CheckCircle2 size={18} /> : index === 0 ? <Clock3 size={18} /> : <ArrowRight size={18} />}</span><p>{step}</p></li>)}</ol>
           </div>
         </section>
