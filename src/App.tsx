@@ -20,7 +20,7 @@ const trustBadges = [
   { icon: RotateCcw, title: "Easy Returns", body: "30-day satisfaction review" },
   { icon: LockKeyhole, title: "Secure Checkout", body: "Encrypted live payment" },
   { icon: PackageCheck, title: "Tracked Delivery", body: "8–23 day US estimate" },
-  { icon: BadgeCheck, title: "Verified Buyers", body: "4.8/5 customer rating" }
+  { icon: BadgeCheck, title: "Buyer Confidence", body: "Clear policies before checkout" }
 ];
 
 const benefits = [
@@ -253,8 +253,8 @@ export default function App() {
         <section className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow">Smart posture relief · Free US Shipping</p>
-            <h1>Relieve neck and back pain while improving posture every day.</h1>
-            <p className="hero-text">Trusted by daily desk users, drivers, and remote workers for posture support, comfort, and visible daily relief.</p>
+            <h1>Build better posture habits with gentle daily reminders.</h1>
+            <p className="hero-text">Made for desk users, drivers, and remote workers who want posture awareness, upper-back support, and a more confident daily fit.</p>
             <div className="hero-offer-pill"><Truck size={17} /> Free Shipping Included Today</div>
             <div className="hero-actions">
               <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Get Yours Today — Free Shipping</button>
@@ -264,7 +264,7 @@ export default function App() {
             <div className="proof-row">
               <span><Star size={16} /> 4.8/5 from 2,400+ customers</span>
               <span><Truck size={16} /> Free US Shipping</span>
-              <span><RotateCcw size={16} /> Easy Returns</span>
+              <span><RotateCcw size={16} /> 30-Day Return Review</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
             </div>
           </div>
@@ -277,7 +277,7 @@ export default function App() {
 
         <section className="reassurance-section" aria-label="Delivery and product reassurance">
           <article><Truck size={21} /><h3>Free US Shipping</h3><p>The final $39 offer includes shipping, so there is no separate delivery fee at checkout.</p></article>
-          <article><RotateCcw size={21} /><h3>Easy Returns</h3><p>Covered by a 30-day satisfaction review when returned complete, clean and safely packed.</p></article>
+          <article><RotateCcw size={21} /><h3>30-Day Return Review</h3><p>Covered by a clear satisfaction review when returned complete, clean and safely packed.</p></article>
           <article><LockKeyhole size={21} /><h3>Secure Checkout</h3><p>Encrypted embedded payment with major card support and eligible wallet payments.</p></article>
         </section>
 
@@ -296,7 +296,7 @@ export default function App() {
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — $39 shipped</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> Easy Returns</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
-              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Fast Delivery · Easy Returns</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Tracked Delivery · 30-Day Return Review</div>
             </div>
           </div>
         </section>
@@ -313,9 +313,9 @@ export default function App() {
         </section>
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Verified buyer proof</p><h2>Trusted by 2,400+ US customers building better posture habits.</h2><p>4.8 average rating · 96% satisfaction indicator · Premium fit for desk work, calls, and daily posture reminders.</p></div>
-          <div className="satisfaction-row" aria-label="Customer satisfaction indicators"><span><strong>2,400+</strong><small>US customers</small></span><span><strong>4.8/5</strong><small>Average rating</small></span><span><strong>96%</strong><small>Satisfaction indicator</small></span><span><strong>$0</strong><small>US shipping fee</small></span></div>
-          <article className="featured-review"><div><span className="stars">★★★★★</span><h3>“The reminder I needed before desk posture became pain.”</h3><p>Verified buyers consistently mention the same wins: gentle vibration cues, lightweight daily fit, simple checkout, and free US shipping already included in the $39 price.</p></div><aside><strong>2,400+</strong><small>verified customer signal</small></aside></article>
+          <div className="section-intro"><p className="eyebrow">Buyer confidence</p><h2>Built for shoppers who want clarity before checkout.</h2><p>Transparent pricing · Free US Shipping · Secure payment · Clear delivery and return expectations.</p></div>
+          <div className="satisfaction-row" aria-label="Customer confidence indicators"><span><strong>$39</strong><small>Product offer</small></span><span><strong>$0</strong><small>US shipping fee</small></span><span><strong>30</strong><small>Day return review</small></span><span><strong>8–23</strong><small>Day US estimate</small></span></div>
+          <article className="featured-review"><div><span className="stars">★★★★★</span><h3>“A simple reminder for better posture habits.”</h3><p>Customers can review the product fit, delivery estimate, return conditions, secure payment details, and fulfillment expectations before placing an order.</p></div><aside><strong>Clear</strong><small>checkout expectations</small></aside></article>
           <div className="cards-grid review-grid">{reviews.map((review) => <article className="review-card" key={review.name}><div className="review-photo" aria-hidden="true">{review.photo}</div><div className="stars">{review.rating}</div><span><BadgeCheck size={15} /> {review.label}</span><p>“{review.quote}”</p><strong>{review.name}</strong><small>{review.location}</small></article>)}</div>
         </section>
 
