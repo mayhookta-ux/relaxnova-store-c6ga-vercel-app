@@ -145,19 +145,21 @@ const pageFromHash = (hash: string): LegalPageKey | null => {
   return key in legalPages ? key : null;
 };
 
+const supportFallback = "I don’t want to guess on that. Please visit our Contact Us page and our support team will help within 1–3 business days.";
+
 function LegalPageView({ pageKey }: { pageKey: LegalPageKey }) {
   const page = legalPages[pageKey];
   return <section className="legal-page"><div className="legal-hero"><p className="eyebrow">Store policy</p><h1>{page.title}</h1><p>{page.intro}</p><div className="legal-meta"><span>Last updated: {businessInfo.updated}</span><span>{businessInfo.legalName}</span><span>US ecommerce policy</span></div></div><div className="legal-layout"><aside className="legal-contact-card"><strong>{pageKey === "contact-us" ? "Support response" : "Business details"}</strong><span><Mail size={16} /> {businessInfo.email}</span><span><MessageCircle size={16} /> {businessInfo.phone}</span><span><Clock3 size={16} /> 1–3 business day response</span><span><MapPin size={16} /> {businessInfo.address}</span><small>Replace these placeholders with your actual business contact information before relying on the pages publicly.</small></aside><div className="legal-content">{page.sections.map((section) => <article className="legal-card" key={section.heading}><h2>{section.heading}</h2>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</article>)}</div></div></section>;
 }
 
 type ChatMessage = { role: "assistant" | "user"; content: string };
-const starterQuestions = ["Shipping time?", "Refund policy?", "Is payment safe?"];
+const starterQuestions = ["Shipping time?", "Is payment safe?", "How do I use it?"];
 
 function SupportChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([{ role: "assistant", content: "Hi — I can help with shipping, returns, payment safety, product use, or order support." }]);
+  const [messages, setMessages] = useState<ChatMessage[]>([{ role: "assistant", content: "Hi — happy to help with shipping, returns, secure checkout, product use, or order questions." }]);
 
   const askSupport = async (question = input) => {
     const content = question.trim();
@@ -167,11 +169,11 @@ function SupportChat() {
     setInput("");
     setLoading(true);
     const { data, error } = await supabase.functions.invoke("support-chat", { body: { messages: nextMessages } });
-    setMessages([...nextMessages, { role: "assistant", content: error ? "Please visit our Contact Us page and our support team will help within 1–3 business days." : data?.answer }]);
+    setMessages([...nextMessages, { role: "assistant", content: error || !data?.answer ? supportFallback : data.answer }]);
     setLoading(false);
   };
 
-  return <aside className={`support-chat ${open ? "support-chat-open" : ""}`} aria-label="Customer support chat"><button className="support-chat-bubble" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close support chat" : "Open support chat"}>{open ? <X size={20} /> : <MessageCircle size={21} />}<span>Support</span></button>{open && <div className="support-chat-panel"><div className="support-chat-head"><div><strong>Store support</strong><span>Fast answers while you shop</span></div><button onClick={() => setOpen(false)} aria-label="Close support chat"><X size={17} /></button></div><div className="support-chat-messages" aria-live="polite">{messages.map((message, index) => <p className={message.role === "user" ? "chat-user" : "chat-assistant"} key={`${message.role}-${index}`}>{message.content}</p>)}{loading && <p className="chat-assistant">Checking that for you…</p>}</div><div className="support-chat-prompts">{starterQuestions.map((question) => <button key={question} onClick={() => askSupport(question)} disabled={loading}>{question}</button>)}</div><form className="support-chat-form" onSubmit={(event) => { event.preventDefault(); askSupport(); }}><input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask a quick question" maxLength={240} /><button type="submit" disabled={loading || !input.trim()} aria-label="Send support question"><Send size={16} /></button></form></div>}</aside>;
+  return <aside className={`support-chat ${open ? "support-chat-open" : ""}`} aria-label="Customer support chat"><button className="support-chat-bubble" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close support chat" : "Open support chat"}>{open ? <X size={20} /> : <MessageCircle size={21} />}<span>Ask support</span></button>{open && <div className="support-chat-panel"><div className="support-chat-head"><div><strong>Human-style support</strong><span>Short answers from store policy</span></div><button onClick={() => setOpen(false)} aria-label="Close support chat"><X size={17} /></button></div><div className="support-chat-messages" aria-live="polite">{messages.map((message, index) => <p className={message.role === "user" ? "chat-user" : "chat-assistant"} key={`${message.role}-${index}`}>{message.content}</p>)}{loading && <p className="chat-assistant">One moment — checking that for you.</p>}</div><div className="support-chat-prompts">{starterQuestions.map((question) => <button key={question} onClick={() => askSupport(question)} disabled={loading}>{question}</button>)}</div><form className="support-chat-form" onSubmit={(event) => { event.preventDefault(); askSupport(); }}><input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask about your order" maxLength={240} /><button type="submit" disabled={loading || !input.trim()} aria-label="Send support question"><Send size={16} /></button></form></div>}</aside>;
 }
 
 export default function App() {
