@@ -4,6 +4,7 @@ export type StripeEnv = "sandbox" | "live";
 
 const clientToken = import.meta.env.VITE_PAYMENTS_CLIENT_TOKEN;
 const environment: StripeEnv = clientToken?.startsWith("pk_test_") ? "sandbox" : "live";
+const liveCheckoutAvailable = Boolean(clientToken?.startsWith("pk_live_"));
 
 let stripePromise: Promise<Stripe | null> | null = null;
 
@@ -19,4 +20,8 @@ export function getStripe(): Promise<Stripe | null> {
 
 export function getStripeEnvironment(): StripeEnv {
   return environment;
+}
+
+export function isLiveCheckoutAvailable(): boolean {
+  return liveCheckoutAvailable;
 }
