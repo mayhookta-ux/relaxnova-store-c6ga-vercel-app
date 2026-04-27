@@ -146,6 +146,12 @@ li { display: flex; gap: 10px; align-items: center; font-weight: 700; }
 .provider-status span { color: hsl(var(--muted-foreground)); font-weight: 800; line-height: 1.55; }
 .provider-status.ready { border-color: hsl(var(--jade)); background: hsl(var(--jade) / 0.18); }
 .provider-status.pending { border-color: hsl(var(--gold) / 0.38); background: hsl(var(--accent) / 0.16); }
+.go-live-test, .live-test-result { grid-column: 1 / -1; }
+.go-live-test { width: 100%; min-height: 58px; margin-top: 10px; }
+.live-test-result { margin: 0; border-radius: 14px; padding: 12px 14px; color: hsl(var(--primary)); background: hsl(var(--background)); border: 1px solid hsl(var(--border)); font-weight: 800; line-height: 1.55; overflow-wrap: anywhere; }
+.live-test-result.running { border-color: hsl(var(--gold) / 0.42); background: hsl(var(--accent) / 0.18); }
+.live-test-result.success { border-color: hsl(var(--jade)); background: hsl(var(--jade) / 0.26); }
+.live-test-result.error { border-color: hsl(var(--rose)); background: hsl(var(--rose) / 0.38); }
 .go-live-panel ol { margin: 0; list-style: none; display: grid; gap: 12px; padding-left: clamp(22px, 3vw, 34px); }
 .go-live-panel li { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
 .go-live-panel li span { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: hsl(var(--ivory)); color: hsl(var(--gold)); border: 1px solid hsl(var(--border)); }
