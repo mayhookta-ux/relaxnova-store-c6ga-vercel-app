@@ -92,8 +92,8 @@ export default function App() {
         <section className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow">Smart posture relief · Free US Shipping</p>
-            <h1>Stop letting desk posture turn into daily neck strain.</h1>
-            <p className="hero-text">Smart Posture Corrector detects slouching and sends a gentle vibration cue so you can lift your shoulders, correct forward-head posture, and feel more comfortable through work, study, and everyday routines.</p>
+            <h1>Relieve neck and back pain while improving posture every day.</h1>
+            <p className="hero-text">Trusted by daily desk users, drivers, and remote workers for posture support, comfort, and visible daily relief.</p>
             <div className="hero-actions">
               <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Buy now — $39 shipped</button>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
