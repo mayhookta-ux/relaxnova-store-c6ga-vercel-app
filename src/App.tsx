@@ -155,6 +155,7 @@ export default function App() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
+  const [activeLegalPage, setActiveLegalPage] = useState<LegalPageKey | null>(() => pageFromHash(window.location.hash));
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
@@ -191,6 +192,22 @@ export default function App() {
       window.setTimeout(() => document.getElementById("confirmation")?.scrollIntoView({ behavior: "smooth" }), 40);
     }
   }, []);
+
+  useEffect(() => {
+    const updatePageFromHash = () => {
+      setActiveLegalPage(pageFromHash(window.location.hash));
+      setMenuOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    window.addEventListener("hashchange", updatePageFromHash);
+    return () => window.removeEventListener("hashchange", updatePageFromHash);
+  }, []);
+
+  const footer = <footer className="footer"><div><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span></div><nav aria-label="Legal footer">{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="social-row"><span>Free US Shipping</span><span>Easy Returns</span><span>Secure Checkout</span><span>Fast Delivery</span></div><small>© 2026 {businessInfo.storeName}. Product content is focused on posture-awareness support and does not make medical claims.</small></footer>;
+
+  if (activeLegalPage) {
+    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}</div>;
+  }
 
   return (
     <div id="home">
@@ -293,7 +310,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Posture Corrector Store</strong><span>Premium single-product posture support for US buyers.</span></div><nav aria-label="Legal footer"><a href="#faq">FAQ</a><a href="#trust">Shipping</a><a href="#trust">Returns</a><a href="#reviews">Reviews</a></nav><div className="social-row"><span>Free US Shipping</span><span>Easy Returns</span><span>Secure Checkout</span><span>Fast Delivery</span></div><small>© 2026 Posture Corrector Store. Product content is focused on posture-awareness support and does not make medical claims.</small></footer>
+      {footer}
     </div>
   );
 }
