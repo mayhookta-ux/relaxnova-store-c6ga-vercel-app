@@ -1,16 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, HeartHandshake, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Star, Truck } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { PaymentTestModeBanner } from "./components/PaymentTestModeBanner";
 import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
-import { supabase } from "./integrations/supabase/client";
 
 type Cart = Record<string, number>;
-type LiveTestStatus = { state: "idle" | "running" | "success" | "error"; message: string; details?: string; clientSecret?: string };
-
 const trustBadges = [
   { icon: Truck, title: "Free US Shipping", body: "Included in the $39 price" },
   { icon: RotateCcw, title: "Easy Returns", body: "30-day satisfaction review" },
@@ -43,22 +40,13 @@ const faqs = [
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
 
-const stripeGoLiveSteps = [
-  "Claim the Stripe test environment with the account you want to use for payments.",
-  "Complete Stripe’s live account onboarding and verify the business details.",
-  "Install the Lovable app on the live Stripe account when prompted.",
-  "Wait for live API keys and webhook credentials to be provisioned automatically.",
-  "Run the readiness check in Payments, then publish once it passes."
-];
-
-export default function App() {
+xport default function App() {
   const [cart, setCart] = useState<Cart>({ [mainProduct.id]: 1 });
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
-  const [liveTest, setLiveTest] = useState<LiveTestStatus>({ state: "idle", message: "Live checkout test has not been run yet." });
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
@@ -84,33 +72,6 @@ export default function App() {
     setCheckoutOpen(true);
     setOrderPlaced(false);
     window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 40);
-  };
-
-  const placeLiveTestOrder = async () => {
-    setLiveTest({ state: "running", message: "Attempting a live Stripe checkout session for Smart Posture Corrector..." });
-    const { data, error } = await supabase.functions.invoke("test-live-checkout", {
-      body: {
-        customerEmail,
-        quantity: cart[mainProduct.id] || 1,
-        returnUrl: `${window.location.origin}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
-      },
-    });
-
-    if (error || !data?.ok) {
-      setLiveTest({
-        state: "error",
-        message: "Live checkout test failed.",
-        details: data?.error || error?.message || "No response details were returned.",
-      });
-      return;
-    }
-
-    setLiveTest({
-      state: "success",
-      message: "Live checkout test passed.",
-      details: `Created live checkout session ${data.sessionId} using ${data.productName} at ${data.amount} with free US shipping.`,
-      clientSecret: data.clientSecret,
-    });
   };
 
   useEffect(() => {
@@ -188,7 +149,7 @@ export default function App() {
         <section className="conversion-section">
           <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A simple, affordable posture upgrade with one clear job.</h2></div>
           <div className="conversion-grid">{benefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}</div>
-          <div className="trust-badge-row" aria-label="Trust badges">{trustBadges.map(({ icon: Icon, title, body }) => <span key={title}><Icon size={19} /><strong>{title}</strong><small>{body}</small></span>)}</div>
+          <div className="satisfaction-row" aria-label="Customer satisfaction indicators"><span><strong>2,400+</strong><small>US customers</small></span><span><strong>4.8/5</strong><small>Average rating</small></span><span><strong>96%</strong><small>Satisfaction indicator</small></span><span><strong>$0</strong><small>US shipping fee</small></span></div>
         </section>
 
         <section id="trust" className="guarantee-section">
@@ -196,13 +157,6 @@ export default function App() {
           <div className="guarantee-list"><span><Truck /> Free US Shipping included</span><span><RotateCcw /> Easy Returns and 30-day satisfaction review</span><span><LockKeyhole /> Secure Checkout</span><span><PackageCheck /> Fast tracked delivery estimate: 8–23 days</span><span><Banknote /> $39 final product price</span></div>
         </section>
 
-        <section className="go-live-section" aria-label="Stripe go-live checklist">
-          <div className="section-intro"><p className="eyebrow">Payment provider setup</p><h2>Stripe go-live checklist.</h2><p>Use this checklist to finish live checkout activation for the Smart Posture Corrector.</p></div>
-          <div className="go-live-panel">
-            <div className="provider-status ready"><ShieldCheck size={20} /><strong>Provider enabled for live checkout</strong><span>Checkout routes directly to the active live payment connection for the $39 Smart Posture Corrector offer.</span><button className="secondary-buy go-live-test" disabled={liveTest.state === "running"} onClick={placeLiveTestOrder}>{liveTest.state === "running" ? "Testing live checkout..." : "Place a test order"}</button><p className={`live-test-result ${liveTest.state}`}>{liveTest.message}{liveTest.details ? ` ${liveTest.details}` : ""} {liveTest.clientSecret && <a href="#live-test-checkout">Open embedded checkout below</a>}</p>{liveTest.clientSecret && <div id="live-test-checkout" className="live-test-checkout"><StripeEmbeddedCheckout items={[{ productId: mainProduct.id, quantity: cart[mainProduct.id] || 1 }]} customerEmail={customerEmail} clientSecret={liveTest.clientSecret} /></div>}</div>
-            <ol>{stripeGoLiveSteps.map((step) => <li key={step}><span><CheckCircle2 size={18} /></span><p>{step}</p></li>)}</ol>
-          </div>
-        </section>
 
         {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure live checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>The secure card payment form is ready below for the $39 Smart Posture Corrector offer with Free US Shipping included.</p></div><div className="checkout-grid"><div className="checkout-form"><div className="checkout-mode live"><ShieldCheck size={18} /><strong>Live Stripe checkout active</strong><span>Orders route immediately to the active live payment connection with shipping included.</span></div><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Truck size={17} /> Free US Shipping</span><span><RotateCcw size={17} /> Easy Returns</span></div>{cartLines.length ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-line"><span>US shipping</span><strong>Free</strong></div><div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><p>After payment, your order is saved securely with free US shipping and fulfillment-ready details.</p></aside></div></section>}
 
