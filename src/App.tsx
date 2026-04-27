@@ -7,7 +7,6 @@ import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
 import { supabase } from "./integrations/supabase/client";
-import { isLiveCheckoutAvailable } from "./lib/stripe";
 
 type Cart = Record<string, number>;
 type LiveTestStatus = { state: "idle" | "running" | "success" | "error"; message: string; details?: string; clientSecret?: string };
@@ -46,7 +45,6 @@ const faqs = [
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
-const liveCheckoutReady = isLiveCheckoutAvailable();
 
 const stripeGoLiveSteps = [
   "Claim the Stripe test environment with the account you want to use for payments.",
@@ -63,9 +61,6 @@ export default function App() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
-  const [manualOrder, setManualOrder] = useState({ name: "", addressLine1: "", city: "", state: "", postalCode: "" });
-  const [manualStatus, setManualStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [manualMessage, setManualMessage] = useState("");
   const [liveTest, setLiveTest] = useState<LiveTestStatus>({ state: "idle", message: "Live checkout test has not been run yet." });
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
@@ -92,22 +87,6 @@ export default function App() {
     setCheckoutOpen(true);
     setOrderPlaced(false);
     window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 40);
-  };
-
-  const placeManualOrder = async () => {
-    setManualStatus("submitting");
-    setManualMessage("");
-    const { data, error } = await supabase.functions.invoke("manual-checkout", {
-      body: { customerEmail, customerName: manualOrder.name, ...manualOrder, quantity: cart[mainProduct.id] || 1 },
-    });
-    if (error || !data?.orderNumber) {
-      setManualStatus("error");
-      setManualMessage(error?.message || "Manual order could not be placed. Please check your details and try again.");
-      return;
-    }
-    setManualStatus("success");
-    setManualMessage(`Manual order ${data.orderNumber} received. We will review payment and fulfillment next.`);
-    setCart({});
   };
 
   const placeLiveTestOrder = async () => {
