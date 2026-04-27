@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, ShieldCheck, Star, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Star, Truck, X } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
+import { supabase } from "./integrations/supabase/client";
 import galleryBeforeAfter from "./assets/cj-exact-before-after.jpg";
 import galleryDetail from "./assets/cj-exact-detail-1.jpg";
 import galleryHumanWorn from "./assets/cj-exact-lifestyle-1.jpg";
@@ -149,6 +150,30 @@ function LegalPageView({ pageKey }: { pageKey: LegalPageKey }) {
   return <section className="legal-page"><div className="legal-hero"><p className="eyebrow">Store policy</p><h1>{page.title}</h1><p>{page.intro}</p><div className="legal-meta"><span>Last updated: {businessInfo.updated}</span><span>{businessInfo.legalName}</span><span>US ecommerce policy</span></div></div><div className="legal-layout"><aside className="legal-contact-card"><strong>{pageKey === "contact-us" ? "Support response" : "Business details"}</strong><span><Mail size={16} /> {businessInfo.email}</span><span><MessageCircle size={16} /> {businessInfo.phone}</span><span><Clock3 size={16} /> 1–3 business day response</span><span><MapPin size={16} /> {businessInfo.address}</span><small>Replace these placeholders with your actual business contact information before relying on the pages publicly.</small></aside><div className="legal-content">{page.sections.map((section) => <article className="legal-card" key={section.heading}><h2>{section.heading}</h2>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</article>)}</div></div></section>;
 }
 
+type ChatMessage = { role: "assistant" | "user"; content: string };
+const starterQuestions = ["Shipping time?", "Refund policy?", "Is payment safe?"];
+
+function SupportChat() {
+  const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([{ role: "assistant", content: "Hi — I can help with shipping, returns, payment safety, product use, or order support." }]);
+
+  const askSupport = async (question = input) => {
+    const content = question.trim();
+    if (!content || loading) return;
+    const nextMessages: ChatMessage[] = [...messages, { role: "user", content }];
+    setMessages(nextMessages);
+    setInput("");
+    setLoading(true);
+    const { data, error } = await supabase.functions.invoke("support-chat", { body: { messages: nextMessages } });
+    setMessages([...nextMessages, { role: "assistant", content: error ? "Please visit our Contact Us page and our support team will help within 1–3 business days." : data?.answer }]);
+    setLoading(false);
+  };
+
+  return <aside className={`support-chat ${open ? "support-chat-open" : ""}`} aria-label="Customer support chat"><button className="support-chat-bubble" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close support chat" : "Open support chat"}>{open ? <X size={20} /> : <MessageCircle size={21} />}<span>Support</span></button>{open && <div className="support-chat-panel"><div className="support-chat-head"><div><strong>Store support</strong><span>Fast answers while you shop</span></div><button onClick={() => setOpen(false)} aria-label="Close support chat"><X size={17} /></button></div><div className="support-chat-messages" aria-live="polite">{messages.map((message, index) => <p className={message.role === "user" ? "chat-user" : "chat-assistant"} key={`${message.role}-${index}`}>{message.content}</p>)}{loading && <p className="chat-assistant">Checking that for you…</p>}</div><div className="support-chat-prompts">{starterQuestions.map((question) => <button key={question} onClick={() => askSupport(question)} disabled={loading}>{question}</button>)}</div><form className="support-chat-form" onSubmit={(event) => { event.preventDefault(); askSupport(); }}><input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask a quick question" maxLength={240} /><button type="submit" disabled={loading || !input.trim()} aria-label="Send support question"><Send size={16} /></button></form></div>}</aside>;
+}
+
 export default function App() {
   const [cart, setCart] = useState<Cart>({ [mainProduct.id]: 1 });
   const [cartOpen, setCartOpen] = useState(false);
@@ -207,7 +232,7 @@ export default function App() {
   const footer = <footer className="footer"><div className="footer-brand"><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span><small>© 2026 {businessInfo.storeName}. Product content is focused on posture-awareness support and does not make medical claims.</small></div><nav className="footer-legal" aria-label="Legal footer"><strong>Store policies</strong>{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="footer-trust"><strong>Buyer protection</strong><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-day return review</span><span><ShieldCheck size={15} /> Secure Stripe checkout</span><span><PackageCheck size={15} /> Tracked delivery estimate</span></div><div className="footer-support"><strong>Customer support</strong><span><Mail size={15} /> {businessInfo.email}</span><span><Clock3 size={15} /> 1–3 business day response</span><span>US delivery estimate: 8–23 days after processing</span></div></footer>;
 
   if (activeLegalPage) {
-    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}</div>;
+    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}<SupportChat /></div>;
   }
 
   return (
@@ -312,6 +337,7 @@ export default function App() {
       </main>
 
       {footer}
+      <SupportChat />
     </div>
   );
 }
