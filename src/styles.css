@@ -254,7 +254,7 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .hero-actions { align-items: stretch; }
   .primary-action { width: 100%; }
   .strip-section span { justify-content: flex-start; text-align: left; }
-  .nav-open, .strip-section, .reassurance-section, .benefit-grid, .conversion-grid, .trust-badge-row, .cta-trust-row, .cards-grid, .policy-section, .product-benefit-grid, .gallery-grid, .before-after-section, .form-row, .manual-grid, .footer { grid-template-columns: 1fr; }
+  .nav-open, .strip-section, .reassurance-section, .benefit-grid, .conversion-grid, .trust-badge-row, .cta-trust-row, .cards-grid, .policy-section, .product-benefit-grid, .gallery-grid, .before-after-section, .form-row, .footer { grid-template-columns: 1fr; }
   .reassurance-section { padding: 24px 18px; }
   .hero-visual, .product-stage { min-height: auto; padding: 18px; }
   .product-photo-large { width: min(100%, 300px); }
