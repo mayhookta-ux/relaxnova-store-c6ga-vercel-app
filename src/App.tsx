@@ -6,6 +6,7 @@ import { PaymentTestModeBanner } from "./components/PaymentTestModeBanner";
 import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
+import { supabase } from "./integrations/supabase/client";
 
 type Cart = Record<string, number>;
 
@@ -51,6 +52,9 @@ export default function App() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
+  const [manualOrder, setManualOrder] = useState({ name: "", addressLine1: "", city: "", state: "", postalCode: "" });
+  const [manualStatus, setManualStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [manualMessage, setManualMessage] = useState("");
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
@@ -76,6 +80,22 @@ export default function App() {
     setCheckoutOpen(true);
     setOrderPlaced(false);
     window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 40);
+  };
+
+  const placeManualOrder = async () => {
+    setManualStatus("submitting");
+    setManualMessage("");
+    const { data, error } = await supabase.functions.invoke("manual-checkout", {
+      body: { customerEmail, customerName: manualOrder.name, ...manualOrder, quantity: cart[mainProduct.id] || 1 },
+    });
+    if (error || !data?.orderNumber) {
+      setManualStatus("error");
+      setManualMessage(error?.message || "Manual order could not be placed. Please check your details and try again.");
+      return;
+    }
+    setManualStatus("success");
+    setManualMessage(`Manual order ${data.orderNumber} received. We will review payment and fulfillment next.`);
+    setCart({});
   };
 
   useEffect(() => {
