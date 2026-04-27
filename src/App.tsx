@@ -10,7 +10,7 @@ import { supabase } from "./integrations/supabase/client";
 import { isLiveCheckoutAvailable } from "./lib/stripe";
 
 type Cart = Record<string, number>;
-type LiveTestStatus = { state: "idle" | "running" | "success" | "error"; message: string; details?: string };
+type LiveTestStatus = { state: "idle" | "running" | "success" | "error"; message: string; details?: string; clientSecret?: string };
 
 const trustBadges = [
   { icon: ShieldCheck, title: "Secure Checkout", body: "Encrypted embedded payment" },
@@ -133,6 +133,7 @@ export default function App() {
       state: "success",
       message: "Live checkout test passed.",
       details: `Created live checkout session ${data.sessionId} using ${data.productName} at ${data.amount}.`,
+      clientSecret: data.clientSecret,
     });
   };
 
@@ -222,7 +223,7 @@ export default function App() {
         <section className="go-live-section" aria-label="Stripe go-live checklist">
           <div className="section-intro"><p className="eyebrow">Payment provider setup</p><h2>Stripe go-live checklist.</h2><p>Use this checklist to finish live checkout activation for the Smart Posture Corrector.</p></div>
           <div className="go-live-panel">
-            <div className={liveCheckoutReady ? "provider-status ready" : "provider-status pending"}><ShieldCheck size={20} /><strong>{liveCheckoutReady ? "Provider enabled for live checkout" : "Provider not enabled for live checkout yet"}</strong><span>{liveCheckoutReady ? "Checkout automatically routes to the live Stripe connection." : "Checkout safely routes to manual fallback until live Stripe credentials are available."}</span><button className="secondary-buy go-live-test" disabled={liveTest.state === "running"} onClick={placeLiveTestOrder}>{liveTest.state === "running" ? "Testing live checkout..." : "Place a test order"}</button><p className={`live-test-result ${liveTest.state}`}>{liveTest.message}{liveTest.details ? ` ${liveTest.details}` : ""}</p></div>
+            <div className={liveCheckoutReady ? "provider-status ready" : "provider-status pending"}><ShieldCheck size={20} /><strong>{liveCheckoutReady ? "Provider enabled for live checkout" : "Provider not enabled for live checkout yet"}</strong><span>{liveCheckoutReady ? "Checkout automatically routes to the live Stripe connection." : "Checkout safely routes to manual fallback until live Stripe credentials are available."}</span><button className="secondary-buy go-live-test" disabled={liveTest.state === "running"} onClick={placeLiveTestOrder}>{liveTest.state === "running" ? "Testing live checkout..." : "Place a test order"}</button><p className={`live-test-result ${liveTest.state}`}>{liveTest.message}{liveTest.details ? ` ${liveTest.details}` : ""} {liveTest.clientSecret && <a href="#live-test-checkout">Open embedded checkout below</a>}</p>{liveTest.clientSecret && <div id="live-test-checkout" className="live-test-checkout"><StripeEmbeddedCheckout items={[{ productId: mainProduct.id, quantity: cart[mainProduct.id] || 1 }]} customerEmail={customerEmail} clientSecret={liveTest.clientSecret} /></div>}</div>
             <ol>{stripeGoLiveSteps.map((step, index) => <li key={step}><span>{liveCheckoutReady ? <CheckCircle2 size={18} /> : index === 0 ? <Clock3 size={18} /> : <ArrowRight size={18} />}</span><p>{step}</p></li>)}</ol>
           </div>
         </section>

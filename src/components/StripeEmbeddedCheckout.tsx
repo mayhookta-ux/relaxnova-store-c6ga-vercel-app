@@ -10,10 +10,13 @@ export type CheckoutLineItem = {
 type StripeEmbeddedCheckoutProps = {
   items: CheckoutLineItem[];
   customerEmail?: string;
+  clientSecret?: string;
 };
 
-export function StripeEmbeddedCheckout({ items, customerEmail }: StripeEmbeddedCheckoutProps) {
+export function StripeEmbeddedCheckout({ items, customerEmail, clientSecret }: StripeEmbeddedCheckoutProps) {
   const fetchClientSecret = async (): Promise<string> => {
+    if (clientSecret) return clientSecret;
+
     const { data, error } = await supabase.functions.invoke("create-checkout", {
       body: {
         items,

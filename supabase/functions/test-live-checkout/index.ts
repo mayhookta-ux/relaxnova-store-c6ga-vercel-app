@@ -44,7 +44,7 @@ Deno.serve(async (req) => {
       payment_intent_data: { metadata: { productId: product.id, sku: product.sku, source: "live_checkout_test" } },
     });
 
-    return new Response(JSON.stringify({ ok: true, sessionId: session.id, clientSecretCreated: Boolean(session.client_secret), productName: product.name, amount: "$34.99 USD", environment: env }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    return new Response(JSON.stringify({ ok: true, sessionId: session.id, clientSecret: session.client_secret, clientSecretCreated: Boolean(session.client_secret), productName: product.name, amount: "$34.99 USD", environment: env }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Live checkout test could not be started";
     return new Response(JSON.stringify({ ok: false, error: message, environment: "live" }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
