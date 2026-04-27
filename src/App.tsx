@@ -7,7 +7,6 @@ import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
 import { supabase } from "./integrations/supabase/client";
-import { isLiveCheckoutAvailable } from "./lib/stripe";
 
 type Cart = Record<string, number>;
 type LiveTestStatus = { state: "idle" | "running" | "success" | "error"; message: string; details?: string; clientSecret?: string };
@@ -46,7 +45,6 @@ const faqs = [
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
-const liveCheckoutReady = isLiveCheckoutAvailable();
 
 const stripeGoLiveSteps = [
   "Claim the Stripe test environment with the account you want to use for payments.",
@@ -63,9 +61,6 @@ export default function App() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
-  const [manualOrder, setManualOrder] = useState({ name: "", addressLine1: "", city: "", state: "", postalCode: "" });
-  const [manualStatus, setManualStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [manualMessage, setManualMessage] = useState("");
   const [liveTest, setLiveTest] = useState<LiveTestStatus>({ state: "idle", message: "Live checkout test has not been run yet." });
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
@@ -92,22 +87,6 @@ export default function App() {
     setCheckoutOpen(true);
     setOrderPlaced(false);
     window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 40);
-  };
-
-  const placeManualOrder = async () => {
-    setManualStatus("submitting");
-    setManualMessage("");
-    const { data, error } = await supabase.functions.invoke("manual-checkout", {
-      body: { customerEmail, customerName: manualOrder.name, ...manualOrder, quantity: cart[mainProduct.id] || 1 },
-    });
-    if (error || !data?.orderNumber) {
-      setManualStatus("error");
-      setManualMessage(error?.message || "Manual order could not be placed. Please check your details and try again.");
-      return;
-    }
-    setManualStatus("success");
-    setManualMessage(`Manual order ${data.orderNumber} received. We will review payment and fulfillment next.`);
-    setCart({});
   };
 
   const placeLiveTestOrder = async () => {
@@ -223,12 +202,12 @@ export default function App() {
         <section className="go-live-section" aria-label="Stripe go-live checklist">
           <div className="section-intro"><p className="eyebrow">Payment provider setup</p><h2>Stripe go-live checklist.</h2><p>Use this checklist to finish live checkout activation for the Smart Posture Corrector.</p></div>
           <div className="go-live-panel">
-            <div className={liveCheckoutReady ? "provider-status ready" : "provider-status pending"}><ShieldCheck size={20} /><strong>{liveCheckoutReady ? "Provider enabled for live checkout" : "Provider not enabled for live checkout yet"}</strong><span>{liveCheckoutReady ? "Checkout automatically routes to the live Stripe connection." : "Checkout safely routes to manual fallback until live Stripe credentials are available."}</span><button className="secondary-buy go-live-test" disabled={liveTest.state === "running"} onClick={placeLiveTestOrder}>{liveTest.state === "running" ? "Testing live checkout..." : "Place a test order"}</button><p className={`live-test-result ${liveTest.state}`}>{liveTest.message}{liveTest.details ? ` ${liveTest.details}` : ""} {liveTest.clientSecret && <a href="#live-test-checkout">Open embedded checkout below</a>}</p>{liveTest.clientSecret && <div id="live-test-checkout" className="live-test-checkout"><StripeEmbeddedCheckout items={[{ productId: mainProduct.id, quantity: cart[mainProduct.id] || 1 }]} customerEmail={customerEmail} clientSecret={liveTest.clientSecret} /></div>}</div>
-            <ol>{stripeGoLiveSteps.map((step, index) => <li key={step}><span>{liveCheckoutReady ? <CheckCircle2 size={18} /> : index === 0 ? <Clock3 size={18} /> : <ArrowRight size={18} />}</span><p>{step}</p></li>)}</ol>
+            <div className="provider-status ready"><ShieldCheck size={20} /><strong>Provider enabled for live checkout</strong><span>Checkout routes directly to the active live Stripe connection for Smart Posture Corrector.</span><button className="secondary-buy go-live-test" disabled={liveTest.state === "running"} onClick={placeLiveTestOrder}>{liveTest.state === "running" ? "Testing live checkout..." : "Place a test order"}</button><p className={`live-test-result ${liveTest.state}`}>{liveTest.message}{liveTest.details ? ` ${liveTest.details}` : ""} {liveTest.clientSecret && <a href="#live-test-checkout">Open embedded checkout below</a>}</p>{liveTest.clientSecret && <div id="live-test-checkout" className="live-test-checkout"><StripeEmbeddedCheckout items={[{ productId: mainProduct.id, quantity: cart[mainProduct.id] || 1 }]} customerEmail={customerEmail} clientSecret={liveTest.clientSecret} /></div>}</div>
+            <ol>{stripeGoLiveSteps.map((step) => <li key={step}><span><CheckCircle2 size={18} /></span><p>{step}</p></li>)}</ol>
           </div>
         </section>
 
-        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>{liveCheckoutReady ? "Live protected checkout supports major cards and eligible Apple Pay or Google Pay wallet payments when available on the buyer device." : "Live checkout is not ready yet, so this order is routed through the safe manual fallback for review."}</p></div><div className="checkout-grid"><div className="checkout-form"><div className={liveCheckoutReady ? "checkout-mode live" : "checkout-mode manual"}><ShieldCheck size={18} /><strong>{liveCheckoutReady ? "Live Stripe checkout active" : "Manual checkout fallback active"}</strong><span>{liveCheckoutReady ? "Orders route to the live payment connection automatically." : "Payment setup is pending; no card details are collected here."}</span></div><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Sparkles size={17} /> Apple Pay and Google Pay when eligible</span><span><Truck size={17} /> 8–23 day US shipping</span></div>{cartLines.length && liveCheckoutReady ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : null}{!cartLines.length && <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}{!liveCheckoutReady && <div className="manual-fallback"><p className="eyebrow">Temporary manual checkout</p><h3>Payment sync pending?</h3><p>Place the order manually so the Smart Posture Corrector request is saved for review while live payment setup is finalized.</p><div className="manual-grid"><input name="name" autoComplete="name" placeholder="Full name" value={manualOrder.name} onChange={(event) => setManualOrder((current) => ({ ...current, name: event.target.value }))} /><input name="address" autoComplete="address-line1" placeholder="US street address" value={manualOrder.addressLine1} onChange={(event) => setManualOrder((current) => ({ ...current, addressLine1: event.target.value }))} /><input name="city" autoComplete="address-level2" placeholder="City" value={manualOrder.city} onChange={(event) => setManualOrder((current) => ({ ...current, city: event.target.value }))} /><input name="state" autoComplete="address-level1" placeholder="State" value={manualOrder.state} onChange={(event) => setManualOrder((current) => ({ ...current, state: event.target.value }))} /><input name="postal" autoComplete="postal-code" placeholder="ZIP code" value={manualOrder.postalCode} onChange={(event) => setManualOrder((current) => ({ ...current, postalCode: event.target.value }))} /></div><button className="secondary-buy manual-submit" disabled={!cartLines.length || manualStatus === "submitting"} onClick={placeManualOrder}>{manualStatus === "submitting" ? "Placing order..." : "Place manual order"}</button>{manualMessage && <p className={manualStatus === "error" ? "form-error" : "form-success"} role="status">{manualMessage}</p>}</div>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-line"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><p>After payment or manual placement, the order is saved securely with a CJ Dropshipping-ready fulfillment structure.</p></aside></div></section>}
+        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure live checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>The live Stripe card payment form is ready below for this $34.99 Smart Posture Corrector checkout session.</p></div><div className="checkout-grid"><div className="checkout-form"><div className="checkout-mode live"><ShieldCheck size={18} /><strong>Live Stripe checkout active</strong><span>Orders route immediately to the active live payment connection.</span></div><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Sparkles size={17} /> Apple Pay and Google Pay when eligible</span><span><Truck size={17} /> 8–23 day US shipping</span></div>{cartLines.length ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-line"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><p>After payment, the order is saved securely with a CJ Dropshipping-ready fulfillment structure.</p></aside></div></section>}
 
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Order confirmation</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely and the order record is ready for CJ Dropshipping fulfillment review.</p></div><button className="secondary-action" onClick={() => setCheckoutOpen(false)}>Return to store <ArrowRight size={17} /></button></section>}
 

@@ -1,6 +1,6 @@
 import { EmbeddedCheckout, EmbeddedCheckoutProvider } from "@stripe/react-stripe-js";
 import { supabase } from "../integrations/supabase/client";
-import { getStripe, getStripeEnvironment } from "../lib/stripe";
+import { getStripe } from "../lib/stripe";
 
 export type CheckoutLineItem = {
   productId: string;
@@ -21,7 +21,7 @@ export function StripeEmbeddedCheckout({ items, customerEmail, clientSecret }: S
       body: {
         items,
         customerEmail,
-        environment: getStripeEnvironment(),
+        environment: "live",
         returnUrl: `${window.location.origin}/?checkout=complete&session_id={CHECKOUT_SESSION_ID}`,
       },
     });

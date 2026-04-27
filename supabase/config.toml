@@ -6,8 +6,5 @@ verify_jwt = false
 [functions.payments-webhook]
 verify_jwt = false
 
-[functions.manual-checkout]
-verify_jwt = false
-
 [functions.test-live-checkout]
 verify_jwt = false
