@@ -22,7 +22,7 @@ export function StripeEmbeddedCheckout({ items, customerEmail, clientSecret }: S
         items,
         customerEmail,
         environment: "live",
-        returnUrl: `${window.location.origin}/?checkout=complete&session_id={CHECKOUT_SESSION_ID}`,
+        returnUrl: `${window.location.origin}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
       },
     });
 
