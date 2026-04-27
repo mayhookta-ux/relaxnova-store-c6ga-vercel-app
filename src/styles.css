@@ -248,7 +248,7 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
 .summary-badges svg { color: hsl(var(--gold)); }
 .confirmation-section { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin: 0 clamp(18px, 5vw, 80px) clamp(60px, 7vw, 90px); }
 .legal-page { background: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted) / 0.34)); }
-.legal-hero { max-width: 980px; margin: 0 auto 38px; text-align: center; }
+.legal-hero { max-width: 980px; margin: 0 auto 42px; text-align: center; }
 .legal-hero h1 { font-size: clamp(46px, 6vw, 78px); }
 .legal-hero p { margin: 18px auto 0; max-width: 760px; color: hsl(var(--muted-foreground)); line-height: 1.78; font-weight: 700; }
 .legal-meta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
@@ -265,10 +265,15 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
 .legal-card h2 { font-size: clamp(28px, 3vw, 42px); margin-bottom: 14px; }
 .legal-card p { margin: 0 0 14px; color: hsl(var(--muted-foreground)); line-height: 1.82; font-weight: 700; }
 .legal-card p:last-child { margin-bottom: 0; }
-.footer { display: grid; grid-template-columns: 1.3fr 1fr 1fr minmax(180px, auto); gap: 22px; align-items: start; padding: 42px clamp(18px, 5vw, 80px); border-top: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--muted-foreground)); font-size: 13px; }
-.footer strong { color: hsl(var(--foreground)); }
-.footer div, .footer nav, .social-row { display: grid; gap: 8px; }
-.footer a:hover { color: hsl(var(--foreground)); }
+.footer { display: grid; grid-template-columns: 1.2fr 0.9fr 1fr 1fr; gap: 28px; align-items: start; padding: 52px clamp(18px, 5vw, 80px); border-top: 1px solid hsl(var(--border)); background: linear-gradient(180deg, hsl(var(--card)), hsl(var(--ivory))); color: hsl(var(--muted-foreground)); font-size: 13px; }
+.footer strong { color: hsl(var(--foreground)); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer-brand, .footer-legal, .footer-trust, .footer-support { display: grid; gap: 11px; align-content: start; }
+.footer-brand > strong { font-family: "Cormorant Garamond", Georgia, serif; font-size: 28px; letter-spacing: 0; text-transform: none; }
+.footer-brand span, .footer-brand small { line-height: 1.65; font-weight: 700; }
+.footer a, .footer-trust span, .footer-support span { display: inline-flex; align-items: center; gap: 8px; width: fit-content; color: hsl(var(--primary)); font-weight: 850; line-height: 1.45; }
+.footer a { border-bottom: 1px solid transparent; }
+.footer a:hover { border-color: hsl(var(--gold)); color: hsl(var(--foreground)); }
+.footer svg { color: hsl(var(--gold)); flex: 0 0 auto; }
 
 @media (max-width: 1100px) {
   .benefit-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
