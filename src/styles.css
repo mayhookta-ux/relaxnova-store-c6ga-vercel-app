@@ -256,6 +256,7 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .benefit-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .conversion-grid, .trust-badge-row, .satisfaction-row, .reassurance-section, .product-benefit-grid, .cta-trust-row { grid-template-columns: repeat(2, 1fr); }
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .premium-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 980px) {
@@ -284,6 +285,9 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .mobile-sticky-buy { display: flex; }
   .strip-section span { text-align: left; min-height: 74px; padding: 14px 16px; }
   .nav-open, .strip-section, .reassurance-section, .benefit-grid, .conversion-grid, .trust-badge-row, .satisfaction-row, .cta-trust-row, .cards-grid, .policy-section, .product-benefit-grid, .gallery-grid, .before-after-section, .form-row, .footer { grid-template-columns: 1fr; }
+  .premium-gallery-grid { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-inline: -18px; padding-inline: 18px; }
+  .premium-gallery-card, .gallery-featured, .gallery-tall, .gallery-wide { flex: 0 0 82vw; min-height: 460px; grid-column: auto; grid-row: auto; scroll-snap-align: start; }
+  .gallery-wide { min-height: 330px; }
   .reassurance-section { padding: 24px 18px; }
   .hero-visual, .product-stage { min-height: auto; padding: 18px; }
   .product-photo-large { width: min(100%, 300px); }
