@@ -117,7 +117,7 @@ const legalPages: Record<LegalPageKey, { title: string; intro: string; sections:
       { heading: "Customer address responsibility", body: ["Customers are responsible for entering a complete and accurate shipping address, including apartment, unit, suite, building, ZIP code, and valid contact information.", "We are not responsible for failed delivery, non-delivery, returned packages, extra carrier fees, or replacement costs caused by incorrect, incomplete, inaccessible, or undeliverable addresses submitted by the customer."] },
       { heading: "Carrier delay disclaimer", body: ["Delivery dates are estimates, not guarantees. Carriers, customs agencies, weather events, regional disruptions, security checks, holiday volume, local delivery access, and last-mile delivery issues may delay packages outside our control.", "A delayed package is not considered lost while tracking remains active, recently updated, or while the carrier indicates the shipment is still moving through the network. We will support reasonable tracking investigations, but carrier delays alone do not automatically create refund eligibility."] },
       { heading: "Lost, delivered, or returned packages", body: ["If tracking shows delivered but you cannot locate the package, check household members, neighbors, mailrooms, lockers, building management, and the local carrier before contacting support.", "If a package is returned, refused, abandoned, or undeliverable due to customer action or address problems, we may deduct fulfillment, reshipment, return, and handling costs from any approved resolution."] },
-      { heading: "International orders", body: ["This storefront is currently written for US ecommerce traffic. If international shipping is enabled later, duties, taxes, import fees, customs clearance, and delivery times should be reviewed and disclosed before accepting international orders."] }
+      { heading: "International orders", body: ["Storefront messaging is currently optimized for US buyers. If checkout accepts non-US destinations, delivery times, import duties, taxes, customs fees, and carrier availability may vary and remain the customer’s responsibility unless clearly stated otherwise at checkout."] }
     ]
   },
   "contact-us": {
@@ -146,6 +146,7 @@ const pageFromHash = (hash: string): LegalPageKey | null => {
 };
 
 const supportFallback = "I don’t want to guess on that. Please visit our Contact Us page and our support team will help within 1–3 business days.";
+const isValidEmail = (value: string) => !value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
 function LegalPageView({ pageKey }: { pageKey: LegalPageKey }) {
   const page = legalPages[pageKey];
@@ -168,9 +169,14 @@ function SupportChat() {
     setMessages(nextMessages);
     setInput("");
     setLoading(true);
-    const { data, error } = await supabase.functions.invoke("support-chat", { body: { messages: nextMessages } });
-    setMessages([...nextMessages, { role: "assistant", content: error || !data?.answer ? supportFallback : data.answer }]);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("support-chat", { body: { messages: nextMessages } });
+      setMessages([...nextMessages, { role: "assistant", content: error || !data?.answer ? supportFallback : data.answer }]);
+    } catch {
+      setMessages([...nextMessages, { role: "assistant", content: supportFallback }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return <aside className={`support-chat ${open ? "support-chat-open" : ""}`} aria-label="Customer support chat"><button className="support-chat-bubble" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close support chat" : "Open support chat"}>{open ? <X size={20} /> : <MessageCircle size={21} />}<span>Ask support</span></button>{open && <div className="support-chat-panel"><div className="support-chat-head"><div><strong>Customer Support</strong><span>Quick answers about shipping, orders, and product help</span></div><button onClick={() => setOpen(false)} aria-label="Close support chat"><X size={17} /></button></div><div className="support-chat-messages" aria-live="polite">{messages.map((message, index) => <p className={message.role === "user" ? "chat-user" : "chat-assistant"} key={`${message.role}-${index}`}>{message.content}</p>)}{loading && <p className="chat-assistant">One moment — checking that for you.</p>}</div><div className="support-chat-prompts">{starterQuestions.map((question) => <button key={question} onClick={() => askSupport(question)} disabled={loading}>{question}</button>)}</div><form className="support-chat-form" onSubmit={(event) => { event.preventDefault(); askSupport(); }}><input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask about your order" maxLength={240} /><button type="submit" disabled={loading || !input.trim()} aria-label="Send support question"><Send size={16} /></button></form></div>}</aside>;
