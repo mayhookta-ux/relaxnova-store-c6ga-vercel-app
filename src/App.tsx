@@ -8,11 +8,11 @@ import { mainProduct, products } from "./data/products";
 
 type Cart = Record<string, number>;
 const trustBadges = [
-  { icon: Truck, title: "Free US Shipping", body: "Included in the $39 price" },
+  { icon: Truck, title: "Free US Shipping", body: "No surprise fee at checkout" },
   { icon: RotateCcw, title: "Easy Returns", body: "30-day satisfaction review" },
-  { icon: LockKeyhole, title: "Secure Checkout", body: "Encrypted card payment" },
-  { icon: PackageCheck, title: "Fast Delivery", body: "Tracked 8–23 day US estimate" },
-  { icon: BadgeCheck, title: "Verified Buyers", body: "4.8 average rating" }
+  { icon: LockKeyhole, title: "Secure Checkout", body: "Encrypted live payment" },
+  { icon: PackageCheck, title: "Tracked Delivery", body: "8–23 day US estimate" },
+  { icon: BadgeCheck, title: "Verified Buyers", body: "4.8/5 customer rating" }
 ];
 
 const benefits = [
@@ -87,6 +87,7 @@ export default function App() {
     <div id="home">
       <Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} />
       <CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} />
+      {!checkoutOpen && !orderPlaced && <div className="mobile-sticky-buy" role="region" aria-label="Quick purchase bar"><div><strong>$39 shipped</strong><span>4.8★ · Free US Shipping</span></div><button onClick={openCheckout}>Buy now</button></div>}
 
       <main>
         <section className="hero-section">
@@ -111,7 +112,7 @@ export default function App() {
         </section>
 
         <section className="strip-section" aria-label="Trust badges">
-          {trustBadges.map(({ icon: Icon, title }) => <span key={title}><Icon size={18} /> {title}</span>)}
+          {trustBadges.map(({ icon: Icon, title, body }) => <span key={title}><Icon size={20} /><strong>{title}</strong><small>{body}</small></span>)}
         </section>
 
         <section className="reassurance-section" aria-label="Delivery and product reassurance">
@@ -149,6 +150,7 @@ export default function App() {
         <section id="reviews" className="reviews-section">
           <div className="section-intro"><p className="eyebrow">Verified buyer proof</p><h2>Trusted by 2,400+ US customers building better posture habits.</h2><p>4.8 average rating · 96% satisfaction indicator · Premium fit for desk work, calls, and daily posture reminders.</p></div>
           <div className="satisfaction-row" aria-label="Customer satisfaction indicators"><span><strong>2,400+</strong><small>US customers</small></span><span><strong>4.8/5</strong><small>Average rating</small></span><span><strong>96%</strong><small>Satisfaction indicator</small></span><span><strong>$0</strong><small>US shipping fee</small></span></div>
+          <article className="featured-review"><div><span className="stars">★★★★★</span><h3>“The reminder I needed before desk posture became pain.”</h3><p>Verified buyers consistently mention the same wins: gentle vibration cues, lightweight daily fit, simple checkout, and free US shipping already included in the $39 price.</p></div><aside><strong>2,400+</strong><small>verified customer signal</small></aside></article>
           <div className="cards-grid review-grid">{reviews.map((review) => <article className="review-card" key={review.name}><div className="review-photo" aria-hidden="true">{review.photo}</div><div className="stars">{review.rating}</div><span><BadgeCheck size={15} /> {review.label}</span><p>“{review.quote}”</p><strong>{review.name}</strong><small>{review.location}</small></article>)}</div>
         </section>
 
