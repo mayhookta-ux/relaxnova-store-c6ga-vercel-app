@@ -247,6 +247,24 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
 .summary-badges span { display: inline-flex; align-items: center; gap: 8px; border: 1px solid hsl(var(--border)); border-radius: 14px; background: hsl(var(--background)); padding: 10px 12px; color: hsl(var(--primary)); font-size: 12px; font-weight: 900; }
 .summary-badges svg { color: hsl(var(--gold)); }
 .confirmation-section { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin: 0 clamp(18px, 5vw, 80px) clamp(60px, 7vw, 90px); }
+.legal-page { background: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted) / 0.34)); }
+.legal-hero { max-width: 980px; margin: 0 auto 38px; text-align: center; }
+.legal-hero h1 { font-size: clamp(46px, 6vw, 78px); }
+.legal-hero p { margin: 18px auto 0; max-width: 760px; color: hsl(var(--muted-foreground)); line-height: 1.78; font-weight: 700; }
+.legal-meta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.legal-meta span, .legal-contact-card span { border: 1px solid hsl(var(--border)); border-radius: 999px; background: hsl(var(--card)); color: hsl(var(--primary)); padding: 9px 13px; font-size: 12px; font-weight: 900; }
+.legal-layout { display: grid; grid-template-columns: minmax(250px, 340px) minmax(0, 1fr); gap: 24px; align-items: start; max-width: 1180px; margin: 0 auto; }
+.legal-contact-card, .legal-card { border: 1px solid hsl(var(--border)); border-radius: var(--radius); background: hsl(var(--card)); box-shadow: var(--soft-shadow); }
+.legal-contact-card { position: sticky; top: 98px; display: grid; gap: 12px; padding: 24px; }
+.legal-contact-card strong { color: hsl(var(--foreground)); font-size: 16px; }
+.legal-contact-card span { display: inline-flex; align-items: center; gap: 8px; border-radius: 16px; line-height: 1.35; }
+.legal-contact-card svg { color: hsl(var(--gold)); flex: 0 0 auto; }
+.legal-contact-card small { color: hsl(var(--muted-foreground)); line-height: 1.65; font-weight: 800; }
+.legal-content { display: grid; gap: 16px; }
+.legal-card { padding: clamp(24px, 3vw, 36px); }
+.legal-card h2 { font-size: clamp(28px, 3vw, 42px); margin-bottom: 14px; }
+.legal-card p { margin: 0 0 14px; color: hsl(var(--muted-foreground)); line-height: 1.82; font-weight: 700; }
+.legal-card p:last-child { margin-bottom: 0; }
 .footer { display: grid; grid-template-columns: 1.3fr 1fr 1fr minmax(180px, auto); gap: 22px; align-items: start; padding: 42px clamp(18px, 5vw, 80px); border-top: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--muted-foreground)); font-size: 13px; }
 .footer strong { color: hsl(var(--foreground)); }
 .footer div, .footer nav, .social-row { display: grid; gap: 8px; }
@@ -264,11 +282,12 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .site-header { flex-wrap: wrap; min-height: 70px; }
   .nav { order: 3; display: none; width: 100%; padding: 14px 0 18px; border-top: 1px solid hsl(var(--border)); }
   .nav-open { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .hero-section, .product-grid, .guarantee-section, .checkout-grid, .contact-section, .before-after-section, .featured-review { grid-template-columns: 1fr; }
+  .hero-section, .product-grid, .guarantee-section, .checkout-grid, .contact-section, .before-after-section, .featured-review, .legal-layout { grid-template-columns: 1fr; }
   .hero-visual, .product-stage { min-height: 340px; }
   .strip-section, .policy-section { grid-template-columns: 1fr 1fr; }
   .product-photo-large { width: min(100%, 390px); }
   .order-summary { position: static; }
+  .legal-contact-card { position: static; }
   .confirmation-section { flex-direction: column; align-items: flex-start; }
   .footer { grid-template-columns: 1fr 1fr; }
 }
@@ -280,6 +299,8 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   h1 { font-size: 48px; }
   h2 { font-size: 38px; }
   h3 { font-size: 29px; }
+  .legal-hero { text-align: left; }
+  .legal-meta { justify-content: flex-start; }
   .hero-actions { align-items: stretch; }
   .primary-action { width: 100%; }
   .mobile-sticky-buy { display: flex; }
