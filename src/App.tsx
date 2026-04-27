@@ -20,7 +20,7 @@ const trustBadges = [
   { icon: RotateCcw, title: "Easy Returns", body: "30-day satisfaction review" },
   { icon: LockKeyhole, title: "Secure Checkout", body: "Encrypted live payment" },
   { icon: PackageCheck, title: "Tracked Delivery", body: "8–23 day US estimate" },
-  { icon: BadgeCheck, title: "Verified Buyers", body: "4.8/5 customer rating" }
+  { icon: BadgeCheck, title: "Buyer Confidence", body: "Clear policies before checkout" }
 ];
 
 const benefits = [
@@ -39,10 +39,10 @@ const reviews = [
 const faqs = [
   ["Is US shipping really free?", "Yes. The final price is $39 with Free US Shipping included, so checkout does not add a separate shipping fee."],
   ["How does the posture corrector work?", "It senses posture changes and sends a gentle vibration cue when you slouch, helping you build a more upright daily habit."],
-  ["Can it help neck pain?", "It is designed to support better posture awareness and daily comfort. It is not medical treatment, but many buyers use it to reduce posture-related neck and shoulder strain."],
+  ["Can it help neck comfort?", "It is designed to support posture awareness and daily comfort habits. It is not medical treatment and does not diagnose, treat, or cure pain or health conditions."],
   ["What is included?", "Package content: 1 Smart Posture Corrector with adjustable strap and LED reminder counter."],
   ["How long is delivery to the United States?", "Estimated US delivery is 8–23 days with tracking once fulfilled."],
-  ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day satisfaction window when returned complete, clean and safely packed."]
+  ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day satisfaction window when return instructions are followed and the item is complete, clean, undamaged, and safely packed."]
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
@@ -117,7 +117,7 @@ const legalPages: Record<LegalPageKey, { title: string; intro: string; sections:
       { heading: "Customer address responsibility", body: ["Customers are responsible for entering a complete and accurate shipping address, including apartment, unit, suite, building, ZIP code, and valid contact information.", "We are not responsible for failed delivery, non-delivery, returned packages, extra carrier fees, or replacement costs caused by incorrect, incomplete, inaccessible, or undeliverable addresses submitted by the customer."] },
       { heading: "Carrier delay disclaimer", body: ["Delivery dates are estimates, not guarantees. Carriers, customs agencies, weather events, regional disruptions, security checks, holiday volume, local delivery access, and last-mile delivery issues may delay packages outside our control.", "A delayed package is not considered lost while tracking remains active, recently updated, or while the carrier indicates the shipment is still moving through the network. We will support reasonable tracking investigations, but carrier delays alone do not automatically create refund eligibility."] },
       { heading: "Lost, delivered, or returned packages", body: ["If tracking shows delivered but you cannot locate the package, check household members, neighbors, mailrooms, lockers, building management, and the local carrier before contacting support.", "If a package is returned, refused, abandoned, or undeliverable due to customer action or address problems, we may deduct fulfillment, reshipment, return, and handling costs from any approved resolution."] },
-      { heading: "International orders", body: ["This storefront is currently written for US ecommerce traffic. If international shipping is enabled later, duties, taxes, import fees, customs clearance, and delivery times should be reviewed and disclosed before accepting international orders."] }
+      { heading: "International orders", body: ["Storefront messaging is currently optimized for US buyers. If checkout accepts non-US destinations, delivery times, import duties, taxes, customs fees, and carrier availability may vary and remain the customer’s responsibility unless clearly stated otherwise at checkout."] }
     ]
   },
   "contact-us": {
@@ -146,6 +146,7 @@ const pageFromHash = (hash: string): LegalPageKey | null => {
 };
 
 const supportFallback = "I don’t want to guess on that. Please visit our Contact Us page and our support team will help within 1–3 business days.";
+const isValidEmail = (value: string) => !value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
 function LegalPageView({ pageKey }: { pageKey: LegalPageKey }) {
   const page = legalPages[pageKey];
@@ -168,9 +169,14 @@ function SupportChat() {
     setMessages(nextMessages);
     setInput("");
     setLoading(true);
-    const { data, error } = await supabase.functions.invoke("support-chat", { body: { messages: nextMessages } });
-    setMessages([...nextMessages, { role: "assistant", content: error || !data?.answer ? supportFallback : data.answer }]);
-    setLoading(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("support-chat", { body: { messages: nextMessages } });
+      setMessages([...nextMessages, { role: "assistant", content: error || !data?.answer ? supportFallback : data.answer }]);
+    } catch {
+      setMessages([...nextMessages, { role: "assistant", content: supportFallback }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return <aside className={`support-chat ${open ? "support-chat-open" : ""}`} aria-label="Customer support chat"><button className="support-chat-bubble" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close support chat" : "Open support chat"}>{open ? <X size={20} /> : <MessageCircle size={21} />}<span>Ask support</span></button>{open && <div className="support-chat-panel"><div className="support-chat-head"><div><strong>Customer Support</strong><span>Quick answers about shipping, orders, and product help</span></div><button onClick={() => setOpen(false)} aria-label="Close support chat"><X size={17} /></button></div><div className="support-chat-messages" aria-live="polite">{messages.map((message, index) => <p className={message.role === "user" ? "chat-user" : "chat-assistant"} key={`${message.role}-${index}`}>{message.content}</p>)}{loading && <p className="chat-assistant">One moment — checking that for you.</p>}</div><div className="support-chat-prompts">{starterQuestions.map((question) => <button key={question} onClick={() => askSupport(question)} disabled={loading}>{question}</button>)}</div><form className="support-chat-form" onSubmit={(event) => { event.preventDefault(); askSupport(); }}><input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask about your order" maxLength={240} /><button type="submit" disabled={loading || !input.trim()} aria-label="Send support question"><Send size={16} /></button></form></div>}</aside>;
@@ -231,7 +237,7 @@ export default function App() {
     return () => window.removeEventListener("hashchange", updatePageFromHash);
   }, []);
 
-  const footer = <footer className="footer"><div className="footer-brand"><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span><small>© 2026 {businessInfo.storeName}. Product content is focused on posture-awareness support and does not make medical claims.</small></div><nav className="footer-legal" aria-label="Legal footer"><strong>Store policies</strong>{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="footer-trust"><strong>Buyer protection</strong><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-day return review</span><span><ShieldCheck size={15} /> Secure Stripe checkout</span><span><PackageCheck size={15} /> Tracked delivery estimate</span></div><div className="footer-support"><strong>Customer support</strong><span><Mail size={15} /> {businessInfo.email}</span><span><Clock3 size={15} /> 1–3 business day response</span><span>US delivery estimate: 8–23 days after processing</span></div></footer>;
+  const footer = <footer className="footer"><div className="footer-brand"><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span><small>© 2026 {businessInfo.storeName}. Product content is focused on posture-awareness support and does not make medical claims.</small></div><nav className="footer-legal" aria-label="Legal footer"><strong>Store policies</strong>{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="footer-trust"><strong>Buyer protection</strong><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-day return review</span><span><ShieldCheck size={15} /> Secure Stripe checkout</span><span><PackageCheck size={15} /> Tracked delivery estimate</span></div><div className="footer-support"><strong>Customer support</strong><span><Mail size={15} /> {businessInfo.email}</span><span><Clock3 size={15} /> 1–3 business day response</span><span><PackageCheck size={15} /> US delivery estimate: 8–23 days after processing</span></div></footer>;
 
   if (activeLegalPage) {
     return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}<SupportChat /></div>;
@@ -247,8 +253,8 @@ export default function App() {
         <section className="hero-section">
           <div className="hero-copy">
             <p className="eyebrow">Smart posture relief · Free US Shipping</p>
-            <h1>Relieve neck and back pain while improving posture every day.</h1>
-            <p className="hero-text">Trusted by daily desk users, drivers, and remote workers for posture support, comfort, and visible daily relief.</p>
+            <h1>Build better posture habits with gentle daily reminders.</h1>
+            <p className="hero-text">Made for desk users, drivers, and remote workers who want posture awareness, upper-back support, and a more confident daily fit.</p>
             <div className="hero-offer-pill"><Truck size={17} /> Free Shipping Included Today</div>
             <div className="hero-actions">
               <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Get Yours Today — Free Shipping</button>
@@ -258,7 +264,7 @@ export default function App() {
             <div className="proof-row">
               <span><Star size={16} /> 4.8/5 from 2,400+ customers</span>
               <span><Truck size={16} /> Free US Shipping</span>
-              <span><RotateCcw size={16} /> Easy Returns</span>
+              <span><RotateCcw size={16} /> 30-Day Return Review</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
             </div>
           </div>
@@ -271,7 +277,7 @@ export default function App() {
 
         <section className="reassurance-section" aria-label="Delivery and product reassurance">
           <article><Truck size={21} /><h3>Free US Shipping</h3><p>The final $39 offer includes shipping, so there is no separate delivery fee at checkout.</p></article>
-          <article><RotateCcw size={21} /><h3>Easy Returns</h3><p>Covered by a 30-day satisfaction review when returned complete, clean and safely packed.</p></article>
+          <article><RotateCcw size={21} /><h3>30-Day Return Review</h3><p>Covered by a clear satisfaction review when returned complete, clean and safely packed.</p></article>
           <article><LockKeyhole size={21} /><h3>Secure Checkout</h3><p>Encrypted embedded payment with major card support and eligible wallet payments.</p></article>
         </section>
 
@@ -290,7 +296,7 @@ export default function App() {
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — $39 shipped</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> Easy Returns</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
-              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Fast Delivery · Easy Returns</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Tracked Delivery · 30-Day Return Review</div>
             </div>
           </div>
         </section>
@@ -307,9 +313,9 @@ export default function App() {
         </section>
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Verified buyer proof</p><h2>Trusted by 2,400+ US customers building better posture habits.</h2><p>4.8 average rating · 96% satisfaction indicator · Premium fit for desk work, calls, and daily posture reminders.</p></div>
-          <div className="satisfaction-row" aria-label="Customer satisfaction indicators"><span><strong>2,400+</strong><small>US customers</small></span><span><strong>4.8/5</strong><small>Average rating</small></span><span><strong>96%</strong><small>Satisfaction indicator</small></span><span><strong>$0</strong><small>US shipping fee</small></span></div>
-          <article className="featured-review"><div><span className="stars">★★★★★</span><h3>“The reminder I needed before desk posture became pain.”</h3><p>Verified buyers consistently mention the same wins: gentle vibration cues, lightweight daily fit, simple checkout, and free US shipping already included in the $39 price.</p></div><aside><strong>2,400+</strong><small>verified customer signal</small></aside></article>
+          <div className="section-intro"><p className="eyebrow">Buyer confidence</p><h2>Built for shoppers who want clarity before checkout.</h2><p>Transparent pricing · Free US Shipping · Secure payment · Clear delivery and return expectations.</p></div>
+          <div className="satisfaction-row" aria-label="Customer confidence indicators"><span><strong>$39</strong><small>Product offer</small></span><span><strong>$0</strong><small>US shipping fee</small></span><span><strong>30</strong><small>Day return review</small></span><span><strong>8–23</strong><small>Day US estimate</small></span></div>
+          <article className="featured-review"><div><span className="stars">★★★★★</span><h3>“A simple reminder for better posture habits.”</h3><p>Customers can review the product fit, delivery estimate, return conditions, secure payment details, and fulfillment expectations before placing an order.</p></div><aside><strong>Clear</strong><small>checkout expectations</small></aside></article>
           <div className="cards-grid review-grid">{reviews.map((review) => <article className="review-card" key={review.name}><div className="review-photo" aria-hidden="true">{review.photo}</div><div className="stars">{review.rating}</div><span><BadgeCheck size={15} /> {review.label}</span><p>“{review.quote}”</p><strong>{review.name}</strong><small>{review.location}</small></article>)}</div>
         </section>
 
@@ -324,7 +330,7 @@ export default function App() {
         </section>
 
 
-        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure live checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>The secure card payment form is ready below for the $39 Smart Posture Corrector offer with Free US Shipping included.</p></div><div className="checkout-grid"><div className="checkout-form"><div className="checkout-mode live"><ShieldCheck size={18} /><strong>Secure card checkout</strong><span>Encrypted live payment for the $39 shipped Smart Posture Corrector offer.</span></div><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Truck size={17} /> Free US Shipping</span><span><RotateCcw size={17} /> Easy Returns</span><span><PackageCheck size={17} /> Fast Delivery</span></div>{cartLines.length ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}<small>Free US Shipping included</small></span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><div className="summary-badges"><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> Easy Returns</span><span><LockKeyhole size={15} /> Secure Checkout</span></div><p>After payment, your order is saved securely with free US shipping and fulfillment-ready details.</p></aside></div></section>}
+        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure live checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>The secure card payment form is ready below for the $39 Smart Posture Corrector offer with Free US Shipping included.</p></div><div className="checkout-grid"><div className="checkout-form"><div className="checkout-mode live"><ShieldCheck size={18} /><strong>Secure card checkout</strong><span>Encrypted live payment for the $39 shipped Smart Posture Corrector offer.</span></div><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} />{!isValidEmail(customerEmail) && <p className="form-error" role="alert">Enter a valid email address before checkout.</p>}</fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Truck size={17} /> Free US Shipping</span><span><RotateCcw size={17} /> 30-Day Return Review</span><span><PackageCheck size={17} /> Tracked Delivery</span></div>{cartLines.length && isValidEmail(customerEmail) ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail.trim()} /> : <p className="form-error" role="alert">{cartLines.length ? "Confirm your email to start secure checkout." : "Add the Smart Posture Corrector before starting checkout."}</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}<small>Free US Shipping included</small></span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><div className="summary-badges"><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-Day Return Review</span><span><LockKeyhole size={15} /> Secure Checkout</span></div><p>After payment, your order is saved securely with free US shipping and fulfillment-ready details.</p></aside></div></section>}
 
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Thank you</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely. Your order is ready for fulfillment review, and your confirmation email will be sent to the checkout email address.</p></div><button className="secondary-action" onClick={() => { window.history.replaceState({}, "", "/"); setOrderPlaced(false); }}>Return to store <ArrowRight size={17} /></button></section>}
 
