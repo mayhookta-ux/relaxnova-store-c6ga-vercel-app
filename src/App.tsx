@@ -112,6 +112,7 @@ const legalPages: Record<LegalPageKey, { title: string; intro: string; sections:
       { heading: "Processing timeline", body: ["Most orders enter fulfillment review within 1–3 business days after payment approval. During high-volume periods, holidays, inventory checks, address verification, supplier backlogs, or carrier disruptions, processing may take up to 5 business days before active carrier movement begins.", "Business days exclude weekends and major US holidays. If we identify a payment, inventory, compliance, or address issue, we may contact you before shipment or cancel and refund the order when fulfillment is not possible."] },
       { heading: "US delivery estimate", body: ["Current US delivery estimate: typically 8–23 calendar days after processing, unless a different estimate is clearly shown at checkout or in order communication. Some orders may arrive sooner, while remote areas or carrier disruptions may take longer.", "Delivery estimates are not guaranteed delivery dates. The estimate includes international or supplier-side routing where applicable, carrier transfer time, customs or security screening when relevant, and last-mile delivery movement."] },
       { heading: "Fulfillment source and tracking", body: ["Orders may be sourced and shipped through CJ Dropshipping, supplier warehouses, and logistics partners. This allows us to offer a focused product at a lower price, but shipping timelines may be longer than domestic warehouse delivery.", "Tracking information is provided when available from the fulfillment and carrier network. Tracking scans may take 3–7 days to update after a label or logistics record is created, especially while the package transfers between fulfillment and carrier networks."] },
+      { heading: "Shipping support", body: [`For RelaxNova shipping support, email ${businessInfo.email} with your order number, checkout email, delivery ZIP code, and tracking concern so our team can review the shipment details.`, "Please allow normal tracking scan delays before requesting an investigation, especially during supplier-to-carrier handoff periods."] },
       { heading: "Customer address responsibility", body: ["Customers are responsible for entering a complete and accurate shipping address, including apartment, unit, suite, building, ZIP code, and valid contact information.", "We are not responsible for failed delivery, non-delivery, returned packages, extra carrier fees, or replacement costs caused by incorrect, incomplete, inaccessible, or undeliverable addresses submitted by the customer."] },
       { heading: "Carrier delay disclaimer", body: ["Delivery dates are estimates, not guarantees. Carriers, customs agencies, weather events, regional disruptions, security checks, holiday volume, local delivery access, and last-mile delivery issues may delay packages outside our control.", "A delayed package is not considered lost while tracking remains active, recently updated, or while the carrier indicates the shipment is still moving through the network. We will support reasonable tracking investigations, but carrier delays alone do not automatically create refund eligibility."] },
       { heading: "Lost, delivered, or returned packages", body: [`If tracking shows delivered but you cannot locate the package, check household members, neighbors, mailrooms, lockers, building management, and the local carrier before contacting RelaxNova at ${businessInfo.email}.`, "If a package is returned, refused, abandoned, or undeliverable due to customer action or address problems, we may deduct fulfillment, reshipment, return, and handling costs from any approved resolution."] },
@@ -143,7 +144,7 @@ const pageFromHash = (hash: string): LegalPageKey | null => {
   return key in legalPages ? key : null;
 };
 
-const supportFallback = "I don’t want to guess on that. Please visit our Contact Us page and our support team will help within 1–3 business days.";
+const supportFallback = `I don’t want to guess on that. Please visit Contact Us or email ${businessInfo.email}, and RelaxNova support will help within 1–3 business days.`;
 const isValidEmail = (value: string) => !value.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
 function LegalPageView({ pageKey }: { pageKey: LegalPageKey }) {
@@ -158,7 +159,7 @@ function SupportChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([{ role: "assistant", content: "Hi — happy to help with shipping, returns, secure checkout, product use, or order questions." }]);
+  const [messages, setMessages] = useState<ChatMessage[]>([{ role: "assistant", content: "Hi — RelaxNova support can help with shipping, returns, secure checkout, product use, or order questions." }]);
 
   const askSupport = async (question = input) => {
     const content = question.trim();
