@@ -5,12 +5,13 @@ import { Header } from "./components/Header";
 import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
-import galleryBeforeAfter from "./assets/posture-gallery-before-after.jpg";
-import galleryDetail from "./assets/posture-gallery-material-closeup.jpg";
-import galleryHumanWorn from "./assets/posture-gallery-human-worn.jpg";
-import galleryLifestyle from "./assets/posture-gallery-lifestyle-desk.jpg";
-import galleryProductAngle from "./assets/posture-gallery-product-angle.jpg";
-import galleryProductFront from "./assets/posture-gallery-product-front.jpg";
+import galleryBeforeAfter from "./assets/cj-exact-before-after.jpg";
+import galleryDetail from "./assets/cj-exact-detail-1.jpg";
+import galleryHumanWorn from "./assets/cj-exact-lifestyle-1.jpg";
+import galleryLifestyle from "./assets/cj-exact-lifestyle-2.jpg";
+import galleryProductAngle from "./assets/cj-exact-angle.jpg";
+import galleryProductFront from "./assets/cj-exact-front.jpg";
+import galleryWearGuide from "./assets/cj-exact-wear-guide.jpg";
 
 type Cart = Record<string, number>;
 const trustBadges = [
@@ -46,12 +47,13 @@ const faqs = [
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
 
 const galleryImages = [
-  { src: galleryProductFront, title: "Studio front angle", body: "Clean premium product view on a warm white ecommerce background.", className: "gallery-featured", width: 1280, height: 1280 },
-  { src: galleryHumanWorn, title: "Natural office wear", body: "Realistic daily desk use with the corrector worn over work clothing.", className: "gallery-tall", width: 1280, height: 1600 },
-  { src: galleryProductAngle, title: "Rear product angle", body: "Adjustable strap routing, compact sensor body, and secure fit details.", width: 1280, height: 1280 },
-  { src: galleryDetail, title: "Material close-up", body: "Woven elastic texture, smooth module finish, stitching, and buckle build quality.", width: 1280, height: 1280 },
-  { src: galleryBeforeAfter, title: "Posture comparison", body: "Elegant side-profile posture reference for credible visual education.", className: "gallery-wide", width: 1600, height: 1000 },
-  { src: galleryLifestyle, title: "Desk lifestyle setting", body: "Premium modern workspace lighting for high-trust ecommerce context.", className: "gallery-wide", width: 1600, height: 1100 }
+  { src: galleryProductFront, title: "Exact CJ product front", body: "Black belt English-display corrector matched to the connected CJ SKU.", className: "gallery-featured", width: 1200, height: 1200 },
+  { src: galleryHumanWorn, title: "Exact wearable appearance", body: "Supplier-matched upper-back fit, strap position, and compact sensor placement.", className: "gallery-tall", width: 800, height: 800 },
+  { src: galleryProductAngle, title: "Exact product angle", body: "Same compact plastic module, strap proportions, and adjustable black belt shape.", width: 1200, height: 1200 },
+  { src: galleryDetail, title: "Close-up product detail", body: "Material, strap, button, charging, and LED counter details from the CJ product media.", width: 1200, height: 1200 },
+  { src: galleryBeforeAfter, title: "CJ posture visual", body: "Supplier product posture reference presented in the premium gallery layout.", className: "gallery-wide", width: 1200, height: 1200 },
+  { src: galleryWearGuide, title: "Adjustment and wear guide", body: "Visual support for fit, reminder angle, and daily usage expectations.", className: "gallery-wide", width: 1200, height: 1200 },
+  { src: galleryLifestyle, title: "Usage presentation", body: "Supplier-provided lifestyle/product context kept consistent with fulfillment media.", className: "gallery-wide", width: 1200, height: 1200 }
 ];
 
 export default function App() {
@@ -157,7 +159,7 @@ export default function App() {
         </section>
 
         <section className="premium-gallery-section" aria-label="Smart Posture Corrector product gallery">
-          <div className="section-intro"><p className="eyebrow">Premium product gallery</p><h2>Original visuals built for trust before checkout.</h2><p>Clean studio angles, natural usage, posture comparison, and material details keep the Smart Posture Corrector realistic, consistent, and conversion-focused.</p></div>
+          <div className="section-intro"><p className="eyebrow">CJ-matched product gallery</p><h2>Exact product visuals kept consistent with fulfillment.</h2><p>Studio angles, wearable appearance, posture reference, and close-up details now use the connected CJ product identity only—matching shape, straps, proportions, materials, and black upper-back wearable design.</p></div>
           <div className="premium-gallery-grid">{galleryImages.map((image) => <article className={`premium-gallery-card ${image.className || ""}`} key={image.title}><img src={image.src} alt={`${mainProduct.name} ${image.title.toLowerCase()}`} width={image.width} height={image.height} loading="lazy" /><div><strong>{image.title}</strong><span>{image.body}</span></div></article>)}</div>
         </section>
 
