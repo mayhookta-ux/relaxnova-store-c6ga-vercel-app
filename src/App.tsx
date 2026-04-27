@@ -247,12 +247,12 @@ export default function App() {
     <div id="home">
       <Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} />
       <CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} />
-      {!checkoutOpen && !orderPlaced && <div className="mobile-sticky-buy" role="region" aria-label="Quick purchase bar"><div><strong>$39 shipped</strong><span>4.8★ · Free US Shipping</span></div><button onClick={openCheckout}>Buy now</button></div>}
+      {!checkoutOpen && !orderPlaced && <div className="mobile-sticky-buy" role="region" aria-label="Quick purchase bar"><div><strong>$39 shipped</strong><span>Secure checkout · Free US Shipping</span></div><button onClick={openCheckout}>Buy now</button></div>}
 
       <main>
         <section className="hero-section">
           <div className="hero-copy">
-            <p className="eyebrow">Smart posture relief · Free US Shipping</p>
+            <p className="eyebrow">Smart posture support · Free US Shipping</p>
             <h1>Build better posture habits with gentle daily reminders.</h1>
             <p className="hero-text">Made for desk users, drivers, and remote workers who want posture awareness, upper-back support, and a more confident daily fit.</p>
             <div className="hero-offer-pill"><Truck size={17} /> Free Shipping Included Today</div>
@@ -260,15 +260,15 @@ export default function App() {
               <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Get Yours Today — Free Shipping</button>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
-            <p className="hero-micro-trust">30-Day Comfort Guarantee • Secure Checkout • Fast US Delivery</p>
+            <p className="hero-micro-trust">$39 shipped • 30-Day Return Review • Secure Checkout</p>
             <div className="proof-row">
-              <span><Star size={16} /> 4.8/5 from 2,400+ customers</span>
+              <span><Star size={16} /> Clear $39 shipped offer</span>
               <span><Truck size={16} /> Free US Shipping</span>
               <span><RotateCcw size={16} /> 30-Day Return Review</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
             </div>
           </div>
-          <div className="hero-visual"><ProductVisual product={mainProduct} large priority /></div>
+          <div className="hero-visual"><ProductVisual product={mainProduct} large priority /><div className="hero-product-trust" aria-label="Product purchase summary"><strong>$39</strong><span>Free US Shipping · Tracked delivery · CJ-matched product</span></div></div>
         </section>
 
         <section className="strip-section" aria-label="Trust badges">
@@ -294,7 +294,7 @@ export default function App() {
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector at $39 with shipping included.</p></article></div>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — $39 shipped</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
-              <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> Easy Returns</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
+              <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> 30-Day Return Review</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
               <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Tracked Delivery · 30-Day Return Review</div>
             </div>
