@@ -3,7 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { type StripeEnv, createStripeClient } from "../_shared/stripe.ts";
 
 const products = {
-  "cj-smart-posture-corrector": { name: "Smart Posture Corrector", amount: 3499, sku: "CJJT100662701AZ", cjProductId: "1357500854936145920", cjVariantId: null },
+  "cj-smart-posture-corrector": { name: "Smart Posture Corrector", amount: 3900, sku: "CJJT100662701AZ", cjProductId: "1357500854936145920", cjVariantId: null },
 } as const;
 
 type ProductId = keyof typeof products;
@@ -35,7 +35,7 @@ Deno.serve(async (req) => {
     if (!returnUrl) throw new Error("A secure return URL is required");
 
     const subtotal = items.reduce((sum, item) => sum + products[item.productId].amount * item.quantity, 0);
-    const shipping = subtotal >= 25000 ? 0 : 1200;
+    const shipping = 0;
     const orderNumber = `EM-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
 
     const db = supabase();
@@ -78,7 +78,7 @@ Deno.serve(async (req) => {
       },
     }));
     if (shipping > 0) {
-      lineItems.push({ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Tracked delivery", metadata: { productId: "shipping", sku: "CJ-SHIP-US" } } } });
+      lineItems.push({ quantity: 1, price_data: { currency: "usd", unit_amount: shipping, product_data: { name: "Free US Shipping", metadata: { productId: "shipping", sku: "US-SHIP-FREE" } } } });
     }
 
     const stripe = createStripeClient(env);

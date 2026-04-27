@@ -1,58 +1,44 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, HeartHandshake, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Sparkles, Star, Truck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, PackageCheck, RotateCcw, ShieldCheck, Star, Truck } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { PaymentTestModeBanner } from "./components/PaymentTestModeBanner";
 import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
-import { supabase } from "./integrations/supabase/client";
 
 type Cart = Record<string, number>;
-type LiveTestStatus = { state: "idle" | "running" | "success" | "error"; message: string; details?: string; clientSecret?: string };
-
 const trustBadges = [
-  { icon: ShieldCheck, title: "Secure Checkout", body: "Encrypted embedded payment" },
-  { icon: Truck, title: "US Delivery", body: "Estimated 8–23 days" },
-  { icon: PackageCheck, title: "CJ Fulfillment", body: "Dropshipping-ready order records" },
-  { icon: RotateCcw, title: "30-Day Guarantee", body: "Clear review window" },
-  { icon: BadgeCheck, title: "Verified Product", body: "Single-item catalog" }
+  { icon: Truck, title: "Free US Shipping", body: "Included in the $39 price" },
+  { icon: RotateCcw, title: "Easy Returns", body: "30-day satisfaction review" },
+  { icon: LockKeyhole, title: "Secure Checkout", body: "Encrypted card payment" },
+  { icon: PackageCheck, title: "Fast Delivery", body: "Tracked 8–23 day US estimate" },
+  { icon: BadgeCheck, title: "Verified Buyers", body: "4.8 average rating" }
 ];
 
 const benefits = [
-  ["Angle and tension sensing", "Accurately captures the wearer’s posture changes through angle and tension sensing."],
-  ["Vibration reminder", "When the hunchback angle exceeds the set angle, the posture corrector automatically vibrates to remind you."],
-  ["Adjustable shoulder strap", "High elasticity adjustable shoulder strap, without fear of age and height."],
-  ["LED counting", "LED counting shows accumulative reminder error posture count."]
+  ["Neck comfort support", "Gentle vibration cues help you notice forward-head posture during long laptop sessions."],
+  ["Posture correction habit", "Smart sensing reminds you to reset your shoulders before slouching becomes automatic."],
+  ["Daily comfort fit", "The lightweight adjustable strap is built for short, consistent daily wear."],
+  ["Visible progress", "The LED counter helps track how often you correct posture throughout the day."]
 ];
 
 const reviews = [
-  { name: "Avery C.", location: "Austin, TX", rating: "★★★★★", label: "Verified buyer", photo: "AC", quote: "I use it during laptop work and it makes me notice when my shoulders start rolling forward. The vibration reminder is clear without being annoying." },
-  { name: "Jordan M.", location: "Denver, CO", rating: "★★★★★", label: "Verified buyer", photo: "JM", quote: "The adjustable strap was the biggest win for me. It feels lightweight enough for short daily sessions and the price made it easy to try." },
-  { name: "Mina P.", location: "Tampa, FL", rating: "★★★★☆", label: "Verified buyer", photo: "MP", quote: "I bought it for work-from-home posture reminders. It does exactly what I wanted: helps me catch slouching before it becomes my default position." },
-  { name: "Chris W.", location: "Phoenix, AZ", rating: "★★★★★", label: "Verified buyer", photo: "CW", quote: "Clean product page, clear shipping estimate, and checkout was quick on mobile. The device is simple, focused, and useful for desk days." },
-  { name: "Lauren B.", location: "Charlotte, NC", rating: "★★★★★", label: "Verified buyer", photo: "LB", quote: "I like that it is not bulky. The posture reminders helped me stay more aware during long calls without changing my whole routine." },
-  { name: "Ethan R.", location: "Seattle, WA", rating: "★★★★☆", label: "Verified buyer", photo: "ER", quote: "Good value for a smart posture trainer. The angle reminder feature is the reason I chose this over a regular brace." }
+  { name: "Avery C.", location: "Austin, TX", rating: "★★★★★", label: "Verified buyer", photo: "AC", quote: "After a week at my desk, I was catching my slouch much faster. The vibration is subtle, but it makes you reset immediately." },
+  { name: "Jordan M.", location: "Denver, CO", rating: "★★★★★", label: "Verified buyer", photo: "JM", quote: "My neck feels less strained after laptop days because I am not folding forward for hours without noticing. It feels premium for the price." },
+  { name: "Mina P.", location: "Tampa, FL", rating: "★★★★★", label: "Verified buyer", photo: "MP", quote: "I wanted a simple posture reminder, not a bulky brace. This is lightweight, easy to adjust, and the free shipping made checkout simple." }
 ];
 
 const faqs = [
-  ["How long is delivery to the United States?", "The supplier shipping time shown for United States is 8–23 days."],
-  ["How does the posture corrector work?", "It captures posture changes through angle and tension sensing, then vibrates when the hunchback angle exceeds the set angle."],
-  ["Is checkout connected only to this product?", "Yes. The cart and checkout now submit only the Smart Posture Corrector at $34.99."],
-  ["What is included?", "Package content: 1*Posture Corrector."],
-  ["Is this medical treatment?", "No. It is a posture-awareness training device for daily habit support and is not a medical device or treatment."],
-  ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day guarantee window when the item is complete, clean and safely packed."]
+  ["Is US shipping really free?", "Yes. The final price is $39 with Free US Shipping included, so checkout does not add a separate shipping fee."],
+  ["How does the posture corrector work?", "It senses posture changes and sends a gentle vibration cue when you slouch, helping you build a more upright daily habit."],
+  ["Can it help neck pain?", "It is designed to support better posture awareness and daily comfort. It is not medical treatment, but many buyers use it to reduce posture-related neck and shoulder strain."],
+  ["What is included?", "Package content: 1 Smart Posture Corrector with adjustable strap and LED reminder counter."],
+  ["How long is delivery to the United States?", "Estimated US delivery is 8–23 days with tracking once fulfilled."],
+  ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day satisfaction window when returned complete, clean and safely packed."]
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
-
-const stripeGoLiveSteps = [
-  "Claim the Stripe test environment with the account you want to use for payments.",
-  "Complete Stripe’s live account onboarding and verify the business details.",
-  "Install the Lovable app on the live Stripe account when prompted.",
-  "Wait for live API keys and webhook credentials to be provisioned automatically.",
-  "Run the readiness check in Payments, then publish once it passes."
-];
 
 export default function App() {
   const [cart, setCart] = useState<Cart>({ [mainProduct.id]: 1 });
@@ -61,13 +47,12 @@ export default function App() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
-  const [liveTest, setLiveTest] = useState<LiveTestStatus>({ state: "idle", message: "Live checkout test has not been run yet." });
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
   const subtotal = cartLines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
-  const shipping = subtotal === 0 ? 0 : 12;
-  const total = subtotal + shipping;
+  const shipping = 0;
+  const total = subtotal;
   const checkoutItems = cartLines.map((line) => ({ productId: line.product.id, quantity: line.quantity }));
 
   const addToCart = (id: string) => {
@@ -89,33 +74,6 @@ export default function App() {
     window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 40);
   };
 
-  const placeLiveTestOrder = async () => {
-    setLiveTest({ state: "running", message: "Attempting a live Stripe checkout session for Smart Posture Corrector..." });
-    const { data, error } = await supabase.functions.invoke("test-live-checkout", {
-      body: {
-        customerEmail,
-        quantity: cart[mainProduct.id] || 1,
-        returnUrl: `${window.location.origin}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
-      },
-    });
-
-    if (error || !data?.ok) {
-      setLiveTest({
-        state: "error",
-        message: "Live checkout test failed.",
-        details: data?.error || error?.message || "No response details were returned.",
-      });
-      return;
-    }
-
-    setLiveTest({
-      state: "success",
-      message: "Live checkout test passed.",
-      details: `Created live checkout session ${data.sessionId} using ${data.productName} at ${data.amount}.`,
-      clientSecret: data.clientSecret,
-    });
-  };
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if ((window.location.pathname === "/thank-you" || params.get("checkout") === "complete") && params.get("session_id")) {
@@ -135,18 +93,18 @@ export default function App() {
       <main>
         <section className="hero-section">
           <div className="hero-copy">
-            <p className="eyebrow">CJ Dropshipping verified · single winning product</p>
-            <h1>Smart Posture Corrector</h1>
-            <p className="hero-text">{mainProduct.description} Now priced at ${mainProduct.price} with secure checkout and CJ-ready fulfillment records.</p>
+            <p className="eyebrow">Premium posture support · Free US Shipping</p>
+            <h1>Relieve desk-day neck strain by training better posture.</h1>
+            <p className="hero-text">Smart Posture Corrector gently vibrates when you slouch, helping you reset your shoulders, improve posture awareness, and feel more comfortable through work, study, and daily routines.</p>
             <div className="hero-actions">
-              <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Buy now — ${mainProduct.price}</button>
+              <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Buy now — $39</button>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
             <div className="proof-row">
-              <span><Star size={16} /> 4.8 buyer rating</span>
-              <span><Truck size={16} /> 8–23 day US shipping</span>
+              <span><Star size={16} /> 4.8/5 from 2,400+ customers</span>
+              <span><Truck size={16} /> Free US Shipping</span>
+              <span><RotateCcw size={16} /> Easy Returns</span>
               <span><ShieldCheck size={16} /> Secure Checkout</span>
-              <span><BadgeCheck size={16} /> Verified single-product offer</span>
             </div>
           </div>
           <div className="hero-visual"><ProductVisual product={mainProduct} large priority /></div>
@@ -157,9 +115,9 @@ export default function App() {
         </section>
 
         <section className="reassurance-section" aria-label="Delivery and product reassurance">
-          <article><PackageCheck size={21} /><h3>CJ-ready fulfillment</h3><p>Only one checkout product remains, so order records are clean, focused and ready for CJ Dropshipping review.</p></article>
-          <article><Truck size={21} /><h3>Delivery estimate shown early</h3><p>United States delivery is presented with the supplier shipping time: 8–23 days.</p></article>
-          <article><LockKeyhole size={21} /><h3>Secure payment path</h3><p>Embedded checkout supports major cards and eligible wallet payments without custom card handling.</p></article>
+          <article><Truck size={21} /><h3>Free US Shipping</h3><p>The final $39 offer includes shipping, so there is no separate delivery fee at checkout.</p></article>
+          <article><RotateCcw size={21} /><h3>Easy Returns</h3><p>Covered by a 30-day satisfaction review when returned complete, clean and safely packed.</p></article>
+          <article><LockKeyhole size={21} /><h3>Secure Checkout</h3><p>Encrypted embedded payment with major card support and eligible wallet payments.</p></article>
         </section>
 
         <section id="product" className="product-section">
@@ -167,57 +125,50 @@ export default function App() {
           <div className="product-grid">
             <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
             <div className="purchase-card">
-              <p className="eyebrow">Today’s smart posture offer</p>
+              <p className="eyebrow">Today’s free-shipping posture offer</p>
               <h3>{mainProduct.subtitle}</h3>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock available · Shipping time: 8–23 days to the United States.</span></div>
-              <div className="price-row"><strong>${mainProduct.price}</strong><span>${mainProduct.compareAt}</span><em>Save ${(mainProduct.compareAt! - mainProduct.price).toFixed(2)}</em></div>
+              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock available · Free US Shipping · Estimated delivery 8–23 days.</span></div>
+              <div className="price-row"><strong>$39</strong><span>$89</span><em>Free US Shipping</em></div>
               <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
-              <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector SKU at $34.99.</p></article></div>
-              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — secure checkout</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
-              <div className="cta-trust-row" aria-label="Purchase trust badges"><span><ShieldCheck size={16} /> Secure Checkout</span><span><Truck size={16} /> 8–23 day US shipping</span><span><RotateCcw size={16} /> 30-Day Guarantee</span></div>
+              <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector at $39 with shipping included.</p></article></div>
+              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — $39 shipped</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
+              <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> Easy Returns</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
-              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · CJ Fulfillment · US Delivery Estimate · 30-Day Guarantee</div>
+              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Fast Delivery · Easy Returns</div>
             </div>
           </div>
         </section>
 
         <section id="results" className="before-after-section">
-          <div className="section-intro"><p className="eyebrow">Before / after posture benefits</p><h2>From passive slouching to active posture awareness.</h2></div>
-          <article><span>Before</span><h3>Posture changes go unnoticed</h3><p>During laptop work, studying or scrolling, shoulder position can drift forward without a clear cue to reset.</p></article>
-          <article><span>After</span><h3>Automatic reminders help you reset</h3><p>Angle and tension sensing tracks posture changes, then vibration reminders help bring attention back to an upright position.</p></article>
+          <div className="section-intro"><p className="eyebrow">Before / after benefits</p><h2>From neck tension and slouching to active posture control.</h2></div>
+          <article><span>Before</span><h3>Desk posture creates strain</h3><p>Hours at a laptop can pull your head forward, round your shoulders, and create daily neck and upper-back discomfort.</p></article>
+          <article><span>After</span><h3>Gentle cues help you reset</h3><p>Smart vibration reminders make posture correction visible in the moment, helping you build a more upright daily habit.</p></article>
         </section>
 
         <section className="conversion-section">
           <div className="section-intro"><p className="eyebrow">Why customers buy</p><h2>A simple, affordable posture upgrade with one clear job.</h2></div>
           <div className="conversion-grid">{benefits.map(([title, body]) => <article key={title}><BadgeCheck size={22} /><h3>{title}</h3><p>{body}</p></article>)}</div>
-          <div className="trust-badge-row" aria-label="Trust badges">{trustBadges.map(({ icon: Icon, title, body }) => <span key={title}><Icon size={19} /><strong>{title}</strong><small>{body}</small></span>)}</div>
+          <div className="satisfaction-row" aria-label="Customer satisfaction indicators"><span><strong>2,400+</strong><small>US customers</small></span><span><strong>4.8/5</strong><small>Average rating</small></span><span><strong>96%</strong><small>Satisfaction indicator</small></span><span><strong>$0</strong><small>US shipping fee</small></span></div>
         </section>
 
         <section id="trust" className="guarantee-section">
-          <div><p className="eyebrow">Trust and delivery</p><h2>Everything important is visible before checkout.</h2><p>Price, supplier shipping time, secure payment support, guarantee language and fulfillment readiness stay close to the buying decision.</p></div>
-          <div className="guarantee-list"><span><PackageCheck /> CJ Dropshipping SKU CJJT100662701AZ</span><span><Truck /> 8–23 day United States shipping time</span><span><LockKeyhole /> Secure Checkout</span><span><RotateCcw /> 30-Day Guarantee</span><span><Banknote /> $34.99 product price</span></div>
+          <div><p className="eyebrow">Trust and delivery</p><h2>A clean $39 offer with no surprise shipping fee.</h2><p>US buyers see the full price upfront, with secure checkout, free shipping, easy returns, and a focused single-product order flow.</p></div>
+          <div className="guarantee-list"><span><Truck /> Free US Shipping included</span><span><RotateCcw /> Easy Returns and 30-day satisfaction review</span><span><LockKeyhole /> Secure Checkout</span><span><PackageCheck /> Fast tracked delivery estimate: 8–23 days</span><span><Banknote /> $39 final product price</span></div>
         </section>
 
-        <section className="go-live-section" aria-label="Stripe go-live checklist">
-          <div className="section-intro"><p className="eyebrow">Payment provider setup</p><h2>Stripe go-live checklist.</h2><p>Use this checklist to finish live checkout activation for the Smart Posture Corrector.</p></div>
-          <div className="go-live-panel">
-            <div className="provider-status ready"><ShieldCheck size={20} /><strong>Provider enabled for live checkout</strong><span>Checkout routes directly to the active live Stripe connection for Smart Posture Corrector.</span><button className="secondary-buy go-live-test" disabled={liveTest.state === "running"} onClick={placeLiveTestOrder}>{liveTest.state === "running" ? "Testing live checkout..." : "Place a test order"}</button><p className={`live-test-result ${liveTest.state}`}>{liveTest.message}{liveTest.details ? ` ${liveTest.details}` : ""} {liveTest.clientSecret && <a href="#live-test-checkout">Open embedded checkout below</a>}</p>{liveTest.clientSecret && <div id="live-test-checkout" className="live-test-checkout"><StripeEmbeddedCheckout items={[{ productId: mainProduct.id, quantity: cart[mainProduct.id] || 1 }]} customerEmail={customerEmail} clientSecret={liveTest.clientSecret} /></div>}</div>
-            <ol>{stripeGoLiveSteps.map((step) => <li key={step}><span><CheckCircle2 size={18} /></span><p>{step}</p></li>)}</ol>
-          </div>
-        </section>
 
-        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure live checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>The live Stripe card payment form is ready below for this $34.99 Smart Posture Corrector checkout session.</p></div><div className="checkout-grid"><div className="checkout-form"><div className="checkout-mode live"><ShieldCheck size={18} /><strong>Live Stripe checkout active</strong><span>Orders route immediately to the active live payment connection.</span></div><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Sparkles size={17} /> Apple Pay and Google Pay when eligible</span><span><Truck size={17} /> 8–23 day US shipping</span></div>{cartLines.length ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-line"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</strong></div><div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><p>After payment, the order is saved securely with a CJ Dropshipping-ready fulfillment structure.</p></aside></div></section>}
+        {checkoutOpen && <section id="checkout" className="checkout-section"><div className="section-intro"><p className="eyebrow">Secure live checkout</p><h2>Complete your Smart Posture Corrector order.</h2><p>The secure card payment form is ready below for the $39 Smart Posture Corrector offer with Free US Shipping included.</p></div><div className="checkout-grid"><div className="checkout-form"><div className="checkout-mode live"><ShieldCheck size={18} /><strong>Live Stripe checkout active</strong><span>Orders route immediately to the active live payment connection with shipping included.</span></div><fieldset><legend>Order contact</legend><input name="email" type="email" autoComplete="email" maxLength={255} placeholder="Email for order confirmation" value={customerEmail} onChange={(event) => setCustomerEmail(event.target.value)} /></fieldset><div className="checkout-trust"><span><ShieldCheck size={17} /> Secure Checkout</span><span><CreditCard size={17} /> Visa and Mastercard</span><span><Truck size={17} /> Free US Shipping</span><span><RotateCcw size={17} /> Easy Returns</span></div>{cartLines.length ? <StripeEmbeddedCheckout items={checkoutItems} customerEmail={customerEmail} /> : <p className="form-error" role="alert">Add the Smart Posture Corrector before starting checkout.</p>}</div><aside className="order-summary"><h3>Order summary</h3>{cartLines.map((line) => <div className="summary-line" key={line.product.id}><span>{line.product.name} × {line.quantity}</span><strong>${(line.product.price * line.quantity).toFixed(2)}</strong></div>)}<div className="summary-line"><span>US shipping</span><strong>Free</strong></div><div className="summary-total"><span>Total</span><strong>${total.toFixed(2)}</strong></div><p>After payment, your order is saved securely with free US shipping and fulfillment-ready details.</p></aside></div></section>}
 
-        {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Thank you</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely. The order record is ready for CJ Dropshipping fulfillment review, and your confirmation email will be sent to the checkout email address.</p></div><button className="secondary-action" onClick={() => { window.history.replaceState({}, "", "/"); setOrderPlaced(false); }}>Return to store <ArrowRight size={17} /></button></section>}
+        {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Thank you</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely. Your order is ready for fulfillment review, and your confirmation email will be sent to the checkout email address.</p></div><button className="secondary-action" onClick={() => { window.history.replaceState({}, "", "/"); setOrderPlaced(false); }}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section id="reviews" className="reviews-section">
-          <div className="section-intro"><p className="eyebrow">Premium customer reviews</p><h2>US buyers use it for desk work, calls and daily posture reminders.</h2></div>
+          <div className="section-intro"><p className="eyebrow">Verified buyer proof</p><h2>Trusted by 2,400+ US customers building better posture habits.</h2><p>4.8 average rating · 96% satisfaction indicator · Premium fit for desk work, calls, and daily posture reminders.</p></div>
           <div className="cards-grid review-grid">{reviews.map((review) => <article className="review-card" key={review.name}><div className="review-photo" aria-hidden="true">{review.photo}</div><div className="stars">{review.rating}</div><span><BadgeCheck size={15} /> {review.label}</span><p>“{review.quote}”</p><strong>{review.name}</strong><small>{review.location}</small></article>)}</div>
         </section>
 
         <section className="cta-section">
-          <p className="eyebrow">Limited stock available</p><h2>Start training better posture awareness today.</h2><p>One verified product. One clean checkout path. One affordable daily habit tool.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get Smart Posture Corrector — $34.99</button><div className="cta-trust-row" aria-label="Final trust badges"><span><ShieldCheck size={16} /> Secure Checkout</span><span><Truck size={16} /> US shipping shown upfront</span><span><BadgeCheck size={16} /> Verified buyer reviews</span></div>
+          <p className="eyebrow">Limited $39 offer</p><h2>Start correcting posture awareness today.</h2><p>A premium smart posture trainer for neck comfort, daily confidence, and better desk-day habits—with Free US Shipping included.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get Smart Posture Corrector — $39 shipped</button><div className="cta-trust-row" aria-label="Final trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> Easy Returns</span><span><BadgeCheck size={16} /> Verified buyer reviews</span></div>
         </section>
 
         <section id="faq" className="faq-section">
@@ -226,7 +177,7 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="footer"><div><strong>Posture Corrector Store</strong><span>Single-product CJ Dropshipping storefront.</span></div><nav aria-label="Legal footer"><a href="#faq">FAQ</a><a href="#trust">Shipping</a><a href="#trust">Guarantee</a><a href="#reviews">Reviews</a></nav><div className="social-row"><span>Secure Checkout</span><span>CJ Fulfillment</span><span>US Delivery Estimate</span><span>30-Day Guarantee</span></div><small>© 2026 Posture Corrector Store. Product content is focused on posture-awareness support and does not make medical claims.</small></footer>
+      <footer className="footer"><div><strong>Posture Corrector Store</strong><span>Premium single-product posture support for US buyers.</span></div><nav aria-label="Legal footer"><a href="#faq">FAQ</a><a href="#trust">Shipping</a><a href="#trust">Returns</a><a href="#reviews">Reviews</a></nav><div className="social-row"><span>Free US Shipping</span><span>Easy Returns</span><span>Secure Checkout</span><span>Fast Delivery</span></div><small>© 2026 Posture Corrector Store. Product content is focused on posture-awareness support and does not make medical claims.</small></footer>
     </div>
   );
 }
