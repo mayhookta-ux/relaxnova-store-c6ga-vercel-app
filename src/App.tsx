@@ -23,9 +23,9 @@ const benefits = [
 ];
 
 const reviews = [
-  { name: "Avery C.", location: "Austin, TX", rating: "★★★★★", label: "Verified buyer", photo: "AC", quote: "After one week at my desk, I caught my slouching much faster. The reminder is subtle, but it makes me reset immediately." },
-  { name: "Jordan M.", location: "Denver, CO", rating: "★★★★★", label: "Verified buyer", photo: "JM", quote: "My neck feels less strained after laptop days because I am not folding forward for hours without noticing. It feels premium and easy to wear." },
-  { name: "Mina P.", location: "Tampa, FL", rating: "★★★★★", label: "Verified buyer", photo: "MP", quote: "I wanted a posture reminder, not a bulky brace. This is lightweight, adjustable, and the $39 free-shipping price made checkout simple." }
+  { name: "Emily R.", location: "Austin, TX", rating: "★★★★★", label: "Verified buyer", photo: "ER", quote: "I wear it during long work calls and it catches my slouch before my neck gets tight. Simple, comfortable, and actually useful." },
+  { name: "Michael T.", location: "Columbus, OH", rating: "★★★★★", label: "Verified buyer", photo: "MT", quote: "Driving and desk work were making my upper back feel tense. The reminders help me sit taller without thinking about it all day." },
+  { name: "Lauren B.", location: "Phoenix, AZ", rating: "★★★★★", label: "Verified buyer", photo: "LB", quote: "Lightweight enough for daily use and the vibration is gentle, not annoying. Checkout was easy and free shipping was included." }
 ];
 
 const faqs = [
@@ -94,10 +94,12 @@ export default function App() {
             <p className="eyebrow">Smart posture relief · Free US Shipping</p>
             <h1>Relieve neck and back pain while improving posture every day.</h1>
             <p className="hero-text">Trusted by daily desk users, drivers, and remote workers for posture support, comfort, and visible daily relief.</p>
+            <div className="hero-offer-pill"><Truck size={17} /> Free Shipping Included Today</div>
             <div className="hero-actions">
-              <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Buy now — $39 shipped</button>
+              <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Get Yours Today — Free Shipping</button>
               <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
             </div>
+            <p className="hero-micro-trust">30-Day Comfort Guarantee • Secure Checkout • Fast US Delivery</p>
             <div className="proof-row">
               <span><Star size={16} /> 4.8/5 from 2,400+ customers</span>
               <span><Truck size={16} /> Free US Shipping</span>
