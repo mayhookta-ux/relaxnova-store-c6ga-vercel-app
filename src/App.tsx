@@ -40,7 +40,7 @@ const faqs = [
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
 
-xport default function App() {
+export default function App() {
   const [cart, setCart] = useState<Cart>({ [mainProduct.id]: 1 });
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
