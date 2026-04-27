@@ -1,4 +1,4 @@
-import postureCorrector from "../assets/posture-gallery-product-front.jpg";
+import postureCorrector from "../assets/cj-exact-front.jpg";
 
 export type Product = {
   id: string;
@@ -21,13 +21,13 @@ export const products: Product[] = [
   {
     id: "cj-smart-posture-corrector",
     name: "Smart Posture Corrector",
-    category: "Verified Smart Posture Trainer",
+    category: "CJ-Verified Upper Back Posture Trainer",
     price: 39,
     compareAt: 89,
-    subtitle: "A lightweight vibration posture trainer for desk work, daily comfort, and better shoulder alignment habits.",
-    description: "Designed for long workdays, laptop posture, and neck-and-shoulder tension awareness. Smart sensing detects slouching and sends a gentle vibration cue so you can reset before poor posture becomes your default.",
-    bullets: ["Gentle vibration reminders when you slouch", "Helps support neck comfort and upright posture habits", "Adjustable fit for daily work-from-home sessions", "LED reminder counter tracks visible daily progress"],
-    details: "Lightweight black smart posture trainer with induction vibration, adjustable elastic shoulder strap, LED counter, and one focused job: helping you notice and correct slouching throughout the day.",
+    subtitle: "A CJ-verified adjustable-angle smart posture corrector with induction vibration, elastic shoulder straps, and LED reminder counting.",
+    description: "Matched to the connected CJ fulfillment product: a black upper-back posture trainer that senses posture angle changes and sends a gentle vibration cue when you exceed the selected reminder angle.",
+    bullets: ["CJ product SKU CJJT100662701AZ visual match", "Adjustable reminder angle for sitting and standing", "High-elasticity black shoulder strap fit", "LED counter tracks posture reminder activity"],
+    details: "Black belt English-display smart posture corrector with plastic sensor body, induction vibration reminder, adjustable elastic shoulder straps, LED counting, and a compact upper-back wearable form.",
     shipping: "Free US Shipping included. Estimated delivery: 8–23 days.",
     returns: "Easy Returns with a 30-day satisfaction review when returned complete, clean and safely packed.",
     stock: "Verified buyer favorite · Limited US offer",
