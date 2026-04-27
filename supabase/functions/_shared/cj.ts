@@ -1,4 +1,5 @@
 const CJ_API_BASE = "https://developers.cjdropshipping.com/api2.0/v1";
+let cachedAccessToken: { token: string; expiresAt: number } | null = null;
 
 type CjAddress = {
   line1?: string | null;
@@ -38,8 +39,29 @@ function requireField(value: string | null | undefined, field: string) {
   return clean;
 }
 
+async function getCjAccessToken() {
+  if (cachedAccessToken && cachedAccessToken.expiresAt > Date.now() + 60_000) return cachedAccessToken.token;
+
+  const apiKey = Deno.env.get("CJ_API_KEY") || requireEnv("CJ_ACCESS_TOKEN");
+  const response = await fetch(`${CJ_API_BASE}/authentication/getAccessToken`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ apiKey }),
+  });
+  const result = await response.json().catch(() => null);
+  const token = result?.data?.accessToken;
+
+  if (!response.ok || result?.result === false || result?.success === false || !token) {
+    throw new Error(`CJ get access token failed [${response.status}]: ${JSON.stringify(result)}`);
+  }
+
+  const expiry = Date.parse(result.data.accessTokenExpiryDate || "");
+  cachedAccessToken = { token, expiresAt: Number.isFinite(expiry) ? expiry : Date.now() + 14 * 24 * 60 * 60 * 1000 };
+  return token;
+}
+
 export async function submitOrderToCj(input: SubmitCjOrderInput) {
-  const token = requireEnv("CJ_ACCESS_TOKEN");
+  const token = await getCjAccessToken();
   const address = input.shippingAddress;
   const products = input.items.map((item) => ({
     ...(item.cj_variant_id ? { vid: item.cj_variant_id } : { sku: requireField(item.sku, `CJ SKU for order item ${item.id}`) }),
