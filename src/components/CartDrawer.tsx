@@ -38,7 +38,7 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
       <div className="cart-footer">
         <div className="trust-note"><ShieldCheck size={18} /> Secure checkout · Free US Shipping · Easy Returns.</div>
         <div className="total-row"><span>Subtotal</span><strong>${subtotal.toFixed(2)}</strong></div>
-        <div className="total-row muted-total"><span>US shipping</span><strong>Free</strong></div>
+        <div className="included-shipping"><span>Free US Shipping included</span></div>
         <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><CreditCard size={18} /> Continue to checkout</button>
       </div>
     </aside>
