@@ -328,6 +328,10 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .hero-actions { align-items: stretch; }
   .primary-action { width: 100%; }
   .mobile-sticky-buy { display: flex; }
+  .support-chat { right: 12px; bottom: 98px; }
+  .support-chat-bubble { min-height: 48px; padding: 0 15px; }
+  .support-chat-panel { width: calc(100vw - 24px); max-height: min(620px, calc(100vh - 130px)); }
+  .support-chat-messages { max-height: min(300px, calc(100vh - 340px)); }
   .strip-section span { text-align: left; min-height: 74px; padding: 14px 16px; }
   .nav-open, .strip-section, .reassurance-section, .benefit-grid, .conversion-grid, .trust-badge-row, .satisfaction-row, .cta-trust-row, .cards-grid, .policy-section, .product-benefit-grid, .gallery-grid, .before-after-section, .form-row, .footer { grid-template-columns: 1fr; }
   .premium-gallery-grid { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin-inline: -18px; padding-inline: 18px; }
