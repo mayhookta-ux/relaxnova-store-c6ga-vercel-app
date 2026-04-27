@@ -11,6 +11,32 @@ type CheckoutItem = { productId: string; quantity: number };
 
 const supabase = () => createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const checkoutAttempts = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 12;
+
+function isRateLimited(req: Request) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("cf-connecting-ip") || "anonymous";
+  const now = Date.now();
+  const recent = (checkoutAttempts.get(ip) || []).filter((time) => now - time < RATE_LIMIT_WINDOW_MS);
+  recent.push(now);
+  checkoutAttempts.set(ip, recent);
+  return recent.length > RATE_LIMIT_MAX;
+}
+
+function cleanReturnUrl(value: unknown) {
+  if (typeof value !== "string" || value.length > 500) return undefined;
+  try {
+    const url = new URL(value);
+    const allowedHosts = new Set(["relaxnova-store-c6ga-vercel-app.lovable.app", "id-preview--a0483a19-e2aa-4d4e-af72-989c0ed6541b.lovable.app"]);
+    const isLocalDev = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+    if (url.protocol !== "https:" && !isLocalDev) return undefined;
+    if (!allowedHosts.has(url.hostname) && !url.hostname.endsWith(".lovable.app") && !url.hostname.endsWith(".lovableproject.com") && !isLocalDev) return undefined;
+    return url.toString();
+  } catch {
+    return undefined;
+  }
+}
 
 function cleanItems(items: unknown): Array<{ productId: ProductId; quantity: number }> {
   if (!Array.isArray(items) || items.length < 1 || items.length > 10) throw new Error("Add at least one valid item before checkout");
@@ -27,11 +53,12 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
   try {
+    if (isRateLimited(req)) return new Response(JSON.stringify({ error: "Checkout is temporarily busy. Please try again in a moment." }), { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     const body = await req.json();
     const env: StripeEnv = body.environment === "live" ? "live" : "sandbox";
     const items = cleanItems(body.items);
     const customerEmail = typeof body.customerEmail === "string" && emailPattern.test(body.customerEmail.trim()) ? body.customerEmail.trim() : undefined;
-    const returnUrl = typeof body.returnUrl === "string" && body.returnUrl.startsWith("http") && body.returnUrl.length <= 500 ? body.returnUrl : undefined;
+    const returnUrl = cleanReturnUrl(body.returnUrl);
     if (!returnUrl) throw new Error("A secure return URL is required");
 
     const subtotal = items.reduce((sum, item) => sum + products[item.productId].amount * item.quantity, 0);
@@ -100,7 +127,7 @@ Deno.serve(async (req) => {
 
     return new Response(JSON.stringify({ clientSecret: session.client_secret, orderId: order.id, orderNumber }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Checkout could not be started";
-    return new Response(JSON.stringify({ error: message }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    console.error("Checkout preparation failed", error);
+    return new Response(JSON.stringify({ error: "Checkout could not be started. Please review your cart and try again." }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   }
 });
