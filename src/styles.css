@@ -204,7 +204,6 @@ summary { cursor: pointer; font-weight: 800; }
 .checkout-mode { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 3px; align-items: center; border: 1px solid hsl(var(--border)); border-radius: 18px; background: hsl(var(--background)); padding: 16px 18px; color: hsl(var(--primary)); }
 .checkout-mode svg { color: hsl(var(--gold)); grid-row: span 2; }
 .checkout-mode span { color: hsl(var(--muted-foreground)); font-size: 13px; font-weight: 800; }
-.checkout-mode.manual { border-color: hsl(var(--gold) / 0.38); background: hsl(var(--accent) / 0.16); }
 .checkout-mode.live { border-color: hsl(var(--jade)); background: hsl(var(--jade) / 0.18); }
 fieldset { border: 1px solid hsl(var(--border)); border-radius: 22px; padding: 22px; display: grid; gap: 14px; }
 legend { padding: 0 8px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 25px; font-weight: 700; }
@@ -217,12 +216,6 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
 .checkout-trust { color: hsl(var(--muted-foreground)); font-size: 13px; }
 .form-error { margin: 0; border: 1px solid hsl(var(--rose)); border-radius: 14px; background: hsl(var(--rose) / 0.38); color: hsl(var(--primary)); padding: 12px 14px; font-weight: 800; }
 .form-success { margin: 0; border: 1px solid hsl(var(--jade)); border-radius: 14px; background: hsl(var(--jade) / 0.35); color: hsl(var(--primary)); padding: 12px 14px; font-weight: 800; }
-.manual-fallback { display: grid; gap: 14px; border: 1px solid hsl(var(--gold) / 0.36); border-radius: 18px; background: hsl(var(--ivory)); padding: 20px; }
-.manual-fallback h3 { font-size: 28px; }
-.manual-fallback p { margin: 0; color: hsl(var(--muted-foreground)); line-height: 1.6; font-weight: 700; }
-.manual-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.manual-grid input:nth-child(2) { grid-column: 1 / -1; }
-.manual-submit { width: 100%; min-height: 58px; }
 .order-summary { position: sticky; top: 98px; display: grid; gap: 16px; }
 .summary-line, .summary-total { display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid hsl(var(--border)); padding-bottom: 13px; }
 .summary-total { border-bottom: 0; font-size: 23px; }
