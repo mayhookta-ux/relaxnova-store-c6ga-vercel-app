@@ -12,6 +12,7 @@ type CjAddress = {
 type CjOrderItem = {
   id: string;
   quantity: number;
+  sku?: string | null;
   cj_variant_id?: string | null;
 };
 
@@ -41,7 +42,7 @@ export async function submitOrderToCj(input: SubmitCjOrderInput) {
   const token = requireEnv("CJ_ACCESS_TOKEN");
   const address = input.shippingAddress;
   const products = input.items.map((item) => ({
-    vid: requireField(item.cj_variant_id, `CJ variant for order item ${item.id}`),
+    ...(item.cj_variant_id ? { vid: item.cj_variant_id } : { sku: requireField(item.sku, `CJ SKU for order item ${item.id}`) }),
     quantity: item.quantity,
     storeLineItemId: item.id,
   }));
