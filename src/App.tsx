@@ -39,10 +39,10 @@ const reviews = [
 const faqs = [
   ["Is US shipping really free?", "Yes. The final price is $39 with Free US Shipping included, so checkout does not add a separate shipping fee."],
   ["How does the posture corrector work?", "It senses posture changes and sends a gentle vibration cue when you slouch, helping you build a more upright daily habit."],
-  ["Can it help neck pain?", "It is designed to support better posture awareness and daily comfort. It is not medical treatment, but many buyers use it to reduce posture-related neck and shoulder strain."],
+  ["Can it help neck comfort?", "It is designed to support posture awareness and daily comfort habits. It is not medical treatment and does not diagnose, treat, or cure pain or health conditions."],
   ["What is included?", "Package content: 1 Smart Posture Corrector with adjustable strap and LED reminder counter."],
   ["How long is delivery to the United States?", "Estimated US delivery is 8–23 days with tracking once fulfilled."],
-  ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day satisfaction window when returned complete, clean and safely packed."]
+  ["Can I request a return review?", "Eligible orders may be reviewed within the 30-day satisfaction window when return instructions are followed and the item is complete, clean, undamaged, and safely packed."]
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
@@ -237,7 +237,7 @@ export default function App() {
     return () => window.removeEventListener("hashchange", updatePageFromHash);
   }, []);
 
-  const footer = <footer className="footer"><div className="footer-brand"><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span><small>© 2026 {businessInfo.storeName}. Product content is focused on posture-awareness support and does not make medical claims.</small></div><nav className="footer-legal" aria-label="Legal footer"><strong>Store policies</strong>{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="footer-trust"><strong>Buyer protection</strong><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-day return review</span><span><ShieldCheck size={15} /> Secure Stripe checkout</span><span><PackageCheck size={15} /> Tracked delivery estimate</span></div><div className="footer-support"><strong>Customer support</strong><span><Mail size={15} /> {businessInfo.email}</span><span><Clock3 size={15} /> 1–3 business day response</span><span>US delivery estimate: 8–23 days after processing</span></div></footer>;
+  const footer = <footer className="footer"><div className="footer-brand"><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span><small>© 2026 {businessInfo.storeName}. Product content is focused on posture-awareness support and does not make medical claims.</small></div><nav className="footer-legal" aria-label="Legal footer"><strong>Store policies</strong>{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="footer-trust"><strong>Buyer protection</strong><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-day return review</span><span><ShieldCheck size={15} /> Secure Stripe checkout</span><span><PackageCheck size={15} /> Tracked delivery estimate</span></div><div className="footer-support"><strong>Customer support</strong><span><Mail size={15} /> {businessInfo.email}</span><span><Clock3 size={15} /> 1–3 business day response</span><span><PackageCheck size={15} /> US delivery estimate: 8–23 days after processing</span></div></footer>;
 
   if (activeLegalPage) {
     return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}<SupportChat /></div>;
