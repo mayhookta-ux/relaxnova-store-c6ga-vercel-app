@@ -74,7 +74,7 @@ Deno.serve(async (req) => {
 
       if (orderId) {
         const { data: order } = await db.from("orders").select("id, order_number, customer_email, customer_name, phone, shipping_address").eq("id", orderId).single();
-        const { data: items } = await db.from("order_items").select("id, quantity, cj_variant_id").eq("order_id", orderId);
+        const { data: items } = await db.from("order_items").select("id, quantity, sku, cj_variant_id").eq("order_id", orderId);
 
         let cjResult = null;
         let cjStatus = "submitted_to_cj";
