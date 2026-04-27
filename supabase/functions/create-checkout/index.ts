@@ -11,18 +11,6 @@ type CheckoutItem = { productId: string; quantity: number };
 
 const supabase = () => createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const checkoutAttempts = new Map<string, number[]>();
-const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX = 12;
-
-function isRateLimited(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("cf-connecting-ip") || "anonymous";
-  const now = Date.now();
-  const recent = (checkoutAttempts.get(ip) || []).filter((time) => now - time < RATE_LIMIT_WINDOW_MS);
-  recent.push(now);
-  checkoutAttempts.set(ip, recent);
-  return recent.length > RATE_LIMIT_MAX;
-}
 
 function cleanReturnUrl(value: unknown) {
   if (typeof value !== "string" || value.length > 500) return undefined;
@@ -53,7 +41,6 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
   try {
-    if (isRateLimited(req)) return new Response(JSON.stringify({ error: "Checkout is temporarily busy. Please try again in a moment." }), { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     const body = await req.json();
     const env: StripeEnv = body.environment === "live" ? "live" : "sandbox";
     const items = cleanItems(body.items);

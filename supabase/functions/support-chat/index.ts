@@ -4,18 +4,6 @@ type SupportMessage = { role: "user" | "assistant"; content: string };
 
 const fallbackAnswer = "I don’t want to guess on that. Please visit our Contact Us page and our support team will help within 1–3 business days.";
 const storeContext = `Store context only: Smart Posture Corrector, black adjustable upper-back posture trainer with gentle vibration reminders, LED reminder counter, adjustable strap, daily posture-awareness support. It supports better posture habits and comfort awareness, but is not medical treatment. Price offer is $39 with Free US Shipping included. US processing is usually 1–3 business days, sometimes up to 5 during delays. US delivery is typically 8–23 calendar days after processing. Orders may be fulfilled through CJ Dropshipping and logistics partners, so tracking can take 3–7 days to update after label/logistics creation. Checkout is securely processed by Stripe; the storefront does not store full card numbers. Eligible return requests may be reviewed within 30 days after confirmed delivery. Returns require written approval first and items should be complete, clean, undamaged, safely packed, and include parts/accessories. Damaged, defective, or wrong item claims should be reported within 7 days with photos/video. Carrier delays, wrong addresses, refused packages, heavy use, missing parts, misuse, or policy abuse may not qualify for refund.`;
-const requestLog = new Map<string, number[]>();
-const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX = 20;
-
-function isRateLimited(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("cf-connecting-ip") || "anonymous";
-  const now = Date.now();
-  const recent = (requestLog.get(ip) || []).filter((time) => now - time < RATE_LIMIT_WINDOW_MS);
-  recent.push(now);
-  requestLog.set(ip, recent);
-  return recent.length > RATE_LIMIT_MAX;
-}
 
 function localAnswer(question: string) {
   const q = question.toLowerCase();
@@ -34,7 +22,6 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
   try {
-    if (isRateLimited(req)) return new Response(JSON.stringify({ answer: "I’m getting a lot of requests right now. Please try again shortly or visit Contact Us for help." }), { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     const { messages } = await req.json() as { messages?: SupportMessage[] };
     const cleanMessages = Array.isArray(messages) ? messages.filter((m) => (m.role === "user" || m.role === "assistant") && typeof m.content === "string").slice(-6) : [];
     const latest = [...cleanMessages].reverse().find((m) => m.role === "user")?.content?.trim().slice(0, 500) || "";
