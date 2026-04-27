@@ -3,9 +3,9 @@ import { Activity, Menu, ShoppingBag, X } from "lucide-react";
 export function Header({ cartCount, menuOpen, onCart, onMenu }: { cartCount: number; menuOpen: boolean; onCart: () => void; onMenu: () => void }) {
   return (
     <header className="site-header">
-      <a className="brand" href="#home" aria-label="Smart Posture Corrector home">
+      <a className="brand" href="#home" aria-label="RelaxNova home">
         <span className="brand-mark"><Activity size={18} /></span>
-        <span>Posture Corrector</span>
+        <span>RelaxNova</span>
       </a>
       <nav className={`nav ${menuOpen ? "nav-open" : ""}`} aria-label="Primary navigation">
         <a href="#product">Product</a>
