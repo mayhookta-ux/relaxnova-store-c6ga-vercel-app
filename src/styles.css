@@ -343,6 +343,7 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .reassurance-section { padding: 24px 18px; }
   .hero-visual, .product-stage { min-height: auto; padding: 18px; }
   .product-photo-large { width: min(100%, 300px); }
+  .hero-product-trust { position: relative; left: auto; bottom: auto; transform: none; width: 100%; margin-top: -8px; }
   .product-card, .gallery-card { padding: 22px; height: auto; min-height: 0; }
   .product-card .product-photo, .gallery-card .product-photo { height: 156px; margin-bottom: 22px; }
   .product-card h3, .gallery-card h3 { font-size: 29px; line-height: 1.08; overflow-wrap: anywhere; }
