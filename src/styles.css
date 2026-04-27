@@ -109,6 +109,10 @@ li { display: flex; gap: 10px; align-items: center; font-weight: 700; }
 .trust-badge-row svg { color: hsl(var(--gold)); grid-row: span 2; }
 .trust-badge-row strong { font-size: 13px; color: hsl(var(--primary)); }
 .trust-badge-row small { color: hsl(var(--muted-foreground)); font-weight: 700; line-height: 1.35; }
+.satisfaction-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 22px; }
+.satisfaction-row span { border: 1px solid hsl(var(--border)); border-radius: 18px; background: hsl(var(--ivory)); padding: 18px; display: grid; gap: 3px; }
+.satisfaction-row strong { font-size: 28px; color: hsl(var(--primary)); }
+.satisfaction-row small { color: hsl(var(--muted-foreground)); font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
 .cta-trust-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
 .cta-trust-row span { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid hsl(var(--border)); border-radius: 14px; background: hsl(var(--ivory)); color: hsl(var(--primary)); min-height: 46px; padding: 10px 12px; font-size: 12px; font-weight: 900; text-align: center; }
 .cta-trust-row svg { color: hsl(var(--gold)); flex: 0 0 auto; }
@@ -227,7 +231,7 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
 
 @media (max-width: 1100px) {
   .benefit-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .conversion-grid, .trust-badge-row, .reassurance-section, .product-benefit-grid, .cta-trust-row { grid-template-columns: repeat(2, 1fr); }
+  .conversion-grid, .trust-badge-row, .satisfaction-row, .reassurance-section, .product-benefit-grid, .cta-trust-row { grid-template-columns: repeat(2, 1fr); }
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -254,7 +258,7 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .hero-actions { align-items: stretch; }
   .primary-action { width: 100%; }
   .strip-section span { justify-content: flex-start; text-align: left; }
-  .nav-open, .strip-section, .reassurance-section, .benefit-grid, .conversion-grid, .trust-badge-row, .cta-trust-row, .cards-grid, .policy-section, .product-benefit-grid, .gallery-grid, .before-after-section, .form-row, .footer { grid-template-columns: 1fr; }
+  .nav-open, .strip-section, .reassurance-section, .benefit-grid, .conversion-grid, .trust-badge-row, .satisfaction-row, .cta-trust-row, .cards-grid, .policy-section, .product-benefit-grid, .gallery-grid, .before-after-section, .form-row, .footer { grid-template-columns: 1fr; }
   .reassurance-section { padding: 24px 18px; }
   .hero-visual, .product-stage { min-height: auto; padding: 18px; }
   .product-photo-large { width: min(100%, 300px); }
