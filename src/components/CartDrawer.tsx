@@ -5,7 +5,6 @@ type CartLine = { product: Product; quantity: number };
 
 export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }: { open: boolean; lines: CartLine[]; onClose: () => void; onAdd: (id: string) => void; onRemove: (id: string) => void; onCheckout: () => void }) {
   const subtotal = lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
-  const shipping = subtotal === 0 ? 0 : 12;
   return (
     <aside className={`cart-panel ${open ? "cart-open" : ""}`} aria-hidden={!open}>
       <div className="cart-head">
@@ -37,9 +36,9 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
         </div>
       )}
       <div className="cart-footer">
-        <div className="trust-note"><ShieldCheck size={18} /> Secure checkout · CJ fulfillment · 8–23 day United States shipping time.</div>
+        <div className="trust-note"><ShieldCheck size={18} /> Secure checkout · Free US Shipping · Easy Returns.</div>
         <div className="total-row"><span>Subtotal</span><strong>${subtotal.toFixed(2)}</strong></div>
-        <div className="total-row muted-total"><span>Estimated shipping</span><strong>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</strong></div>
+        <div className="total-row muted-total"><span>US shipping</span><strong>Free</strong></div>
         <button className="primary-action" disabled={!lines.length} onClick={onCheckout}><CreditCard size={18} /> Continue to checkout</button>
       </div>
     </aside>
