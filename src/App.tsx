@@ -312,8 +312,14 @@ export default function App() {
         </section>
 
         <section className="premium-gallery-section" aria-label="Smart Posture Corrector product gallery">
-          <div className="section-intro"><p className="eyebrow">CJ-matched product gallery</p><h2>Exact product visuals kept consistent with fulfillment.</h2><p>Studio angles, wearable appearance, posture reference, and close-up details now use the connected CJ product identity only—matching shape, straps, proportions, materials, and black upper-back wearable design.</p></div>
-          <div className="premium-gallery-grid">{galleryImages.map((image) => <article className={`premium-gallery-card ${image.className || ""}`} key={image.title}><button className="gallery-image-button" type="button" onClick={() => openImagePreview({ src: image.src, title: image.title, body: image.body })} aria-label={`Open larger preview of ${image.title}`}><img src={image.src} alt={`${mainProduct.name} ${image.title.toLowerCase()}`} width={image.width} height={image.height} loading="lazy" /></button><div><strong>{image.title}</strong><span>{image.body}</span></div></article>)}</div>
+          <div className="luxury-gallery-shell">
+            <button className="luxury-gallery-hero" type="button" onClick={() => openImagePreview(galleryImages[0])} aria-label={`Open larger preview of ${galleryImages[0].title}`}>
+              <img src={galleryImages[0].src} alt={`${mainProduct.name} main gallery view`} width={galleryImages[0].width} height={galleryImages[0].height} loading="lazy" />
+            </button>
+            <div className="luxury-gallery-grid">
+              {galleryImages.slice(1).map((image) => <button className="luxury-gallery-card" type="button" key={image.title} onClick={() => openImagePreview(image)} aria-label={`Open larger preview of ${image.title}`}><img src={image.src} alt={`${mainProduct.name} ${image.title.toLowerCase()}`} width={image.width} height={image.height} loading="lazy" /></button>)}
+            </div>
+          </div>
         </section>
 
         <section id="results" className="before-after-section">
