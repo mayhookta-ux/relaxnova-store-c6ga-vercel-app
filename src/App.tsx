@@ -254,13 +254,13 @@ export default function App() {
   const imagePreview = previewImage && <div className="image-preview-overlay" role="dialog" aria-modal="true" aria-label={`${previewImage.title} image preview`} onClick={() => setPreviewImage(null)}><div className="image-preview-panel" onClick={(event) => event.stopPropagation()}><button className="image-preview-close" type="button" onClick={() => setPreviewImage(null)} aria-label="Close image preview"><X size={20} /></button><img src={previewImage.src} alt={previewImage.title} /><div><strong>{previewImage.title}</strong>{previewImage.body && <span>{previewImage.body}</span>}</div></div></div>;
 
   if (activeLegalPage) {
-    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}{imagePreview}<SupportChat /></div>;
+    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} onPreview={(product) => openImagePreview({ src: product.image, title: product.name, body: product.subtitle })} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}{imagePreview}<SupportChat /></div>;
   }
 
   return (
     <div id="home">
       <Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} />
-      <CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} />
+      <CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} onPreview={(product) => openImagePreview({ src: product.image, title: product.name, body: product.subtitle })} />
       {!checkoutOpen && !orderPlaced && <div className="mobile-sticky-buy" role="region" aria-label="Quick purchase bar"><div><strong>$39 shipped</strong><span>Secure checkout · Free US Shipping</span></div><button onClick={openCheckout}>Buy now</button></div>}
 
       <main>
