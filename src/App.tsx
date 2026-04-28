@@ -282,7 +282,7 @@ export default function App() {
               <span><ShieldCheck size={16} /> Secure Checkout</span>
             </div>
           </div>
-          <div className="hero-visual"><ProductVisual product={mainProduct} large priority /><div className="hero-product-trust" aria-label="Product purchase summary"><strong>$39</strong><span>Free US Shipping · Tracked delivery · CJ-matched product</span></div></div>
+          <div className="hero-visual"><ProductVisual product={mainProduct} large priority onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /><div className="hero-product-trust" aria-label="Product purchase summary"><strong>Free US Shipping</strong><span>$39 offer · Tracked delivery · CJ-matched product</span></div></div>
         </section>
 
         <section className="strip-section" aria-label="Trust badges">
@@ -298,7 +298,7 @@ export default function App() {
         <section id="product" className="product-section">
           <div className="section-intro"><p className="eyebrow">Main offer</p><h2>{mainProduct.subtitle}</h2><p>{mainProduct.description}</p></div>
           <div className="product-grid">
-            <div className="product-stage"><ProductVisual product={mainProduct} large /></div>
+            <div className="product-stage"><ProductVisual product={mainProduct} large onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /></div>
             <div className="purchase-card">
               <p className="eyebrow">Today’s free-shipping posture offer</p>
               <h3>{mainProduct.subtitle}</h3>
@@ -317,7 +317,7 @@ export default function App() {
 
         <section className="premium-gallery-section" aria-label="Smart Posture Corrector product gallery">
           <div className="section-intro"><p className="eyebrow">CJ-matched product gallery</p><h2>Exact product visuals kept consistent with fulfillment.</h2><p>Studio angles, wearable appearance, posture reference, and close-up details now use the connected CJ product identity only—matching shape, straps, proportions, materials, and black upper-back wearable design.</p></div>
-          <div className="premium-gallery-grid">{galleryImages.map((image) => <article className={`premium-gallery-card ${image.className || ""}`} key={image.title}><img src={image.src} alt={`${mainProduct.name} ${image.title.toLowerCase()}`} width={image.width} height={image.height} loading="lazy" /><div><strong>{image.title}</strong><span>{image.body}</span></div></article>)}</div>
+          <div className="premium-gallery-grid">{galleryImages.map((image) => <article className={`premium-gallery-card ${image.className || ""}`} key={image.title}><button className="gallery-image-button" type="button" onClick={() => openImagePreview({ src: image.src, title: image.title, body: image.body })} aria-label={`Open larger preview of ${image.title}`}><img src={image.src} alt={`${mainProduct.name} ${image.title.toLowerCase()}`} width={image.width} height={image.height} loading="lazy" /></button><div><strong>{image.title}</strong><span>{image.body}</span></div></article>)}</div>
         </section>
 
         <section id="results" className="before-after-section">
@@ -359,6 +359,7 @@ export default function App() {
       </main>
 
       {footer}
+      {imagePreview}
       <SupportChat />
     </div>
   );
