@@ -391,6 +391,6 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .cart-lines { padding: 14px 18px; }
   .cart-line { grid-template-columns: 56px 1fr; }
   .cart-line b { grid-column: 2; }
-  .cart-thumb { width: 56px; height: 56px; }
+  .cart-thumb-button { width: 56px; height: 56px; }
   fieldset { padding: 18px; }
 }
