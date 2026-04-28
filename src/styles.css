@@ -42,16 +42,13 @@ img { max-width: 100%; display: block; }
 .menu-button { display: none; }
 .cart-button, .icon-button { border: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--foreground)); min-width: 44px; height: 44px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: 0 8px 20px hsl(var(--primary) / 0.06); }
 
-section:not(.hero-section):not(.strip-section):not(.reassurance-section) { padding: clamp(72px, 8vw, 126px) clamp(18px, 5vw, 80px); }
-.hero-section { min-height: calc(100vh - 76px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 0.78fr); gap: clamp(34px, 6vw, 86px); align-items: center; padding: clamp(44px, 5vw, 76px) clamp(18px, 5vw, 80px); background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--pearl))); }
-.hero-copy { max-width: 780px; }
+section:not(.product-viewer-top) { padding: clamp(72px, 8vw, 126px) clamp(18px, 5vw, 80px); }
 .eyebrow { margin: 0 0 14px; text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; font-weight: 800; color: hsl(var(--gold)); }
 h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 1.02; margin: 0; letter-spacing: 0; color: hsl(var(--foreground)); }
 h1 { font-size: clamp(50px, 6.4vw, 86px); max-width: 820px; }
 h2 { font-size: clamp(38px, 5vw, 72px); }
 h3 { font-size: clamp(24px, 2.8vw, 35px); }
 .hero-text, .section-intro p, .purchase-card p, .review-card p, .policy-section p, .faq-list p, .guarantee-section p, .contact-section p { color: hsl(var(--muted-foreground)); line-height: 1.78; font-weight: 600; }
-.hero-text { max-width: 700px; font-size: 20px; color: hsl(var(--primary)); }
 .hero-actions, .proof-row, .card-bottom, .price-row, .pay-row, .guarantee-list { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .hero-actions { margin-top: 32px; gap: 16px; }
 .primary-action { border: 0; border-radius: 999px; padding: 24px 46px; min-height: 72px; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); font-weight: 900; cursor: pointer; box-shadow: 0 22px 48px hsl(var(--primary) / 0.26); display: inline-flex; align-items: center; justify-content: center; gap: 9px; text-align: center; }
@@ -62,11 +59,6 @@ h3 { font-size: clamp(24px, 2.8vw, 35px); }
 .full { width: 100%; }
 .proof-row { margin-top: 30px; color: hsl(var(--muted-foreground)); font-size: 13px; }
 .proof-row span, .pay-row, .trust-note { display: inline-flex; align-items: center; gap: 8px; }
-.hero-offer-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; border: 1px solid hsl(var(--jade)); border-radius: 999px; background: hsl(var(--jade) / 0.22); color: hsl(var(--primary)); padding: 10px 14px; font-size: 13px; font-weight: 900; }
-.hero-offer-pill svg { color: hsl(var(--gold)); }
-.hero-micro-trust { margin: 12px 0 0; color: hsl(var(--muted-foreground)); font-size: 13px; font-weight: 900; letter-spacing: 0.02em; }
-
-.hero-visual { position: relative; display: grid; place-items: center; align-content: center; gap: 18px; min-height: 460px; perspective: 1200px; }
 .product-photo { position: relative; isolation: isolate; width: min(100%, 248px); aspect-ratio: 1; margin: 0 auto; border-radius: var(--radius); overflow: hidden; background: linear-gradient(145deg, hsl(var(--background)), hsl(var(--ivory))); box-shadow: var(--product-shadow); transform: translateZ(0); transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 520ms ease, filter 520ms ease; }
 .product-photo-large { width: min(100%, 455px); }
 .product-photo::before { content: ""; position: absolute; inset: -18%; z-index: 0; pointer-events: none; background: radial-gradient(circle at 28% 24%, hsl(var(--primary-foreground) / 0.48), transparent 34%), radial-gradient(circle at 76% 72%, hsl(var(--gold) / 0.11), transparent 36%), linear-gradient(135deg, hsl(var(--jade) / 0.1), transparent 48%); opacity: 0.64; transform: translate3d(-1%, 1%, 0) scale(1.015); animation: productAuraFloat 16s ease-in-out infinite alternate; }
@@ -87,16 +79,6 @@ h3 { font-size: clamp(24px, 2.8vw, 35px); }
   .product-photo, .product-photo::before, .product-photo img, .product-viewer-main, .product-viewer-main::before, .product-viewer-main img, .product-thumbnail, .product-thumbnail::before, .product-thumbnail img, .cart-thumb-button, .cart-thumb { animation: none; transition: none; }
 }
 
-.strip-section { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--card)); box-shadow: 0 14px 34px hsl(var(--primary) / 0.07); }
-.strip-section span { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 3px; align-items: center; min-height: 86px; padding: 18px 20px; border-right: 1px solid hsl(var(--border)); color: hsl(var(--primary)); white-space: normal; }
-.strip-section strong { font-size: 12px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
-.strip-section small { grid-column: 2; color: hsl(var(--muted-foreground)); font-size: 11px; font-weight: 800; line-height: 1.35; }
-.strip-section svg { color: hsl(var(--gold)); flex: 0 0 auto; }
-.reassurance-section { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 34px clamp(18px, 5vw, 80px); background: hsl(var(--background)); border-bottom: 1px solid hsl(var(--border)); }
-.reassurance-section article { border: 1px solid hsl(var(--border)); border-radius: var(--radius); background: hsl(var(--card)); box-shadow: 0 12px 28px hsl(var(--primary) / 0.07); padding: 24px; }
-.reassurance-section svg { color: hsl(var(--gold)); margin-bottom: 12px; }
-.reassurance-section h3 { font-size: 25px; }
-.reassurance-section p { margin: 10px 0 0; color: hsl(var(--muted-foreground)); line-height: 1.65; font-weight: 700; }
 .section-intro { max-width: 780px; margin-bottom: 42px; }
 .narrow { max-width: 920px; margin-inline: auto; text-align: center; }
 .purchase-card, .review-card, .benefit-grid article, .policy-section article, .before-after-section article, .contact-card { background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: var(--radius); box-shadow: var(--soft-shadow); }
