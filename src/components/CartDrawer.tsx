@@ -3,7 +3,7 @@ import type { Product } from "../data/products";
 
 type CartLine = { product: Product; quantity: number };
 
-export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }: { open: boolean; lines: CartLine[]; onClose: () => void; onAdd: (id: string) => void; onRemove: (id: string) => void; onCheckout: () => void }) {
+export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout, onPreview }: { open: boolean; lines: CartLine[]; onClose: () => void; onAdd: (id: string) => void; onRemove: (id: string) => void; onCheckout: () => void; onPreview?: (product: Product) => void }) {
   const subtotal = lines.reduce((sum, line) => sum + line.product.price * line.quantity, 0);
   return (
     <aside className={`cart-panel ${open ? "cart-open" : ""}`} aria-hidden={!open}>
@@ -20,7 +20,7 @@ export function CartDrawer({ open, lines, onClose, onAdd, onRemove, onCheckout }
         <div className="cart-lines">
           {lines.map((line) => (
             <div className="cart-line" key={line.product.id}>
-              <img className="cart-thumb" src={line.product.image} alt={`${line.product.name} thumbnail`} width={80} height={80} loading="lazy" />
+              <button className="cart-thumb-button" type="button" onClick={() => onPreview?.(line.product)} aria-label={`Open larger preview of ${line.product.name}`}><img className="cart-thumb" src={line.product.image} alt={`${line.product.name} thumbnail`} width={80} height={80} loading="lazy" /></button>
               <div>
                 <strong>{line.product.name}</strong>
                 <p>{line.product.category}</p>
