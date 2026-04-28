@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Star, Truck, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Truck, X } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
@@ -12,13 +12,6 @@ import galleryProductAngle from "./assets/cj-exact-angle.jpg";
 import galleryProductFront from "./assets/cj-exact-front.jpg";
 
 type Cart = Record<string, number>;
-const trustBadges = [
-  { icon: Truck, title: "Free US Shipping", body: "No surprise fee at checkout" },
-  { icon: RotateCcw, title: "Easy Returns", body: "30-day satisfaction review" },
-  { icon: LockKeyhole, title: "Secure Checkout", body: "Encrypted live payment" },
-  { icon: PackageCheck, title: "Tracked Delivery", body: "8–23 day US estimate" },
-  { icon: BadgeCheck, title: "Buyer Confidence", body: "Clear policies before checkout" }
-];
 
 const benefits = [
   ["Neck comfort support", "Gentle vibration cues help you notice forward-head posture during long laptop sessions."],
