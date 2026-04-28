@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Truck, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Truck, X } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
