@@ -1,6 +1,6 @@
 # Deploy to Vercel
 
-This is a clean **React + Vite + TypeScript** premium e-commerce store (AURELIS / RelaxNova), ready for instant Vercel deployment.
+This is a clean **React + Vite + TypeScript** premium e-commerce store (RelaxNova), ready for instant Vercel deployment.
 
 ## Project structure
 

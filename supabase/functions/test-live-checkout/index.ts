@@ -3,7 +3,7 @@ import { type StripeEnv, createStripeClient } from "../_shared/stripe.ts";
 
 const product = {
   id: "cj-smart-posture-corrector",
-  name: "Smart Posture Corrector",
+  name: "RelaxNova Smart Posture Corrector",
   amount: 3900,
   sku: "CJJT100662701AZ",
 };
