@@ -241,10 +241,20 @@ export default function App() {
     return () => window.removeEventListener("hashchange", updatePageFromHash);
   }, []);
 
+  useEffect(() => {
+    if (!previewImage) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPreviewImage(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [previewImage]);
+
   const footer = <footer className="footer"><div className="footer-brand"><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span><small>© 2026 RelaxNova. All rights reserved. Product content is focused on posture-awareness support and does not make medical claims.</small></div><nav className="footer-legal" aria-label="Legal footer"><strong>Store policies</strong>{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="footer-trust"><strong>Buyer protection</strong><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-day return policy</span><span><ShieldCheck size={15} /> Secure Stripe checkout</span><span><Mail size={15} /> {businessInfo.email}</span></div><div className="footer-support"><strong>RelaxNova support</strong><span><Mail size={15} /> {businessInfo.email}</span><span><MapPin size={15} /> {businessInfo.location}</span><span><Clock3 size={15} /> 1–3 business day response</span><span><PackageCheck size={15} /> US delivery: 8–23 business days</span></div></footer>;
+  const imagePreview = previewImage && <div className="image-preview-overlay" role="dialog" aria-modal="true" aria-label={`${previewImage.title} image preview`} onClick={() => setPreviewImage(null)}><div className="image-preview-panel" onClick={(event) => event.stopPropagation()}><button className="image-preview-close" type="button" onClick={() => setPreviewImage(null)} aria-label="Close image preview"><X size={20} /></button><img src={previewImage.src} alt={previewImage.title} /><div><strong>{previewImage.title}</strong>{previewImage.body && <span>{previewImage.body}</span>}</div></div></div>;
 
   if (activeLegalPage) {
-    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}<SupportChat /></div>;
+    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}{imagePreview}<SupportChat /></div>;
   }
 
   return (
