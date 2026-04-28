@@ -267,7 +267,7 @@ export default function App() {
             </div>
             <aside className="product-viewer-purchase">
               <p className="eyebrow">RelaxNova smart posture corrector</p>
-              <h2>{mainProduct.name}</h2>
+              <h1>{mainProduct.name}</h1>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="price-row"><strong>$39</strong><span>$89</span><em>Free US Shipping</em></div>
