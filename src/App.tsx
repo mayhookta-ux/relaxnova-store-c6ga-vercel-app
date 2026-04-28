@@ -188,6 +188,7 @@ export default function App() {
   const [customerEmail, setCustomerEmail] = useState("");
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPageKey | null>(() => pageFromHash(window.location.hash));
   const [previewImage, setPreviewImage] = useState<{ src: string; title: string; body?: string } | null>(null);
+  const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
@@ -195,6 +196,8 @@ export default function App() {
   const shipping = 0;
   const total = subtotal;
   const checkoutItems = cartLines.map((line) => ({ productId: line.product.id, quantity: line.quantity }));
+  const productViewerImages = galleryImages.slice(0, 4);
+  const selectedGalleryImage = productViewerImages[selectedGalleryIndex] || productViewerImages[0];
 
   const addToCart = (id: string) => {
     setCart((current) => ({ ...current, [id]: Math.min((current[id] || 0) + 1, 10) }));
@@ -278,7 +281,7 @@ export default function App() {
               <span><ShieldCheck size={16} /> Secure Checkout</span>
             </div>
           </div>
-          <div className="hero-visual"><ProductVisual product={mainProduct} large priority onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /><div className="hero-product-trust" aria-label="Product purchase summary"><strong>$39 shipped</strong><span>Free US Shipping · Tracked delivery · Secure checkout</span></div></div>
+          <div className="hero-visual"><ProductVisual product={mainProduct} large priority onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /></div>
         </section>
 
         <section className="strip-section" aria-label="Trust badges">
@@ -291,34 +294,27 @@ export default function App() {
           <article><LockKeyhole size={21} /><h3>Secure Checkout</h3><p>Encrypted embedded payment with major card support and eligible wallet payments.</p></article>
         </section>
 
-        <section id="product" className="product-section">
-          <div className="section-intro"><p className="eyebrow">Main offer</p><h2>{mainProduct.subtitle}</h2><p>{mainProduct.description}</p></div>
-          <div className="product-grid">
-            <div className="product-stage"><ProductVisual product={mainProduct} large onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /></div>
-            <div className="purchase-card">
-              <p className="eyebrow">Today’s free-shipping posture offer</p>
-              <h3>{mainProduct.subtitle}</h3>
+        <section id="product" className="product-viewer-section" aria-label="RelaxNova product viewer">
+          <div className="product-viewer-layout">
+            <div className="product-viewer-media">
+              <button className="product-viewer-main" type="button" onClick={() => openImagePreview(selectedGalleryImage)} aria-label={`Open larger preview of ${selectedGalleryImage.title}`}>
+                <img src={selectedGalleryImage.src} alt={`${mainProduct.name} ${selectedGalleryImage.title.toLowerCase()}`} width={selectedGalleryImage.width} height={selectedGalleryImage.height} loading="lazy" />
+              </button>
+              <div className="product-thumbnail-strip" aria-label="Product image thumbnails">
+                {productViewerImages.map((image, index) => <button className={`product-thumbnail ${selectedGalleryIndex === index ? "product-thumbnail-active" : ""}`} type="button" key={image.title} onClick={() => setSelectedGalleryIndex(index)} aria-label={`View ${image.title}`} aria-pressed={selectedGalleryIndex === index}><img src={image.src} alt={`${mainProduct.name} thumbnail ${index + 1}`} width={image.width} height={image.height} loading="lazy" /></button>)}
+              </div>
+            </div>
+            <aside className="purchase-card product-viewer-purchase">
+              <p className="eyebrow">RelaxNova smart posture corrector</p>
+              <h2>{mainProduct.name}</h2>
+              <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
-              <div className="urgency-callout"><Clock3 size={18} /><span>Limited stock available · Free US Shipping · Estimated delivery 8–23 days.</span></div>
               <div className="price-row"><strong>$39</strong><span>$89</span><em>Free US Shipping</em></div>
-              <ul>{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
-              <div className="product-info-grid"><article><h4>What you receive</h4><p>{mainProduct.details}</p></article><article><h4>Delivery estimate</h4><p>{mainProduct.shipping}</p></article><article><h4>Guarantee</h4><p>{mainProduct.returns}</p></article><article><h4>Checkout record</h4><p>Checkout is connected only to the Smart Posture Corrector at $39 with shipping included.</p></article></div>
+              <ul className="viewer-benefits">{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
               <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — $39 shipped</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> 30-Day Return Review</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
-              <div className="pay-row"><CreditCard size={18} /> Secure Checkout · Free US Shipping · Tracked Delivery · 30-Day Return Review</div>
-            </div>
-          </div>
-        </section>
-
-        <section className="premium-gallery-section" aria-label="Smart Posture Corrector product gallery">
-          <div className="luxury-gallery-shell">
-            <button className="luxury-gallery-hero" type="button" onClick={() => openImagePreview(galleryImages[0])} aria-label={`Open larger preview of ${galleryImages[0].title}`}>
-              <img src={galleryImages[0].src} alt={`${mainProduct.name} main gallery view`} width={galleryImages[0].width} height={galleryImages[0].height} loading="lazy" />
-            </button>
-            <div className="luxury-gallery-grid">
-              {galleryImages.slice(1).map((image) => <button className="luxury-gallery-card" type="button" key={image.title} onClick={() => openImagePreview(image)} aria-label={`Open larger preview of ${image.title}`}><img src={image.src} alt={`${mainProduct.name} ${image.title.toLowerCase()}`} width={image.width} height={image.height} loading="lazy" /></button>)}
-            </div>
+            </aside>
           </div>
         </section>
 
