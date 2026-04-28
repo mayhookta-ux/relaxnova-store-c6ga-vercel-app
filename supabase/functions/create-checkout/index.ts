@@ -3,7 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 import { type StripeEnv, createStripeClient } from "../_shared/stripe.ts";
 
 const products = {
-  "cj-smart-posture-corrector": { name: "Smart Posture Corrector", amount: 3900, sku: "CJJT100662701AZ", cjProductId: "1357500854936145920", cjVariantId: null },
+  "cj-smart-posture-corrector": { name: "RelaxNova Smart Posture Corrector", amount: 3900, sku: "CJJT100662701AZ", cjProductId: "1357500854936145920", cjVariantId: null },
 } as const;
 
 type ProductId = keyof typeof products;
@@ -50,12 +50,12 @@ Deno.serve(async (req) => {
 
     const subtotal = items.reduce((sum, item) => sum + products[item.productId].amount * item.quantity, 0);
     const shipping = 0;
-    const orderNumber = `EM-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+    const orderNumber = `RN-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
 
     const db = supabase();
     const { data: order, error: orderError } = await db.from("orders").insert({
       order_number: orderNumber,
-      customer_email: customerEmail || "pending-customer@elyramaison.local",
+      customer_email: customerEmail || "pending-customer@relaxnova.local",
       status: "pending",
       payment_status: "unpaid",
       fulfillment_status: "not_submitted",
