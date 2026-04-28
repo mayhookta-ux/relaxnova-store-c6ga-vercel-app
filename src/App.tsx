@@ -191,6 +191,7 @@ export default function App() {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
   const [activeLegalPage, setActiveLegalPage] = useState<LegalPageKey | null>(() => pageFromHash(window.location.hash));
+  const [previewImage, setPreviewImage] = useState<{ src: string; title: string; body?: string } | null>(null);
 
   const cartLines = useMemo(() => products.filter((p) => cart[p.id]).map((p) => ({ product: p, quantity: cart[p.id] })), [cart]);
   const cartCount = cartLines.reduce((sum, line) => sum + line.quantity, 0);
@@ -217,6 +218,8 @@ export default function App() {
     setOrderPlaced(false);
     window.setTimeout(() => document.getElementById("checkout")?.scrollIntoView({ behavior: "smooth" }), 40);
   };
+
+  const openImagePreview = (image: { src: string; title: string; body?: string }) => setPreviewImage(image);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
