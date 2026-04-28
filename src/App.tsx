@@ -6,13 +6,11 @@ import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
 import { supabase } from "./integrations/supabase/client";
-import galleryBeforeAfter from "./assets/cj-exact-before-after.jpg";
 import galleryDetail from "./assets/cj-exact-detail-1.jpg";
 import galleryHumanWorn from "./assets/cj-exact-lifestyle-1.jpg";
 import galleryLifestyle from "./assets/cj-exact-lifestyle-2.jpg";
 import galleryProductAngle from "./assets/cj-exact-angle.jpg";
 import galleryProductFront from "./assets/cj-exact-front.jpg";
-import galleryWearGuide from "./assets/cj-exact-wear-guide.jpg";
 
 type Cart = Record<string, number>;
 const trustBadges = [
@@ -48,13 +46,11 @@ const faqs = [
 const paymentMethods = ["Visa", "Mastercard", "Apple Pay", "Google Pay"];
 
 const galleryImages = [
-  { src: galleryProductFront, title: "Exact CJ product front", body: "Black belt English-display corrector matched to the connected CJ SKU.", className: "gallery-featured gallery-fit-product", width: 1200, height: 1200 },
-  { src: galleryHumanWorn, title: "Exact wearable appearance", body: "Supplier-matched upper-back fit, strap position, and compact sensor placement.", className: "gallery-tall gallery-fit-context", width: 800, height: 800 },
-  { src: galleryProductAngle, title: "Exact product angle", body: "Same compact plastic module, strap proportions, and adjustable black belt shape.", className: "gallery-fit-product", width: 1200, height: 1200 },
-  { src: galleryDetail, title: "Close-up product detail", body: "Material, strap, button, charging, and LED counter details from the CJ product media.", className: "gallery-fit-detail", width: 1200, height: 1200 },
-  { src: galleryBeforeAfter, title: "CJ posture visual", body: "Supplier product posture reference presented in the premium gallery layout.", className: "gallery-wide gallery-fit-context", width: 1200, height: 1200 },
-  { src: galleryWearGuide, title: "Adjustment and wear guide", body: "Visual support for fit, reminder angle, and daily usage expectations.", className: "gallery-wide gallery-fit-context", width: 1200, height: 1200 },
-  { src: galleryLifestyle, title: "Usage presentation", body: "Supplier-provided lifestyle/product context kept consistent with fulfillment media.", className: "gallery-wide gallery-fit-context", width: 1200, height: 1200 }
+  { src: galleryProductFront, title: "RelaxNova Smart Posture Corrector", width: 1200, height: 1200 },
+  { src: galleryProductAngle, title: "Angled product view", width: 1200, height: 1200 },
+  { src: galleryDetail, title: "Close-up detail", width: 1200, height: 1200 },
+  { src: galleryHumanWorn, title: "Worn fit view", width: 800, height: 800 },
+  { src: galleryLifestyle, title: "Daily use view", width: 1200, height: 1200 }
 ];
 
 type LegalPageKey = "privacy-policy" | "refund-policy" | "terms-of-service" | "shipping-policy" | "contact-us";
