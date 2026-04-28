@@ -373,6 +373,9 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .product-card .product-photo, .gallery-card .product-photo { height: 156px; margin-bottom: 22px; }
   .product-card h3, .gallery-card h3 { font-size: 29px; line-height: 1.08; overflow-wrap: anywhere; }
   .product-card p, .gallery-card p { margin: 12px 0 0; line-height: 1.68; }
+  .image-preview-overlay { padding: 12px; }
+  .image-preview-panel { max-height: 86vh; border-radius: 20px; }
+  .image-preview-panel img { max-height: 58vh; }
   .purchase-actions { grid-template-columns: 1fr; }
   .secondary-buy { width: 100%; }
   .featured-review aside { min-height: 110px; }
