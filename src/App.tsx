@@ -282,7 +282,7 @@ export default function App() {
               <span><ShieldCheck size={16} /> Secure Checkout</span>
             </div>
           </div>
-          <div className="hero-visual"><ProductVisual product={mainProduct} large priority onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /><div className="hero-product-trust" aria-label="Product purchase summary"><strong>Free US Shipping</strong><span>$39 offer · Tracked delivery · CJ-matched product</span></div></div>
+          <div className="hero-visual"><ProductVisual product={mainProduct} large priority onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /><div className="hero-product-trust" aria-label="Product purchase summary"><strong>Free US Shipping</strong><span>Tracked delivery · CJ-matched product · Secure checkout</span></div></div>
         </section>
 
         <section className="strip-section" aria-label="Trust badges">
