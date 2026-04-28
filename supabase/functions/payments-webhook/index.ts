@@ -42,7 +42,7 @@ Deno.serve(async (req) => {
       const customerDetails = object.customer_details || {};
       const shippingDetails = object.shipping_details || {};
       const update = {
-        customer_email: customerDetails.email || object.customer_email || "pending-customer@elyramaison.local",
+        customer_email: customerDetails.email || object.customer_email || "pending-customer@relaxnova.local",
         customer_name: customerDetails.name || shippingDetails.name || null,
         phone: customerDetails.phone || null,
         status: "confirmed",
