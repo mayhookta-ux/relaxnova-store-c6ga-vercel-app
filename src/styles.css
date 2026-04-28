@@ -86,7 +86,7 @@ h3 { font-size: clamp(24px, 2.8vw, 35px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .product-photo, .product-photo img, .product-photo-large::before, .premium-gallery-card, .premium-gallery-card img { animation: none; transition: none; }
+  .product-photo, .product-photo img, .product-photo-large::before, .premium-gallery-card, .premium-gallery-card img, .cart-thumb-button, .cart-thumb { animation: none; transition: none; }
 }
 
 .strip-section { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--card)); box-shadow: 0 14px 34px hsl(var(--primary) / 0.07); }
