@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Star, Truck, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Truck, X } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
-import { ProductVisual } from "./components/ProductVisual";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
 import { supabase } from "./integrations/supabase/client";
@@ -13,13 +12,6 @@ import galleryProductAngle from "./assets/cj-exact-angle.jpg";
 import galleryProductFront from "./assets/cj-exact-front.jpg";
 
 type Cart = Record<string, number>;
-const trustBadges = [
-  { icon: Truck, title: "Free US Shipping", body: "No surprise fee at checkout" },
-  { icon: RotateCcw, title: "Easy Returns", body: "30-day satisfaction review" },
-  { icon: LockKeyhole, title: "Secure Checkout", body: "Encrypted live payment" },
-  { icon: PackageCheck, title: "Tracked Delivery", body: "8–23 day US estimate" },
-  { icon: BadgeCheck, title: "Buyer Confidence", body: "Clear policies before checkout" }
-];
 
 const benefits = [
   ["Neck comfort support", "Gentle vibration cues help you notice forward-head posture during long laptop sessions."],
@@ -250,7 +242,7 @@ export default function App() {
   }, [previewImage]);
 
   const footer = <footer className="footer"><div className="footer-brand"><strong>{businessInfo.storeName}</strong><span>Premium single-product posture support for US buyers.</span><small>© 2026 RelaxNova. All rights reserved. Product content is focused on posture-awareness support and does not make medical claims.</small></div><nav className="footer-legal" aria-label="Legal footer"><strong>Store policies</strong>{legalLinks.map((link) => <a key={link.key} href={`#${link.key}`}>{link.label}</a>)}</nav><div className="footer-trust"><strong>Buyer protection</strong><span><Truck size={15} /> Free US Shipping</span><span><RotateCcw size={15} /> 30-day return policy</span><span><ShieldCheck size={15} /> Secure Stripe checkout</span><span><Mail size={15} /> {businessInfo.email}</span></div><div className="footer-support"><strong>RelaxNova support</strong><span><Mail size={15} /> {businessInfo.email}</span><span><MapPin size={15} /> {businessInfo.location}</span><span><Clock3 size={15} /> 1–3 business day response</span><span><PackageCheck size={15} /> US delivery: 8–23 business days</span></div></footer>;
-  const imagePreview = previewImage && <div className="image-preview-overlay" role="dialog" aria-modal="true" aria-label={`${previewImage.title} image preview`} onClick={() => setPreviewImage(null)}><div className="image-preview-panel" onClick={(event) => event.stopPropagation()}><button className="image-preview-close" type="button" onClick={() => setPreviewImage(null)} aria-label="Close image preview"><X size={20} /></button><img src={previewImage.src} alt={previewImage.title} /><div><strong>{previewImage.title}</strong>{previewImage.body && <span>{previewImage.body}</span>}</div></div></div>;
+  const imagePreview = previewImage && <div className="image-preview-overlay" role="dialog" aria-modal="true" aria-label={`${previewImage.title} image preview`} onClick={() => setPreviewImage(null)}><div className="image-preview-panel clean-preview" onClick={(event) => event.stopPropagation()}><button className="image-preview-close" type="button" onClick={() => setPreviewImage(null)} aria-label="Close image preview"><X size={20} /></button><img src={previewImage.src} alt={previewImage.title} /></div></div>;
 
   if (activeLegalPage) {
     return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} onPreview={(product) => openImagePreview({ src: product.image, title: product.name, body: product.subtitle })} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}{imagePreview}<SupportChat /></div>;
@@ -263,38 +255,7 @@ export default function App() {
       {!checkoutOpen && !orderPlaced && <div className="mobile-sticky-buy" role="region" aria-label="Quick purchase bar"><div><strong>$39 shipped</strong><span>Secure checkout · Free US Shipping</span></div><button onClick={openCheckout}>Buy now</button></div>}
 
       <main>
-        <section className="hero-section">
-          <div className="hero-copy">
-            <p className="eyebrow">Smart posture support · Free US Shipping</p>
-            <h1>Build better posture habits with gentle daily reminders.</h1>
-            <p className="hero-text">Made for desk users, drivers, and remote workers who want posture awareness, upper-back support, and a more confident daily fit.</p>
-            <div className="hero-offer-pill"><Truck size={17} /> Free Shipping Included Today</div>
-            <div className="hero-actions">
-              <button className="primary-action hero-primary" onClick={openCheckout}><CreditCard size={19} /> Get Yours Today — Free Shipping</button>
-              <button className="secondary-buy hero-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button>
-            </div>
-            <p className="hero-micro-trust">$39 shipped • 30-Day Return Review • Secure Checkout</p>
-            <div className="proof-row">
-              <span><Star size={16} /> Clear $39 shipped offer</span>
-              <span><Truck size={16} /> Free US Shipping</span>
-              <span><RotateCcw size={16} /> 30-Day Return Review</span>
-              <span><ShieldCheck size={16} /> Secure Checkout</span>
-            </div>
-          </div>
-          <div className="hero-visual"><ProductVisual product={mainProduct} large priority onPreview={() => openImagePreview({ src: mainProduct.image, title: mainProduct.name, body: mainProduct.subtitle })} /></div>
-        </section>
-
-        <section className="strip-section" aria-label="Trust badges">
-          {trustBadges.map(({ icon: Icon, title, body }) => <span key={title}><Icon size={20} /><strong>{title}</strong><small>{body}</small></span>)}
-        </section>
-
-        <section className="reassurance-section" aria-label="Delivery and product reassurance">
-          <article><Truck size={21} /><h3>Free US Shipping</h3><p>The final $39 offer includes shipping, so there is no separate delivery fee at checkout.</p></article>
-          <article><RotateCcw size={21} /><h3>30-Day Return Review</h3><p>Covered by a clear satisfaction review when returned complete, clean and safely packed.</p></article>
-          <article><LockKeyhole size={21} /><h3>Secure Checkout</h3><p>Encrypted embedded payment with major card support and eligible wallet payments.</p></article>
-        </section>
-
-        <section id="product" className="product-viewer-section" aria-label="RelaxNova product viewer">
+        <section id="product" className="product-viewer-section product-viewer-top" aria-label="RelaxNova product viewer">
           <div className="product-viewer-layout">
             <div className="product-viewer-media">
               <button className="product-viewer-main" type="button" onClick={() => openImagePreview(selectedGalleryImage)} aria-label={`Open larger preview of ${selectedGalleryImage.title}`}>
@@ -304,9 +265,9 @@ export default function App() {
                 {productViewerImages.map((image, index) => <button className={`product-thumbnail ${selectedGalleryIndex === index ? "product-thumbnail-active" : ""}`} type="button" key={image.title} onClick={() => setSelectedGalleryIndex(index)} aria-label={`View ${image.title}`} aria-pressed={selectedGalleryIndex === index}><img src={image.src} alt={`${mainProduct.name} thumbnail ${index + 1}`} width={image.width} height={image.height} loading="lazy" /></button>)}
               </div>
             </div>
-            <aside className="purchase-card product-viewer-purchase">
+            <aside className="product-viewer-purchase">
               <p className="eyebrow">RelaxNova smart posture corrector</p>
-              <h2>{mainProduct.name}</h2>
+              <h1>{mainProduct.name}</h1>
               <p>{mainProduct.description}</p>
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="price-row"><strong>$39</strong><span>$89</span><em>Free US Shipping</em></div>
