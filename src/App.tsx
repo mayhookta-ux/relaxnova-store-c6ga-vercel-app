@@ -238,7 +238,7 @@ export default function App() {
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="price-row"><strong>$39</strong><span>$89</span><em>Free US Shipping</em></div>
               <ul className="viewer-benefits">{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
-              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Order Now — Free US Shipping</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
+              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Get RelaxNova Now — $39 Free Shipping</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> 30-Day Return Review</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
             </aside>
@@ -274,7 +274,7 @@ export default function App() {
         {orderPlaced && <section id="confirmation" className="confirmation-section"><div><p className="eyebrow">Thank you</p><h2>Your Smart Posture Corrector order is confirmed.</h2><p>Your payment was completed securely. Your order is ready for fulfillment review, and your confirmation email will be sent to the checkout email address.</p></div><button className="secondary-action" onClick={() => { window.history.replaceState({}, "", "/"); setOrderPlaced(false); }}>Return to store <ArrowRight size={17} /></button></section>}
 
         <section className="cta-section">
-          <p className="eyebrow">Limited $39 offer</p><h2>Start correcting posture awareness today.</h2><p>A premium smart posture trainer for neck comfort, daily confidence, and better desk-day habits—with Free US Shipping included.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get Smart Posture Corrector — $39 shipped</button><div className="cta-trust-row" aria-label="Final trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> Easy Returns</span><span><BadgeCheck size={16} /> Verified buyer reviews</span></div>
+          <p className="eyebrow">Limited $39 offer</p><h2>Start correcting posture awareness today.</h2><p>A premium smart posture trainer for neck comfort, daily confidence, and better desk-day habits—with Free US Shipping included.</p><button className="primary-action hero-primary" onClick={openCheckout}>Get RelaxNova Now — $39 Free Shipping</button><div className="cta-trust-row" aria-label="Final trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> Easy Returns</span><span><BadgeCheck size={16} /> Verified buyer reviews</span></div>
         </section>
 
         <section id="faq" className="faq-section">
