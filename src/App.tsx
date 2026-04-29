@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, MessageCircle, PackageCheck, RotateCcw, Send, ShieldCheck, Truck, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Banknote, CheckCircle2, Clock3, CreditCard, LockKeyhole, Mail, MapPin, PackageCheck, RotateCcw, ShieldCheck, Truck, X } from "lucide-react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { StripeEmbeddedCheckout } from "./components/StripeEmbeddedCheckout";
 import { mainProduct, products } from "./data/products";
-import { supabase } from "./integrations/supabase/client";
 import galleryDetail from "./assets/cj-exact-detail-1.jpg";
 import galleryHumanWorn from "./assets/cj-exact-lifestyle-1.jpg";
 import galleryLifestyle from "./assets/cj-exact-lifestyle-2.jpg";
@@ -134,40 +133,9 @@ const pageFromHash = (hash: string): LegalPageKey | null => {
   return key in legalPages ? key : null;
 };
 
-const supportFallback = `I don’t want to guess on that. Please visit Contact Us or email ${businessInfo.email}, and RelaxNova support will help within 1–3 business days.`;
-
 function LegalPageView({ pageKey }: { pageKey: LegalPageKey }) {
   const page = legalPages[pageKey];
-  return <section className="legal-page"><div className="legal-hero"><p className="eyebrow">Store policy</p><h1>{page.title}</h1><p>{page.intro}</p><div className="legal-meta"><span>Last updated: {businessInfo.updated}</span><span>{businessInfo.legalName}</span><span>{businessInfo.location}</span></div></div><div className="legal-layout"><aside className="legal-contact-card"><strong>{pageKey === "contact-us" ? "Support response" : "RelaxNova contact"}</strong><span><Mail size={16} /> {businessInfo.email}</span><span><MessageCircle size={16} /> Email customer support</span><span><Clock3 size={16} /> 1–3 business day response</span><span><MapPin size={16} /> {businessInfo.location}</span><small>For order, privacy, refund, shipping, or policy questions, contact RelaxNova by email.</small></aside><div className="legal-content">{page.sections.map((section) => <article className="legal-card" key={section.heading}><h2>{section.heading}</h2>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</article>)}</div></div></section>;
-}
-
-type ChatMessage = { role: "assistant" | "user"; content: string };
-const starterQuestions = ["Shipping time?", "Is payment safe?", "How do I use it?"];
-
-function SupportChat() {
-  const [open, setOpen] = useState(false);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([{ role: "assistant", content: "Hi — RelaxNova support can help with shipping, returns, secure checkout, product use, or order questions." }]);
-
-  const askSupport = async (question = input) => {
-    const content = question.trim();
-    if (!content || loading) return;
-    const nextMessages: ChatMessage[] = [...messages, { role: "user", content }];
-    setMessages(nextMessages);
-    setInput("");
-    setLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke("support-chat", { body: { messages: nextMessages } });
-      setMessages([...nextMessages, { role: "assistant", content: error || !data?.answer ? supportFallback : data.answer }]);
-    } catch {
-      setMessages([...nextMessages, { role: "assistant", content: supportFallback }]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return <aside className={`support-chat ${open ? "support-chat-open" : ""}`} aria-label="RelaxNova support chat"><button className="support-chat-bubble" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close support chat" : "Open support chat"}>{open ? <X size={20} /> : <MessageCircle size={21} />}<span>Ask support</span></button>{open && <div className="support-chat-panel"><div className="support-chat-head"><div><strong>RelaxNova Support</strong><span>Quick answers about shipping, orders, and product help</span></div><button onClick={() => setOpen(false)} aria-label="Close support chat"><X size={17} /></button></div><div className="support-chat-messages" aria-live="polite">{messages.map((message, index) => <p className={message.role === "user" ? "chat-user" : "chat-assistant"} key={`${message.role}-${index}`}>{message.content}</p>)}{loading && <p className="chat-assistant">One moment — checking that for you.</p>}</div><div className="support-chat-prompts">{starterQuestions.map((question) => <button key={question} onClick={() => askSupport(question)} disabled={loading}>{question}</button>)}</div><form className="support-chat-form" onSubmit={(event) => { event.preventDefault(); askSupport(); }}><input value={input} onChange={(event) => setInput(event.target.value)} placeholder="Ask about your order" maxLength={240} /><button type="submit" disabled={loading || !input.trim()} aria-label="Send support question"><Send size={16} /></button></form></div>}</aside>;
+  return <section className="legal-page"><div className="legal-hero"><p className="eyebrow">Store policy</p><h1>{page.title}</h1><p>{page.intro}</p><div className="legal-meta"><span>Last updated: {businessInfo.updated}</span><span>{businessInfo.legalName}</span><span>{businessInfo.location}</span></div></div><div className="legal-layout"><aside className="legal-contact-card"><strong>{pageKey === "contact-us" ? "Support response" : "RelaxNova contact"}</strong><span><Mail size={16} /> {businessInfo.email}</span><span><Mail size={16} /> Email customer support</span><span><Clock3 size={16} /> 1–3 business day response</span><span><MapPin size={16} /> {businessInfo.location}</span><small>For order, privacy, refund, shipping, or policy questions, contact RelaxNova by email.</small></aside><div className="legal-content">{page.sections.map((section) => <article className="legal-card" key={section.heading}><h2>{section.heading}</h2>{section.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</article>)}</div></div></section>;
 }
 
 export default function App() {
