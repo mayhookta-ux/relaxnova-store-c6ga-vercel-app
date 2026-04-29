@@ -243,7 +243,7 @@ export default function App() {
   const imagePreview = previewImage && <div className="image-preview-overlay" role="dialog" aria-modal="true" aria-label={`${previewImage.title} image preview`} onClick={() => setPreviewImage(null)}><div className="image-preview-panel clean-preview" onClick={(event) => event.stopPropagation()}><button className="image-preview-close" type="button" onClick={() => setPreviewImage(null)} aria-label="Close image preview"><X size={20} /></button><img src={previewImage.src} alt={previewImage.title} /></div></div>;
 
   if (activeLegalPage) {
-    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} onPreview={(product) => openImagePreview({ src: product.image, title: product.name, body: product.subtitle })} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}{imagePreview}<SupportChat /></div>;
+    return <div id="home"><Header cartCount={cartCount} menuOpen={menuOpen} onMenu={() => setMenuOpen((open) => !open)} onCart={() => setCartOpen(true)} /><CartDrawer open={cartOpen} lines={cartLines} onClose={() => setCartOpen(false)} onAdd={addToCart} onRemove={removeFromCart} onCheckout={openCheckout} onPreview={(product) => openImagePreview({ src: product.image, title: product.name, body: product.subtitle })} /><main><LegalPageView pageKey={activeLegalPage} /></main>{footer}{imagePreview}</div>;
   }
 
   return (
@@ -270,7 +270,7 @@ export default function App() {
               <span className="stock-pill featured"><CheckCircle2 size={16} /> {mainProduct.stock}</span>
               <div className="price-row"><strong>$39</strong><span>$89</span><em>Free US Shipping</em></div>
               <ul className="viewer-benefits">{mainProduct.bullets.map((b) => <li key={b}><BadgeCheck size={17} /> {b}</li>)}</ul>
-              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Buy now — $39 shipped</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
+              <div className="purchase-actions"><button className="primary-action full buy-now-strong" onClick={openCheckout}>Order Now — Free US Shipping</button><button className="secondary-buy" onClick={() => addToCart(mainProduct.id)}>Add to cart</button></div>
               <div className="cta-trust-row" aria-label="Purchase trust badges"><span><Truck size={16} /> Free US Shipping</span><span><RotateCcw size={16} /> 30-Day Return Review</span><span><ShieldCheck size={16} /> Secure Checkout</span></div>
               <div className="payment-icons" aria-label="Accepted payment methods">{paymentMethods.map((method) => <span key={method}>{method}</span>)}</div>
             </aside>
@@ -317,7 +317,6 @@ export default function App() {
 
       {footer}
       {imagePreview}
-      <SupportChat />
     </div>
   );
 }
