@@ -4,7 +4,7 @@ export function ProductVisual({ product, large = false, priority = false, onPrev
   return (
     <figure className={`product-photo ${large ? "product-photo-large" : ""}`} aria-label={`${product.name} product photo`}>
       <button className="product-image-button" type="button" onClick={onPreview} aria-label={`Open larger preview of ${product.name}`}>
-        <img src={product.image} alt={`${product.name} product`} className="w-full h-full object-contain object-center p-2"
+        <img src={product.image} alt={`${product.name} product`} className="w-full h-full object-contain object-center p-2" />
       </button>
     </figure>
   );
