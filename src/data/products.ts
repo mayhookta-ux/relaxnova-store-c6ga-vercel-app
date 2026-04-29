@@ -19,7 +19,7 @@ export type Product = {
 
 export const products: Product[] = [
   {
-    id: "cj-smart-posture-corrector",
+    id: "relaxnova-smart-posture-corrector",
     name: "RelaxNova Smart Posture Corrector",
     category: "Upper Back Posture Trainer",
     price: 39,
