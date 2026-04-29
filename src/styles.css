@@ -177,6 +177,7 @@ li { display: flex; gap: 10px; align-items: center; font-weight: 700; }
 .faq-list { display: grid; gap: 12px; max-width: 980px; }
 details { background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: 18px; padding: 20px 24px; }
 summary { cursor: pointer; font-weight: 800; }
+lovable-badge, replit-badge, [data-replit-badge], [class*="replit" i], [aria-label*="Replit" i] { display: none !important; }
 .policy-section { grid-template-columns: repeat(2, 1fr); }
 .contact-section { display: grid; grid-template-columns: 1fr minmax(280px, 420px); gap: 28px; align-items: center; }
 .contact-card { display: grid; gap: 10px; }
