@@ -313,10 +313,6 @@ input { width: 100%; border: 1px solid hsl(var(--border)); border-radius: 999px;
   .hero-actions { align-items: stretch; }
   .primary-action { width: 100%; }
   .mobile-sticky-buy { display: flex; }
-  .support-chat { right: 12px; bottom: 106px; }
-  .support-chat-bubble { min-height: 48px; padding: 0 15px; }
-  .support-chat-panel { width: calc(100vw - 24px); max-height: min(620px, calc(100vh - 130px)); }
-  .support-chat-messages { max-height: min(300px, calc(100vh - 340px)); }
   .nav-open, .benefit-grid, .conversion-grid, .trust-badge-row, .satisfaction-row, .cta-trust-row, .cards-grid, .policy-section, .product-benefit-grid, .before-after-section, .form-row, .footer { grid-template-columns: 1fr; }
   .product-viewer-layout { gap: 24px; }
   .product-viewer-main { min-height: auto; aspect-ratio: 4 / 5; }
